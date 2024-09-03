@@ -493,8 +493,60 @@ Transform:
   m_Children:
   - {fileID: 2077159506}
   - {fileID: 988256067}
+  - {fileID: 1702592195}
   m_Father: {fileID: 63961912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1702592194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1702592195}
+  - component: {fileID: 1702592196}
+  m_Layer: 0
+  m_Name: NakamaService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1702592195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702592194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1298724190}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1702592196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702592194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054d476c5d0c4a34fb37204ae629edea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostCf: api.cifarm-server.starci.net
+  portCf: 443
+  svKey: defaultkey
+  message: a7f973b0-e10d-4140-aad2-18cf57aa160f
+  publicKey: 0x08Aa055bEb18f568A004ADa08D93a4e38De461dE
+  signature: 0x6508dedeb5db4d5dbe18a02aad6767a084b20ab7988933c692e8f00fd96a9bd1289c0ac56df145bc2d7ce386c257d779b787b99c310c1cbdea17b961dbe71dde1b
+  chain: avalanche
 --- !u!1 &2001163996
 GameObject:
   m_ObjectHideFlags: 0

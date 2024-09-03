@@ -16,8 +16,7 @@ namespace SupernovaDriver.Scripts.SceneController.Entry
 
         private void Start()
         {
-
-            UnityEngine.SceneManagement.SceneManager.LoadScene(Constants.MainScene);
+         //   UnityEngine.SceneManagement.SceneManager.LoadScene(Constants.MainScene);
         }
     }
 }
