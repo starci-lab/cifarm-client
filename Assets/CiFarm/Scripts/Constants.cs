@@ -17,25 +17,25 @@ public static class Constants
     public const string CarTag          = "Car";
 
     // Scenes
-    public const string EntryScene            = "SupernovaDriver/Scenes/Entry";
-    public const string MainScene             = "SupernovaDriver/Scenes/MainScene";
-    public const string GameScene             = "SupernovaDriver/Scenes/GameScene";
-    public const string RegisterScene         = "SupernovaDriver/Scenes/Popup/Register";
-    public const string LoginScene            = "SupernovaDriver/Scenes/Popup/Login";
-    public const string UpdateAccountScene    = "SupernovaDriver/Scenes/Popup/UpdateAccount";
-    public const string ErrorScene            = "SupernovaDriver/Scenes/Popup/Error";
-    public const string LoseScene             = "SupernovaDriver/Scenes/Popup/Lose";
-    public const string WinScene              = "SupernovaDriver/Scenes/Popup/Win";
-    public const string LevelSelectScene      = "SupernovaDriver/Scenes/Popup/LevelSelect";
-    public const string ConfirmPopup          = "SupernovaDriver/Scenes/Popup/ConfirmPopup";
-    public const string SettingsPopup         = "SupernovaDriver/Scenes/Popup/SettingsPopup";
-    public const string ProfilePopup          = "SupernovaDriver/Scenes/Popup/Profile";
-    public const string PausePopup            = "SupernovaDriver/Scenes/Popup/Pause";
-    public const string LevelInformationPopup = "SupernovaDriver/Scenes/Popup/LevelInformation";
-    public const string CompareItemPopup      = "SupernovaDriver/Scenes/Popup/CompareItem";
-    public const string ShopPopup             = "SupernovaDriver/Scenes/Popup/Shop";
-    public const string RandomItemPopup       = "SupernovaDriver/Scenes/Popup/RandomItem";
-    public const string LevelUpPopup          = "SupernovaDriver/Scenes/Popup/LevelUp";
+    public const string EntryScene            = "CiFarm/Scenes/Entry";
+    public const string MainScene             = "CiFarm/Scenes/MainScene";
+    public const string GameScene             = "CiFarm/Scenes/GameScene";
+    public const string RegisterScene         = "CiFarm/Scenes/Popup/Register";
+    public const string LoginScene            = "CiFarm/Scenes/Popup/Login";
+    public const string UpdateAccountScene    = "CiFarm/Scenes/Popup/UpdateAccount";
+    public const string ErrorScene            = "CiFarm/Scenes/Popup/Error";
+    public const string LoseScene             = "CiFarm/Scenes/Popup/Lose";
+    public const string WinScene              = "CiFarm/Scenes/Popup/Win";
+    public const string LevelSelectScene      = "CiFarm/Scenes/Popup/LevelSelect";
+    public const string ConfirmPopup          = "CiFarm/Scenes/Popup/ConfirmPopup";
+    public const string SettingsPopup         = "CiFarm/Scenes/Popup/SettingsPopup";
+    public const string ProfilePopup          = "CiFarm/Scenes/Popup/Profile";
+    public const string PausePopup            = "CiFarm/Scenes/Popup/Pause";
+    public const string LevelInformationPopup = "CiFarm/Scenes/Popup/LevelInformation";
+    public const string CompareItemPopup      = "CiFarm/Scenes/Popup/CompareItem";
+    public const string ShopPopup             = "CiFarm/Scenes/Popup/Shop";
+    public const string RandomItemPopup       = "CiFarm/Scenes/Popup/RandomItem";
+    public const string LevelUpPopup          = "CiFarm/Scenes/Popup/LevelUp";
 
     public const string DailyBonusPopup = "SupernovaDriver/Scenes/Popup/DailyBonus";
 
