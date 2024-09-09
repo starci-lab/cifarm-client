@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SupernovaDriver.Scripts.Utilities
+namespace CiFarm.Scripts.Utilities
 {
     public static class DLogger
     {

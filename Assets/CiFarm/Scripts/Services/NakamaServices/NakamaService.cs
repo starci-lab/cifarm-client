@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using Nakama;
 using Newtonsoft.Json;
-using SupernovaDriver.Scripts.Utilities;
 using UnityEngine;
 
 namespace CiFarm.Scripts.Services.NakamaServices
