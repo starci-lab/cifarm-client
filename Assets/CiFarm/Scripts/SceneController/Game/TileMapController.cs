@@ -22,7 +22,33 @@ namespace CiFarm.Scripts.SceneController.Game
                 }
             }
         }
+        
+        public void SetGroundWithTilePos(Vector3Int position, GameObject objectPlaced)
+        {
+            var tileCenterPosition = interactableMap.CellToWorld(position);
+            
+            TileBase tile = interactableMap.GetTile(position);
 
+            if (tile != null && tile.name == interactableTileName)
+            {
+                tileCenterPosition.z =  0;
+                tileCenterPosition.y += interactableMap.cellSize.y / 2.0f;
+                var obj = Instantiate(objectPlaced);
+                obj.transform.position = tileCenterPosition;
+            }
+            else
+            {
+                if (tile == null)
+                {
+                    DLogger.Log("No tile at this position (NULL)", "TileManager", LogColors.Lime);
+                }
+                else
+                {
+                    DLogger.Log($"Tile name: {tile.name}", "TileManager", LogColors.Lime);
+                }
+            }
+        }
+        
         public void SetGround(Vector3 position, GameObject objectPlaced)
         {
             var worldPosition = Camera.main.ScreenToWorldPoint(position);

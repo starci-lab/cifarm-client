@@ -5,9 +5,8 @@ using Nakama;
 using Newtonsoft.Json;
 using SupernovaDriver.Scripts.Utilities;
 using UnityEngine;
-using UnityEngine.iOS;
 
-namespace CiFarm.Scripts.Services
+namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaService : ManualSingletonMono<NakamaService>
     {
