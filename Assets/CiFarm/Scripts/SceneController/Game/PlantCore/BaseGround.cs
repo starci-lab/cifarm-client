@@ -13,5 +13,15 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             plant.transform.SetParent(transform);
             plant.transform.position = positionPlant.position;
         }
+
+        private void Update()
+        {
+            
+        }
+
+        public void ShowTextTimer()
+        {
+            
+        }
     }
 }
