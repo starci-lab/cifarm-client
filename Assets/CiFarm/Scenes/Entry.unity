@@ -1986,6 +1986,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3231139608854104813, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -28.599976
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231139608854104813, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.399994
+      objectReference: {fileID: 0}
     - target: {fileID: 4202201619485790367, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2349,6 +2357,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1702592195}
   - component: {fileID: 1702592196}
+  - component: {fileID: 1702592197}
+  - component: {fileID: 1702592198}
   m_Layer: 0
   m_Name: NakamaService
   m_TagString: Untagged
@@ -2383,13 +2393,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054d476c5d0c4a34fb37204ae629edea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hostCf: api.cifarm-server.starci.net
-  portCf: 443
-  svKey: defaultkey
-  message: 2b1ba1f0-b3b1-4655-ad71-298f2d8384bb
-  publicKey: 0xe77C6E21b819A8EF16D686ABbf4770F090612f18
-  signature: 0x462429718251db9bfbab1ea54778dcc431330d02d886cc64d6b24e816ba867fe2c141b572bb80f381578333999a2c6f3d27478dda48078acf596619bcf87bce91c
-  chain: avalanche
+  useHttps: 0
+  host: localhost
+  port: 7350
+  serverKey: defaultkey
+  authenticated: 0
+--- !u!114 &1702592197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702592194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25e91cdc0f4fe84a85ef17ecd46714f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seeds: []
+  tiles: []
+  animals: []
+--- !u!114 &1702592198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702592194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983feb88ef01db84d95b7e887adad167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2001163996
 GameObject:
   m_ObjectHideFlags: 0
