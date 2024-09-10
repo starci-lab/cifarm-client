@@ -16,6 +16,8 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             if (plantState > plantStatesRender.Count)
             {
                 DLogger.LogError("Invalid plant state", "Plant", LogColors.OrangeRed);
+                DLogger.LogError("Invalid plant state", "Plant");
+                DLogger.LogError("Invalid plant state");
                 return;
             }
             plantCurrentState  = plantState;

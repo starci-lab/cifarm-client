@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Imba.UI;
 using Imba.Utils;
 using SupernovaDriver.Scripts.UI.View;
@@ -11,19 +12,42 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private GameView _gameView;
 
-        [Header("Test")]
+        [Header("Test Zone Here, this play will make fake parameter")]
         public GameObject dirtTile;
+
+        public GameObject dirtTileNft;
+
+        public List<Vector2Int> listDirtNormal;
+        public List<Vector2Int> listDirtNft;
 
         private void Start()
         {
             _gameView = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
+            LoadNormalDirt();
+            LoadNftDirt();
         }
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            // if (Input.GetMouseButtonDown(0))
+            // {
+            //     tileMapController.SetGround(Input.mousePosition, dirtTile);
+            // }
+        }
+
+        public void LoadNormalDirt()
+        {
+            foreach (var dt in listDirtNormal)
             {
-                tileMapController.SetGround(Input.mousePosition, dirtTile);
+                tileMapController.SetGroundWithTilePos(dt, dirtTile);
+            }
+        }
+
+        public void LoadNftDirt()
+        {
+            foreach (var dt in listDirtNft)
+            {
+                tileMapController.SetGroundWithTilePos(dt, dirtTileNft);
             }
         }
     }

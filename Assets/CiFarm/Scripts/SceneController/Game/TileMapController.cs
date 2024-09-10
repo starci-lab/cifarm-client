@@ -1,3 +1,4 @@
+using System;
 using CiFarm.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,7 +12,7 @@ namespace CiFarm.Scripts.SceneController.Game
         public Tile   hiddenInteractableTile; // Tile to replace "interactions_visible" tiles with
         public string interactableTileName = "interactions"; // Name of the tile to check for
 
-        void Start()
+        private void Awake()
         {
             foreach (var position in interactableMap.cellBounds.allPositionsWithin)
             {
@@ -22,11 +23,12 @@ namespace CiFarm.Scripts.SceneController.Game
                 }
             }
         }
-        
-        public void SetGroundWithTilePos(Vector3Int position, GameObject objectPlaced)
+
+        public void SetGroundWithTilePos(Vector2Int position2D, GameObject objectPlaced)
         {
+            var position           = new Vector3Int(position2D.x, position2D.y, 0);
             var tileCenterPosition = interactableMap.CellToWorld(position);
-            
+
             TileBase tile = interactableMap.GetTile(position);
 
             if (tile != null && tile.name == interactableTileName)
@@ -48,7 +50,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 }
             }
         }
-        
+
         public void SetGround(Vector3 position, GameObject objectPlaced)
         {
             var worldPosition = Camera.main.ScreenToWorldPoint(position);
@@ -56,7 +58,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
             var cellPosition       = interactableMap.WorldToCell(worldPosition);
             var tileCenterPosition = interactableMap.CellToWorld(cellPosition);
-
+            DLogger.Log("Clicked Tile: " + cellPosition, "TileManager", LogColors.Lime);
 
             TileBase tile = interactableMap.GetTile(cellPosition);
 
