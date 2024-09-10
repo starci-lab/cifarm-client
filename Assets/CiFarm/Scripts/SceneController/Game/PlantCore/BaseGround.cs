@@ -9,6 +9,8 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         public void SetPlant(BasePlant plantToSet)
         {
+            plant = plantToSet;
+            plant.transform.SetParent(transform);
             plant.transform.position = positionPlant.position;
         }
     }

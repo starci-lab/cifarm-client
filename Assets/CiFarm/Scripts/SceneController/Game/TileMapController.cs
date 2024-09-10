@@ -35,8 +35,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 tileCenterPosition.z =  0;
                 tileCenterPosition.y += interactableMap.cellSize.y / 2.0f;
-                var obj = Instantiate(objectPlaced);
-                obj.transform.position = tileCenterPosition;
+                objectPlaced.transform.position = tileCenterPosition;
             }
             else
             {

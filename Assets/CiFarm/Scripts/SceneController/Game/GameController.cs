@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using CiFarm.Scripts.SceneController.Game.PlantCore;
 using Imba.UI;
 using Imba.Utils;
 using SupernovaDriver.Scripts.UI.View;
@@ -17,8 +19,16 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public GameObject dirtTileNft;
 
-        public List<Vector2Int> listDirtNormal;
-        public List<Vector2Int> listDirtNft;
+        [Serializable]
+        public struct DirtPlantTest
+        {
+            public Vector2Int position;
+            public GameObject plant;
+            public int        plantState;
+        }
+
+        public List<DirtPlantTest> listDirtNormal;
+        public List<DirtPlantTest> listDirtNft;
 
         private void Start()
         {
@@ -39,7 +49,16 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             foreach (var dt in listDirtNormal)
             {
-                tileMapController.SetGroundWithTilePos(dt, dirtTile);
+                var dirtObj  = Instantiate(dirtTile);
+                var plantObj = Instantiate(dt.plant);
+
+                var dirtScript = dirtObj.GetComponent<BaseGround>();
+                var plant      = plantObj.GetComponent<BasePlant>();
+
+                plant.SetPlantState(dt.plantState);
+                dirtScript.SetPlant(plant);
+
+                tileMapController.SetGroundWithTilePos(dt.position, dirtObj);
             }
         }
 
@@ -47,7 +66,16 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             foreach (var dt in listDirtNft)
             {
-                tileMapController.SetGroundWithTilePos(dt, dirtTileNft);
+                var dirtObj  = Instantiate(dirtTileNft);
+                var plantObj = Instantiate(dt.plant);
+
+                var dirtScript = dirtObj.GetComponent<BaseGround>();
+                var plant      = plantObj.GetComponent<BasePlant>();
+
+                plant.SetPlantState(dt.plantState);
+                dirtScript.SetPlant(plant);
+
+                tileMapController.SetGroundWithTilePos(dt.position, dirtObj);
             }
         }
     }

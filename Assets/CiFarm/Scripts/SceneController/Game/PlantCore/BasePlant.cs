@@ -7,7 +7,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
     public class BasePlant : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer plantRender;
-        
         [SerializeField] private List<Sprite> plantStatesRender;
         [SerializeField] private int plantCurrentState = 0;
 
@@ -22,6 +21,14 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             }
             plantCurrentState  = plantState;
             plantRender.sprite = plantStatesRender[plantCurrentState];
+        }
+        public void ShowRequired()
+        {
+          
+        }
+        public void ShowTimer()
+        {
+          
         }
     }
 }
