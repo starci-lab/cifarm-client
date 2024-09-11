@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
+using CiFarm.Scripts.UI.View;
 using Imba.UI;
 using Imba.Utils;
 using SupernovaDriver.Scripts.UI.View;

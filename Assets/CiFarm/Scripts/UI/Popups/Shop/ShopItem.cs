@@ -27,7 +27,7 @@ namespace CiFarm.Scripts.UI.Popups.Shop
             textItemPrice.text        = data.textItemPrice;
             iconItem.sprite           = data.iconItem;
         }
-
+    
         public void OnBuy()
         {
             _buyAction?.Invoke(_shopItemData);

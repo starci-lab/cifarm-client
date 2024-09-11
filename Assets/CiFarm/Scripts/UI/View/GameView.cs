@@ -1,50 +1,31 @@
-using System.Collections;
-using Imba.Audio;
 using Imba.UI;
-using TMPro;
-using UnityEngine;
-using UnityEngine.Events;
 
-namespace SupernovaDriver.Scripts.UI.View
+namespace CiFarm.Scripts.UI.View
 {
     public class GameView : UIView
     {
-        [SerializeField] private TextMeshProUGUI scoreText;
-        [SerializeField] private Transform       countDownThree;
-        [SerializeField] private Transform       countDownTwo;
-        [SerializeField] private Transform       countDownOne;
-        [SerializeField] private Transform       countDownStart;
+        #region UI BUTTON
 
-        public IEnumerator StartGameCountDown(UnityAction callBack1, UnityAction callBack2)
+        public void OnClickShop()
         {
-            AudioManager.Instance.PlaySFX(AudioName.CountDown);
-            StartCoroutine(DoCountDownAnimation(countDownThree));
-            yield return new WaitForSeconds(1);
-            AudioManager.Instance.PlaySFX(AudioName.CountDown);
-            StartCoroutine(DoCountDownAnimation(countDownTwo));
-            yield return new WaitForSeconds(1);
-            AudioManager.Instance.PlaySFX(AudioName.CountDown);
-            AudioManager.Instance.PlaySFX(Random.value > 0.5f ? AudioName.SoundCarStart1 : AudioName.SoundCarStart2);
-            callBack1?.Invoke();
-            StartCoroutine(DoCountDownAnimation(countDownOne));
-            yield return new WaitForSeconds(1);
-            AudioManager.Instance.PlaySFX(AudioName.StartGame);
-            StartCoroutine(DoCountDownAnimation(countDownStart));
-            yield return new WaitForSeconds(1);
-            callBack2?.Invoke();
         }
 
-        public IEnumerator DoCountDownAnimation(Transform target)
+        public void OnClickShopNft()
         {
-            target.SetActive(true);
-            yield return new WaitForSeconds(1);
-            target.SetActive(false);
         }
 
-        public void SetDisplayScore(int currentScore)
+        public void OnClickDaily()
         {
-            scoreText.text = "Score: " + currentScore;
         }
 
+        public void OnClickInventory()
+        {
+        }
+
+        public void OnClickFriend()
+        {
+        }
+
+        #endregion
     }
 }
