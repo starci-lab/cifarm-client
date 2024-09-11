@@ -119,11 +119,20 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public int harvestQuantityRemaining; 
     }
 
+    public enum PlacedItemType
+    {
+        Tile,
+        Building
+    }
+
     [Serializable]
     public class PlacedItem
     {
+        [JsonProperty("key")]
+        public string key;
+
         [JsonProperty("type")]
-        public int type;
+        public PlacedItemType type;
 
         [JsonProperty("position")]
         public Position position;

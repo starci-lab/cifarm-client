@@ -8,6 +8,7 @@ namespace CiFarm.Scripts.Utilities
 
     }
 
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     public class ReadOnlyDrawer : PropertyDrawer
     {
@@ -26,4 +27,5 @@ namespace CiFarm.Scripts.Utilities
             GUI.enabled = true;
         }
     }
+#endif
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using CiFarm.Scripts.Utilities;
-using Codice.CM.Common;
 using Imba.Utils;
 using Nakama;
 using Newtonsoft.Json;
@@ -16,7 +15,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [SerializeField] private bool useHttps = true;
         [SerializeField] private string host = "api.cifarm-server.starci.net";
 
-        [SerializeField] private int    port = 143;
+        [SerializeField] private int    port = 443;
         [SerializeField] private string serverKey  = "defaultkey";
 
         [HideInInspector]
