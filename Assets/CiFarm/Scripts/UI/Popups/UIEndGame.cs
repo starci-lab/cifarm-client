@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace SupernovaDriver.Scripts.UI.Popups
+namespace CiFarm.Scripts.UI.Popups
 {
     public class EndGameParam
     {
