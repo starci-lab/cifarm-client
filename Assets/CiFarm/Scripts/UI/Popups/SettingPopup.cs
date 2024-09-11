@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SupernovaDriver.Scripts.UI.Popups
+namespace CiFarm.Scripts.UI.Popups
 {
     public class SettingPopup : UIPopup
     {

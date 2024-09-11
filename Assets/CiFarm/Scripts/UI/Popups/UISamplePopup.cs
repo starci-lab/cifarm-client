@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace SupernovaDriver.Scripts.UI.Popups
+namespace CiFarm.Scripts.UI.Popups
 {
     public class UISamplePopup : UIPopup
     {
