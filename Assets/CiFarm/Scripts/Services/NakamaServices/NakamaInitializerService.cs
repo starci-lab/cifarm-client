@@ -43,15 +43,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
 #if UNITY_EDITOR
             //set fake credentials for edtior only
-            if (useLocal)
-            {
-                SetEditorLocalCredentials();
-            } else
-            {
-                SetEditorProductionCredentials();
-            }
-  
+            SetEditorCredentials();
 #endif
+
             yield return new WaitUntil(() => credentials != null);
             //initialize
             InitializeClient();
@@ -65,27 +59,29 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         }
 
-        private void SetEditorLocalCredentials()
+        private void SetEditorCredentials()
         {
-            credentials = new Credentials()
+            if (useLocal)
             {
-                message = "0d9c4c9f-e52e-4b00-8aaa-1e6caaa50890",
-                publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                signature = "0x3570775c081781655265d6784ef77535a04e161653917e98938f9503ffee5797220a8fbd6c46e0853fb4e5d3cb608af8b3be1b7397aa4c3cbda456e115ccc7251b",
-                chainKey = "avalanche"
-            };
-        }
-        private void SetEditorProductionCredentials()
-        {
-            credentials = new Credentials()
+                credentials = new Credentials()
+                {
+                    message = "0d9c4c9f-e52e-4b00-8aaa-1e6caaa50890",
+                    publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
+                    signature = "0x3570775c081781655265d6784ef77535a04e161653917e98938f9503ffee5797220a8fbd6c46e0853fb4e5d3cb608af8b3be1b7397aa4c3cbda456e115ccc7251b",
+                    chainKey = "avalanche"
+                };
+            } else
             {
-                message = "1ccd5c84-93c9-4bb9-a40a-285b4c5405e2",
-                publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                signature = "0x2f2d66a0502b990f4e8450d54277cf4b7297d45b2e04bed2fcfc606fc2e1e72e3b72282f3a0798e45e4b1715bf90c3660eaa2bf0780bc1a9196e6468915d39a61c",
-                chainKey = "avalanche"
-            };
+                credentials = new Credentials()
+                {
+                    message = "1ccd5c84-93c9-4bb9-a40a-285b4c5405e2",
+                    publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
+                    signature = "0x2f2d66a0502b990f4e8450d54277cf4b7297d45b2e04bed2fcfc606fc2e1e72e3b72282f3a0798e45e4b1715bf90c3660eaa2bf0780bc1a9196e6468915d39a61c",
+                    chainKey = "avalanche"
+                };
+            }
+           
         }
-
 
         //called from React app to set credentials, then break the coroutine
         public void SetCredentials(string payload)
