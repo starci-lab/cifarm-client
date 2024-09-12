@@ -28,16 +28,18 @@ namespace CiFarm.Scripts.UI.Popups
                 _onClose = param.callBack;
             }
         }
-
+        
         protected override void OnHiding()
         {
             base.OnHiding();
+            AudioManager.Instance.PlaySFX(AudioName.Close1);
             AudioManager.Instance.SaveAudioSetting();
             _onClose?.Invoke();
         }
 
         public void BTN_Home()
         {
+            
             Hide();
         }
 

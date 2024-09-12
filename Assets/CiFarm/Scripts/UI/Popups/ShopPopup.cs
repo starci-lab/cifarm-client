@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using CiFarm.Scripts.UI.Popups.Shop;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
+using Imba.Audio;
 using Imba.UI;
 using SuperScrollView;
 using UnityEngine;
@@ -85,10 +86,16 @@ namespace CiFarm.Scripts.UI.Popups
             return item;
         }
 
+        protected override void OnHiding()
+        {
+            base.OnHiding();
+            AudioManager.Instance.PlaySFX(AudioName.Close1);
+            _onClose?.Invoke();
+        }
+
         protected override void OnHidden()
         {
             base.OnHidden();
-            _onClose?.Invoke();
         }
 
         #region NAKAMA COMMUNICATE

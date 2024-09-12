@@ -26,28 +26,28 @@ namespace CiFarm.Scripts.UI.View
 
         public void OnClickShopNft()
         {
-            GameController.Instance.CameraController.LockCamera();
+            //GameController.Instance.CameraController.LockCamera();
             AudioManager.Instance.PlaySFX(AudioName.Click3);
             DLogger.Log("In process OnClickShopNft", "MainUI");
         }
 
         public void OnClickDaily()
         {
-            GameController.Instance.CameraController.LockCamera();
+           // GameController.Instance.CameraController.LockCamera();
             AudioManager.Instance.PlaySFX(AudioName.Click3);
             DLogger.Log("In process OnClickDaily", "MainUI");
         }
 
         public void OnClickInventory()
         {
-            GameController.Instance.CameraController.LockCamera();
+            //GameController.Instance.CameraController.LockCamera();
             AudioManager.Instance.PlaySFX(AudioName.Click3);
             DLogger.Log("In process OnClickInventory", "MainUI");
         }
 
         public void OnClickFriend()
         {
-            GameController.Instance.CameraController.LockCamera();
+          //  GameController.Instance.CameraController.LockCamera();
             AudioManager.Instance.PlaySFX(AudioName.Click3);
             DLogger.Log("In process OnClickFriend", "MainUI");
         }
@@ -65,7 +65,6 @@ namespace CiFarm.Scripts.UI.View
         public void OnPopupClose()
         {
             DLogger.Log("CLOSED POPUP");
-            AudioManager.Instance.PlaySFX(AudioName.Close1);
             GameController.Instance.CameraController.UnLockCamera();
         }
         #endregion

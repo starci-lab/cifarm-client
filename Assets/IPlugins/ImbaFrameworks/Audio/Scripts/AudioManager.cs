@@ -54,8 +54,8 @@ namespace Imba.Audio
 
         private string musicVolumeKey = "musicKey";
         private string audioVolumeKey = "audioKey";
-        public  float  _musicVolume   = 1f;
-        public  float  _audioVolume   = 1f;
+        public  float  _musicVolume   = 0.5f;
+        public  float  _audioVolume   = 0.5f;
 
         public void SetMusicVolume(float newValue)
         {
@@ -126,8 +126,8 @@ namespace Imba.Audio
                 }
             }
 
-            _musicVolume = PlayerPrefs.GetFloat(musicVolumeKey, 1f);
-            _audioVolume = PlayerPrefs.GetFloat(audioVolumeKey, 1f);
+            _musicVolume = PlayerPrefs.GetFloat(musicVolumeKey, 0.5f);
+            _audioVolume = PlayerPrefs.GetFloat(audioVolumeKey, 0.5f);
         }
 
         void OnEnable()
@@ -216,7 +216,7 @@ namespace Imba.Audio
                     s.Source = CreateAudioSource(s);
                 }
 
-                s.Source.volume = s.Volume * _musicVolume;
+                s.Source.volume = s.Volume * _audioVolume;
                 s.Source.PlayOneShot(s.AudioClip, s.Volume);
             }
         }
