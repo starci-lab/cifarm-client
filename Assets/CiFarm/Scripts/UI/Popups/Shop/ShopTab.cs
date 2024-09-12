@@ -13,5 +13,10 @@ namespace CiFarm.Scripts.UI.Popups.Shop
         {
             unselectedMask.SetActive(!isSelect);
         }
+
+        public void OnClick()
+        {
+            OnClickTab?.Invoke();
+        }
     }
 }

@@ -119,6 +119,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             ClearSelectedShop();
             animaTab.SetSelect(true);
+            
             shopItemsData.Clear();
             ResetListView();
         }
@@ -127,6 +128,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             ClearSelectedShop();
             treeTab.SetSelect(true);
+            
             shopItemsData.Clear();
             ResetListView();
         }
