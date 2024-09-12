@@ -30,8 +30,7 @@ namespace CiFarm.Scripts.UI.Popups
             //this.isOnMusic = AudioSettingService.Instance.GetMusicVolume() == 1 ? true : false;
             this._isMuteSfx   = AudioManager.Instance.IsMuteAudio(Imba.Audio.AudioType.SFX);
             this._isMuteMusic = AudioManager.Instance.IsMuteAudio(Imba.Audio.AudioType.BGM);
-            OnSound(_isMuteSfx);
-            OnMusic(_isMuteMusic);
+  
 
             if (Parameter != null)
             {
@@ -46,47 +45,12 @@ namespace CiFarm.Scripts.UI.Popups
             _onClose?.Invoke();
         }
 
-        public void BTN_Sound()
-        {
-            _isMuteSfx = !_isMuteSfx;
-            OnSound(_isMuteSfx);
-            //PlayerPrefs.SetInt("MuteSFX", _isMuteSfx ? 1 : 0);
-            AudioManager.Instance.SetSound(_isMuteSfx);
-        }
-
-        public void BTN_Music()
-        {
-            _isMuteMusic = !_isMuteMusic;
-            OnMusic(_isMuteMusic);
-            AudioManager.Instance.SetMusic(_isMuteMusic);
-            if (_isMuteMusic)
-                AudioManager.Instance.StopMusic(AudioName.BGM_Menu);
-            else
-            {
-                if (SceneManager.GetActiveScene().name == "GameScene")
-                    AudioManager.Instance.PlayMusic(AudioName.BGM_Menu);
-            }
-        }
-
+        
         public void BTN_Home()
         {
             Hide();
         }
 
-        public void OnMusic(bool isMute)
-        {
-            btnMusic[0].SetActive(!isMute);
-            iconMusic[0].SetActive(!isMute);
-            btnMusic[1].SetActive(isMute);
-            iconMusic[1].SetActive(isMute);
-        }
-
-        public void OnSound(bool isMute)
-        {
-            btnSound[0].SetActive(!isMute);
-            iconSound[0].SetActive(!isMute);
-            btnSound[1].SetActive(isMute);
-            iconSound[1].SetActive(isMute);
-        }
+       
     }
 }

@@ -54,6 +54,7 @@ namespace CiFarm.Scripts.UI.View
 
         public void OnPopupClose()
         {
+            DLogger.Log("CLOSED POPUP");
             GameController.Instance.CameraController.UnLockCamera();
         }
         #endregion

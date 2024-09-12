@@ -21,17 +21,20 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnInit();
             shopItemLoopListView.InitListView(0, OnGetItemByIndex);
-            if (Parameter != null)
-            {
-                var param = (GameViewParam)Parameter;
-                _onClose = param.callBack;
-            }
+         
         }
 
         protected override void OnShowing()
         {
             base.OnShowing();
+            if (Parameter != null)
+            {
+                var param = (GameViewParam)Parameter;
+                _onClose = param.callBack;
+            }
+            
             LoadAllItemShop();
+
         }
 
         public void OnClickBuyItem(ShopItemData item)

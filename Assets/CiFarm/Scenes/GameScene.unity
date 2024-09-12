@@ -4634,6 +4634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb915e8ddebbfc44aa830002158d05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelGameObjectConfig: {fileID: 0}
 --- !u!1 &620426393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,6 +5034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMapController: {fileID: 669348101}
+  cameraController: {fileID: 669348102}
   dirtTile: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
   dirtTileNft: {fileID: 7360233726201006671, guid: b6de7067fa900f7408a20f7263a1a552, type: 3}
   listDirtNormal:
@@ -5047,19 +5049,6 @@ MonoBehaviour:
     plantState: 4
   - position: {x: 4, y: 0}
     plant: {fileID: 1158725481770596654, guid: b82723a35cca55c488517d05e0541fb7, type: 3}
-    plantState: 2
-  listDirtNft:
-  - position: {x: 0, y: 1}
-    plant: {fileID: 1158725481770596654, guid: 4f4b72c51e2d1644d8629d7287bd4b8c, type: 3}
-    plantState: 2
-  - position: {x: 0, y: 2}
-    plant: {fileID: 1158725481770596654, guid: a836ac0abe428844f8f4b916883480f0, type: 3}
-    plantState: 4
-  - position: {x: 0, y: 3}
-    plant: {fileID: 1158725481770596654, guid: 52bbf58fd026b164f84df12581310a10, type: 3}
-    plantState: 1
-  - position: {x: 0, y: 4}
-    plant: {fileID: 1158725481770596654, guid: 5c81c55820bd8444fadb58a75c97adf6, type: 3}
     plantState: 2
 --- !u!114 &669348101
 MonoBehaviour:
@@ -5103,6 +5092,7 @@ MonoBehaviour:
   dragLimitRight: 15
   targetDrag: {x: 0, y: 0, z: 0}
   isDragging: 0
+  allowDrag: 1
 --- !u!1 &718507045
 GameObject:
   m_ObjectHideFlags: 0
