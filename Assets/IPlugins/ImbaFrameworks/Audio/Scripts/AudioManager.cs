@@ -15,7 +15,6 @@ namespace Imba.Audio
 {
     public class AudioManager : ManualSingletonMono<AudioManager>
     {
-        //driven SFX engine
         public event Action OnChangeSFX;
 
         #region VARIABLES
@@ -48,6 +47,45 @@ namespace Imba.Audio
         private bool _isMuteMusic;
 
         private bool _isMuteSfx;
+
+        #endregion
+
+        #region AUDIO CONFIG
+
+        private string musicVolumeKey = "musicKey";
+        private string audioVolumeKey = "audioKey";
+        public  float  _musicVolume   = 1f;
+        public  float  _audioVolume   = 1f;
+
+        public void SetMusicVolume(float newValue)
+        {
+            _musicVolume = newValue;
+            foreach (var s in _database)
+            {
+                if (s.AudioClip == null)
+                    continue;
+                if (s.Type == AudioType.BGM)
+                {
+                    if (s.Source == null)
+                    {
+                        continue;
+                    }
+
+                    s.Source.volume = s.Volume * newValue;
+                }
+            }
+        }
+
+        public void SetAudioVolume(float newValue)
+        {
+            _audioVolume = newValue;
+        }
+
+        public void SaveAudioSetting()
+        {
+            PlayerPrefs.SetFloat(musicVolumeKey, _musicVolume);
+            PlayerPrefs.SetFloat(audioVolumeKey, _audioVolume);
+        }
 
         #endregion
 
@@ -87,6 +125,9 @@ namespace Imba.Audio
                     s.Source.Play();
                 }
             }
+
+            _musicVolume = PlayerPrefs.GetFloat(musicVolumeKey, 1f);
+            _audioVolume = PlayerPrefs.GetFloat(audioVolumeKey, 1f);
         }
 
         void OnEnable()
@@ -175,6 +216,7 @@ namespace Imba.Audio
                     s.Source = CreateAudioSource(s);
                 }
 
+                s.Source.volume = s.Volume * _musicVolume;
                 s.Source.PlayOneShot(s.AudioClip, s.Volume);
             }
         }
@@ -221,6 +263,7 @@ namespace Imba.Audio
                 return;
             }
 
+            s.Source.volume = s.Volume * _musicVolume;
             if (s.Source == null)
             {
                 s.Source = CreateAudioSource(s);
@@ -446,6 +489,8 @@ namespace Imba.Audio
                         }
 
                         s.Source.volume = 0f;
+
+                        s.Volume *= _musicVolume;
                         float targetVolume = s.Volume;
                         while (s.Source.volume < targetVolume)
                         {

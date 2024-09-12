@@ -45,111 +45,111 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _database:
-  - AudioName: 0
-    Type: 1
-    AudioClip: {fileID: 8300000, guid: 62971411349de3347a1e02030dc06543, type: 3}
-    Volume: 1
-    Priority: 0
-    SpatialBlend: 0
-    Source: {fileID: 0}
-    IsLooping: 1
-    PlayOnAwake: 0
   - AudioName: 1
     Type: 1
-    AudioClip: {fileID: 8300000, guid: d9f8cc1b4d59f4c4b83e8dcd86c296cf, type: 3}
-    Volume: 0.8
+    AudioClip: {fileID: 8300000, guid: fb064478e58db08439252a1eaa709bb7, type: 3}
+    Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 2
-    Type: 2
-    AudioClip: {fileID: 8300000, guid: 2c3bd64ba1e19b345b14c6e2ef73d70e, type: 3}
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: fb064478e58db08439252a1eaa709bb7, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
     IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 30
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: 2bdcdbf9c362a2f45a84188a4f17b9b9, type: 3}
+  - AudioName: 3
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: fb064478e58db08439252a1eaa709bb7, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 32
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: 7c7ac2184e5ae41448fb52c527dfa50c, type: 3}
+  - AudioName: 4
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: 931bb13571f91df4fa6327cba10e0dca, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 33
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: 081a234f9eab565448effc9feba6b6a2, type: 3}
+  - AudioName: 5
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: 050ee741475cd734f979a226afa1572b, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 35
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: b39d9385064107840a9bdcf41e21cd05, type: 3}
+  - AudioName: 6
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: b692534aad670074f862f3bd8785ed3b, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 36
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: 6a753c4aac04a1a4bba61ac6ccd5e93c, type: 3}
+  - AudioName: 7
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: 5048f664ea4ea9248ad460662c5e4297, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 37
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: cdd77804b45e513448d8c937ecde9491, type: 3}
+  - AudioName: 8
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: 85c3a6859582c214baaae2d783d360f6, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 38
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: 3625bdb5bbc885246bf9dfae7a571589, type: 3}
+  - AudioName: 9
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: 2e4b7e2aacd19f1458f5ac2e73e0fdb7, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 39
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: 9b97e5dd8b463794892d665d10118eee, type: 3}
+  - AudioName: 10
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: 46500a7d157fe5842a1b14820389d455, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
     PlayOnAwake: 0
-  - AudioName: 34
-    Type: 0
-    AudioClip: {fileID: 8300000, guid: 7341438d55319e241bf503861a373a90, type: 3}
+  - AudioName: 11
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: 2caff89e0dee2ea43bd9ee295b77edc0, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
     Source: {fileID: 0}
-    IsLooping: 0
+    IsLooping: 1
+    PlayOnAwake: 0
+  - AudioName: 12
+    Type: 1
+    AudioClip: {fileID: 8300000, guid: dd3cda4baf377a745b8e7bce2340dec8, type: 3}
+    Volume: 1
+    Priority: 0
+    SpatialBlend: 0
+    Source: {fileID: 0}
+    IsLooping: 1
     PlayOnAwake: 0

@@ -5,33 +5,23 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace CiFarm.Scripts.UI.Popups
 {
     public class SettingPopup : UIPopup
     {
-        [SerializeField] TMP_Text     txtNamePopup;
-        [SerializeField] GameObject[] btns = new GameObject[2];
-        [SerializeField] GameObject   btnClose;
-
-        [SerializeField] GameObject[] btnSound     = new GameObject[2];
-        [SerializeField] GameObject[] iconSound    = new GameObject[2];
-        [SerializeField] GameObject[] btnMusic     = new GameObject[2];
-        [SerializeField] GameObject[] iconMusic    = new GameObject[2];
-        private          bool         _isMuteMusic = true;
-        private          bool         _isMuteSfx   = true;
+        [SerializeField] private Slider musicSetting;
+        [SerializeField] private Slider audiSetting;
 
         private UnityAction _onClose;
 
         protected override void OnShowing()
         {
             base.OnShowing();
-            //this.isOnSound = AudioSettingService.Instance.GetSoundVolume() == 1 ? true : false;
-            //this.isOnMusic = AudioSettingService.Instance.GetMusicVolume() == 1 ? true : false;
-            this._isMuteSfx   = AudioManager.Instance.IsMuteAudio(Imba.Audio.AudioType.SFX);
-            this._isMuteMusic = AudioManager.Instance.IsMuteAudio(Imba.Audio.AudioType.BGM);
-  
 
+            musicSetting.SetValueWithoutNotify(AudioManager.Instance._musicVolume);
+            audiSetting.SetValueWithoutNotify(AudioManager.Instance._audioVolume);
             if (Parameter != null)
             {
                 var param = (GameViewParam)Parameter;
@@ -42,15 +32,28 @@ namespace CiFarm.Scripts.UI.Popups
         protected override void OnHiding()
         {
             base.OnHiding();
+            AudioManager.Instance.SaveAudioSetting();
             _onClose?.Invoke();
         }
 
-        
         public void BTN_Home()
         {
             Hide();
         }
 
-       
+        public void OnChangeMusic(float value)
+        {
+            AudioManager.Instance.SetMusicVolume(value);
+        }
+
+        public void OnChangeAudio(float value)
+        {
+            AudioManager.Instance.SetAudioVolume(value);
+        }
+        public void OnDoneEdit()
+        {
+            AudioManager.Instance.PlaySFX(AudioName.Click4);
+
+        }
     }
 }

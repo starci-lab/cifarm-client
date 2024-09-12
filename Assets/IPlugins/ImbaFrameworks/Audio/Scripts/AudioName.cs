@@ -12,7 +12,6 @@ namespace Imba.Audio
 
         BGM_Menu     = 0,
         BGM_GAMEPLAY = 1,
-        AMB_GAMEPLAY = 2,
 
         #region UI
 
@@ -20,16 +19,18 @@ namespace Imba.Audio
 
         #region GAME PLAY
 
-        Claim     = 30,
-        Claim2X   = 32,
-        CountDown = 33,
-        StartGame = 34,
-
-        Explotion      = 35,
-        Explotion2     = 36,
-        Explotion3     = 37,
-        SoundCarStart1 = 38,
-        SoundCarStart2 = 39,
+        Appear1,
+        Appear2,
+        Click1,
+        Click2,
+        Click3,
+        Click4,
+        Click5,
+        Close1,
+        Close2,
+        Close3,
+        PowerUpBright,
+   
 
         #endregion
     }
