@@ -16,15 +16,15 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [SerializeField] private bool useHttps = true;
         [SerializeField] private string host = "api.cifarm-server.starci.net";
 
-        [SerializeField] private int    port = 443;
-        [SerializeField] private string serverKey  = "defaultkey";
+        [SerializeField] private int port = 443;
+        [SerializeField] private string serverKey = "defaultkey";
 
         [HideInInspector]
-        public Client   client  = null;
+        public Client client = null;
         [HideInInspector]
         public ISession session = null;
         [HideInInspector]
-        public IApiUser user    = null;
+        public IApiUser user = null;
 
         //credentials
         private Credentials credentials = null;
@@ -62,21 +62,23 @@ namespace CiFarm.Scripts.Services.NakamaServices
         private void SetEditorCredentials()
         {
 
-                credentials = useLocal 
-                ? new () {
-                    message = "0d9c4c9f-e52e-4b00-8aaa-1e6caaa50890",
-                    publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                    signature = "0x3570775c081781655265d6784ef77535a04e161653917e98938f9503ffee5797220a8fbd6c46e0853fb4e5d3cb608af8b3be1b7397aa4c3cbda456e115ccc7251b",
-                    chainKey = "avalanche",
-                    network = "testnet",
-                } 
-                : new () {
-                    message = "1ccd5c84-93c9-4bb9-a40a-285b4c5405e2",
-                    publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                    signature = "0x2f2d66a0502b990f4e8450d54277cf4b7297d45b2e04bed2fcfc606fc2e1e72e3b72282f3a0798e45e4b1715bf90c3660eaa2bf0780bc1a9196e6468915d39a61c",
-                    chainKey = "avalanche",
-                    network = "testnet",
-                };
+            credentials = useLocal
+            ? new()
+            {
+                message = "0d9c4c9f-e52e-4b00-8aaa-1e6caaa50890",
+                publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
+                signature = "0x3570775c081781655265d6784ef77535a04e161653917e98938f9503ffee5797220a8fbd6c46e0853fb4e5d3cb608af8b3be1b7397aa4c3cbda456e115ccc7251b",
+                chainKey = "avalanche",
+                network = "testnet",
+            }
+            : new()
+            {
+                message = "1ccd5c84-93c9-4bb9-a40a-285b4c5405e2",
+                publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
+                signature = "0x2f2d66a0502b990f4e8450d54277cf4b7297d45b2e04bed2fcfc606fc2e1e72e3b72282f3a0798e45e4b1715bf90c3660eaa2bf0780bc1a9196e6468915d39a61c",
+                chainKey = "avalanche",
+                network = "testnet",
+            };
         }
 
         //called from React app to set credentials, then break the coroutine
@@ -84,11 +86,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             credentials = JsonConvert.DeserializeObject<Credentials>(payload);
         }
-    
+
         public void InitializeClient()
         {
             try
-            {      
+            {
                 if (useLocal)
                 {
                     client = new Client("http", "localhost", 7350, "defaultkey", UnityWebRequestAdapter.Instance)
@@ -96,7 +98,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
                         Timeout = 5, //5s
                         GlobalRetryConfiguration = new RetryConfiguration(1, 0)
                     };
-                } else
+                }
+                else
                 {
                     var scheme = useHttps ? "https" : "http";
                     client = new Client(scheme, host, port, serverKey, UnityWebRequestAdapter.Instance)
@@ -123,7 +126,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 { "message", credentials.message },
                 { "publicKey", credentials.publicKey },
                 { "signature", credentials.signature },
-                { "chainKey", credentials.chainKey }
+                { "chainKey", credentials.chainKey },
+                { "network", credentials.network }
             });
                 authenticated = true;
             }
@@ -139,12 +143,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 var result = await client.RpcAsync(session, "go_healthcheck");
                 var response = JsonConvert.DeserializeObject<GoHealthcheckResponse>(result.Payload);
-              
+
                 if (response.status == "ok")
                 {
                     DLogger.Log("Healthcheck succeeded", "Nakama", LogColors.LimeGreen);
                 }
-                
+
             }
             catch (Exception e)
             {
