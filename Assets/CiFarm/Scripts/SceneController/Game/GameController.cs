@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
+using CiFarm.Scripts.Services;
+using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.View;
 using Imba.UI;
 using Imba.Utils;
 using SupernovaDriver.Scripts.UI.View;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CiFarm.Scripts.SceneController.Game
@@ -12,12 +15,17 @@ namespace CiFarm.Scripts.SceneController.Game
     public class GameController : ManualSingletonMono<GameController>
     {
         [SerializeField] private TileMapController tileMapController;
+        [SerializeField] private CameraController  cameraController;
 
         private GameView _gameView;
 
+        #region GETTET SETTER
+        public TileMapController TileMapController => tileMapController;
+        public CameraController CameraController => cameraController;
+        #endregion
+        
         [Header("Test Zone Here, this play will make fake parameter")]
         public GameObject dirtTile;
-
         public GameObject dirtTileNft;
 
         [Serializable]
@@ -29,13 +37,16 @@ namespace CiFarm.Scripts.SceneController.Game
         }
 
         public List<DirtPlantTest> listDirtNormal;
-        public List<DirtPlantTest> listDirtNft;
 
         private void Start()
         {
+            UIManager.Instance.ViewManager.ShowView(UIViewName.GameView);
             _gameView = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
-            LoadNormalDirt();
-            LoadNftDirt();
+            _gameView.Show();
+
+            LoadUserTileMap();
+            // SHOW TO UI
+            // LoadNormalDirt();
         }
 
         private void Update()
@@ -46,7 +57,7 @@ namespace CiFarm.Scripts.SceneController.Game
             // }
         }
 
-        public void LoadNormalDirt()
+        private void LoadNormalDirt()
         {
             foreach (var dt in listDirtNormal)
             {
@@ -63,21 +74,54 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public void LoadNftDirt()
+
+        #region Nakama Communicated
+
+        #region Loader Data
+
+        /// <summary>
+        /// INIT METHOD
+        /// </summary>
+        private void LoadUserTileMap()
         {
-            foreach (var dt in listDirtNft)
+            var rawData = NakamaSocketService.Instance.placedItems;
+            foreach (var placed in rawData)
             {
-                var dirtObj  = Instantiate(dirtTileNft);
-                var plantObj = Instantiate(dt.plant);
+                switch (placed.type)
+                {
+                    case PlacedItemType.Tile:
+                        PlacedDirt(placed);
+                        break;
+                    case PlacedItemType.Building:
 
-                var dirtScript = dirtObj.GetComponent<BaseGround>();
-                var plant      = plantObj.GetComponent<BasePlant>();
-
-                plant.SetPlantState(dt.plantState);
-                dirtScript.SetPlant(plant);
-
-                tileMapController.SetGroundWithTilePos(dt.position, dirtObj);
+                        break;
+                }
             }
         }
+
+        private void PlacedDirt(PlacedItem placedItem)
+        {
+            var prefabDirtData = ResourceService.Instance.ModelGameObjectConfig.GetTile(placedItem.referenceKey);
+            var dirtObj        = Instantiate(prefabDirtData);
+
+            tileMapController.SetGroundWithTilePos(
+                new Vector2Int((int)placedItem.position.x, (int)placedItem.position.y)
+                , dirtObj);
+
+
+            // var plantObj = Instantiate(dt.plant);
+            // var plant    = plantObj.GetComponent<BasePlant>();
+            // var dirtScript = dirtObj.GetComponent<BaseGround>();
+            // plant.SetPlantState(dt.plantState);
+            // dirtScript.SetPlant(plant);
+        }
+
+        private void PlacedBuilding(PlacedItem placedItem)
+        {
+        }
+
+        #endregion
+
+        #endregion
     }
 }

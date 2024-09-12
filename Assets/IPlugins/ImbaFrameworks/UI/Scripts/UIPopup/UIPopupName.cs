@@ -12,13 +12,11 @@ namespace Imba.UI
     /// </summary>
     public enum UIPopupName
     {
-        SamplePopup = -1,
-        MessageBox = 0,
+        SamplePopup            = -1,
+        MessageBox             = 0,
         MessageBoxUnclosePopup = 1,
-        SettingPopup = 2,
-        LevelUpPopup = 3,
-        SummaryPopup = 4,
-        UpgradeSkillPopup = 5,
-        EndGamePopup = 6,
+        SettingPopup           = 2,
+        ShopPopup              = 5,
+        EndGamePopup           = 6,
     }
 }

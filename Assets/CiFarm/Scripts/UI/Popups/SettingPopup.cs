@@ -1,8 +1,9 @@
-using System;
+using CiFarm.Scripts.UI.View;
 using Imba.Audio;
 using Imba.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace CiFarm.Scripts.UI.Popups
@@ -19,7 +20,8 @@ namespace CiFarm.Scripts.UI.Popups
         [SerializeField] GameObject[] iconMusic    = new GameObject[2];
         private          bool         _isMuteMusic = true;
         private          bool         _isMuteSfx   = true;
-        private          Action       OnContinue;
+
+        private UnityAction _onClose;
 
         protected override void OnShowing()
         {
@@ -31,12 +33,17 @@ namespace CiFarm.Scripts.UI.Popups
             OnSound(_isMuteSfx);
             OnMusic(_isMuteMusic);
 
+            if (Parameter != null)
+            {
+                var param = (GameViewParam)Parameter;
+                _onClose = param.callBack;
+            }
         }
 
         protected override void OnHiding()
         {
             base.OnHiding();
-            OnContinue?.Invoke();
+            _onClose?.Invoke();
         }
 
         public void BTN_Sound()
@@ -56,15 +63,14 @@ namespace CiFarm.Scripts.UI.Popups
                 AudioManager.Instance.StopMusic(AudioName.BGM_Menu);
             else
             {
-                if(SceneManager.GetActiveScene().name == "GameScene")
+                if (SceneManager.GetActiveScene().name == "GameScene")
                     AudioManager.Instance.PlayMusic(AudioName.BGM_Menu);
-            }    
+            }
         }
 
         public void BTN_Home()
         {
             Hide();
-            SceneManager.LoadScene("MainScene");
         }
 
         public void OnMusic(bool isMute)

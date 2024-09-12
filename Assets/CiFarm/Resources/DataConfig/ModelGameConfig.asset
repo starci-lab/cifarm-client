@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47264c83eee4699afa52a5fc01d682a, type: 3}
+  m_Name: ModelGameConfig
+  m_EditorClassIdentifier: 
+  tileMapper:
+  - key: starter
+    prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+  - key: basic1
+    prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+  - key: basic2
+    prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+  - key: basic3
+    prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+  - key: basic4
+    prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+  plantMapper:
+  - key: cauliflower
+    prefabModel: {fileID: 1158725481770596654, guid: 4f4b72c51e2d1644d8629d7287bd4b8c, type: 3}
+  - key: carrot
+    prefabModel: {fileID: 1158725481770596654, guid: f037a6288d43dff4ab6709dc5619e09b, type: 3}
+  - key: pineapple
+    prefabModel: {fileID: 1158725481770596654, guid: a836ac0abe428844f8f4b916883480f0, type: 3}
+  - key: watermelon
+    prefabModel: {fileID: 1158725481770596654, guid: 52bbf58fd026b164f84df12581310a10, type: 3}
+  - key: bellpepper
+    prefabModel: {fileID: 1158725481770596654, guid: 1457bcb785280af44b18d59564b2b139, type: 3}
+  - key: pepper
+    prefabModel: {fileID: 1158725481770596654, guid: b82723a35cca55c488517d05e0541fb7, type: 3}
+  - key: potato
+    prefabModel: {fileID: 1158725481770596654, guid: 5c81c55820bd8444fadb58a75c97adf6, type: 3}
+  constructionMapper: []

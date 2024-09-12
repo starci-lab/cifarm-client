@@ -1878,6 +1878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb915e8ddebbfc44aa830002158d05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  modelGameObjectConfig: {fileID: 11400000, guid: 002182cf8d8d01a4890e6eda4b4e0f09, type: 2}
 --- !u!1001 &1026835838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2409,9 +2410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054d476c5d0c4a34fb37204ae629edea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useHttps: 0
-  host: localhost
-  port: 7350
+  useHttps: 1
+  host: api.cifarm-server.starci.net
+  port: 443
   serverKey: defaultkey
   authenticated: 0
 --- !u!114 &1702592197

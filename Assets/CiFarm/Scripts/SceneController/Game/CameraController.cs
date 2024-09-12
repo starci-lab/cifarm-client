@@ -29,6 +29,8 @@ namespace CiFarm.Scripts.SceneController.Game
         public Vector3 targetDrag;
         public bool    isDragging;
 
+        public bool allowDrag = true;
+
         void Start()
         {
             targetZoom = mainCam.orthographicSize;
@@ -37,6 +39,11 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void LateUpdate()
         {
+            if (!allowDrag)
+            {
+                return;
+            }
+
             HandleCameraDrag();
             HandleZoom();
         }
@@ -79,6 +86,16 @@ namespace CiFarm.Scripts.SceneController.Game
             }
 
             mainCam.DOOrthoSize(targetZoom, zoomSmoothTime);
+        }
+
+        public void LockCamera()
+        {
+            allowDrag = false;
+        }
+
+        public void UnLockCamera()
+        {
+            allowDrag = true;
         }
     }
 }
