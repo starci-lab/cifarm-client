@@ -1982,13 +1982,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2976012464656396240, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -75.6001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976012464656396240, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -236.90002
+      objectReference: {fileID: 0}
     - target: {fileID: 2989115320671016246, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3231139608854104813, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -28.599976
+      value: -28.599854
       objectReference: {fileID: 0}
     - target: {fileID: 3231139608854104813, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1997,6 +2005,14 @@ PrefabInstance:
     - target: {fileID: 4202201619485790367, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623805211250284054, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 102.8999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623805211250284054, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -233.69995
       objectReference: {fileID: 0}
     - target: {fileID: 5762806645442667581, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2425,6 +2441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983feb88ef01db84d95b7e887adad167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugPlacedItems: 1
+  placedItems: []
 --- !u!1 &2001163996
 GameObject:
   m_ObjectHideFlags: 0

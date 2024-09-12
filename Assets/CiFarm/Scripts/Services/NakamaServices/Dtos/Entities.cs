@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 namespace CiFarm.Scripts.Services.NakamaServices
-{
+{   
     [Serializable]
     public class Seed
     {
@@ -18,9 +18,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("perennial")]
         public bool perennial;
-
-        [JsonProperty("referenceId")]
-        public string referenceId;
 
         [JsonProperty("growthStages")]
         public int growthStages;
@@ -47,9 +44,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("price")]
         public int Price { get; set; }
 
-        [JsonProperty("referenceId")]
-        public string ReferenceId { get; set; }
-
         [JsonProperty("maxOwnership")]
         public int MaxOwnership { get; set; }
     }
@@ -68,9 +62,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("growthTime")]
         public int growthTime;
-
-        [JsonProperty("referenceId")]
-        public string referenceId;
 
         [JsonProperty("offspringPrice")]
         public int offspringPrice;
@@ -140,8 +131,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("isPlanted")]
         public bool isPlanted;
 
-        [JsonProperty("referenceId")]
-        public string referenceId;
+        [JsonProperty("referenceKey")]
+        public string referenceKey;
 
         [JsonProperty("fullyMatured")]
         public bool fullyMatured;

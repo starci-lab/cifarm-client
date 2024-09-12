@@ -61,9 +61,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             credentials = new Credentials()
             {
-                message = "ae1584a3-7f77-48c4-9f1b-3a1d0f0dc58c",
+                message = "e224d0d8-ce9a-41c9-a8fc-5ddd03bbf69f",
                 publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                signature = "0x33c619dc61cc57405d25bc593c6e203abcc0c3a671f12e28b6e57606a846fc060fb6de512e36e6af52a6c008cd33a2955d4c5be6a538519d8f9e75ab3c43f15e1b",
+                signature = "0xd239fecc5a67afd0352a089331b005ae9965b4a47001dd87fd619346410a2a44763bff159fe40eb4d1b8788f0a076318faca6ebabfab9976e206caf0bb18476b1b",
                 chainKey = "avalanche"
             };
         }
@@ -76,7 +76,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
     
         public void InitializeClient()
         {
-            DLogger.Log("Creating client...", "Nakama", LogColors.Gold);
             try
             {   
                 var scheme = useHttps ? "https" : "http";
