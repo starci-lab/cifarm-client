@@ -49,11 +49,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
             InitializeClient();
 
             //authenticate
-            Authenticate();
+            AuthenticateAsync();
             yield return new WaitUntil(() => authenticated);
 
             //healthcheck
-            HealthCheck();
+            HealthCheckAsync();
 
         }
 
@@ -61,9 +61,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             credentials = new Credentials()
             {
-                message = "e224d0d8-ce9a-41c9-a8fc-5ddd03bbf69f",
+                message = "6353a079-6288-405d-a92d-db75d080ca47",
                 publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                signature = "0xd239fecc5a67afd0352a089331b005ae9965b4a47001dd87fd619346410a2a44763bff159fe40eb4d1b8788f0a076318faca6ebabfab9976e206caf0bb18476b1b",
+                signature = "0x5844831e2bd71f9a3f52197662e1a158c8bb731b942bd08fc3440ac60c146f7a54e857b03b33d392d9ce004710130263d7298ff5b747995e9a46fd4950901b791c",
                 chainKey = "avalanche"
             };
         }
@@ -91,7 +91,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             }
         }
 
-        public async void Authenticate()
+        public async void AuthenticateAsync()
         {
             try
             {
@@ -111,7 +111,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             }
         }
 
-        public async void HealthCheck()
+        public async void HealthCheckAsync()
         {
             try
             {

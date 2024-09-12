@@ -19,9 +19,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
 
-            LoadSeeds();
-            LoadTiles();
-            LoadAnimals();
+            LoadSeedsAsync();
+            LoadTilesAsync();
+            LoadAnimalsAsync();
         }
 
         [ReadOnly]
@@ -34,7 +34,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public List<Animal> animals;
 
         //load seeds
-        public async void LoadSeeds()
+        public async void LoadSeedsAsync()
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
@@ -50,7 +50,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         //load tiles
-        public async void LoadTiles()
+        public async void LoadTilesAsync()
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
@@ -66,7 +66,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         //load animals
-        public async void LoadAnimals()
+        public async void LoadAnimalsAsync()
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;

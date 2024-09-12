@@ -2375,6 +2375,8 @@ GameObject:
   - component: {fileID: 1702592196}
   - component: {fileID: 1702592197}
   - component: {fileID: 1702592198}
+  - component: {fileID: 1702592199}
+  - component: {fileID: 1702592200}
   m_Layer: 0
   m_Name: NakamaService
   m_TagString: Untagged
@@ -2410,7 +2412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useHttps: 0
-  host: localhost
+  host: 127.0.0.1
   port: 7350
   serverKey: defaultkey
   authenticated: 0
@@ -2443,6 +2445,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugPlacedItems: 1
   placedItems: []
+--- !u!114 &1702592199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702592194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b59beb1c67bdb74aaef4b7d9ac062ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1702592200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702592194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9882119fc2e0f014991903965ee15156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventories: []
+  golds: 0
 --- !u!1 &2001163996
 GameObject:
   m_ObjectHideFlags: 0
