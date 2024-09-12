@@ -10,7 +10,7 @@ namespace CiFarm.Scripts.UI.Popups.Shop
     {
         [SerializeField] private TextMeshProUGUI textItemName;
         [SerializeField] private TextMeshProUGUI textItemTimeDetail;
-        [SerializeField] private TextMeshProUGUI textItemProfitDetail;
+        [SerializeField] private TextMeshProUGUI textItemProductDetail;
         [SerializeField] private TextMeshProUGUI textItemPrice;
         [SerializeField] private Image           iconItem;
 
@@ -23,7 +23,7 @@ namespace CiFarm.Scripts.UI.Popups.Shop
             _buyAction                = callBack;
             textItemName.text         = data.textItemName;
             textItemTimeDetail.text   = "Plant Time: " + data.textItemTimeDetail;
-            textItemProfitDetail.text = "Profit: " + data.textItemProfitDetail;
+            textItemProductDetail.text = "Products: " + data.textItemProfitDetail;
             textItemPrice.text        = data.textItemPrice;
             iconItem.sprite           = data.iconItem;
         }

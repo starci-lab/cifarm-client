@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using CiFarm.Scripts.Services;
+using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Shop;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
@@ -13,11 +15,12 @@ namespace CiFarm.Scripts.UI.Popups
     public class ShopPopup : UIPopup
     {
         [SerializeField] private LoopListView2 shopItemLoopListView;
+        [SerializeField] private ShopTab       seedTab;
+        [SerializeField] private ShopTab       animaTab;
+        [SerializeField] private ShopTab       treeTab;
 
-        private UnityAction _onClose;
-
-        [Header("TEST")]
-        public List<ShopItemData> shopItemsData;
+        private UnityAction        _onClose;
+        public  List<ShopItemData> shopItemsData;
 
         protected override void OnInit()
         {
@@ -34,20 +37,9 @@ namespace CiFarm.Scripts.UI.Popups
                 _onClose = param.callBack;
             }
 
-            LoadAllItemShop();
-            for (int i = 0; i < 10; i++)
-            {
-                shopItemsData.Add(new ShopItemData
-                {
-                    textItemName         = "Test " + i,
-                    textItemTimeDetail   = "Test " + i,
-                    textItemProfitDetail = "Test " + i,
-                    textItemPrice        = "Test " + i,
-                    iconItem             = null
-                });
-            }
-
-            ResetListView();
+            ClearSelectedShop();
+            seedTab.SetSelect(true);
+            LoadItemShopSeed();
         }
 
         public void OnClickBuyItem(ShopItemData item)
@@ -60,6 +52,13 @@ namespace CiFarm.Scripts.UI.Popups
             shopItemLoopListView.RecycleAllItem();
             shopItemLoopListView.SetListItemCount(shopItemsData.Count);
             shopItemLoopListView.MovePanelToItemIndex(0, 0);
+        }
+
+        public void ClearSelectedShop()
+        {
+            seedTab.SetSelect();
+            animaTab.SetSelect();
+            treeTab.SetSelect();
         }
 
         private LoopListViewItem2 OnGetItemByIndex(LoopListView2 listView, int index)
@@ -78,10 +77,7 @@ namespace CiFarm.Scripts.UI.Popups
 
             LoopListViewItem2 item;
             item = listView.NewListViewItem("ShopItem");
-
             var itemScript = item.GetComponent<ShopItem>();
-
-
             itemScript.InitData(itemData, OnClickBuyItem);
             return item;
         }
@@ -100,12 +96,42 @@ namespace CiFarm.Scripts.UI.Popups
 
         #region NAKAMA COMMUNICATE
 
-        public void LoadAllItemShop()
+        public void LoadItemShopSeed()
         {
+            ClearSelectedShop();
+            seedTab.SetSelect(true);
+            var rawData = NakamaLoaderService.Instance.seeds;
+            shopItemsData.Clear();
+            foreach (var data in rawData)
+            {
+                var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+                shopItemsData.Add(new ShopItemData
+                {
+                    textItemName         = gameConfig.ItemName,
+                    textItemTimeDetail   = (data.growthStageDuration * data.growthStages).ToString(),
+                    textItemProfitDetail = data.maxHarvestQuantity.ToString(),
+                    textItemPrice        = data.price.ToString(),
+                    iconItem             = gameConfig.GameShopIcon
+                });
+            }
+
+            ResetListView();
         }
 
-        public void LoadItemShopByType()
+        public void LoadItemShopByAnimal()
         {
+            ClearSelectedShop();
+            animaTab.SetSelect(true);
+            shopItemsData.Clear();
+            ResetListView();
+        }
+
+        public void LoadItemShopByTree()
+        {
+            ClearSelectedShop();
+            treeTab.SetSelect(true);
+            shopItemsData.Clear();
+            ResetListView();
         }
 
         #endregion

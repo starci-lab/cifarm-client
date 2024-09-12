@@ -14,28 +14,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileMapper:
   - key: starter
+    itemName: 
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
   - key: basic1
+    itemName: 
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
   - key: basic2
+    itemName: 
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
   - key: basic3
+    itemName: 
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
   - key: basic4
+    itemName: 
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
   plantMapper:
   - key: cauliflower
+    itemName: Cauliflower
     prefabModel: {fileID: 1158725481770596654, guid: 4f4b72c51e2d1644d8629d7287bd4b8c, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: 4d1a35c11a27d5747b906561b40da842, type: 3}
+    gameHarvestIcon: {fileID: 0}
   - key: carrot
+    itemName: Carrot
     prefabModel: {fileID: 1158725481770596654, guid: f037a6288d43dff4ab6709dc5619e09b, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: 1fb865f36105b464ebe8111786947b08, type: 3}
+    gameHarvestIcon: {fileID: 0}
   - key: pineapple
+    itemName: Pineapple
     prefabModel: {fileID: 1158725481770596654, guid: a836ac0abe428844f8f4b916883480f0, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: 2791df69c69821342b27fe19dcb72ff7, type: 3}
+    gameHarvestIcon: {fileID: 0}
   - key: watermelon
+    itemName: Watermelon
     prefabModel: {fileID: 1158725481770596654, guid: 52bbf58fd026b164f84df12581310a10, type: 3}
-  - key: bellpepper
+    gameShopIcon: {fileID: 21300000, guid: 965d283a221a9554b9858650ed7793dc, type: 3}
+    gameHarvestIcon: {fileID: 0}
+  - key: cucumber
+    itemName: Cucumber
     prefabModel: {fileID: 1158725481770596654, guid: 1457bcb785280af44b18d59564b2b139, type: 3}
-  - key: pepper
+    gameShopIcon: {fileID: 21300000, guid: a0c77fc100c36cf44b83061a50d3b349, type: 3}
+    gameHarvestIcon: {fileID: 0}
+  - key: bellpepper
+    itemName: Bell Pepper
     prefabModel: {fileID: 1158725481770596654, guid: b82723a35cca55c488517d05e0541fb7, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: 399a7532cdf23ce4090a18998af478f8, type: 3}
+    gameHarvestIcon: {fileID: 0}
   - key: potato
+    itemName: Potato
     prefabModel: {fileID: 1158725481770596654, guid: 5c81c55820bd8444fadb58a75c97adf6, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: a6acdf792ff4b7c4a9ceb3c56b091c24, type: 3}
+    gameHarvestIcon: {fileID: 0}
   constructionMapper: []

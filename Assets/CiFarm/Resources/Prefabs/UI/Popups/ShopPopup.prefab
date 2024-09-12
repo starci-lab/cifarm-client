@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 6567659761271808120}
   - component: {fileID: 772698876389606744}
   - component: {fileID: 5675628597912708067}
+  - component: {fileID: 3238673779345895739}
   m_Layer: 5
   m_Name: Chicken
   m_TagString: Untagged
@@ -353,6 +354,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3238673779345895739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370116723652572395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9590a11f391d88742a9b65ada59e8ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unselectedMask: {fileID: 6447081847939006163}
+  OnClickTab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6887559093635682516}
+        m_TargetAssemblyTypeName: CiFarm.Scripts.UI.Popups.ShopPopup, Game
+        m_MethodName: LoadItemShopByAnimal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1666044056162544293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,8 +1156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -602.47}
-  m_SizeDelta: {x: 0, y: 1204.9}
+  m_AnchoredPosition: {x: 0, y: -629.01685}
+  m_SizeDelta: {x: 0, y: 1151.8063}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3660084734889404873
 CanvasRenderer:
@@ -1212,9 +1241,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mItemPrefabDataList:
   - mItemPrefab: {fileID: 7924793291978968307, guid: 577784bf60f8ac9499c0aee3be70f032, type: 3}
-    mPadding: 10
+    mPadding: 15
     mInitCreateCount: 0
-    mStartPosOffset: 5
+    mStartPosOffset: 0
   mArrangeType: 0
   mSupportScrollBar: 0
   mItemSnapEnable: 0
@@ -1367,6 +1396,9 @@ MonoBehaviour:
     StartRotation: {x: 0, y: 0, z: 0}
     StartScale: {x: 1, y: 1, z: 1}
   shopItemLoopListView: {fileID: 5682460167991722778}
+  seedTab: {fileID: 7352325600701682362}
+  animaTab: {fileID: 3238673779345895739}
+  treeTab: {fileID: 165183902519974739}
   shopItemsData: []
 --- !u!1 &5356884983922514118
 GameObject:
@@ -1567,6 +1599,7 @@ GameObject:
   - component: {fileID: 6307318843361004968}
   - component: {fileID: 2863924078307813312}
   - component: {fileID: 1184023101720356180}
+  - component: {fileID: 165183902519974739}
   m_Layer: 5
   m_Name: Tree
   m_TagString: Untagged
@@ -1633,6 +1666,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &165183902519974739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412871961245452230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9590a11f391d88742a9b65ada59e8ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unselectedMask: {fileID: 7843552156927738782}
+  OnClickTab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6887559093635682516}
+        m_TargetAssemblyTypeName: CiFarm.Scripts.UI.Popups.ShopPopup, Game
+        m_MethodName: LoadItemShopByTree
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6415013490161216636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,6 +2995,7 @@ GameObject:
   - component: {fileID: 1811016811419851248}
   - component: {fileID: 7206899496896801226}
   - component: {fileID: 1577148250505626607}
+  - component: {fileID: 7352325600701682362}
   m_Layer: 5
   m_Name: Apple
   m_TagString: Untagged
@@ -3000,6 +3062,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7352325600701682362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6903086147612793998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9590a11f391d88742a9b65ada59e8ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unselectedMask: {fileID: 7501775591614210019}
+  OnClickTab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6887559093635682516}
+        m_TargetAssemblyTypeName: CiFarm.Scripts.UI.Popups.ShopPopup, Game
+        m_MethodName: LoadItemShopSeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7040980998789107190
 GameObject:
   m_ObjectHideFlags: 0

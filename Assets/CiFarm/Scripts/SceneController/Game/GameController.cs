@@ -103,7 +103,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void PlacedDirt(PlacedItem placedItem)
         {
-            var prefabDirtData = ResourceService.Instance.ModelGameObjectConfig.GetTile(placedItem.referenceKey);
+            var prefabDirtData = ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(placedItem.referenceKey);
             var dirtObj        = Instantiate(prefabDirtData);
 
             tileMapController.SetGroundWithTilePos(
@@ -112,7 +112,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
             if (placedItem.isPlanted)
             {
-                var prefabPlantData = ResourceService.Instance.ModelGameObjectConfig.GetPlant(placedItem.referenceKey);
+                var prefabPlantData = ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.referenceKey);
                 var plantObj        = Instantiate(prefabPlantData);
 
                 var plant      = plantObj.GetComponent<BasePlant>();
