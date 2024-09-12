@@ -61,9 +61,15 @@ namespace CiFarm.Scripts.Services.GameDatas
     {
         [SerializeField] private string     key;
         [SerializeField] private GameObject prefabModel;
+        [SerializeField] private Sprite gameShopIcon;
+        [SerializeField] private Sprite gameHarvestIcon;
 
         public string Key => key;
 
         public GameObject PrefabModel => prefabModel;
+
+        public Sprite GameShopIcon => gameShopIcon;
+
+        public Sprite GameHarvestIcon => gameHarvestIcon;
     }
 }

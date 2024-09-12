@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CiFarm.Scripts.UI.Popups.Shop;
 using CiFarm.Scripts.UI.View;
+using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using SuperScrollView;
 using UnityEngine;
@@ -21,7 +22,6 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnInit();
             shopItemLoopListView.InitListView(0, OnGetItemByIndex);
-         
         }
 
         protected override void OnShowing()
@@ -32,16 +32,36 @@ namespace CiFarm.Scripts.UI.Popups
                 var param = (GameViewParam)Parameter;
                 _onClose = param.callBack;
             }
-            
-            LoadAllItemShop();
 
+            LoadAllItemShop();
+            for (int i = 0; i < 10; i++)
+            {
+                shopItemsData.Add(new ShopItemData
+                {
+                    textItemName         = "Test " + i,
+                    textItemTimeDetail   = "Test " + i,
+                    textItemProfitDetail = "Test " + i,
+                    textItemPrice        = "Test " + i,
+                    iconItem             = null
+                });
+            }
+
+            ResetListView();
         }
 
         public void OnClickBuyItem(ShopItemData item)
         {
+            DLogger.Log("Buy Item: " + item.textItemName, "SHOP");
         }
 
-        LoopListViewItem2 OnGetItemByIndex(LoopListView2 listView, int index)
+        private void ResetListView()
+        {
+            shopItemLoopListView.RecycleAllItem();
+            shopItemLoopListView.SetListItemCount(shopItemsData.Count);
+            shopItemLoopListView.MovePanelToItemIndex(0, 0);
+        }
+
+        private LoopListViewItem2 OnGetItemByIndex(LoopListView2 listView, int index)
         {
             if (index < 0 || index >= shopItemsData.Count)
             {
