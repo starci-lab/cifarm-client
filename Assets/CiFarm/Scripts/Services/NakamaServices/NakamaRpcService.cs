@@ -8,7 +8,7 @@ using CiFarm.Scripts.Utilities;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
-    public class NakamaRpcAsyncService : ManualSingletonMono<NakamaRpcAsyncService>
+    public class NakamaRpcService : ManualSingletonMono<NakamaRpcService>
     {
         #region Inititialized
         public override void Awake()
@@ -35,8 +35,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
 
-        //Shop RpcAsyncs
-        #region BuySeedRpcAsync
+        //Shop Rpcs
+        #region BuySeedRpc
         public class BuySeedRpcAsyncParams
         {
             [JsonProperty("key")]
@@ -62,7 +62,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             return JsonConvert.DeserializeObject<BuySeedRpcAsyncResponse>(result.Payload);
         }
         #endregion
-        #region ConstructBuildingRpcAsync
+        #region ConstructBuildingRpc
         public class ConstructBuildingRpcAsyncParams
         {
             [JsonProperty("key")]
@@ -88,7 +88,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             return JsonConvert.DeserializeObject<ConstructBuildingRpcAsyncResponse>(result.Payload);
         }
         #endregion
-        #region BuyAnimalRpcAsync
+        #region BuyAnimalRpc
         public class BuyAnimalRpcAsyncParams
         {
             [JsonProperty("key")]
@@ -113,8 +113,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
 
-        //Farming RpcAsyncs
-        #region PlantSeedRpcAsync
+        //Farming Rpcs
+        #region PlantSeedRpc
         public class PlantSeedRpcAsyncParams
         {
             [JsonProperty("inventorySeedKey")]
@@ -143,7 +143,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         #endregion
 
         //Daily Rewards RpcAsync
-        #region ClaimDailyRewardRpcAsync
+        #region ClaimDailyRewardRpc
         public class ClaimDailyRewardRpcAsyncResponse
         {
             [JsonProperty("amount")]

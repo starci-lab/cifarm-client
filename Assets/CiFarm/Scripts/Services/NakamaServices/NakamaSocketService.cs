@@ -21,7 +21,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
 
-            Initialize();
+            InitializeAsync();
 
             yield return new WaitUntil(() => initialized);
             //register event
@@ -63,7 +63,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public ISocket socket = null;
 
         private bool initialized = false;
-        private async void Initialize()
+        private async void InitializeAsync()
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
