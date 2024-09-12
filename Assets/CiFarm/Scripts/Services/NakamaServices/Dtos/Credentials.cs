@@ -15,6 +15,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("chainkey")]
         public string chainKey;
+
+        [JsonProperty("network")]
+        public string network;
     }
 
 }
