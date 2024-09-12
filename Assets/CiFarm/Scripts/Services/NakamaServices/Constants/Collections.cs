@@ -15,8 +15,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [EnumStringValue("Tiles")]
         Tiles,
+
         [EnumStringValue("System")]
-        System
+        System,
+
+        [EnumStringValue("Inventories")]
+        Inventories
     }
 
     public enum SystemKey
