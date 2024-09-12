@@ -2324,115 +2324,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582758154}
   m_CullTransparentMesh: 1
---- !u!1 &1702592194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1702592195}
-  - component: {fileID: 1702592196}
-  - component: {fileID: 1702592197}
-  - component: {fileID: 1702592198}
-  - component: {fileID: 1702592199}
-  - component: {fileID: 1702592200}
-  m_Layer: 0
-  m_Name: NakamaService
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1702592195
+--- !u!4 &1702592195 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+  m_PrefabInstance: {fileID: 6966371345340147135}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702592194}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1298724190}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1702592196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702592194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 054d476c5d0c4a34fb37204ae629edea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useHttps: 1
-  host: api.cifarm-server.starci.net
-  port: 443
-  serverKey: defaultkey
-  authenticated: 0
---- !u!114 &1702592197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702592194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e25e91cdc0f4fe84a85ef17ecd46714f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seeds: []
-  tiles: []
-  animals: []
---- !u!114 &1702592198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702592194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983feb88ef01db84d95b7e887adad167, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugPlacedItems: 1
-  placedItems: []
---- !u!114 &1702592199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702592194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b59beb1c67bdb74aaef4b7d9ac062ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1702592200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1702592194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9882119fc2e0f014991903965ee15156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  golds: 0
-  inventoryPage: 0
-  inventories: []
 --- !u!1 &2001163996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,6 +2631,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3554b8735ebc7648bc988d50b551ef2, type: 3}
+--- !u!1001 &6966371345340147135
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1298724190}
+    m_Modifications:
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2316685567340283097, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2328878227380581963, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: m_Name
+      value: NakamaService
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
