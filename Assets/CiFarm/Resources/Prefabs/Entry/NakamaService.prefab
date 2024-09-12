@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054d476c5d0c4a34fb37204ae629edea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useLocal: 0
   useHttps: 1
   host: api.cifarm-server.starci.net
   port: 443
