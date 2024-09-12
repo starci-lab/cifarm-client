@@ -55,8 +55,8 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 2
-    Type: 1
-    AudioClip: {fileID: 8300000, guid: fb064478e58db08439252a1eaa709bb7, type: 3}
+    Type: 0
+    AudioClip: {fileID: 8300000, guid: 0dea486c1f659524aa9b8c4d8395b3ed, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
@@ -64,8 +64,8 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 3
-    Type: 1
-    AudioClip: {fileID: 8300000, guid: fb064478e58db08439252a1eaa709bb7, type: 3}
+    Type: 0
+    AudioClip: {fileID: 8300000, guid: cf14940c9dcf48e439dc952d85a5111f, type: 3}
     Volume: 1
     Priority: 0
     SpatialBlend: 0
@@ -73,7 +73,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 4
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: 931bb13571f91df4fa6327cba10e0dca, type: 3}
     Volume: 1
     Priority: 0
@@ -82,7 +82,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 5
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: 050ee741475cd734f979a226afa1572b, type: 3}
     Volume: 1
     Priority: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 6
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: b692534aad670074f862f3bd8785ed3b, type: 3}
     Volume: 1
     Priority: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 7
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: 5048f664ea4ea9248ad460662c5e4297, type: 3}
     Volume: 1
     Priority: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 8
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: 85c3a6859582c214baaae2d783d360f6, type: 3}
     Volume: 1
     Priority: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 9
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: 2e4b7e2aacd19f1458f5ac2e73e0fdb7, type: 3}
     Volume: 1
     Priority: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 10
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: 46500a7d157fe5842a1b14820389d455, type: 3}
     Volume: 1
     Priority: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 11
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: 2caff89e0dee2ea43bd9ee295b77edc0, type: 3}
     Volume: 1
     Priority: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
     IsLooping: 1
     PlayOnAwake: 0
   - AudioName: 12
-    Type: 1
+    Type: 0
     AudioClip: {fileID: 8300000, guid: dd3cda4baf377a745b8e7bce2340dec8, type: 3}
     Volume: 1
     Priority: 0
@@ -153,3 +153,5 @@ MonoBehaviour:
     Source: {fileID: 0}
     IsLooping: 1
     PlayOnAwake: 0
+  _musicVolume: 1
+  _audioVolume: 1

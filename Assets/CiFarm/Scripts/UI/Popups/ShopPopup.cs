@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
@@ -40,11 +41,6 @@ namespace CiFarm.Scripts.UI.Popups
             ClearSelectedShop();
             seedTab.SetSelect(true);
             LoadItemShopSeed();
-        }
-
-        public void OnClickBuyItem(ShopItemData item)
-        {
-            DLogger.Log("Buy Item: " + item.textItemName, "SHOP");
         }
 
         private void ResetListView()
@@ -107,8 +103,9 @@ namespace CiFarm.Scripts.UI.Popups
                 var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
                 shopItemsData.Add(new ShopItemData
                 {
+                    itemKey              = data.key,
                     textItemName         = gameConfig.ItemName,
-                    textItemTimeDetail   = (data.growthStageDuration * data.growthStages).ToString(),
+                    textItemTimeDetail   = (data.growthStageDuration).ToString(),
                     textItemProfitDetail = data.maxHarvestQuantity.ToString(),
                     textItemPrice        = data.price.ToString(),
                     iconItem             = gameConfig.GameShopIcon
@@ -134,12 +131,34 @@ namespace CiFarm.Scripts.UI.Popups
             ResetListView();
         }
 
+        public async void OnClickBuyItem(ShopItemData item)
+        {
+            DLogger.Log("Buy Item: " + item.textItemName, "SHOP");
+
+            try
+            {
+                var resultData = await NakamaRpcService.Instance.BuySeedRpcAsync(
+                    new NakamaRpcService.BuySeedRpcAsyncParams
+                    {
+                        key      = item.itemKey,
+                        quantity = 1
+                    });
+
+                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("Buy Item error: " + e.Message, "SHOP");
+            }
+        }
+
         #endregion
     }
 
     [System.Serializable]
     public class ShopItemData
     {
+        public string itemKey;
         public string textItemName;
         public string textItemTimeDetail;
         public string textItemProfitDetail;
