@@ -53,6 +53,7 @@ namespace CiFarm.Scripts.Services.GameDatas
 
             return result.PrefabModel;
         }
+
         public ModelConfigEntity GetPlant(string keyToFind)
         {
             var result = PlantMapper.FirstOrDefault(o => o.Key == keyToFind);
@@ -65,6 +66,52 @@ namespace CiFarm.Scripts.Services.GameDatas
             return result;
         }
 
+        public ModelConfigEntity GetTile(string keyToFind)
+        {
+            var result = tileMapper.FirstOrDefault(o => o.Key == keyToFind);
+            if (result == null)
+            {
+                DLogger.LogError("GetTile not found for: " + keyToFind, "ModelGameObjectConfig");
+                return PlantMapper[0];
+            }
+
+            return result;
+        }
+
+        public ModelConfigEntity GetConstruction(string keyToFind)
+        {
+            var result = constructionMapper.FirstOrDefault(o => o.Key == keyToFind);
+            if (result == null)
+            {
+                DLogger.LogError("GetConstruction not found for: " + keyToFind, "ModelGameObjectConfig");
+                return PlantMapper[0];
+            }
+
+            return result;
+        }
+
+        public ModelConfigEntity GetAnyMatchId(string keyToFind)
+        {
+            var result = PlantMapper.FirstOrDefault(o => o.Key == keyToFind);
+            if (result != null)
+            {
+                return result;
+            }
+
+            result = tileMapper.FirstOrDefault(o => o.Key == keyToFind);
+            if (result != null)
+            {
+                return result;
+            }
+
+            result = constructionMapper.FirstOrDefault(o => o.Key == keyToFind);
+            if (result != null)
+            {
+                return result;
+            }
+
+            return result;
+        }
     }
 
     [Serializable]
@@ -73,8 +120,8 @@ namespace CiFarm.Scripts.Services.GameDatas
         [SerializeField] private string     key;
         [SerializeField] private string     itemName;
         [SerializeField] private GameObject prefabModel;
-        [SerializeField] private Sprite gameShopIcon;
-        [SerializeField] private Sprite gameHarvestIcon;
+        [SerializeField] private Sprite     gameShopIcon;
+        [SerializeField] private Sprite     gameHarvestIcon;
 
         public string Key      => key;
         public string ItemName => itemName;

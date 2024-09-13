@@ -58,9 +58,12 @@ namespace CiFarm.Scripts.UI.View
 
         public void OnClickInventory()
         {
-            //GameController.Instance.CameraController.LockCamera();
+            GameController.Instance.CameraController.LockCamera();
             AudioManager.Instance.PlaySFX(AudioName.Click3);
-            DLogger.Log("In process OnClickInventory", "MainUI");
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.InventoryPopup, new GameViewParam
+            {
+                callBack = OnPopupClose
+            });
         }
 
         public void OnClickFriend()
