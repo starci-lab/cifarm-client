@@ -1,5 +1,6 @@
 using System.Collections;
 using DG.Tweening;
+using Imba.Audio;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,12 +45,15 @@ namespace SupernovaDriver.Scripts.SceneController.Entry
 
         public void ShowPlayButton()
         {
+            AudioManager.Instance.PlaySFX(AudioName.Click3);
+
             loadingGroup.SetActive(false);
             playButton.SetActive(true);
         }
 
         public void LoadGameScene()
         {
+            AudioManager.Instance.PlaySFX(AudioName.Click1);
             UnityEngine.SceneManagement.SceneManager.LoadScene(Constants.GameScene);
         }
     }

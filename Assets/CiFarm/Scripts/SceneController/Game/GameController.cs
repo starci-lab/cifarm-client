@@ -20,12 +20,15 @@ namespace CiFarm.Scripts.SceneController.Game
         private GameView _gameView;
 
         #region GETTET SETTER
+
         public TileMapController TileMapController => tileMapController;
-        public CameraController CameraController => cameraController;
+        public CameraController  CameraController  => cameraController;
+
         #endregion
-        
+
         [Header("Test Zone Here, this play will make fake parameter")]
         public GameObject dirtTile;
+
         public GameObject dirtTileNft;
 
         [Serializable]
@@ -74,7 +77,6 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-
         #region Nakama Communicated
 
         #region Loader Data
@@ -101,19 +103,23 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void PlacedDirt(PlacedItem placedItem)
         {
-            var prefabDirtData = ResourceService.Instance.ModelGameObjectConfig.GetTile(placedItem.referenceKey);
+            var prefabDirtData = ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(placedItem.referenceKey);
             var dirtObj        = Instantiate(prefabDirtData);
 
             tileMapController.SetGroundWithTilePos(
                 new Vector2Int((int)placedItem.position.x, (int)placedItem.position.y)
                 , dirtObj);
 
+            if (placedItem.isPlanted)
+            {
+                var prefabPlantData = ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.referenceKey);
+                var plantObj        = Instantiate(prefabPlantData);
 
-            // var plantObj = Instantiate(dt.plant);
-            // var plant    = plantObj.GetComponent<BasePlant>();
-            // var dirtScript = dirtObj.GetComponent<BaseGround>();
-            // plant.SetPlantState(dt.plantState);
-            // dirtScript.SetPlant(plant);
+                var plant      = plantObj.GetComponent<BasePlant>();
+                var dirtScript = dirtObj.GetComponent<BaseGround>();
+                plant.SetPlantState(placedItem.seedGrowthInfo.currentStage);
+                dirtScript.SetPlant(plant);
+            }
         }
 
         private void PlacedBuilding(PlacedItem placedItem)
