@@ -59,6 +59,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "buy_seed", JsonConvert.SerializeObject(_params));
+
+            NakamaAssetService.Instance.LoadWalletAsync();
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+
             return JsonConvert.DeserializeObject<BuySeedRpcAsyncResponse>(result.Payload);
         }
         #endregion
@@ -85,6 +89,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "construct_building", JsonConvert.SerializeObject(_params));
+
+            NakamaAssetService.Instance.LoadWalletAsync();
+
             return JsonConvert.DeserializeObject<ConstructBuildingRpcAsyncResponse>(result.Payload);
         }
         #endregion
@@ -107,6 +114,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
+
+            NakamaAssetService.Instance.LoadWalletAsync();
+            NakamaAssetService.Instance.LoadInventoriesAsync();
 
             var result = await client.RpcAsync(session, "buy_animal", JsonConvert.SerializeObject(_params));
             return JsonConvert.DeserializeObject<BuyAnimalRpcAsyncResponse>(result.Payload);
@@ -137,6 +147,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+
             var result = await client.RpcAsync(session, "plant_seed", JsonConvert.SerializeObject(_params));
             return JsonConvert.DeserializeObject<PlantSeedRpcAsyncResponse>(result.Payload);
         }
@@ -159,8 +171,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "claim_daily_reward");
+
+            NakamaAssetService.Instance.LoadWalletAsync();
+
             return JsonConvert.DeserializeObject<ClaimDailyRewardRpcAsyncResponse>(result.Payload);
         }
         #endregion
-    }
+}
 }
