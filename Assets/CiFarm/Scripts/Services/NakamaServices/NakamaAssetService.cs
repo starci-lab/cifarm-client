@@ -1,16 +1,17 @@
 using CiFarm.Scripts.Utilities;
-using Codice.CM.Common;
 using Imba.Utils;
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaAssetService : ManualSingletonMono<NakamaAssetService>
     {
+        public UnityAction onGoldChange;
         public override void Awake()
         {
             base.Awake();
@@ -45,6 +46,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var wallet = JsonConvert.DeserializeObject<Wallet>(account.Wallet);
 
             golds = wallet.golds;
+            DLogger.Log("Wallet loaded", "Nakama - Wallet", LogColors.LimeGreen);
+            onGoldChange?.Invoke();
         }
 
         public async void LoadInventoriesAsync()

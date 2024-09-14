@@ -5,6 +5,7 @@ using CiFarm.Scripts.Services.GameDatas;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Inventory;
 using CiFarm.Scripts.UI.View;
+using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using SuperScrollView;
 using UnityEngine;
@@ -80,6 +81,7 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void OnClickItem(InvenItemData data)
         {
+            DLogger.Log("Clicked Game item: " + data.itemKey);
         }
 
         #region NAKAMA
@@ -95,13 +97,13 @@ namespace CiFarm.Scripts.UI.Popups
                 switch (data.type)
                 {
                     case InventoryType.Seed:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
                         break;
                     case InventoryType.Tile:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(data.key);
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(data.referenceKey);
                         break;
                     case InventoryType.Animal:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
                         break;
                     default:
                         continue;
@@ -130,7 +132,7 @@ namespace CiFarm.Scripts.UI.Popups
                 switch (data.type)
                 {
                     case InventoryType.Seed:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
                         break;
                     default:
                         continue;
@@ -144,7 +146,6 @@ namespace CiFarm.Scripts.UI.Popups
                 });
             }
 
-            ResetGridView();
             ResetGridView();
         }
 

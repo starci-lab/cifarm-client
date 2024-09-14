@@ -2687,6 +2687,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: NakamaService
       objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: host
+      value: api.cifarm-server.starci.net
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: message
+      value: 143904a3-1340-4e7e-a715-822d157e09f1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: publicKey
+      value: 0xd0e698A8FEebE32106E607aDFe4368FD781d8822
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: signature
+      value: 0x946fd38932745975e580c3149c50f2d3220d91c4c15a84f671bea0ffc7c67d263d03515138138848c971987d23ac5a47ffc5296ae77ed3e3fbd6fd4ebf739aed1b
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

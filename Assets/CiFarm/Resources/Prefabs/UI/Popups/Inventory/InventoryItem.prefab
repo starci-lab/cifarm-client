@@ -300,8 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e75c456b2c52faf44bc77c27bd7ca423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
-  quantity: {fileID: 0}
+  itemIcon: {fileID: 3752153888759745358}
+  quantity: {fileID: 5222723898058693845}
 --- !u!114 &-8248759490772580480
 MonoBehaviour:
   m_ObjectHideFlags: 0

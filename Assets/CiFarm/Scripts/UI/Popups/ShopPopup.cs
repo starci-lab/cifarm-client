@@ -5,9 +5,11 @@ using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Shop;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
+using DG.Tweening;
 using Imba.Audio;
 using Imba.UI;
 using SuperScrollView;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +17,7 @@ namespace CiFarm.Scripts.UI.Popups
 {
     public class ShopPopup : UIPopup
     {
+        [SerializeField] private TextMeshProUGUI userWallet;
         [SerializeField] private LoopListView2 shopItemLoopListView;
         [SerializeField] private ShopTab       seedTab;
         [SerializeField] private ShopTab       animaTab;
@@ -23,10 +26,12 @@ namespace CiFarm.Scripts.UI.Popups
         private UnityAction        _onClose;
         public  List<ShopItemData> shopItemsData;
 
+        public int _currentCoin = 0;
         protected override void OnInit()
         {
             base.OnInit();
             shopItemLoopListView.InitListView(0, OnGetItemByIndex);
+            NakamaAssetService.Instance.onGoldChange = (FetchUserCoin);
         }
 
         protected override void OnShowing()
@@ -41,6 +46,7 @@ namespace CiFarm.Scripts.UI.Popups
             ClearSelectedShop();
             seedTab.SetSelect(true);
             LoadItemShopSeed();
+            FetchUserCoin();
         }
 
         private void ResetListView()
@@ -89,7 +95,12 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnHidden();
         }
-
+        public void FetchUserCoin()
+        {
+            var targetCoin = NakamaAssetService.Instance.golds;
+            DOTween.To(() => _currentCoin, x => _currentCoin = x, targetCoin, 0.3f)
+                .OnUpdate(() => { userWallet.text = _currentCoin.ToString(); });
+        }
         #region NAKAMA COMMUNICATE
 
         public void LoadItemShopSeed()
