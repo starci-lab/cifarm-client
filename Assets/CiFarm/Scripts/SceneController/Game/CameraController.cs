@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace CiFarm.Scripts.SceneController.Game
 {
@@ -44,6 +45,10 @@ namespace CiFarm.Scripts.SceneController.Game
                 return;
             }
 
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
             HandleCameraDrag();
             HandleZoom();
         }

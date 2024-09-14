@@ -7,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaSocketService : ManualSingletonMono<NakamaSocketService>
     {
+        public UnityAction OnFetchPlacedDataFromServer;
         public override void Awake()
         {
             base.Awake();
@@ -56,6 +58,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 DLogger.Log($"{placedItems.Count} placed items loaded. See the inspector for details.", "Nakama - Placed Items State", LogColors.Aquamarine);
             }
+            
+            OnFetchPlacedDataFromServer?.Invoke();
         }
 
         [HideInInspector]

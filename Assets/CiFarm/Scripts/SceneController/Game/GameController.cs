@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
+using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View;
+using CiFarm.Scripts.Utilities;
+using Imba.Audio;
 using Imba.UI;
 using Imba.Utils;
 using SupernovaDriver.Scripts.UI.View;
@@ -28,7 +31,6 @@ namespace CiFarm.Scripts.SceneController.Game
 
         [Header("Test Zone Here, this play will make fake parameter")]
         public GameObject dirtTile;
-
         public GameObject dirtTileNft;
 
         [Serializable]
@@ -46,35 +48,10 @@ namespace CiFarm.Scripts.SceneController.Game
             UIManager.Instance.ViewManager.ShowView(UIViewName.GameView);
             _gameView = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
             _gameView.Show();
-
             LoadUserTileMap();
+            NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
             // SHOW TO UI
             // LoadNormalDirt();
-        }
-
-        private void Update()
-        {
-            // if (Input.GetMouseButtonDown(0))
-            // {
-            //     tileMapController.SetGround(Input.mousePosition, dirtTile);
-            // }
-        }
-
-        private void LoadNormalDirt()
-        {
-            foreach (var dt in listDirtNormal)
-            {
-                var dirtObj  = Instantiate(dirtTile);
-                var plantObj = Instantiate(dt.plant);
-
-                var dirtScript = dirtObj.GetComponent<BaseGround>();
-                var plant      = plantObj.GetComponent<BasePlant>();
-
-                plant.SetPlantState(dt.plantState);
-                dirtScript.SetPlant(plant);
-
-                tileMapController.SetGroundWithTilePos(dt.position, dirtObj);
-            }
         }
 
         #region Nakama Communicated
@@ -95,7 +72,6 @@ namespace CiFarm.Scripts.SceneController.Game
                         PlacedDirt(placed);
                         break;
                     case PlacedItemType.Building:
-
                         break;
                 }
             }
@@ -103,20 +79,23 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void PlacedDirt(PlacedItem placedItem)
         {
-            var prefabDirtData = ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(placedItem.referenceKey);
-            var dirtObj        = Instantiate(prefabDirtData);
+            var prefabDirtData =
+                ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(placedItem.referenceKey);
+            var dirtObj = Instantiate(prefabDirtData);
 
             tileMapController.SetGroundWithTilePos(
                 new Vector2Int((int)placedItem.position.x, (int)placedItem.position.y)
                 , dirtObj);
 
+            var dirtScript = dirtObj.GetComponent<BaseGround>();
+            dirtScript.Init(placedItem);
             if (placedItem.isPlanted)
             {
-                var prefabPlantData = ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.referenceKey);
-                var plantObj        = Instantiate(prefabPlantData);
+                var prefabPlantData =
+                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.seed.key);
+                var plantObj = Instantiate(prefabPlantData);
 
-                var plant      = plantObj.GetComponent<BasePlant>();
-                var dirtScript = dirtObj.GetComponent<BaseGround>();
+                var plant = plantObj.GetComponent<BasePlant>();
                 plant.SetPlantState(placedItem.seedGrowthInfo.currentStage);
                 dirtScript.SetPlant(plant);
             }
@@ -126,8 +105,13 @@ namespace CiFarm.Scripts.SceneController.Game
         {
         }
 
+       
         #endregion
 
+        public void OnFetchPlacedDataFromServer()
+        {
+            
+        }
         #endregion
     }
 }
