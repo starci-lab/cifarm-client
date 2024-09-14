@@ -12,14 +12,14 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
     public class BaseGround : MonoBehaviour
     {
         [SerializeField] private Transform positionPlant;
-        [SerializeField] private BasePlant plant;
+         public  BasePlant plant;
 
         private bool       isPlanted  = false;
-        private PlacedItem _dirtData ;
+        public PlacedItem dirtData ;
 
         public void Init(PlacedItem placedItem)
         {
-            _dirtData = placedItem;
+            dirtData = placedItem;
         }
 
         public void SetPlant(BasePlant plantToSet)
@@ -49,7 +49,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         private async void OnConfirmSetPlant(InvenItemData plantData)
         {
-            DLogger.Log("Planting Item: " + plantData.inventoryKey +" To: " +_dirtData.key, "SHOP");
+            DLogger.Log("Planting Item: " + plantData.inventoryKey +" To: " +dirtData.key, "SHOP");
 
             try
             {
@@ -57,7 +57,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                  new NakamaRpcService.PlantSeedRpcAsyncParams
                  {
                      inventorySeedKey  = plantData.inventoryKey,
-                     placedItemTileKey = _dirtData.key
+                     placedItemTileKey = dirtData.key
                  });
 
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);

@@ -9,8 +9,6 @@ using CiFarm.Scripts.Utilities;
 using Imba.Audio;
 using Imba.UI;
 using Imba.Utils;
-using SupernovaDriver.Scripts.UI.View;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CiFarm.Scripts.SceneController.Game
@@ -20,7 +18,8 @@ namespace CiFarm.Scripts.SceneController.Game
         [SerializeField] private TileMapController tileMapController;
         [SerializeField] private CameraController  cameraController;
 
-        private GameView _gameView;
+        private HashSet<BaseGround> _baseGrounds;
+        private GameView         _gameView;
 
         #region GETTET SETTER
 
@@ -29,22 +28,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
-        [Header("Test Zone Here, this play will make fake parameter")]
-        public GameObject dirtTile;
-        public GameObject dirtTileNft;
-
-        [Serializable]
-        public struct DirtPlantTest
-        {
-            public Vector2Int position;
-            public GameObject plant;
-            public int        plantState;
-        }
-
-        public List<DirtPlantTest> listDirtNormal;
-
         private void Start()
         {
+            _baseGrounds = new HashSet<BaseGround>();
             UIManager.Instance.ViewManager.ShowView(UIViewName.GameView);
             _gameView = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
             _gameView.Show();
@@ -81,7 +67,8 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             var prefabDirtData =
                 ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(placedItem.referenceKey);
-            var dirtObj = Instantiate(prefabDirtData);
+            var dirtObj = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
+            // var dirtObj = Instantiate(prefabDirtData);
 
             tileMapController.SetGroundWithTilePos(
                 new Vector2Int((int)placedItem.position.x, (int)placedItem.position.y)
@@ -92,26 +79,42 @@ namespace CiFarm.Scripts.SceneController.Game
             if (placedItem.isPlanted)
             {
                 var prefabPlantData =
-                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.seed.key);
-                var plantObj = Instantiate(prefabPlantData);
+                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.seed
+                        .key);
+                // var plantObj = Instantiate(prefabPlantData);
+                var plantObj = SimplePool.Spawn(prefabPlantData, Vector3.zero, prefabPlantData.transform.rotation);
 
                 var plant = plantObj.GetComponent<BasePlant>();
                 plant.SetPlantState(placedItem.seedGrowthInfo.currentStage);
                 dirtScript.SetPlant(plant);
             }
+            _baseGrounds.Add(dirtScript);
+
         }
 
         private void PlacedBuilding(PlacedItem placedItem)
         {
         }
 
-       
         #endregion
 
         public void OnFetchPlacedDataFromServer()
         {
+            DLogger.Log("REALTIME FETCH", "GAME TILE");
+            foreach (var dirt in
+                     _baseGrounds) 
+            {
+                if (dirt.plant != null)
+                {
+                    SimplePool.Despawn(dirt.plant.gameObject);
+                }
+                SimplePool.Despawn(dirt.gameObject);
+            }
+            _baseGrounds.Clear();
             
+            LoadUserTileMap();
         }
+
         #endregion
     }
 }
