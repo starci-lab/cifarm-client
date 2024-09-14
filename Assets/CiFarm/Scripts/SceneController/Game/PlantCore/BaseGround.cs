@@ -33,11 +33,8 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         private void OnMouseDown()
         {
-            DLogger.Log("Ground Clicked");
             if (EventSystem.current.IsPointerOverGameObject())
             {
-                DLogger.Log("Ground Clicked on ui");
-
                 return;
             }
 
@@ -49,8 +46,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     PlantAction = OnConfirmSetPlant
                 });
             }
-
-            DLogger.Log("Ground Clicked is planted");
         }
 
         private async void OnConfirmSetPlant(InvenItemData plantData)
