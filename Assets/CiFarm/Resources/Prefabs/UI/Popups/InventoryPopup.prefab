@@ -1417,7 +1417,7 @@ MonoBehaviour:
     m_Right: 20
     m_Top: 20
     m_Bottom: 20
-  mItemPadding: {x: 20, y: 20}
+  mItemPadding: {x: 60, y: 20}
   mItemSize: {x: 0, y: 0}
   mItemRecycleDistance: {x: 50, y: 50}
   mItemSnapEnable: 0
