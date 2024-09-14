@@ -12,14 +12,15 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
     public class BaseGround : MonoBehaviour
     {
         [SerializeField] private Transform positionPlant;
-         public  BasePlant plant;
+        public                   BasePlant plant;
 
-        private bool       isPlanted  = false;
-        public PlacedItem dirtData ;
+        private bool       isPlanted = false;
+        public  PlacedItem dirtData;
 
         public void Init(PlacedItem placedItem)
         {
-            dirtData = placedItem;
+            dirtData  = placedItem;
+            isPlanted = false;
         }
 
         public void SetPlant(BasePlant plantToSet)
@@ -32,8 +33,11 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         private void OnMouseDown()
         {
+            DLogger.Log("Ground Clicked");
             if (EventSystem.current.IsPointerOverGameObject())
             {
+                DLogger.Log("Ground Clicked on ui");
+
                 return;
             }
 
@@ -45,21 +49,23 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     PlantAction = OnConfirmSetPlant
                 });
             }
+
+            DLogger.Log("Ground Clicked is planted");
         }
 
         private async void OnConfirmSetPlant(InvenItemData plantData)
         {
-            DLogger.Log("Planting Item: " + plantData.inventoryKey +" To: " +dirtData.key, "SHOP");
+            DLogger.Log("Planting Item: " + plantData.inventoryKey + " To: " + dirtData.key, "SHOP");
 
             try
             {
                 var resultData = await NakamaRpcService.Instance.PlantSeedRpcAsync(
-                 new NakamaRpcService.PlantSeedRpcAsyncParams
-                 {
-                     inventorySeedKey  = plantData.inventoryKey,
-                     placedItemTileKey = dirtData.key
-                 });
-
+                    new NakamaRpcService.PlantSeedRpcAsyncParams
+                    {
+                        inventorySeedKey  = plantData.inventoryKey,
+                        placedItemTileKey = dirtData.key
+                    });
+                //GameController.Instance.OnFetchPlacedDataFromServer();
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)

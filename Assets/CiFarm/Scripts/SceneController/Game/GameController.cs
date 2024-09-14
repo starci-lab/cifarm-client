@@ -18,7 +18,7 @@ namespace CiFarm.Scripts.SceneController.Game
         [SerializeField] private TileMapController tileMapController;
         [SerializeField] private CameraController  cameraController;
 
-        private HashSet<BaseGround> _baseGrounds;
+        private List<BaseGround> _baseGrounds;
         private GameView         _gameView;
 
         #region GETTET SETTER
@@ -30,7 +30,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void Start()
         {
-            _baseGrounds = new HashSet<BaseGround>();
+            _baseGrounds = new List<BaseGround>();
             UIManager.Instance.ViewManager.ShowView(UIViewName.GameView);
             _gameView = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
             _gameView.Show();
@@ -101,8 +101,9 @@ namespace CiFarm.Scripts.SceneController.Game
         public void OnFetchPlacedDataFromServer()
         {
             DLogger.Log("REALTIME FETCH", "GAME TILE");
-            foreach (var dirt in
-                     _baseGrounds) 
+            
+            _baseGrounds.Reverse();
+            foreach (var dirt in _baseGrounds) 
             {
                 if (dirt.plant != null)
                 {
