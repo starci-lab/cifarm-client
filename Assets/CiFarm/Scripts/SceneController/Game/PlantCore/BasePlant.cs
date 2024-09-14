@@ -12,13 +12,13 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         public void SetPlantState(int plantState)
         {
-            if (plantState > plantStatesRender.Count)
+            if (plantState >= plantStatesRender.Count)
             {
                 DLogger.LogError("Invalid plant state", "Plant", LogColors.OrangeRed);
                 return;
             }
 
-            plantCurrentState  = plantState;
+            plantCurrentState  = plantState -1;
             plantRender.sprite = plantStatesRender[plantCurrentState];
         }
 

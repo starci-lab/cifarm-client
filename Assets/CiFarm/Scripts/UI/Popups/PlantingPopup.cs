@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.GameDatas;
@@ -13,14 +12,20 @@ using UnityEngine.Events;
 
 namespace CiFarm.Scripts.UI.Popups
 {
-    public class InventoryPopup : UIPopup
+    public class PlantingPopupParam
     {
-        [SerializeField] private List<InventoryTab> inventoryTabs;
-        [SerializeField] private LoopGridView       loopGridView;
+        public UnityAction                CloseAction;
+        public UnityAction<InvenItemData> PlantAction;
+    }
+
+    public class PlantingPopup : UIPopup
+    {
+        [SerializeField] private LoopGridView loopGridView;
 
         public List<InvenItemData> inventoryItemsData;
 
-        private UnityAction _onClose;
+        private UnityAction                _onClose;
+        private UnityAction<InvenItemData> _plantAction;
 
         protected override void OnInit()
         {
@@ -33,20 +38,12 @@ namespace CiFarm.Scripts.UI.Popups
             base.OnShowing();
             if (Parameter != null)
             {
-                var param = (GameViewParam)Parameter;
-                _onClose = param.callBack;
+                var param = (PlantingPopupParam)Parameter;
+                _onClose     = param.CloseAction;
+                _plantAction = param.PlantAction;
             }
 
-            OnClickInventoryTab(inventoryTabs[0]);
             LoadAllUserItem();
-        }
-
-        public void OnClickInventoryTab(InventoryTab tab)
-        {
-            foreach (var ivTab in inventoryTabs)
-            {
-                ivTab.SetSelect(ivTab == tab);
-            }
         }
 
         private LoopGridViewItem OnGetItemByIndex(LoopGridView listView, int indexParam, int indexParam2,
@@ -82,6 +79,8 @@ namespace CiFarm.Scripts.UI.Popups
         public void OnClickItem(InvenItemData data)
         {
             DLogger.Log("Clicked Game item: " + data.itemKey);
+            _plantAction?.Invoke(data);
+            Hide();
         }
 
         #region NAKAMA
@@ -97,12 +96,6 @@ namespace CiFarm.Scripts.UI.Popups
                 switch (data.type)
                 {
                     case InventoryType.Seed:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
-                        break;
-                    case InventoryType.Tile:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(data.referenceKey);
-                        break;
-                    case InventoryType.Animal:
                         gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
                         break;
                     default:
@@ -121,68 +114,6 @@ namespace CiFarm.Scripts.UI.Popups
             ResetGridView();
         }
 
-        public void LoadAllUserItemBySeed()
-        {
-            inventoryItemsData.Clear();
-            inventoryItemsData.Clear();
-
-            var rawData = NakamaAssetService.Instance.inventories;
-            foreach (var data in rawData)
-            {
-                ModelConfigEntity gameConfig;
-                switch (data.type)
-                {
-                    case InventoryType.Seed:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
-                        break;
-                    default:
-                        continue;
-                }
-
-                inventoryItemsData.Add(new InvenItemData
-                {
-                    itemKey  = data.key,
-                    quantity = data.quantity,
-                    iconItem = gameConfig.GameShopIcon
-                });
-            }
-
-            ResetGridView();
-        }
-
-        public void LoadAllUserItemByAnimal()
-        {
-            inventoryItemsData.Clear();
-            ResetGridView();
-        }
-
-        public void LoadAllUserItemByTile()
-        {
-            inventoryItemsData.Clear();
-            ResetGridView();
-        }
-
-        public void LoadAllUserItemByProduct()
-        {
-            inventoryItemsData.Clear();
-            ResetGridView();
-        }
-
-        public void LoadAllUserItemByTool()
-        {
-            inventoryItemsData.Clear();
-            ResetGridView();
-        }
-
         #endregion
-    }
-
-    [System.Serializable]
-    public class InvenItemData
-    {
-        public string inventoryKey;
-        public string itemKey;
-        public int    quantity;
-        public Sprite iconItem;
     }
 }

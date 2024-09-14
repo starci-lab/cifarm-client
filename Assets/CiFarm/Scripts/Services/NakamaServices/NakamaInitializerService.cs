@@ -18,7 +18,13 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [SerializeField] private int port = 443;
         [SerializeField] private string serverKey = "defaultkey";
-
+        
+        [Header("Fake user config")]
+        [SerializeField] private string message = "1ccd5c84-93c9-4bb9-default-285b4c5405e2";
+        [SerializeField] private string publicKey = "default";
+        [SerializeField] private string signature = "default";
+        [SerializeField] private string chainKey  = "avalanche";
+        
         [HideInInspector]
         public Client client = null;
         [HideInInspector]
@@ -73,11 +79,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
             }
             : new()
             {
-                message = "1ccd5c84-93c9-4bb9-a40a-285b4c5405e2",
-                publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                signature = "0x2f2d66a0502b990f4e8450d54277cf4b7297d45b2e04bed2fcfc606fc2e1e72e3b72282f3a0798e45e4b1715bf90c3660eaa2bf0780bc1a9196e6468915d39a61c",
-                chainKey = "avalanche",
-                network = "testnet",
+                message   = message,
+                publicKey = publicKey,
+                signature = signature,
+                chainKey  = chainKey,
+                network   = "testnet",
             };
         }
 

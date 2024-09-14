@@ -24,6 +24,12 @@ namespace CiFarm.Scripts.UI.View
 
         private int _currentCoin;
 
+        protected override void OnInit()
+        {
+            base.OnInit();
+            NakamaAssetService.Instance.onGoldChange = (FetchUserCoin);
+        }
+
         protected override void OnShown()
         {
             base.OnShown();
@@ -38,7 +44,11 @@ namespace CiFarm.Scripts.UI.View
             AudioManager.Instance.PlaySFX(AudioName.Click3);
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ShopPopup, new GameViewParam
             {
-                callBack = OnPopupClose
+                callBack = () =>
+                {
+                    OnPopupClose();
+                    FetchUserCoin();
+                }
             });
         }
 
@@ -93,7 +103,7 @@ namespace CiFarm.Scripts.UI.View
 
         #region NAKAMA
 
-        public async void FetchUserCoin()
+        public void FetchUserCoin()
         {
             var targetCoin = NakamaAssetService.Instance.golds;
             DOTween.To(() => _currentCoin, x => _currentCoin = x, targetCoin, 0.3f)
