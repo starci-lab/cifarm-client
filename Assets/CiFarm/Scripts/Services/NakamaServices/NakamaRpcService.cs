@@ -115,10 +115,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
+            var result = await client.RpcAsync(session, "buy_animal", JsonConvert.SerializeObject(_params));
             NakamaAssetService.Instance.LoadWalletAsync();
             NakamaAssetService.Instance.LoadInventoriesAsync();
-
-            var result = await client.RpcAsync(session, "buy_animal", JsonConvert.SerializeObject(_params));
             return JsonConvert.DeserializeObject<BuyAnimalRpcAsyncResponse>(result.Payload);
         }
         #endregion
