@@ -161,7 +161,8 @@ namespace CiFarm.Scripts.UI.Popups
             }
             catch (Exception e)
             {
-                DLogger.LogError("Buy Item error: " + e.Message, "SHOP");
+                UIManager.Instance.PopupManager.ShowMessageDialog("Buy fail","You do not have enough gold to buy this item", UIMessageBox.MessageBoxType.OK);
+                DLogger.LogWarning("Buy Item error: " + e.Message, "SHOP");
             }
         }
 

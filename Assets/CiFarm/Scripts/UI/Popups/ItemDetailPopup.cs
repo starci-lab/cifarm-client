@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using CiFarm.Scripts.Services;
 using Imba.UI;
 using TMPro;
 using UnityEngine;
@@ -10,17 +12,24 @@ namespace CiFarm.Scripts.UI.Popups
     {
         public string      ItemId;
         public int         Quantity;
+        public bool        CanSell;
         public Sprite      IconItem;
         public UnityAction OnSellItem;
     }
 
     public class ItemDetailPopup : UIPopup
     {
+        [Header("Changing popup")]
+        [SerializeField] private List<GameObject> detailGroup;
+
+        [SerializeField] private List<GameObject> sellingGroup;
+
         [Header("Customize popup")]
         [SerializeField] private Image itemIcon;
 
         [SerializeField] private TextMeshProUGUI textItemName;
         [SerializeField] private TextMeshProUGUI textItemPrice;
+        [SerializeField] private TextMeshProUGUI textItemDetail;
         [SerializeField] private TMP_InputField  textItemCounter;
         [SerializeField] private TextMeshProUGUI textTotalValue;
 
@@ -30,6 +39,7 @@ namespace CiFarm.Scripts.UI.Popups
         private UnityAction _onSellItem;
 
         private int    _quantity;
+        private bool   _canSell;
         private string _itemId;
 
         protected override void OnShowing()
@@ -42,10 +52,32 @@ namespace CiFarm.Scripts.UI.Popups
                 _itemId         = param.ItemId;
                 _quantity       = param.Quantity;
                 _onSellItem     = param.OnSellItem;
-                basePrice       = 1;
+                _canSell        = param.CanSell;
             }
 
-            textItemPrice.text = "Price: " + basePrice;
+            foreach (var o in detailGroup)
+            {
+                o.SetActive(!_canSell);
+            }
+
+            foreach (var o in sellingGroup)
+            {
+                o.SetActive(_canSell);
+            }
+
+            if (_canSell)
+            {
+                var config = ResourceService.Instance.ShopSellConfig.GetItemDetail(_itemId);
+                basePrice          = config.SellValue;
+                textItemPrice.text = "Price: " + basePrice;
+                textItemName.text  = config.ItemName;
+            }
+            else
+            {
+                var config = ResourceService.Instance.ItemDetailConfig.GetItemDetail(_itemId);
+                textItemDetail.text = config.ItemDescription;
+            }
+
             UpdateCounter();
         }
 

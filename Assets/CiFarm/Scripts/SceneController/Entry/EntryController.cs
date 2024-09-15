@@ -6,15 +6,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SupernovaDriver.Scripts.SceneController.Entry
+namespace CiFarm.Scripts.SceneController.Entry
 {
     public class EntryController : MonoBehaviour
     {
         [SerializeField] private GameObject services;
-
         [SerializeField] private Image           loaderBar;
         [SerializeField] private TextMeshProUGUI details;
-
         [SerializeField] private GameObject loadingGroup;
         [SerializeField] private GameObject playButton;
 

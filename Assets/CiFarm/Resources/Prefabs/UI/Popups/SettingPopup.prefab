@@ -2094,7 +2094,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: 28
+      AudioName: -1
     PunchAnimation:
       Move:
         AnimationType: 4

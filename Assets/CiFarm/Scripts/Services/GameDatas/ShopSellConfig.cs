@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CiFarm.Scripts.Services.GameDatas
@@ -8,6 +9,11 @@ namespace CiFarm.Scripts.Services.GameDatas
     public class ShopSellConfig : ScriptableObject
     {
         [SerializeField] private List<ShopConfigEntity> sellingItemsConfig;
+
+        public ShopConfigEntity GetItemDetail(string id)
+        {
+            return sellingItemsConfig.FirstOrDefault(o => o.Key == id);
+        }
     }
 
     [Serializable]
