@@ -20,7 +20,8 @@ namespace CiFarm.Scripts.UI.Popups
 
         public List<InvenItemData> inventoryItemsData;
 
-        private UnityAction _onClose;
+        private InventoryTab currentTab;
+        private UnityAction  _onClose;
 
         protected override void OnInit()
         {
@@ -41,8 +42,15 @@ namespace CiFarm.Scripts.UI.Popups
             LoadAllUserItem();
         }
 
+        protected override void OnHiding()
+        {
+            base.OnHiding();
+            _onClose?.Invoke();
+        }
+
         public void OnClickInventoryTab(InventoryTab tab)
         {
+            currentTab = tab;
             foreach (var ivTab in inventoryTabs)
             {
                 ivTab.SetSelect(ivTab == tab);
@@ -82,6 +90,14 @@ namespace CiFarm.Scripts.UI.Popups
         public void OnClickItem(InvenItemData data)
         {
             DLogger.Log("Clicked Game item: " + data.itemKey);
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ItemDetailPopup, new ItemDetailPopupParam
+            {
+                ItemId     = data.itemKey,
+                Quantity   = data.quantity,
+                IconItem   = data.iconItem,
+                CanSell    = false,
+                OnSellItem = () => { currentTab.OnClick(); }
+            });
         }
 
         #region NAKAMA
@@ -142,6 +158,7 @@ namespace CiFarm.Scripts.UI.Popups
                 inventoryItemsData.Add(new InvenItemData
                 {
                     itemKey  = data.key,
+                    type     = data.type,
                     quantity = data.quantity,
                     iconItem = gameConfig.GameShopIcon
                 });
@@ -180,9 +197,10 @@ namespace CiFarm.Scripts.UI.Popups
     [System.Serializable]
     public class InvenItemData
     {
-        public string inventoryKey;
-        public string itemKey;
-        public int    quantity;
-        public Sprite iconItem;
+        public string        inventoryKey;
+        public string        itemKey;
+        public int           quantity;
+        public InventoryType type;
+        public Sprite        iconItem;
     }
 }

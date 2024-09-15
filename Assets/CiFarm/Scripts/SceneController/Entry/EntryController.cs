@@ -1,19 +1,18 @@
 using System.Collections;
 using DG.Tweening;
 using Imba.Audio;
+using Imba.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SupernovaDriver.Scripts.SceneController.Entry
+namespace CiFarm.Scripts.SceneController.Entry
 {
     public class EntryController : MonoBehaviour
     {
         [SerializeField] private GameObject services;
-
         [SerializeField] private Image           loaderBar;
         [SerializeField] private TextMeshProUGUI details;
-
         [SerializeField] private GameObject loadingGroup;
         [SerializeField] private GameObject playButton;
 
@@ -54,7 +53,11 @@ namespace SupernovaDriver.Scripts.SceneController.Entry
         public void LoadGameScene()
         {
             AudioManager.Instance.PlaySFX(AudioName.Click1);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(Constants.GameScene);
+
+            UIManager.Instance.ShowTransition(() =>
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(Constants.GameScene);
+            });
         }
     }
 }

@@ -676,7 +676,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: 30
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4
@@ -1727,7 +1727,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: 29
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4
@@ -3237,7 +3237,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: 29
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4
@@ -4269,7 +4269,7 @@ MonoBehaviour:
       Event:
         m_PersistentCalls:
           m_Calls: []
-      AudioName: 28
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4
@@ -7067,7 +7067,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: 30
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4
@@ -7763,8 +7763,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: This is a message poppup
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4be39c2dbc341b5498d4d32ea7298cea, type: 2}
+  m_sharedMaterial: {fileID: -5589675249571846086, guid: 4be39c2dbc341b5498d4d32ea7298cea, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

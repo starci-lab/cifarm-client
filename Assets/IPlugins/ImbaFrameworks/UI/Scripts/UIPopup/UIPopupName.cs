@@ -20,5 +20,6 @@ namespace Imba.UI
         EndGamePopup           = 6,
         InventoryPopup         = 7,
         PlantingPopup          = 8,
+        ItemDetailPopup        = 9,
     }
 }

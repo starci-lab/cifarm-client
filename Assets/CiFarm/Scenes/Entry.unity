@@ -2029,7 +2029,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
-    - {fileID: 3757111697237153152, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
@@ -2586,6 +2597,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1298724190}
     m_Modifications:
+    - target: {fileID: 7138680271911581800, guid: e3554b8735ebc7648bc988d50b551ef2, type: 3}
+      propertyPath: shopSellConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 982a4be2b7e1ef048bc3fc5e62e768d7, type: 2}
+    - target: {fileID: 7138680271911581800, guid: e3554b8735ebc7648bc988d50b551ef2, type: 3}
+      propertyPath: itemDetailConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c82f78a49ecc1d4294d00b5521c93dc, type: 2}
     - target: {fileID: 7272541869065131550, guid: e3554b8735ebc7648bc988d50b551ef2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2693,15 +2712,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: message
-      value: 9b3a9b07-2744-4c09-90ca-db017da65044
+      value: be2d51d4-6964-4f14-b0b1-717c60b983b9
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: publicKey
-      value: 0x28Ab3b6cD07abaAaC6436fbB9aC69Ae6aB842515
+      value: 0x227FB0C344b4D4F975f4Fb5712d5DB9860A588BF
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: signature
-      value: 0xb6362cea4ce1f0ccf7089168037b01cfba2847a527a3b0bb8b3ec43441e63a910a4c3574b6e0dad7373dc5045e92750f2aa1471566fe482fcd22497553a5dc8f1b
+      value: 0x42315cf1e98b7b7f8f53fa3d2feff5af240fa4c3c94ef9e3712ad3bafc6b95845bc99350c2024aeeb092790a462f7ec1902640f801201c72af1f0d34b9d1de571c
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

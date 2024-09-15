@@ -36,6 +36,8 @@ namespace CiFarm.Scripts.SceneController.Game
             _gameView.Show();
             LoadUserTileMap();
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
+
+            UIManager.Instance.HideTransition(() => { });
             // SHOW TO UI
             // LoadNormalDirt();
         }
@@ -88,8 +90,8 @@ namespace CiFarm.Scripts.SceneController.Game
                 plant.SetPlantState(placedItem.seedGrowthInfo.currentStage);
                 dirtScript.SetPlant(plant);
             }
-            _baseGrounds.Add(dirtScript);
 
+            _baseGrounds.Add(dirtScript);
         }
 
         private void PlacedBuilding(PlacedItem placedItem)
@@ -101,18 +103,20 @@ namespace CiFarm.Scripts.SceneController.Game
         public void OnFetchPlacedDataFromServer()
         {
             DLogger.Log("REALTIME FETCH", "GAME TILE");
-            
+
             _baseGrounds.Reverse();
-            foreach (var dirt in _baseGrounds) 
+            foreach (var dirt in _baseGrounds)
             {
                 if (dirt.plant != null)
                 {
                     SimplePool.Despawn(dirt.plant.gameObject);
                 }
+
                 SimplePool.Despawn(dirt.gameObject);
             }
+
             _baseGrounds.Clear();
-            
+
             LoadUserTileMap();
         }
 
