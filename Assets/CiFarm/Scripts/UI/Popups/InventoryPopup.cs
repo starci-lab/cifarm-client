@@ -20,7 +20,8 @@ namespace CiFarm.Scripts.UI.Popups
 
         public List<InvenItemData> inventoryItemsData;
 
-        private UnityAction _onClose;
+        private InventoryTab currentTab;
+        private UnityAction  _onClose;
 
         protected override void OnInit()
         {
@@ -49,6 +50,7 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void OnClickInventoryTab(InventoryTab tab)
         {
+            currentTab = tab;
             foreach (var ivTab in inventoryTabs)
             {
                 ivTab.SetSelect(ivTab == tab);
@@ -88,6 +90,13 @@ namespace CiFarm.Scripts.UI.Popups
         public void OnClickItem(InvenItemData data)
         {
             DLogger.Log("Clicked Game item: " + data.itemKey);
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ItemDetailPopup, new ItemDetailPopupParam
+            {
+                ItemId     = data.itemKey,
+                Quantity   = data.quantity,
+                IconItem   = data.iconItem,
+                OnSellItem = () => { currentTab.OnClick(); }
+            });
         }
 
         #region NAKAMA
