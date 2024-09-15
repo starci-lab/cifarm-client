@@ -36,6 +36,7 @@ namespace CiFarm.Scripts.SceneController.Game
             _gameView.Show();
             LoadUserTileMap();
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
+
             UIManager.Instance.HideTransition(() => { });
             // SHOW TO UI
             // LoadNormalDirt();
