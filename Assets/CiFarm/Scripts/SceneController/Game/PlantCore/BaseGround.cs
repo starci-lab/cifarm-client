@@ -12,15 +12,13 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
     public class BaseGround : MonoBehaviour
     {
         [SerializeField] private Transform positionPlant;
-        public                   BasePlant plant;
 
-        private bool       isPlanted = false;
-        public  PlacedItem dirtData;
+        public BasePlant plant;
+        public PlacedItem dirtData;
 
         public void Init(PlacedItem placedItem)
         {
-            dirtData  = placedItem;
-            isPlanted = false;
+            dirtData = placedItem;
         }
 
         public void SetPlant(BasePlant plantToSet)
@@ -28,7 +26,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             plant = plantToSet;
             plant.transform.SetParent(transform);
             plant.transform.position = positionPlant.position;
-            isPlanted                = true;
         }
 
         private void OnMouseDown()
@@ -38,7 +35,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
-            if (!isPlanted)
+            if (!dirtData.isPlanted)
             {
                 UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new PlantingPopupParam
                 {

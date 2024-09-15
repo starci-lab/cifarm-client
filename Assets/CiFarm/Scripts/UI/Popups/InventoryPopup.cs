@@ -41,6 +41,12 @@ namespace CiFarm.Scripts.UI.Popups
             LoadAllUserItem();
         }
 
+        protected override void OnHiding()
+        {
+            base.OnHiding();
+            _onClose?.Invoke();
+        }
+
         public void OnClickInventoryTab(InventoryTab tab)
         {
             foreach (var ivTab in inventoryTabs)
