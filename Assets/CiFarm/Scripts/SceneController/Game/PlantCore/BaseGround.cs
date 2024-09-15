@@ -13,7 +13,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
     {
         [SerializeField] private Transform positionPlant;
 
-        public BasePlant plant;
+        public BasePlant  plant;
         public PlacedItem dirtData;
 
         public void Init(PlacedItem placedItem)
@@ -35,6 +35,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
+            // Trồng cây
             if (!dirtData.isPlanted)
             {
                 UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new PlantingPopupParam
@@ -42,6 +43,14 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     CloseAction = null,
                     PlantAction = OnConfirmSetPlant
                 });
+                return;
+            }
+
+            // Thu hoạch
+            if (dirtData.isPlanted && dirtData.fullyMatured)
+            {
+                DLogger.Log("Try Harvesting...");
+                OnHarvestPlant();
             }
         }
 
@@ -62,7 +71,20 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             }
             catch (Exception e)
             {
-                DLogger.LogError("Planting Item error: " + e.Message, "Gound");
+                DLogger.LogError("Planting Item error: " + e.Message, "Ground");
+            }
+        }
+
+        private async void OnHarvestPlant()
+        {
+            try
+            {
+                //GameController.Instance.OnFetchPlacedDataFromServer();
+                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("Harvest Item error: " + e.Message, "Ground");
             }
         }
     }
