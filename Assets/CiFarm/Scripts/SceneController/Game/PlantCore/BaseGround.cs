@@ -81,6 +81,10 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             {
                 //GameController.Instance.OnFetchPlacedDataFromServer();
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+                await NakamaRpcService.Instance.HarvestPlantRpcAsync(new()
+                {
+                    placedItemTileKey = dirtData.key,
+                });
             }
             catch (Exception e)
             {

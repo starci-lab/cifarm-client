@@ -135,8 +135,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public class PlantSeedRpcAsyncResponse
         {
-            [JsonProperty("haverstIn")]
-            public int haverstIn;
+            [JsonProperty("seedInventoryKey")]
+            public string seedInventoryKey;
         }
         public async Task<PlantSeedRpcAsyncResponse> PlantSeedRpcAsync(
             PlantSeedRpcAsyncParams _params
@@ -151,6 +151,33 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var result = await client.RpcAsync(session, "plant_seed", JsonConvert.SerializeObject(_params));
             NakamaAssetService.Instance.LoadInventoriesAsync();
             return JsonConvert.DeserializeObject<PlantSeedRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+        #region HarvestPlantRpc
+        public class HarvestPlantRpcAsyncParams
+        {
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public class HarvestPlantRpcAsyncResponse
+        {
+            [JsonProperty("harvestPlantInventoryKey")]
+            public int harvestPlantInventoryKey;
+        }
+        public async Task<HarvestPlantRpcAsyncParams> HarvestPlantRpcAsync(
+            HarvestPlantRpcAsyncParams _params
+            )
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+
+
+            var result = await client.RpcAsync(session, "harvest_plant", JsonConvert.SerializeObject(_params));
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+            return JsonConvert.DeserializeObject<HarvestPlantRpcAsyncParams>(result.Payload);
         }
         #endregion
 
