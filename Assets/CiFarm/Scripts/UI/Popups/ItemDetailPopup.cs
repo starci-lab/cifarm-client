@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CiFarm.Scripts.Services;
+using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using TMPro;
 using UnityEngine;
@@ -65,6 +66,7 @@ namespace CiFarm.Scripts.UI.Popups
                 o.SetActive(_canSell);
             }
 
+            DLogger.Log("This item can sell? =>" + _canSell);
             if (_canSell)
             {
                 var config = ResourceService.Instance.ShopSellConfig.GetItemDetail(_itemId);
@@ -76,6 +78,7 @@ namespace CiFarm.Scripts.UI.Popups
             {
                 var config = ResourceService.Instance.ItemDetailConfig.GetItemDetail(_itemId);
                 textItemDetail.text = config.ItemDescription;
+                textItemName.text   = config.ItemName;
             }
 
             UpdateCounter();
