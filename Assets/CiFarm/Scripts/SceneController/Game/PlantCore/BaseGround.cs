@@ -28,6 +28,12 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             plant.transform.position = positionPlant.position;
         }
 
+        public void RemovePlant()
+        {
+            SimplePool.Despawn(plant.gameObject);
+            dirtData.isPlanted = false;
+        }
+
         private void OnMouseDown()
         {
             if (EventSystem.current.IsPointerOverGameObject())
@@ -68,6 +74,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     });
                 //GameController.Instance.OnFetchPlacedDataFromServer();
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+                
             }
             catch (Exception e)
             {
@@ -79,12 +86,12 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         {
             try
             {
-                //GameController.Instance.OnFetchPlacedDataFromServer();
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
                 await NakamaRpcService.Instance.HarvestPlantRpcAsync(new()
                 {
                     placedItemTileKey = dirtData.key,
                 });
+                RemovePlant();
             }
             catch (Exception e)
             {
