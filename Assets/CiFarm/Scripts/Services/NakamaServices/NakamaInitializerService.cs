@@ -71,9 +71,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             credentials = useLocal
             ? new()
             {
-                message = "3aaa524a-b778-429f-9245-4479fadf8bd5",
+                message = "7b97a64b-15b7-49e1-b65c-c023cf8bba48",
                 publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                signature = "0x502f49a74832bcdca524b47d2469f98b9b2cdffc3452fc0d2dfc6ce2ad22225d0fcfb6eca5103a43003d50c7acdb06d500d57ee485aee91d8683da910baa46171b",
+                signature = "0x94d3bc20d651ad4afcd7790eb1102f5850312fa2292001a2db89320fb0a3d86302f279e70f8ddd5a68bdfd5316a6347155c1945193265090be878aab7e26ff501c",
                 chainKey = "avalanche",
                 network = "testnet",
             }
