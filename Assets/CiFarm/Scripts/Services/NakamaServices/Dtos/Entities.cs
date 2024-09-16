@@ -107,7 +107,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public float currentStageTimeElapsed; 
 
         [JsonProperty("harvestQuantityRemaining")]
-        public int harvestQuantityRemaining; 
+        public int harvestQuantityRemaining;
+
+        [JsonProperty("needWater")]
+        public bool needWater;
     }
 
     public enum PlacedItemType
