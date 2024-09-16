@@ -1,6 +1,7 @@
 using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void LoadWalletAsync()
         {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -52,16 +54,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void LoadInventoriesAsync()
         {
-            var client = NakamaInitializerService.Instance.client;
-            var session = NakamaInitializerService.Instance.session;
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
 
-            var objects = await client.ListUsersStorageObjectsAsync(session, CollectionType.Inventories.GetStringValue(), session.UserId, 25);
-            inventories = objects.Objects.Select(_object =>
-            {
-                var inventory = JsonConvert.DeserializeObject<Inventory>(_object.Value);
-                inventory.key = _object.Key;
-                return inventory;
-            }).ToList();
+            var response = await NakamaRpcService.Instance.ListInventoriesRpcAsync();
+            inventories = response.inventories;
+
             DLogger.Log("Inventories loaded", "Nakama - Inventories", LogColors.LimeGreen);
         }
     }

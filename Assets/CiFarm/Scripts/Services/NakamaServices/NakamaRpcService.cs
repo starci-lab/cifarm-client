@@ -5,6 +5,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using CiFarm.Scripts.Utilities;
+using System.Collections.Generic;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
@@ -204,5 +205,25 @@ namespace CiFarm.Scripts.Services.NakamaServices
             return JsonConvert.DeserializeObject<ClaimDailyRewardRpcAsyncResponse>(result.Payload);
         }
         #endregion
-}
+
+        //Profile rpc
+        public class ListInventoriesRpcAsyncResponse
+        {
+            [JsonProperty("inventories")]
+            public List<Inventory> inventories;
+        }
+
+        public async Task<ListInventoriesRpcAsyncResponse> ListInventoriesRpcAsync()
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "list_inventories");
+
+            NakamaAssetService.Instance.LoadWalletAsync();
+
+            return JsonConvert.DeserializeObject<ListInventoriesRpcAsyncResponse>(result.Payload);
+        }
+    }
 }
