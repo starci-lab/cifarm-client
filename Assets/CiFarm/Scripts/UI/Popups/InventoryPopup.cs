@@ -160,8 +160,7 @@ namespace CiFarm.Scripts.UI.Popups
                 switch (data.type)
                 {
                     case InventoryType.Seed:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
-                        break;
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);                        break;
                     default:
                         continue;
                 }
@@ -202,8 +201,7 @@ namespace CiFarm.Scripts.UI.Popups
                 switch (data.type)
                 {
                     case InventoryType.PlantHarvested:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetProductModel(data.referenceKey);
-                        break;
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);                        break;
                     default:
                         continue;
                 }
