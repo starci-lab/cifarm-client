@@ -11,9 +11,13 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 {
     public class BaseGround : MonoBehaviour
     {
-        [SerializeField] private Transform positionPlant;
+        [SerializeField] private Transform  positionPlant;
+        [SerializeField] private GameObject dirtBubbleModel;
 
-        public BasePlant  plant;
+        [ReadOnly]
+        public BasePlant plant;
+
+        [ReadOnly]
         public PlacedItem dirtData;
 
         public void Init(PlacedItem placedItem)
@@ -41,7 +45,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
-            // Trồng cây
             if (!dirtData.isPlanted)
             {
                 UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new PlantingPopupParam
@@ -52,11 +55,21 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
-            // Thu hoạch
             if (dirtData.isPlanted && dirtData.fullyMatured)
             {
                 DLogger.Log("Try Harvesting...");
                 OnHarvestPlant();
+                return;
+            }
+
+            if (dirtData.isPlanted )
+            {
+                var dirtBubbleObj = SimplePool.Spawn(dirtBubbleModel, transform.position, Quaternion.identity);
+                var bubble        = dirtBubbleObj.GetComponent<DirtBubble>();
+                bubble.SetBubble(dirtData.key,InjectionType.Timer,
+                    dirtData.seedGrowthInfo.seed.growthStageDuration -
+                    (int)dirtData.seedGrowthInfo.currentStageTimeElapsed);
+                return;
             }
         }
 
@@ -74,7 +87,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     });
                 //GameController.Instance.OnFetchPlacedDataFromServer();
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                
             }
             catch (Exception e)
             {

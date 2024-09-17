@@ -2539,7 +2539,7 @@ PrefabInstance:
     - target: {fileID: 1846383361580452009, guid: 1795a6e8cf4acb740b5fd7b132ea7a14, type: 3}
       propertyPath: _database.Array.data[0].AudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: fb064478e58db08439252a1eaa709bb7, type: 3}
+      objectReference: {fileID: 8300000, guid: 6c292c4d9f18d5543847298f6b25bbe6, type: 3}
     - target: {fileID: 8206230976750006334, guid: 1795a6e8cf4acb740b5fd7b132ea7a14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2712,19 +2712,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: message
-      value: 53a6ce69-aae4-4c3a-bf5b-9d67d8100a19
-      objectReference: {fileID: 0}
-    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
-      propertyPath: useLocal
-      value: 1
+      value: cd738213-77cd-40a1-9eb2-0028d491b82d
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: publicKey
-      value: 0x1efaB17597775B44bc8EF8cc22DE588b49e6b0E0
+      value: 0x52A1C3Ee38872949c0FEE3ec5b3f2cE6815677DE
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: signature
-      value: 0x420a7045e4dceb819844f9793272248403826c289bce8321a0c5ac9898d2fa8a44b913b4ee837a84a3ac13db9fbb39994da4f7c603d6a9db64f96e440fedad671b
+      value: 0x5aa54e13608cc83cd06886b5ce4464a121a3b4f8014beedce7aadff5885b6d05106b3e4e20c88791139aab1d97b78cc0aebcb3a0a9609dcae30437da0e0690861b
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
