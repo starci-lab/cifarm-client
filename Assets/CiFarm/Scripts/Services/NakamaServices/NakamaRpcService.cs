@@ -48,8 +48,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public class BuySeedRpcAsyncResponse
         {
-            [JsonProperty("totalCost")]
-            public int totalCost;
+            [JsonProperty("inventorySeedKey")]
+            public int inventorySeedKey;
         }
         public async Task<BuySeedRpcAsyncResponse> BuySeedRpcAsync(
             BuySeedRpcAsyncParams _params
@@ -179,6 +179,81 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var result = await client.RpcAsync(session, "harvest_plant", JsonConvert.SerializeObject(_params));
             NakamaAssetService.Instance.LoadInventoriesAsync();
             return JsonConvert.DeserializeObject<HarvestPlantRpcAsyncParams>(result.Payload);
+        }
+        #endregion
+        #region WaterRpc
+        public class WaterRpcAsyncParams
+        {
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public class WaterRpcAsyncResponse
+        {
+        }
+        public async Task<WaterRpcAsyncResponse> WaterRpcAsync(
+            WaterRpcAsyncParams _params
+            )
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+
+
+            var result = await client.RpcAsync(session, "water", JsonConvert.SerializeObject(_params));
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+            return JsonConvert.DeserializeObject<WaterRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+        #region UsePestisideRpc
+        public class UsePestisideRpcAsyncParams
+        {
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public class UsePestisideRpcAsyncResponse
+        {
+        }
+        public async Task<UsePestisideRpcAsyncResponse> UsePestisideRpcAsync(
+            UsePestisideRpcAsyncParams _params
+            )
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+
+
+            var result = await client.RpcAsync(session, "use_pestiside", JsonConvert.SerializeObject(_params));
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+            return JsonConvert.DeserializeObject<UsePestisideRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+        #region UseHerbicideRpc
+        public class UseHerbicideRpcAsyncParams
+        {
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public class UseHerbicideRpcAsyncResponse
+        {
+        }
+        public async Task<UsePestisideRpcAsyncResponse> UseHerbicideRpcAsync(
+            UseHerbicideRpcAsyncResponse _params
+            )
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+
+
+            var result = await client.RpcAsync(session, "use_herbicide", JsonConvert.SerializeObject(_params));
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+            return JsonConvert.DeserializeObject<UsePestisideRpcAsyncResponse>(result.Payload);
         }
         #endregion
 
