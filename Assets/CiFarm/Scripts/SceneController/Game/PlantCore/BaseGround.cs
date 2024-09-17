@@ -23,6 +23,22 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         public void Init(PlacedItem placedItem)
         {
             dirtData = placedItem;
+            DirtBubble bubble;
+            switch (placedItem.seedGrowthInfo.plantCurrentState)
+            {
+                case PlantCurrentState.NeedWater:
+                    bubble = SpawnBubble();
+                    bubble.SetBubble(dirtData.key, InjectionType.Water);
+                    break;
+                case PlantCurrentState.IsWeedy:
+                    bubble = SpawnBubble();
+                    bubble.SetBubble(dirtData.key, InjectionType.Grass);
+                    break;
+                case PlantCurrentState.IsInfested:
+                    bubble = SpawnBubble();
+                    bubble.SetBubble(dirtData.key, InjectionType.Worm);
+                    break;
+            }
         }
 
         public void SetPlant(BasePlant plantToSet)
@@ -62,15 +78,20 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
-            if (dirtData.isPlanted )
+            if (dirtData.isPlanted)
             {
-                var dirtBubbleObj = SimplePool.Spawn(dirtBubbleModel, transform.position, Quaternion.identity);
-                var bubble        = dirtBubbleObj.GetComponent<DirtBubble>();
-                bubble.SetBubble(dirtData.key,InjectionType.Timer,
+                var bubble = SpawnBubble();
+                bubble.SetBubble(dirtData.key, InjectionType.Timer,
                     dirtData.seedGrowthInfo.seed.growthStageDuration -
                     (int)dirtData.seedGrowthInfo.currentStageTimeElapsed);
                 return;
             }
+        }
+
+        private DirtBubble SpawnBubble()
+        {
+            var dirtBubbleObj = SimplePool.Spawn(dirtBubbleModel, transform.position, Quaternion.identity);
+            return dirtBubbleObj.GetComponent<DirtBubble>();
         }
 
         private async void OnConfirmSetPlant(InvenItemData plantData)
