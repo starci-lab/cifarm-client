@@ -150,4 +150,23 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("placedItems")]
         public List<PlacedItem> placedItems;
     }
+
+    [Serializable]
+    public class DeliveringProduct
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("referenceKey")]
+        public string referenceKey;
+
+        [JsonProperty("type")]
+        public int type;
+
+        [JsonProperty("quantity")]
+        public int quantity;
+
+        [JsonProperty("isPremium")]
+        public bool isPremium;
+    }
 }

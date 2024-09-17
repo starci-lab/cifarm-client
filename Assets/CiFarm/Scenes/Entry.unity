@@ -2715,6 +2715,10 @@ PrefabInstance:
       value: 53a6ce69-aae4-4c3a-bf5b-9d67d8100a19
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: useLocal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: publicKey
       value: 0x1efaB17597775B44bc8EF8cc22DE588b49e6b0E0
       objectReference: {fileID: 0}

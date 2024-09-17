@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6616302030822056925}
   - component: {fileID: 1483126429237669449}
   - component: {fileID: 8515697114261210811}
+  - component: {fileID: 6693157797563031162}
   m_Layer: 0
   m_Name: NakamaService
   m_TagString: Untagged
@@ -53,6 +54,10 @@ MonoBehaviour:
   host: api.cifarm-server.starci.net
   port: 443
   serverKey: defaultkey
+  message: 1ccd5c84-93c9-4bb9-default-285b4c5405e2
+  publicKey: default
+  signature: default
+  chainKey: avalanche
   authenticated: 0
 --- !u!114 &1602844812581178767
 MonoBehaviour:
@@ -110,3 +115,16 @@ MonoBehaviour:
   golds: 0
   inventoryPage: 0
   inventories: []
+--- !u!114 &6693157797563031162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328878227380581963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ff6a6bb8dc6824fa5875dcc1853e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deliveringProducts: []
