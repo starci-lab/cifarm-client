@@ -49,7 +49,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public class BuySeedRpcAsyncResponse
         {
             [JsonProperty("inventorySeedKey")]
-            public int inventorySeedKey;
+            public string inventorySeedKey;
         }
         public async Task<BuySeedRpcAsyncResponse> BuySeedRpcAsync(
             BuySeedRpcAsyncParams _params
@@ -281,13 +281,13 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
 
-        //Profile rpc
+        //Assets rpc
+        #region ListInventoriesRpc
         public class ListInventoriesRpcAsyncResponse
         {
             [JsonProperty("inventories")]
             public List<Inventory> inventories;
         }
-
         public async Task<ListInventoriesRpcAsyncResponse> ListInventoriesRpcAsync()
         {
             if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
@@ -300,5 +300,46 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
             return JsonConvert.DeserializeObject<ListInventoriesRpcAsyncResponse>(result.Payload);
         }
+        #endregion
+        #region ListDeliveringProductsAsync
+        public class ListDeliveringProductsRpcAsyncResponse
+        {
+            [JsonProperty("deliveringProducts")]
+            public List<DeliveringProduct> deliveringProducts;
+        }
+        public async Task<ListDeliveringProductsRpcAsyncResponse> ListDeliveringProductsRpcAsync()
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "list_delivering_products");
+
+            return JsonConvert.DeserializeObject<ListDeliveringProductsRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+        #region DeliverProductsAsync
+
+        public class DeliverProductsAsyncParams
+        {
+            [JsonProperty("inventories")]
+            public List<Inventory> inventories;
+        }
+        public class DeliverProductsAsyncResponse
+        {
+            [JsonProperty("keys")]
+            public List<string> keys;
+        }
+        public async Task<DeliverProductsAsyncResponse> ListDeliveringProductsRpcAsync(DeliverProductsAsyncParams _params)
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "deliver_products", JsonConvert.SerializeObject(_params));
+
+            return JsonConvert.DeserializeObject<DeliverProductsAsyncResponse>(result.Payload);
+        }
+        #endregion
     }
-}
+}   
