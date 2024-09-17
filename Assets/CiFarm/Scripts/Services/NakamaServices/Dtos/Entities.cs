@@ -91,12 +91,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("seed")]
         public Seed seed; 
 
-        [JsonProperty("isWeedy")]
-        public bool isWeedy; 
-
-        [JsonProperty("isInfested")]
-        public bool isInfested;
-
         [JsonProperty("currentStage")]
         public int currentStage; 
 
@@ -107,12 +101,19 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public float currentStageTimeElapsed; 
 
         [JsonProperty("harvestQuantityRemaining")]
-        public int harvestQuantityRemaining;
-
-        [JsonProperty("needWater")]
-        public bool needWater;
+        public int harvestQuantityRemaining; 
+        
+        [JsonProperty("plantCurrentState")]
+        public PlantCurrentState plantCurrentState;
     }
-
+    public enum PlantCurrentState
+    {
+        Normal,
+        NeedWater,
+        IsWeedy,
+        IsInfested,
+    }
+    
     public enum PlacedItemType
     {
         Tile,
