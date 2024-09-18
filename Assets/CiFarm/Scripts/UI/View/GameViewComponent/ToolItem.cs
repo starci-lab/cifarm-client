@@ -13,8 +13,11 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
         [SerializeField] private GameObject unselectedMask;
 
         public UnityEvent onClickTool;
-
-        public void InitIcon([CanBeNull] Sprite spriteIcon, UnityAction onClickAction)
+        public void InitAction(UnityAction onClickAction)
+        {
+            onClickTool.AddListener(onClickAction);
+        }
+        public void InitIcon([CanBeNull] Sprite spriteIcon)
         {
             if (spriteIcon == null)
             {
@@ -24,7 +27,6 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
             {
                 button.Interactable = true;
                 iconRender.sprite   = spriteIcon;
-                onClickTool.AddListener(onClickAction);
             }
         }
 
