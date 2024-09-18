@@ -328,6 +328,28 @@ namespace CiFarm.Scripts.Services.NakamaServices
             return JsonConvert.DeserializeObject<DeliverProductsRpcAsyncResponse>(result.Payload);
         }
         #endregion
+        #region RetainProductsAsync
+
+        public class RetainProductsRpcAsyncParams
+        {
+            [JsonProperty("deliveringProducts")]
+            public List<DeliveringProduct> deliveringProducts;
+        }
+        public class RetainProductsRpcAsyncResponse
+        {
+            [JsonProperty("inventoryKeys")]
+            public List<string> inventoryKeys;
+        }
+        public async Task<RetainProductsRpcAsyncResponse> RetainProductsRpcAsync(RetainProductsRpcAsyncParams _params)
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "retain_products", JsonConvert.SerializeObject(_params));
+
+            return JsonConvert.DeserializeObject<RetainProductsRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
 
         //Users Rpcs
         #region SearchUsersRpc
