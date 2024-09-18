@@ -42,9 +42,9 @@ namespace CiFarm.Scripts.UI.Popups
             LoadItemsOnSale();
         }
 
-        public void LoadItemsOnSale()
+        private void LoadItemsOnSale()
         {
-            // Load item from server
+            // todo: Load item from server
             roadsideData = new List<RoadSideItemData>();
 
             // Load to display 
@@ -62,7 +62,11 @@ namespace CiFarm.Scripts.UI.Popups
             }
         }
 
-        public void OnPutNewItemOnSale(int index)
+        /// <summary>
+        /// Button method
+        /// </summary>
+        /// <param name="index"></param>
+        private void OnPutNewItemOnSale(int index)
         {
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new CustomInventoryPopupParam
             {
@@ -71,9 +75,25 @@ namespace CiFarm.Scripts.UI.Popups
             });
         }
 
-        public void OnClickToRemoveItemOnSale(int index)
+        /// <summary>
+        /// Button method
+        /// </summary>
+        /// <param name="index"></param>
+        private void OnClickToRemoveItemOnSale(int index)
         {
             var itemToRemove = roadsideData.FirstOrDefault(o => o.Index == index);
+
+            UIManager.Instance.PopupManager.ShowMessageDialog("Confirm",
+                "Are you sure want to remove this item from stock?", UIMessageBox.MessageBoxType.Yes_No,
+                (result) =>
+                {
+                    if (result == UIMessageBox.MessageBoxAction.Accept)
+                    {
+                        OnConfirmRemoveItemSell(itemToRemove, index);
+                    }
+
+                    return true;
+                });
         }
 
         protected override void OnHiding()
@@ -83,7 +103,13 @@ namespace CiFarm.Scripts.UI.Popups
         }
 
         #region NAKAMA
-        public void OnConfirmSetSell(InvenItemData plantData, int index)
+
+        /// <summary>
+        /// Todo
+        /// </summary>
+        /// <param name="plantData"></param>
+        /// <param name="index"></param>
+        private void OnConfirmSetSell(InvenItemData plantData, int index)
         {
             try
             {
@@ -96,7 +122,12 @@ namespace CiFarm.Scripts.UI.Popups
             }
         }
 
-        public void OnConfirmRemoveItemSell(InvenItemData plantData, int index)
+        /// <summary>
+        /// todo
+        /// </summary>
+        /// <param name="plantData"></param>
+        /// <param name="index"></param>
+        private void OnConfirmRemoveItemSell(RoadSideItemData plantData, int index)
         {
             try
             {
