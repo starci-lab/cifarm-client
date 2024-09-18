@@ -74,10 +74,8 @@ namespace CiFarm.Scripts.UI.Popups
         public void OnClickToRemoveItemOnSale(int index)
         {
             var itemToRemove = roadsideData.FirstOrDefault(o => o.Index == index);
-            
         }
 
-  
         protected override void OnHiding()
         {
             base.OnHiding();

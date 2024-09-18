@@ -89,15 +89,13 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void OnClickItem(InvenItemData data)
         {
-            DLogger.Log("Clicked Game item: " + data.itemKey);
-            DLogger.Log("Clicked Game item: " + data.type);
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ItemDetailPopup, new ItemDetailPopupParam
             {
                 ItemId     = data.itemKey,
                 Quantity   = data.quantity,
                 IconItem   = data.iconItem,
-                CanSell    = data.type == InventoryType.PlantHarvested,
-                OnSellItem = () => { currentTab.OnClick(); }
+                CanSell    = false,
+                OnSellItem = (dt) => { currentTab.OnClick(); }
             });
         }
 

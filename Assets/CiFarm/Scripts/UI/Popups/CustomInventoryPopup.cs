@@ -105,6 +105,19 @@ namespace CiFarm.Scripts.UI.Popups
                     Hide();
                     break;
                 case PlantingPopupType.Selling:
+                    UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ItemDetailPopup, new ItemDetailPopupParam
+                    {
+                        ItemId   = data.itemKey,
+                        Quantity = data.quantity,
+                        IconItem = data.iconItem,
+                        CanSell  = true,
+                        OnSellItem = (quantity) =>
+                        {
+                            data.quantity = quantity;
+                            _callBackAction?.Invoke(data);
+                            Hide();
+                        }
+                    });
                     break;
             }
         }

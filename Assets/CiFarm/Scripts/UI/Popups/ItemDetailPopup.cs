@@ -11,11 +11,11 @@ namespace CiFarm.Scripts.UI.Popups
 {
     public class ItemDetailPopupParam
     {
-        public string      ItemId;
-        public int         Quantity;
-        public bool        CanSell;
-        public Sprite      IconItem;
-        public UnityAction OnSellItem;
+        public string           ItemId;
+        public int              Quantity;
+        public bool             CanSell;
+        public Sprite           IconItem;
+        public UnityAction<int> OnSellItem;
     }
 
     public class ItemDetailPopup : UIPopup
@@ -37,11 +37,17 @@ namespace CiFarm.Scripts.UI.Popups
         public int counter = 1;
         public int basePrice;
 
-        private UnityAction _onSellItem;
+        private UnityAction<int> _onSellItem;
 
         private int    _quantity;
         private bool   _canSell;
         private string _itemId;
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+            textItemCounter.onValueChanged.AddListener(CustomEditValidate);
+        }
 
         protected override void OnShowing()
         {
@@ -66,7 +72,6 @@ namespace CiFarm.Scripts.UI.Popups
                 o.SetActive(_canSell);
             }
 
-            DLogger.Log("This item can sell? =>" + _canSell);
             if (_canSell)
             {
                 var config = ResourceService.Instance.ShopSellConfig.GetItemDetail(_itemId);
@@ -129,9 +134,29 @@ namespace CiFarm.Scripts.UI.Popups
             UpdateCounter();
         }
 
+        public void CustomEditValidate(string input)
+        {
+            if (int.TryParse(input, out var temp))
+            {
+                if (temp <= 0)
+                {
+                    temp = 1;
+                }
+
+                if (temp > _quantity)
+                {
+                    temp = _quantity;
+                }
+
+                counter = temp;
+
+                textItemCounter.text = counter.ToString();
+            }
+        }
+
         public void OnClickSell()
         {
-            _onSellItem?.Invoke();
+            _onSellItem?.Invoke(counter);
         }
     }
 }
