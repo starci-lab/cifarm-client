@@ -8131,6 +8131,9 @@ MonoBehaviour:
   ShowProps: 0
   ShowBackBtn: 0
   Title: 
+  userName: {fileID: 0}
+  userLevel: {fileID: 0}
+  userExperiencesProcessed: {fileID: 0}
   userCoin: {fileID: 7377101103442572925}
   userNtfCoinA: {fileID: 9031053173689437301}
   userNtfCoinB: {fileID: 2851921107239978641}

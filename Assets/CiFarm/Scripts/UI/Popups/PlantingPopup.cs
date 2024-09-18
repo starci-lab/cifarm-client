@@ -90,6 +90,10 @@ namespace CiFarm.Scripts.UI.Popups
             inventoryItemsData.Clear();
 
             var rawData = NakamaAssetService.Instance.inventories;
+            if (rawData == null || rawData.Count == 0)
+            {
+                rawData = new ();
+            }
             foreach (var data in rawData)
             {
                 ModelConfigEntity gameConfig;

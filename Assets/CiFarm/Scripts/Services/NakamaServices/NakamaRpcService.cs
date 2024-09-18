@@ -234,7 +234,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
         }
         public async Task<UsePestisideRpcAsyncResponse> UseHerbicideRpcAsync(
-            UseHerbicideRpcAsyncResponse _params
+            UseHerbicideRpcAsyncParams _params
             )
         {
             var client = NakamaInitializerService.Instance.client;
@@ -315,8 +315,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         public class DeliverProductsRpcAsyncResponse
         {
-            [JsonProperty("keys")]
-            public List<string> keys;
+            [JsonProperty("deliveryProductKeys")]
+            public List<string> deliveryProductKeys;
         }
         public async Task<DeliverProductsRpcAsyncResponse> ListDeliveringProductsRpcAsync(DeliverProductsRpcAsyncParams _params)
         {

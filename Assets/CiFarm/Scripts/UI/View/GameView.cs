@@ -1,6 +1,7 @@
 using System;
 using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services.NakamaServices;
+using CiFarm.Scripts.UI.View.GameViewComponent;
 using CiFarm.Scripts.Utilities;
 using DG.Tweening;
 using Imba.Audio;
@@ -25,6 +26,9 @@ namespace CiFarm.Scripts.UI.View
         [SerializeField] private TextMeshProUGUI userCoin;
         [SerializeField] private TextMeshProUGUI userNtfCoinA;
         [SerializeField] private TextMeshProUGUI userNtfCoinB;
+        [SerializeField] private ToolManager     toolManager;
+
+        public ToolManager ToolManager => toolManager;
 
         private int _currentCoin;
 
