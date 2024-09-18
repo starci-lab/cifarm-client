@@ -157,6 +157,7 @@ namespace CiFarm.Scripts.UI.Popups
         public void OnClickSell()
         {
             _onSellItem?.Invoke(counter);
+            Hide(true);
         }
     }
 }
