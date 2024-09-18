@@ -170,4 +170,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("isPremium")]
         public bool isPremium;
     }
+
+    [Serializable]
+    public class VisitState
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("userId")]
+        public string userId;
+    }
 }

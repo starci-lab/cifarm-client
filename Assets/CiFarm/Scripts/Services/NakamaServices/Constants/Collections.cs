@@ -20,7 +20,15 @@ namespace CiFarm.Scripts.Services.NakamaServices
         System,
 
         [EnumStringValue("Inventories")]
-        Inventories
+        Inventories,
+
+        [EnumStringValue("Config")]
+        Config
+    }
+    public enum ConfigKey
+    {
+        [EnumStringValue("visitState")]
+        VisitState
     }
 
     public enum SystemKey

@@ -55,7 +55,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             BuySeedRpcAsyncParams _params
             )
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -85,7 +84,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             ConstructBuildingRpcAsyncParams _params
             )
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -112,7 +110,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             BuyAnimalRpcAsyncParams _params
             )
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -143,7 +140,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             PlantSeedRpcAsyncParams _params
             )
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -170,11 +166,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
             HarvestPlantRpcAsyncParams _params
             )
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
-
-
 
             var result = await client.RpcAsync(session, "harvest_plant", JsonConvert.SerializeObject(_params));
             NakamaAssetService.Instance.LoadInventoriesAsync();
@@ -220,7 +213,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             UsePestisideRpcAsyncParams _params
             )
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -245,7 +237,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             UseHerbicideRpcAsyncResponse _params
             )
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -257,7 +248,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
 
-        //Daily Rewards RpcAsync
+        //Daily Rewards Rpcs
         #region ClaimDailyRewardRpc
         public class ClaimDailyRewardRpcAsyncResponse
         {
@@ -268,8 +259,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         public async Task<ClaimDailyRewardRpcAsyncResponse> ClaimDailyRequestRpcAsync()
-        {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+        {       
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -281,7 +271,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
 
-        //Assets rpc
+        //Assets Rpcs
         #region ListInventoriesRpc
         public class ListInventoriesRpcAsyncResponse
         {
@@ -290,7 +280,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         public async Task<ListInventoriesRpcAsyncResponse> ListInventoriesRpcAsync()
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -309,7 +298,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         public async Task<ListDeliveringProductsRpcAsyncResponse> ListDeliveringProductsRpcAsync()
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -320,25 +308,86 @@ namespace CiFarm.Scripts.Services.NakamaServices
         #endregion
         #region DeliverProductsAsync
 
-        public class DeliverProductsAsyncParams
+        public class DeliverProductsRpcAsyncParams
         {
             [JsonProperty("inventories")]
             public List<Inventory> inventories;
         }
-        public class DeliverProductsAsyncResponse
+        public class DeliverProductsRpcAsyncResponse
         {
             [JsonProperty("keys")]
             public List<string> keys;
         }
-        public async Task<DeliverProductsAsyncResponse> ListDeliveringProductsRpcAsync(DeliverProductsAsyncParams _params)
+        public async Task<DeliverProductsRpcAsyncResponse> ListDeliveringProductsRpcAsync(DeliverProductsRpcAsyncParams _params)
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "deliver_products", JsonConvert.SerializeObject(_params));
 
-            return JsonConvert.DeserializeObject<DeliverProductsAsyncResponse>(result.Payload);
+            return JsonConvert.DeserializeObject<DeliverProductsRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+
+        //Users Rpcs
+        #region SearchUsersRpc
+        public class SearchUsersRpcAsyncParams
+        {
+            [JsonProperty("value")]
+            public string value;
+        }
+        public class SearchUsersAsyncResponse
+        {
+            [JsonProperty("users")]
+            public List<User> users;
+        }
+
+        public async Task<SearchUsersAsyncResponse> SearchUsersRpcAsync(SearchUsersRpcAsyncParams _params)
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "search_users", JsonConvert.SerializeObject(_params));
+
+            return JsonConvert.DeserializeObject<SearchUsersAsyncResponse>(result.Payload);
+        }
+        #endregion
+        #region GetRandomUserRpc
+        public class GetRandomUserRpcAsyncResponse
+        {
+            [JsonProperty("user")]
+            public User user;
+        }
+
+        public async Task<GetRandomUserRpcAsyncResponse> GetRandomUserAsync()
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "get_random_user");
+            return JsonConvert.DeserializeObject<GetRandomUserRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+        #region VisitRpc
+        public class VisitRpcParams
+        {
+            [JsonProperty("userId")]
+            public string userId;
+        }
+
+        public async Task VisitRpc(VisitRpcParams _params)
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+            await client.RpcAsync(session, "visit", JsonConvert.SerializeObject(_params));
+        }
+        #endregion
+        #region ReturnRpc
+        public async Task ReturnRpc()
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+            await client.RpcAsync(session, "return");
         }
         #endregion
     }

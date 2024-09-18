@@ -1,29 +1,83 @@
+using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using Nakama;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaUsersService : ManualSingletonMono<NakamaUsersService>
-    {
+    {   
         public override void Awake()
         {
             base.Awake();
         }
 
-        public async void AddFriendByIdAsync(string userId)
-        {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
-            var client = NakamaInitializerService.Instance.client;
-            var session = NakamaInitializerService.Instance.session;
+        [ReadOnly]
+        public List<User> searchUsers;
 
-            await client.AddFriendsAsync(session, new List<string> { userId });
+        [ReadOnly]
+        public string visitUserId;
+
+        [ReadOnly]
+        public User randomUser;
+
+        public IEnumerator Start()
+        {
+            yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
+            SetRandomUserAsync();
         }
+
+        public async void SearchAsync(string value)
+        {
+            var response = await NakamaRpcService.Instance.SearchUsersRpcAsync(new()
+            {
+                value = value,
+            }
+            );
+            searchUsers = response.users;
+        }
+
+        public async void SetRandomUserAsync()
+        {
+            var response = await NakamaRpcService.Instance.GetRandomUserAsync();
+            randomUser = response.user;
+        }
+
+        public async void VisitAsync(string userId)
+        {
+            try
+            {
+                await NakamaRpcService.Instance.VisitRpc(new()
+                {
+                    userId = userId,
+                });
+                visitUserId = userId;
+            }
+            catch (Exception ex)
+            {
+                DLogger.LogError(ex.Message);
+            }  
+        }
+
+        public async void ReturnAsync()
+        {
+            try
+            {
+                await NakamaRpcService.Instance.ReturnRpc();
+                visitUserId = null;
+            }
+            catch (Exception ex)
+            {
+                DLogger.LogError(ex.Message);
+            }
+        }
+
         public async void AddFriendByUsernameAsync(string username)
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -32,7 +86,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async Task<IApiFriendList> ListFriendsAsync(string cursor)
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
             return await client.ListFriendsAsync(session, null, 10, cursor);
