@@ -98,10 +98,10 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                         GameController.Instance.OnWaterPlant(this);
                         break;
                     case PlantCurrentState.IsWeedy:
-                        GameController.Instance.OnPesticidePlant(this);
+                        GameController.Instance.OnHerbicidePlant(this);
                         break;
                     case PlantCurrentState.IsInfested:
-                        GameController.Instance.OnHerbicidePlant(this);
+                        GameController.Instance.OnPesticidePlant(this);
                         break;
                 }
 

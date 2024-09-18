@@ -172,12 +172,12 @@ namespace CiFarm.Scripts.SceneController.Game
             }
             catch (Exception e)
             {
-                DLogger.LogError("Harvest Item error: " + e.Message, "Ground");
+                DLogger.LogError("OnWaterPlant error: " + e.Message, "Ground");
             }
         }
 
         /// <summary>
-        /// Phun thuoc co
+        /// Phun thuoc tru sau
         /// </summary>
         /// <param name="ground"></param>
         public async void OnPesticidePlant(BaseGround ground)
@@ -199,12 +199,12 @@ namespace CiFarm.Scripts.SceneController.Game
             }
             catch (Exception e)
             {
-                DLogger.LogError("Harvest Item error: " + e.Message, "Ground");
+                DLogger.LogError("UsePestisideRpcAsync error: " + e.Message, "Ground");
             }
         }
 
         /// <summary>
-        /// Phun thuoc tru sau
+        /// Phun thuoc diet co
         /// </summary>
         /// <param name="ground"></param>
         public async void OnHerbicidePlant(BaseGround ground)
@@ -222,11 +222,12 @@ namespace CiFarm.Scripts.SceneController.Game
                 {
                     placedItemTileKey = ground.dirtData.key
                 });
+                
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
-                DLogger.LogError("Harvest Item error: " + e.Message, "Ground");
+                DLogger.LogError("UseHerbicideRpcAsync error: " + e.Message, "Ground");
             }
         }
 
