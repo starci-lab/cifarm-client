@@ -61,6 +61,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
+            // Planting
             if (!dirtData.isPlanted)
             {
                 UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new PlantingPopupParam
@@ -71,19 +72,39 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
+            // Harvest
             if (dirtData.isPlanted && dirtData.fullyMatured)
             {
-                DLogger.Log("Try Harvesting...");
-                OnHarvestPlant();
+                GameController.Instance.OnHarvestPlant(this);
                 return;
             }
 
-            if (dirtData.isPlanted)
+            // Planted and everything normal
+            if (dirtData.isPlanted && dirtData.seedGrowthInfo.plantCurrentState == PlantCurrentState.Normal)
             {
                 var bubble = SpawnBubble();
                 bubble.SetBubble(dirtData.key, InjectionType.Timer,
                     dirtData.seedGrowthInfo.seed.growthStageDuration -
                     (int)dirtData.seedGrowthInfo.currentStageTimeElapsed);
+                return;
+            }
+
+            // REQUIRED SOME THING
+            if (dirtData.isPlanted && dirtData.seedGrowthInfo.plantCurrentState != PlantCurrentState.Normal)
+            {
+                switch (dirtData.seedGrowthInfo.plantCurrentState)
+                {
+                    case PlantCurrentState.NeedWater:
+                        GameController.Instance.OnWaterPlant(this);
+                        break;
+                    case PlantCurrentState.IsWeedy:
+                        GameController.Instance.OnPesticidePlant(this);
+                        break;
+                    case PlantCurrentState.IsInfested:
+                        GameController.Instance.OnHerbicidePlant(this);
+                        break;
+                }
+
                 return;
             }
         }
@@ -94,7 +115,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             return dirtBubbleObj.GetComponent<DirtBubble>();
         }
 
-        private async void OnConfirmSetPlant(InvenItemData plantData)
+        public async void OnConfirmSetPlant(InvenItemData plantData)
         {
             DLogger.Log("Planting Item: " + plantData.inventoryKey + " To: " + dirtData.key, "SHOP");
 
@@ -112,23 +133,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             catch (Exception e)
             {
                 DLogger.LogError("Planting Item error: " + e.Message, "Ground");
-            }
-        }
-
-        private async void OnHarvestPlant()
-        {
-            try
-            {
-                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                await NakamaRpcService.Instance.HarvestPlantRpcAsync(new()
-                {
-                    placedItemTileKey = dirtData.key,
-                });
-                RemovePlant();
-            }
-            catch (Exception e)
-            {
-                DLogger.LogError("Harvest Item error: " + e.Message, "Ground");
             }
         }
     }

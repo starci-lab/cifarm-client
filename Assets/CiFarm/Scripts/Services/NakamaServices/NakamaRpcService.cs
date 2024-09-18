@@ -242,7 +242,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
         }
         public async Task<UsePestisideRpcAsyncResponse> UseHerbicideRpcAsync(
-            UseHerbicideRpcAsyncResponse _params
+            UseHerbicideRpcAsyncParams _params
             )
         {
             if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");

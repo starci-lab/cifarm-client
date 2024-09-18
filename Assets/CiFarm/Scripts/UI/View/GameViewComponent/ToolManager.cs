@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CiFarm.Scripts.Utilities;
 using UnityEngine;
 
 namespace CiFarm.Scripts.UI.View.GameViewComponent
@@ -8,14 +9,16 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
     {
         [SerializeField] private List<ToolItem> toolItems;
         [SerializeField] private List<ToolData> toolDatas;
-        private                  int            _inventoryPage;
-        private                  int            _currentSelectIndex;
+
+        private int _inventoryPage;
+        private int _currentSelectIndex;
 
         public ToolData CurrentTool
         {
             get
             {
                 var tool = toolDatas[_inventoryPage * 4 + _currentSelectIndex];
+                DLogger.Log("Current Tool: " + tool.toolType, "ToolManager");
                 return tool;
             }
         }
@@ -31,7 +34,7 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
 
         private void Start()
         {
-            toolItems[0].SetSelect();
+            toolItems[0].SetSelect(true);
         }
 
         public void LoadTool()
