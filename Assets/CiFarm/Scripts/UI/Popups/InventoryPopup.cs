@@ -90,12 +90,13 @@ namespace CiFarm.Scripts.UI.Popups
         public void OnClickItem(InvenItemData data)
         {
             DLogger.Log("Clicked Game item: " + data.itemKey);
+            DLogger.Log("Clicked Game item: " + data.type);
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ItemDetailPopup, new ItemDetailPopupParam
             {
                 ItemId     = data.itemKey,
                 Quantity   = data.quantity,
                 IconItem   = data.iconItem,
-                CanSell    = false,
+                CanSell    = data.type == InventoryType.PlantHarvested,
                 OnSellItem = () => { currentTab.OnClick(); }
             });
         }
@@ -121,16 +122,26 @@ namespace CiFarm.Scripts.UI.Popups
                     case InventoryType.Animal:
                         gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
                         break;
+                    case InventoryType.PlantHarvested:
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
+
+                        break;
                     default:
                         continue;
                 }
+
+                var icon = data.type == InventoryType.PlantHarvested
+                    ? gameConfig.GameHarvestIcon
+                    : gameConfig.GameShopIcon;
+
 
                 inventoryItemsData.Add(new InvenItemData
                 {
                     inventoryKey = data.key,
                     itemKey      = data.referenceKey,
                     quantity     = data.quantity,
-                    iconItem     = gameConfig.GameShopIcon
+                    iconItem     = icon,
+                    type         = data.type
                 });
             }
 
@@ -149,18 +160,18 @@ namespace CiFarm.Scripts.UI.Popups
                 switch (data.type)
                 {
                     case InventoryType.Seed:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
-                        break;
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);                        break;
                     default:
                         continue;
                 }
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    itemKey  = data.key,
-                    type     = data.type,
-                    quantity = data.quantity,
-                    iconItem = gameConfig.GameShopIcon
+                    inventoryKey = data.key,
+                    itemKey      = data.referenceKey,
+                    type         = data.type,
+                    quantity     = data.quantity,
+                    iconItem     = gameConfig.GameShopIcon
                 });
             }
 
@@ -182,6 +193,29 @@ namespace CiFarm.Scripts.UI.Popups
         public void LoadAllUserItemByProduct()
         {
             inventoryItemsData.Clear();
+
+            var rawData = NakamaAssetService.Instance.inventories;
+            foreach (var data in rawData)
+            {
+                ModelConfigEntity gameConfig;
+                switch (data.type)
+                {
+                    case InventoryType.PlantHarvested:
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);                        break;
+                    default:
+                        continue;
+                }
+
+                inventoryItemsData.Add(new InvenItemData
+                {
+                    inventoryKey = data.key,
+                    itemKey      = data.referenceKey,
+                    quantity     = data.quantity,
+                    iconItem     = gameConfig.GameHarvestIcon,
+                    type         = data.type
+                });
+            }
+
             ResetGridView();
         }
 

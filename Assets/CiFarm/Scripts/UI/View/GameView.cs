@@ -8,6 +8,7 @@ using Imba.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace CiFarm.Scripts.UI.View
 {
@@ -18,6 +19,9 @@ namespace CiFarm.Scripts.UI.View
 
     public class GameView : UIView
     {
+        [SerializeField] private TextMeshProUGUI userName;
+        [SerializeField] private TextMeshProUGUI userLevel;
+        [SerializeField] private Image           userExperiencesProcessed;
         [SerializeField] private TextMeshProUGUI userCoin;
         [SerializeField] private TextMeshProUGUI userNtfCoinA;
         [SerializeField] private TextMeshProUGUI userNtfCoinB;
@@ -34,6 +38,10 @@ namespace CiFarm.Scripts.UI.View
         {
             base.OnShown();
             FetchUserCoin();
+
+            userName.text                       = "UserAxxy";
+            userLevel.text                      = "1";
+            userExperiencesProcessed.fillAmount = 0.5f;
         }
 
         #region UI BUTTON
@@ -78,9 +86,12 @@ namespace CiFarm.Scripts.UI.View
 
         public void OnClickFriend()
         {
-            //  GameController.Instance.CameraController.LockCamera();
+            GameController.Instance.CameraController.LockCamera();
             AudioManager.Instance.PlaySFX(AudioName.Click3);
-            DLogger.Log("In process OnClickFriend", "MainUI");
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.FriendsPopup, new GameViewParam
+            {
+                callBack = OnPopupClose
+            });
         }
 
         public void OnClickSetting()

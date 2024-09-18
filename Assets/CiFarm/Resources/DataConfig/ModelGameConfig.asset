@@ -75,3 +75,34 @@ MonoBehaviour:
     gameShopIcon: {fileID: 21300000, guid: 10d90b2e8bd69454f99f09abed716621, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: 5160280a488a444488012be34e7a2698, type: 3}
   constructionMapper: []
+  productMapper:
+  - key: carrot
+    itemName: Carrot
+    prefabModel: {fileID: 0}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
+  - key: cauliflower
+    itemName: Cauliflower
+    prefabModel: {fileID: 0}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
+  - key: pineapple
+    itemName: Pineapple
+    prefabModel: {fileID: 0}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
+  - key: watermelon
+    itemName: Watermelon
+    prefabModel: {fileID: 0}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
+  - key: cucumber
+    itemName: Cucumber
+    prefabModel: {fileID: 0}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}
+  - key: bellpepper
+    itemName: Bell Pepper
+    prefabModel: {fileID: 0}
+    gameShopIcon: {fileID: 0}
+    gameHarvestIcon: {fileID: 0}

@@ -21,5 +21,6 @@ namespace Imba.UI
         InventoryPopup         = 7,
         PlantingPopup          = 8,
         ItemDetailPopup        = 9,
+        FriendsPopup        = 10,
     }
 }

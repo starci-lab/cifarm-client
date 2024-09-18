@@ -13,10 +13,12 @@ namespace CiFarm.Scripts.Services.GameDatas
         [SerializeField] private List<ModelConfigEntity> tileMapper;
         [SerializeField] private List<ModelConfigEntity> plantMapper;
         [SerializeField] private List<ModelConfigEntity> constructionMapper;
+        [SerializeField] private List<ModelConfigEntity> productMapper;
 
         public List<ModelConfigEntity> TileMapper         => tileMapper;
         public List<ModelConfigEntity> PlantMapper        => plantMapper;
         public List<ModelConfigEntity> ConstructionMapper => constructionMapper;
+        public List<ModelConfigEntity> ProductMapper      => productMapper;
 
         public GameObject GetTileObjectModel(string keyToFind)
         {
@@ -85,6 +87,17 @@ namespace CiFarm.Scripts.Services.GameDatas
             {
                 DLogger.LogError("GetConstruction not found for: " + keyToFind, "ModelGameObjectConfig");
                 return PlantMapper[0];
+            }
+
+            return result;
+        }  
+        public ModelConfigEntity GetProductModel(string keyToFind)
+        {
+            var result = productMapper.FirstOrDefault(o => o.Key == keyToFind);
+            if (result == null)
+            {
+                DLogger.LogError("GetProductModel not found for: " + keyToFind, "ModelGameObjectConfig");
+                return productMapper[0];
             }
 
             return result;
