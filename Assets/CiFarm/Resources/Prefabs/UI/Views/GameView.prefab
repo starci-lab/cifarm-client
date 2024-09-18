@@ -3797,6 +3797,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tooltem
       objectReference: {fileID: 0}
+    - target: {fileID: 7890887854204782486, guid: d73baa165f81a5d4f8ffb99d53948a5e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ea8cc3d4b7a622d469315a1e00655ddb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4037,7 +4041,7 @@ PrefabInstance:
     - target: {fileID: 7890887854204782486, guid: d73baa165f81a5d4f8ffb99d53948a5e, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ea8cc3d4b7a622d469315a1e00655ddb, type: 3}
+      objectReference: {fileID: 21300000, guid: ce7aaf0270008bb4da8423c6145dfa43, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

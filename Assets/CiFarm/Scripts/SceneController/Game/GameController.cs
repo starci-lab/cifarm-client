@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
-using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.UI.View.GameViewComponent;
 using CiFarm.Scripts.Utilities;
@@ -184,10 +183,10 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Pesticide)
             {
-                DLogger.Log("Current tool not water ");
+                DLogger.Log("Current tool not Pesticide");
                 return;
             }
-
+            
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
@@ -211,7 +210,7 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Herbicide)
             {
-                DLogger.Log("Current tool not water ");
+                DLogger.Log("Current tool not Herbicide");
                 return;
             }
 
