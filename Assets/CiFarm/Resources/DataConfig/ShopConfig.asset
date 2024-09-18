@@ -31,7 +31,7 @@ MonoBehaviour:
   - key: cucumber
     itemName: Cucumber
     sellValue: 100
-  - key: bellpepper
+  - key: bellPepper
     itemName: Bell Pepper
     sellValue: 100
   - key: potato

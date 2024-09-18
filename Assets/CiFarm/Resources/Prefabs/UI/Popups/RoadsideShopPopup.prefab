@@ -1662,6 +1662,7 @@ MonoBehaviour:
     StartPosition: {x: 0, y: 0, z: 0}
     StartRotation: {x: 0, y: 0, z: 0}
     StartScale: {x: 1, y: 1, z: 1}
+  roadsideItems: []
 --- !u!1 &5484005864064170492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,7 +2196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71fe371ab24643cabecc9fed3e20594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPosition: {x: -101, y: 475.8169, z: 0}
+  StartPosition: {x: -53.5, y: -117.6, z: 0}
   StartRotation: {x: -0, y: 0, z: 0}
   StartScale: {x: 1, y: 1, z: 1}
   StartAlpha: 1

@@ -734,6 +734,7 @@ GameObject:
   - component: {fileID: 4822451122175257578}
   - component: {fileID: 7009840523958391774}
   - component: {fileID: 1222540769266882237}
+  - component: {fileID: 4903536287720202879}
   m_Layer: 5
   m_Name: RoadsideItem
   m_TagString: Untagged
@@ -801,3 +802,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4903536287720202879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8362917802422287005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b0a4aaad2e4137b2610ada79ac89cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textQuantity: {fileID: 9031339566983885777}
+  productGroup: {fileID: 2727385607795116470}
+  productRender: {fileID: 6603213087893320563}

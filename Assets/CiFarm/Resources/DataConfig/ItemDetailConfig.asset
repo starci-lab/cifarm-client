@@ -46,7 +46,7 @@ MonoBehaviour:
       mild, slightly sweet flavor. Rich in water and low in calories, cucumbers are
       perfect for salads, snacks, and pickling, offering both hydration and a light,
       cooling taste.       '
-  - key: bellpepper
+  - key: bellPepper
     itemName: Bell Pepper
     type: 0
     itemDescription: 'Bell pepper seeds grow into vibrant, crisp vegetables with

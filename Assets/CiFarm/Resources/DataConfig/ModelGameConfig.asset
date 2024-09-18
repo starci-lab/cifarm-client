@@ -64,7 +64,7 @@ MonoBehaviour:
     prefabModel: {fileID: 1158725481770596654, guid: 1457bcb785280af44b18d59564b2b139, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 04a4624e0da32de429ec21b5b1961554, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: 34bfa7678573cf74d81261bb459723f4, type: 3}
-  - key: bellpepper
+  - key: bellPepper
     itemName: Bell Pepper
     prefabModel: {fileID: 1158725481770596654, guid: b82723a35cca55c488517d05e0541fb7, type: 3}
     gameShopIcon: {fileID: 21300000, guid: d6e42fd964fa4f640a6dbe9c81da3737, type: 3}
