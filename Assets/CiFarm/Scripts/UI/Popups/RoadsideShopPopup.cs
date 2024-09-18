@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CiFarm.Scripts.UI.Popups.Roadside;
 using CiFarm.Scripts.UI.View;
+using CiFarm.Scripts.Utilities;
+using Imba.Audio;
 using Imba.UI;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,7 +15,7 @@ namespace CiFarm.Scripts.UI.Popups
     {
         [SerializeField] private List<RoadsideItem> roadsideItems;
 
-        [ReadOnly] public List<RoadSideItemData> RoadsideData;
+        [Unity.Collections.ReadOnly] public List<RoadSideItemData> roadsideData;
 
         private UnityAction _onClose;
 
@@ -43,12 +45,12 @@ namespace CiFarm.Scripts.UI.Popups
         public void LoadItemsOnSale()
         {
             // Load item from server
-            RoadsideData = new List<RoadSideItemData>();
+            roadsideData = new List<RoadSideItemData>();
 
             // Load to display 
             for (int i = 0; i < roadsideItems.Count; i++)
             {
-                var item = RoadsideData.FirstOrDefault(o => o.Index == i);
+                var item = roadsideData.FirstOrDefault(o => o.Index == i);
                 if (item == null)
                 {
                     roadsideItems[i].SetProductOnSale();
@@ -62,19 +64,57 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void OnPutNewItemOnSale(int index)
         {
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new CustomInventoryPopupParam
+            {
+                PlantingPopupType = PlantingPopupType.Selling,
+                PlantAction       = (data) => { OnConfirmSetSell(data, index); }
+            });
         }
 
         public void OnClickToRemoveItemOnSale(int index)
         {
+            var itemToRemove = roadsideData.FirstOrDefault(o => o.Index == index);
+            
         }
 
+  
         protected override void OnHiding()
         {
             base.OnHiding();
             _onClose?.Invoke();
         }
+
+        #region NAKAMA
+        public void OnConfirmSetSell(InvenItemData plantData, int index)
+        {
+            try
+            {
+                // call NAKAMA
+                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("OnConfirmSetSell Item error: " + e.Message, "Roadside");
+            }
+        }
+
+        public void OnConfirmRemoveItemSell(InvenItemData plantData, int index)
+        {
+            try
+            {
+                // call NAKAMA
+                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("OnConfirmSetSell Item error: " + e.Message, "Roadside");
+            }
+        }
+
+        #endregion
     }
 
+    [Serializable]
     public class RoadSideItemData
     {
         public int    Index;

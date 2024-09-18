@@ -108,6 +108,11 @@ namespace CiFarm.Scripts.UI.Popups
             inventoryItemsData.Clear();
 
             var rawData = NakamaAssetService.Instance.inventories;
+            if (rawData == null)
+            {
+                rawData = new();
+            }
+
             foreach (var data in rawData)
             {
                 ModelConfigEntity gameConfig;
@@ -160,7 +165,8 @@ namespace CiFarm.Scripts.UI.Popups
                 switch (data.type)
                 {
                     case InventoryType.Seed:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);                        break;
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
+                        break;
                     default:
                         continue;
                 }
@@ -201,7 +207,8 @@ namespace CiFarm.Scripts.UI.Popups
                 switch (data.type)
                 {
                     case InventoryType.PlantHarvested:
-                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);                        break;
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.referenceKey);
+                        break;
                     default:
                         continue;
                 }

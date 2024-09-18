@@ -64,8 +64,9 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             // Planting
             if (!dirtData.isPlanted)
             {
-                UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new PlantingPopupParam
+                UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new CustomInventoryPopupParam
                 {
+                    PlantingPopupType =  PlantingPopupType.Planting,
                     CloseAction = null,
                     PlantAction = OnConfirmSetPlant
                 });
