@@ -108,6 +108,16 @@ namespace CiFarm.Scripts.UI.View
             });
         }
 
+        public void OnClickRoadsideShop()
+        {
+            GameController.Instance.CameraController.LockCamera();
+            AudioManager.Instance.PlaySFX(AudioName.Click3);
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.RoadsideShopPopup, new GameViewParam
+            {
+                callBack = OnPopupClose
+            });
+        }
+
         public void OnPopupClose()
         {
             DLogger.Log("CLOSED POPUP");
