@@ -30,6 +30,8 @@ namespace Imba.Audio
         Close2,
         Close3,
         PowerUpBright,
+        Watering,
+        Spray,
    
 
         #endregion

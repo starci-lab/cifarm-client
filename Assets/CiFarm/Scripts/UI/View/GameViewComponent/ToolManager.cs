@@ -10,13 +10,15 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
         [SerializeField] private List<ToolItem> toolItems;
         [SerializeField] private List<ToolData> toolDatas;
 
-        private int _inventoryPage;
+        private int _inventoryPage = 0;
         private int _currentSelectIndex;
 
         public ToolData CurrentTool
         {
             get
-            {
+            {                
+                DLogger.Log("Index Tool: " + _inventoryPage * 4 + _currentSelectIndex, "ToolManager");
+
                 var tool = toolDatas[_inventoryPage * 4 + _currentSelectIndex];
                 DLogger.Log("Current Tool: " + tool.toolType, "ToolManager");
                 return tool;

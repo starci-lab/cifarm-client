@@ -140,6 +140,7 @@ namespace CiFarm.Scripts.SceneController.Game
                                                                      .harvestQuantityRemaining +
                                                                  " " + ground.dirtData.seedGrowthInfo.seed.key);
                 ground.RemovePlant();
+                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
@@ -158,12 +159,16 @@ namespace CiFarm.Scripts.SceneController.Game
                 DLogger.Log("Current tool not water ");
                 return;
             }
+
             try
             {
+                AudioManager.Instance.PlaySFX(AudioName.Watering);
                 await NakamaRpcService.Instance.WaterRpcAsync(new()
                 {
                     placedItemTileKey = ground.dirtData.key,
                 });
+
+                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
@@ -182,12 +187,15 @@ namespace CiFarm.Scripts.SceneController.Game
                 DLogger.Log("Current tool not water ");
                 return;
             }
+
             try
             {
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaRpcService.Instance.UsePestisideRpcAsync(new()
                 {
                     placedItemTileKey = ground.dirtData.key,
                 });
+                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
@@ -206,12 +214,15 @@ namespace CiFarm.Scripts.SceneController.Game
                 DLogger.Log("Current tool not water ");
                 return;
             }
+
             try
             {
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaRpcService.Instance.UseHerbicideRpcAsync(new()
                 {
                     placedItemTileKey = ground.dirtData.key
                 });
+                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {

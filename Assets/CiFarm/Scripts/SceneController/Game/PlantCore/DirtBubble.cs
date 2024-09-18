@@ -28,9 +28,10 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 SimplePool.Despawn(gameObject);
                 return;
             }
-
+            timerText.SetActive(false);
+            iconRender.SetActive(false);
             bubble.SetActive(true);
-            TileBubbleController.Instance.OnBubbleAppear(_tileId);
+            TileBubbleController.Instance.OnBubbleAppear(_tileId, this);
             switch (type)
             {
                 case InjectionType.None:
@@ -39,7 +40,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 case InjectionType.Water:
                 case InjectionType.Worm:
                 case InjectionType.Grass:
-                    timerText.SetActive(false);
+                    iconRender.SetActive(true);
                     if (spritesConfig.TryGetValue(type, out var data))
                     {
                         iconRender.sprite = data;
