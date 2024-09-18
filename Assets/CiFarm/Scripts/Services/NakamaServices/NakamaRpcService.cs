@@ -327,8 +327,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         public class DeliverProductsAsyncResponse
         {
-            [JsonProperty("keys")]
-            public List<string> keys;
+            [JsonProperty("deliveryProductKeys")]
+            public List<string> deliveryProductKeys;
         }
         public async Task<DeliverProductsAsyncResponse> ListDeliveringProductsRpcAsync(DeliverProductsAsyncParams _params)
         {
