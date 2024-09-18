@@ -19,8 +19,8 @@ namespace CiFarm.Scripts.UI.Popups
             inputField.onEndEdit.AddListener((value) =>
             {   
                 DLogger.Log(value, "Search", LogColors.Chartreuse);
-                NakamaUsersService.Instance.SearchAsync(value);
-            });
+                NakamaCommunityService.Instance.SearchAsync(value);
+            }   );
         }
     }
 

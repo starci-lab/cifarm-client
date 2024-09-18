@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
-    public class NakamaUsersService : ManualSingletonMono<NakamaUsersService>
+    public class NakamaCommunityService : ManualSingletonMono<NakamaCommunityService>
     {   
         public override void Awake()
         {
