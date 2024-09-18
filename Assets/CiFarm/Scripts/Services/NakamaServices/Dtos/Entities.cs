@@ -169,6 +169,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("isPremium")]
         public bool isPremium;
+        
+        [JsonProperty("index")]
+        public int index;
     }
 
     [Serializable]

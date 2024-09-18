@@ -1,5 +1,7 @@
+using Imba.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CiFarm.Scripts.UI.Popups.Roadside
@@ -7,24 +9,44 @@ namespace CiFarm.Scripts.UI.Popups.Roadside
     public class RoadsideItem : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI textQuantity;
-        [SerializeField] private GameObject      plusButton;
+        [SerializeField] private GameObject      plusButtonGroup;
         [SerializeField] private GameObject      productGroup;
         [SerializeField] private Image           productRender;
+
+        private UnityAction _onClickAdd;
+        private UnityAction _onClickRemove;
+
+        public void InitCallback(UnityAction onClickAdd, UnityAction onClickRemove)
+        {
+            _onClickAdd    = onClickAdd;
+            _onClickRemove = onClickRemove;
+        }
 
         public void SetProductOnSale(Sprite sprite = null, int quantity = 0)
         {
             if (sprite != null && quantity != 0)
             {
                 productGroup.SetActive(true);
-                plusButton.SetActive(false);
+                plusButtonGroup.SetActive(false);
                 productRender.sprite = sprite;
                 textQuantity.text    = quantity.ToString();
             }
             else
             {
                 productGroup.SetActive(false);
-                plusButton.SetActive(true);
+                plusButtonGroup.SetActive(true);
+                textQuantity.text = "";
             }
+        }
+
+        public void OnClickAdd()
+        {
+            _onClickAdd?.Invoke();
+        }
+
+        public void OnClickRemove()
+        {
+            _onClickRemove?.Invoke();
         }
     }
 }
