@@ -95,7 +95,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 var bubble = clickedGround.SpawnBubble();
                 bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
-                    clickedGround.dirtData.seedGrowthInfo.seed.growthStageDuration -
+                    clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
                     (int)clickedGround.dirtData.seedGrowthInfo.currentStageTimeElapsed);
                 return;
             }
@@ -136,7 +136,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 var bubble = clickedGround.SpawnBubble();
                 bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
-                    clickedGround.dirtData.seedGrowthInfo.seed.growthStageDuration -
+                    clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
                     (int)clickedGround.dirtData.seedGrowthInfo.currentStageTimeElapsed);
                 return;
             }
@@ -260,7 +260,7 @@ namespace CiFarm.Scripts.SceneController.Game
             if (placedItem.isPlanted)
             {
                 var prefabPlantData =
-                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.seed
+                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.crop
                         .key);
                 // var plantObj = Instantiate(prefabPlantData);
                 var plantObj = SimplePool.Spawn(prefabPlantData, Vector3.zero, prefabPlantData.transform.rotation);
@@ -310,7 +310,7 @@ namespace CiFarm.Scripts.SceneController.Game
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                await NakamaRpcService.Instance.HarvestPlantRpcAsync(new()
+                await NakamaRpcService.Instance.HarvestCropRpcAsync(new()
                 {
                     placedItemTileKey = ground.dirtData.key,
                 });
@@ -318,7 +318,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 UIManager.Instance.AlertManager.ShowAlertMessage("Get " +
                                                                  ground.dirtData.seedGrowthInfo
                                                                      .harvestQuantityRemaining +
-                                                                 " " + ground.dirtData.seedGrowthInfo.seed.key);
+                                                                 " " + ground.dirtData.seedGrowthInfo.crop.key);
                 ground.RemovePlant();
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -435,14 +435,14 @@ namespace CiFarm.Scripts.SceneController.Game
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                await NakamaRpcService.Instance.ThiefPlantRpcAsync(new()
+                await NakamaRpcService.Instance.ThiefCropRpcAsync(new()
                 {
                     userId            = _friendItemData.userId,
                     placedItemTileKey = ground.dirtData.key,
                 });
 
                 UIManager.Instance.AlertManager.ShowAlertMessage("Get " + 1 + " " +
-                                                                 ground.dirtData.seedGrowthInfo.seed.key);
+                                                                 ground.dirtData.seedGrowthInfo.crop.key);
 
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }

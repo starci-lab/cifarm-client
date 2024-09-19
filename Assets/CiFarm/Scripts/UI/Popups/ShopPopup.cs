@@ -107,7 +107,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             ClearSelectedShop();
             seedTab.SetSelect(true);
-            var rawData = NakamaLoaderService.Instance.seeds;
+            var rawData = NakamaLoaderService.Instance.crops;
             shopItemsData.Clear();
             foreach (var data in rawData)
             {

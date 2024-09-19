@@ -19,13 +19,13 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
 
-            LoadSeedsAsync();
+            LoadCropsAsync();
             LoadTilesAsync();
             LoadAnimalsAsync();
         }
 
         [ReadOnly]
-        public List<Seed> seeds;
+        public List<Crop> crops;
 
         [ReadOnly]
         public List<Tile> tiles;
@@ -34,19 +34,19 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public List<Animal> animals;
 
         //load seeds
-        public async void LoadSeedsAsync()
+        public async void LoadCropsAsync()
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
-            var objects = await client.ListStorageObjectsAsync(session, CollectionType.Seeds.GetStringValue(), 20);
-            seeds = objects.Objects.Select(_object =>
+            var objects = await client.ListStorageObjectsAsync(session, CollectionType.Crops.GetStringValue(), 20);
+            crops = objects.Objects.Select(_object =>
             {
-                var seed = JsonConvert.DeserializeObject<Seed>(_object.Value);
+                var seed = JsonConvert.DeserializeObject<Crop>(_object.Value);
                 seed.key = _object.Key;
                 return seed;
             }).ToList();
-            DLogger.Log("Seeds loaded", "Nakama - Seeds", LogColors.LimeGreen);
+            DLogger.Log("Crops loaded", "Nakama - Crops", LogColors.LimeGreen);
         }
 
         //load tiles

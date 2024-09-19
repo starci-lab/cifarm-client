@@ -31,9 +31,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             socket.ReceivedMatchState += OnReceivedMatchState;
         }
 
-        public async Task FetchCentralInstantlyAsync()
+        public async Task ForceCentralBroadcastInstantlyRpcAsync()
         {
-            await NakamaRpcService.Instance.FetchCentralInstantlyAsync();
+            await NakamaRpcService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
         }
 
         [Tooltip("Enable to display logs for updates on the state of placed items. Disable to hide these logs.")]
