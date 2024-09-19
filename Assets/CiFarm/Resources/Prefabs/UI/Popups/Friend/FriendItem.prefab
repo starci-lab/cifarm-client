@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -138.8, y: 3.2}
+  m_AnchoredPosition: {x: -138.80002, y: 3.199997}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7430726624159341609
@@ -1103,7 +1103,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: -0.000048876}
+  m_AnchoredPosition: {x: 100, y: -0.000045776367}
   m_SizeDelta: {x: 166, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &430419565033428357
@@ -1231,13 +1231,14 @@ GameObject:
   - component: {fileID: 4201884704664761081}
   - component: {fileID: 5389428372700300120}
   - component: {fileID: 1152141579556313213}
+  - component: {fileID: 7497219100266040301}
   m_Layer: 5
   m_Name: FriendItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1299148880512735300
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1254,11 +1255,11 @@ RectTransform:
   - {fileID: 1479586921460098215}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -4.2296, y: -1.1019}
   m_SizeDelta: {x: 851.5406, y: 183.4855}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4201884704664761081
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1313,6 +1314,18 @@ MonoBehaviour:
   friendIc: {fileID: 7856989826233877126}
   userAva: {fileID: 8222922883943024489}
   textUserName: {fileID: 4353821833349179057}
+--- !u!114 &7497219100266040301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7385241792019135598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbcbd7952202d4d44a555aea5af2a351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7418177648933331620
 GameObject:
   m_ObjectHideFlags: 0

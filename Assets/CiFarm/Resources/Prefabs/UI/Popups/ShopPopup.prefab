@@ -5667,7 +5667,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: -1
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4
@@ -8137,6 +8137,7 @@ MonoBehaviour:
   userCoin: {fileID: 7377101103442572925}
   userNtfCoinA: {fileID: 9031053173689437301}
   userNtfCoinB: {fileID: 2851921107239978641}
+  toolManager: {fileID: 0}
 --- !u!1 &8221729022592766281
 GameObject:
   m_ObjectHideFlags: 0

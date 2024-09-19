@@ -7558,7 +7558,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: 7
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4

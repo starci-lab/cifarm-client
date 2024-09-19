@@ -144,14 +144,12 @@ namespace Imba.Audio
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            Debug.Log("OnSceneLoaded " + scene.name);
-            AudioManager.Instance.FadeIn(GetMusicBGName(scene.name), 1f);
+            Instance.FadeIn(GetMusicBGName(scene.name), 1f);
         }
 
         void OnSceneUnloaded(Scene scene)
         {
-            Debug.Log("OnSceneUnloaded " + scene.name);
-            AudioManager.Instance.StopMusic(GetMusicBGName(scene.name));
+            Instance.StopMusic(GetMusicBGName(scene.name));
         }
 
         //TODO: move to game logic
