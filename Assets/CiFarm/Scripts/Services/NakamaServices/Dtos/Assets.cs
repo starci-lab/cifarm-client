@@ -36,4 +36,20 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("golds")]
         public int golds;
     }
+
+    [Serializable]
+    public class PlayerStats
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("experiences")]
+        public long experiences;
+
+        [JsonProperty("experienceQuota")]
+        public long experienceQuota;
+
+        [JsonProperty("level")]
+        public int level;
+    }
 }
