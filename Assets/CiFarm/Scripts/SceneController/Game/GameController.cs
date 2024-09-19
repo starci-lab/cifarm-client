@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
+using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.UI.View.GameViewComponent;
 using CiFarm.Scripts.Utilities;
@@ -21,6 +23,7 @@ namespace CiFarm.Scripts.SceneController.Game
         private List<BaseGround> _baseGrounds;
         private GameView         _gameView;
 
+        private FriendItemData _friendItemData;
         #region GETTET SETTER
 
         public TileMapController TileMapController => tileMapController;
@@ -36,10 +39,17 @@ namespace CiFarm.Scripts.SceneController.Game
             _gameView.Show();
             LoadUserTileMap();
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
+            NakamaCommunityService.Instance.OnVisitUser              = OnVisitUser;
 
             UIManager.Instance.HideTransition(() => { });
             // SHOW TO UI
             // LoadNormalDirt();
+        }
+
+        public void LoadFriendHouse(FriendItemData friendData)
+        {
+            _friendItemData = friendData;
+            OnLoadFriendWithAnimation(friendData.userId);
         }
 
         #region Nakama Communicated
@@ -186,7 +196,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 DLogger.Log("Current tool not Pesticide");
                 return;
             }
-            
+
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
@@ -221,13 +231,24 @@ namespace CiFarm.Scripts.SceneController.Game
                 {
                     placedItemTileKey = ground.dirtData.key
                 });
-                
+
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
                 DLogger.LogError("UseHerbicideRpcAsync error: " + e.Message, "Ground");
             }
+        }
+
+        private void OnLoadFriendWithAnimation(string friendId)
+        {
+            DLogger.Log("Try visit: " + friendId);
+            UIManager.Instance.ShowTransition(() => { NakamaCommunityService.Instance.VisitAsync(friendId); });
+        }
+
+        public void OnVisitUser(bool status)
+        {
+            UIManager.Instance.HideTransition(() => { });
         }
 
         #endregion

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Friend;
 using CiFarm.Scripts.UI.View;
@@ -130,6 +131,8 @@ namespace CiFarm.Scripts.UI.Popups
         private void OnClickVisitFriend(FriendItemData friendItemData)
         {
             DLogger.Log("Try to visit: " + friendItemData.userId);
+            Hide(true);
+            GameController.Instance.LoadFriendHouse(friendItemData);
         }
     }
 

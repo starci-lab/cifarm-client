@@ -18,8 +18,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         public UnityAction OnSearchUsersUpdate;
-        public UnityAction OnVisitUser;
-        public UnityAction OnReturn;
+        public UnityAction<bool> OnVisitUser;
+        public UnityAction<bool> OnReturn;
         [ReadOnly]
         public List<User> searchUsers;
 
@@ -61,11 +61,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     userId = userId,
                 });
                 visitUserId = userId;
-                OnVisitUser?.Invoke();
+                OnVisitUser?.Invoke(true);
             }
             catch (Exception ex)
             {
                 DLogger.LogError(ex.Message);
+                OnVisitUser?.Invoke(false);
             }  
         }
 
@@ -75,11 +76,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 await NakamaRpcService.Instance.ReturnRpc();
                 visitUserId = null;
-                OnReturn?.Invoke();
+                OnReturn?.Invoke(true);
             }
             catch (Exception ex)
             {
                 DLogger.LogError(ex.Message);
+                OnReturn?.Invoke(false);
             }
         }
 
