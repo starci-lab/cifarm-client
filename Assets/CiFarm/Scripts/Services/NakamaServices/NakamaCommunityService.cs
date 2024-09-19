@@ -75,7 +75,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             try
             {
-                await NakamaRpcService.Instance.ReturnRpc();
+                await NakamaRpcService.Instance.ReturnAsyncRpc();
                 visitUserId = null;
                 OnReturn?.Invoke(true);
             }

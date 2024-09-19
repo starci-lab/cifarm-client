@@ -70,10 +70,17 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
             credentials = useLocal
             ? new()
+            //{
+            //    message = "d164a56e-f33b-4d3a-94e1-c5586930159f",
+            //    publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
+            //    signature = "0x1ec2eff2b21e9aa70ff60f54e7298ab0ceff16271ec0ab4e7bb9a7b025ef3616221a82d8464fcc33f82eb179cbce1c14d3dab5a78ce060e0c0ba5c46aab8adc41c",
+            //    chainKey = "avalanche",
+            //    network = "testnet",
+            //}
             {
-                message = "d164a56e-f33b-4d3a-94e1-c5586930159f",
-                publicKey = "0x2a27cc686C4c00fAbAB169733E8f0A89a3e348bA",
-                signature = "0x1ec2eff2b21e9aa70ff60f54e7298ab0ceff16271ec0ab4e7bb9a7b025ef3616221a82d8464fcc33f82eb179cbce1c14d3dab5a78ce060e0c0ba5c46aab8adc41c",
+                message = "84651c85-519b-46ec-ab16-4fc9b8a72aab",
+                publicKey = "0xd0e698A8FEebE32106E607aDFe4368FD781d8822",
+                signature = "0x63ebbbda7852a919eb45da72f8a98d1ded1a83237c2f2a2e02ef228d2d5391567bc6051fef89c5c49412b2feb79756035e00de30d7aafdaafd7b257fb50276d81b",
                 chainKey = "avalanche",
                 network = "testnet",
             }

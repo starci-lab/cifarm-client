@@ -413,7 +413,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
         #region ReturnRpc
-        public async Task ReturnRpc()
+        public async Task ReturnAsyncRpc()
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
@@ -527,8 +527,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
             return JsonConvert.DeserializeObject<ThiefPlantRpcAsyncResponse>(result.Payload);
         }
         #endregion
-
-
+        #region ReturnRpc
+        public async Task FetchCentralInstantlyAsync()
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+            await client.RpcAsync(session, "fetch_central_instantly");
+        }
+        #endregion
         //Nft Rpcs
         #region UpdatePremiumTileNftsRpc
         public class UpdatePremiumTileNftsRpcAsyncResponse
