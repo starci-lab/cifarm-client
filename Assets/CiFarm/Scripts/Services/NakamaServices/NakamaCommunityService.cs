@@ -11,15 +11,16 @@ using UnityEngine.Events;
 namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaCommunityService : ManualSingletonMono<NakamaCommunityService>
-    {   
+    {
         public override void Awake()
         {
             base.Awake();
         }
 
-        public UnityAction OnSearchUsersUpdate;
+        public UnityAction       OnSearchUsersUpdate;
         public UnityAction<bool> OnVisitUser;
         public UnityAction<bool> OnReturn;
+
         [ReadOnly]
         public List<User> searchUsers;
 
@@ -38,9 +39,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public async void SearchAsync(string value)
         {
             var response = await NakamaRpcService.Instance.SearchUsersRpcAsync(new()
-            {
-                value = value,
-            }
+                {
+                    value = value,
+                }
             );
             searchUsers = response.users;
             OnSearchUsersUpdate?.Invoke();
@@ -67,7 +68,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 DLogger.LogError(ex.Message);
                 OnVisitUser?.Invoke(false);
-            }  
+            }
         }
 
         public async void ReturnAsync()
@@ -87,7 +88,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void AddFriendByUsernameAsync(string username)
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             await client.AddFriendsAsync(session, null, new List<string> { username });
@@ -95,7 +96,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async Task<IApiFriendList> ListFriendsAsync(string cursor)
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
             return await client.ListFriendsAsync(session, null, 10, cursor);
         }

@@ -69,11 +69,11 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void OnVisitUser(bool status)
         {
-          
+            TileBubbleController.Instance.ClearAllBubble();
+            OnFetchPlacedDataFromServer();
             if (status)
             {
-                TileBubbleController.Instance.ClearAllBubble();
-                OnFetchPlacedDataFromServer();
+
                 _gameView.Hide();
                 _visitView.Show(new VisitViewParam
                 {
@@ -96,10 +96,10 @@ namespace CiFarm.Scripts.SceneController.Game
         public void OnReturnHome(bool status)
         {
         
+            TileBubbleController.Instance.ClearAllBubble();
+            OnFetchPlacedDataFromServer();
             if (status)
             {
-                TileBubbleController.Instance.ClearAllBubble();
-                OnFetchPlacedDataFromServer();
                 _gameView.Show();
                 _visitView.Hide();
             }
@@ -108,7 +108,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 if (!status)
                 {
-                    UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Visit fail...");
+                    UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Return fail...");
                 }
             });
         }
