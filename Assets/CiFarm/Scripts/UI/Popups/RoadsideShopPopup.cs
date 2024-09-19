@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CiFarm.Scripts.Services;
+using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Roadside;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
@@ -18,6 +20,8 @@ namespace CiFarm.Scripts.UI.Popups
         [Unity.Collections.ReadOnly] public List<RoadSideItemData> roadsideData;
 
         private UnityAction _onClose;
+
+        private DeliveringProduct rawDelivering;
 
         protected override void OnInit()
         {
@@ -44,8 +48,23 @@ namespace CiFarm.Scripts.UI.Popups
 
         private void LoadItemsOnSale()
         {
-            // todo: Load item from server
             roadsideData = new List<RoadSideItemData>();
+            var rawData = NakamaRoadsideShopService.Instance.deliveringProducts;
+
+            foreach (var delivering in rawData)
+            {
+                var spriteRender = ResourceService.Instance.ModelGameObjectConfig.GetPlant(delivering.referenceKey)
+                    .GameHarvestIcon;
+
+                roadsideData.Add(new RoadSideItemData
+                {
+                    Index             = delivering.index,
+                    Key               = delivering.key,
+                    ReferenceKey      = delivering.referenceKey,
+                    SpriteItemProduct = spriteRender,
+                    Quantity          = delivering.quantity
+                });
+            }
 
             // Load to display 
             for (int i = 0; i < roadsideItems.Count; i++)
@@ -115,6 +134,16 @@ namespace CiFarm.Scripts.UI.Popups
             {
                 // call NAKAMA
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+                var currentDelivering = new List<Services.NakamaServices.Inventory>();
+                currentDelivering.Add(new Services.NakamaServices.Inventory
+                {
+                    key          = plantData.inventoryKey,
+                    referenceKey = plantData.itemKey,
+                    type         = plantData.type,
+                    quantity     = plantData.quantity
+                });
+
+                NakamaRoadsideShopService.Instance.DeliverProductsAsync(currentDelivering);
             }
             catch (Exception e)
             {
@@ -125,13 +154,18 @@ namespace CiFarm.Scripts.UI.Popups
         /// <summary>
         /// todo
         /// </summary>
-        /// <param name="plantData"></param>
+        /// <param name="removeItem"></param>
         /// <param name="index"></param>
-        private void OnConfirmRemoveItemSell(RoadSideItemData plantData, int index)
+        private void OnConfirmRemoveItemSell(RoadSideItemData removeItem, int index)
         {
             try
             {
-                // call NAKAMA
+                var removeData =
+                    NakamaRoadsideShopService.Instance.deliveringProducts.FirstOrDefault(o => o.key == removeItem.Key);
+                NakamaRoadsideShopService.Instance.RetainProductsAsync(new List<DeliveringProduct>()
+                {
+                    removeData
+                });
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)

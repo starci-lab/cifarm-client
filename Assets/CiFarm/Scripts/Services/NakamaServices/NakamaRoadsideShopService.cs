@@ -34,5 +34,32 @@ namespace CiFarm.Scripts.Services.NakamaServices
             deliveringProducts = data.deliveringProducts;
             DLogger.Log("Delivering product loaded", "Nakama - Delivering Products", LogColors.LimeGreen);
         }
+        
+        public async void DeliverProductsAsync(List<Inventory> inventories)
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            
+            await NakamaRpcService.Instance.DeliverProductsRpcAsync(new NakamaRpcService.DeliverProductsRpcAsyncParams
+            {
+                inventories = inventories
+            });
+            
+            DLogger.Log("DeliverProductsAsync", "Nakama - Delivering Products", LogColors.LimeGreen);
+            LoadDeliveringProductsAsync();
+        }
+        
+        public async void RetainProductsAsync(List<DeliveringProduct> deliveringProduct)
+        {
+            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
+            
+            await NakamaRpcService.Instance.RetainProductsRpcAsync(new NakamaRpcService.RetainProductsRpcAsyncParams
+            {
+                deliveringProducts = deliveringProduct
+            });
+            
+            DLogger.Log("RetainProductsAsync", "Nakama - Delivering Products", LogColors.LimeGreen);
+            LoadDeliveringProductsAsync();
+        }
+
     }
 }
