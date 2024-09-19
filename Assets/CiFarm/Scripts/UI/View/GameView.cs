@@ -1,4 +1,3 @@
-using System;
 using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.View.GameViewComponent;

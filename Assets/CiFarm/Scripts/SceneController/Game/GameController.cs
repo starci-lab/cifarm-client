@@ -22,8 +22,10 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private List<BaseGround> _baseGrounds;
         private GameView         _gameView;
+        private VisitView        _visitView;
 
         private FriendItemData _friendItemData;
+
         #region GETTET SETTER
 
         public TileMapController TileMapController => tileMapController;
@@ -31,25 +33,84 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
+        public override void Awake()
+        {
+            base.Awake();
+            _baseGrounds = new List<BaseGround>();
+            _gameView    = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
+            _visitView   = UIManager.Instance.ViewManager.GetViewByName<VisitView>(UIViewName.VisitView);
+        }
+
         private void Start()
         {
-            _baseGrounds = new List<BaseGround>();
             UIManager.Instance.ViewManager.ShowView(UIViewName.GameView);
-            _gameView = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
             _gameView.Show();
+
             LoadUserTileMap();
+
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
             NakamaCommunityService.Instance.OnVisitUser              = OnVisitUser;
+            NakamaCommunityService.Instance.OnReturn                 = OnReturnHome;
 
             UIManager.Instance.HideTransition(() => { });
-            // SHOW TO UI
-            // LoadNormalDirt();
         }
 
         public void LoadFriendHouse(FriendItemData friendData)
         {
             _friendItemData = friendData;
-            OnLoadFriendWithAnimation(friendData.userId);
+            LoadFriendWithAnimation(friendData.userId);
+        }
+
+        public void ReturnHome()
+        {
+            _friendItemData = null;
+            LoadHomeWithAnimation();
+        }
+
+        public void OnVisitUser(bool status)
+        {
+          
+            if (status)
+            {
+                TileBubbleController.Instance.ClearAllBubble();
+                OnFetchPlacedDataFromServer();
+                _gameView.Hide();
+                _visitView.Show(new VisitViewParam
+                {
+                    userName         = _friendItemData.userName,
+                    userLevel        = 1,
+                    userLevelProcess = 0.7f,
+                    userAva          = null
+                });
+            }
+
+            UIManager.Instance.HideTransition(() =>
+            {
+                if (!status)
+                {
+                    UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Visit fail...");
+                }
+            });
+        }
+
+        public void OnReturnHome(bool status)
+        {
+        
+            if (status)
+            {
+                TileBubbleController.Instance.ClearAllBubble();
+                OnFetchPlacedDataFromServer();
+                _gameView.Show();
+                _visitView.Hide();
+            }
+
+            UIManager.Instance.HideTransition(() =>
+            {
+                if (!status)
+                {
+                    UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Visit fail...");
+                }
+            });
         }
 
         #region Nakama Communicated
@@ -240,15 +301,15 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private void OnLoadFriendWithAnimation(string friendId)
+        private void LoadFriendWithAnimation(string friendId)
         {
             DLogger.Log("Try visit: " + friendId);
             UIManager.Instance.ShowTransition(() => { NakamaCommunityService.Instance.VisitAsync(friendId); });
         }
 
-        public void OnVisitUser(bool status)
+        private void LoadHomeWithAnimation()
         {
-            UIManager.Instance.HideTransition(() => { });
+            UIManager.Instance.ShowTransition(() => { NakamaCommunityService.Instance.ReturnAsync(); });
         }
 
         #endregion
