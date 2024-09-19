@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Profiling.Memory.Experimental;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
@@ -24,12 +25,26 @@ namespace CiFarm.Scripts.Services.NakamaServices
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
 
             //load
+            LoadInfoAsync();
+            LoadMetadataAsync();
             LoadPlayerStatsAsync();
             LoadInventoriesAsync();
             LoadWalletAsync();
         }
 
-        [Header("Level")]
+        [Header("Info")]
+        [ReadOnly]
+        public string username;
+        [ReadOnly]
+        public string displayName;
+        [ReadOnly]
+        public string avatarUrl;
+
+        [Header("Metadata")]
+        [ReadOnly]
+        public Metadata metadata;
+
+        [Header("Player Status")]
         [ReadOnly]
         public PlayerStats playerStats;
 
@@ -41,6 +56,34 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public int inventoryPage;
         [ReadOnly]
         public List<Inventory> inventories;
+
+        public async void LoadInfoAsync()
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+            username = session.Username;
+
+            var account = await client.GetAccountAsync(session);
+            displayName = account.User.DisplayName;
+            avatarUrl = account.User.AvatarUrl;
+        }
+
+        public async void LoadMetadataAsync()
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
+            {
+                new ()
+                {
+                    Collection = CollectionType.Config.GetStringValue(),
+                    Key = ConfigKey.Metadata.GetStringValue(),
+                    UserId = session.UserId,
+                }
+            });
+            metadata = JsonConvert.DeserializeObject<Metadata>(objects.Objects.First().Value);
+        }
 
 
         public async void LoadPlayerStatsAsync()
