@@ -9,6 +9,7 @@ namespace CiFarm.Scripts.UI.Popups.Inventory
     {
         [SerializeField] private Image           itemIcon;
         [SerializeField] private TextMeshProUGUI quantity;
+        [SerializeField] private GameObject      premium;
 
         private InvenItemData              invenItemData;
         private UnityAction<InvenItemData> onClick;
@@ -19,6 +20,7 @@ namespace CiFarm.Scripts.UI.Popups.Inventory
             onClick         = callBack;
             itemIcon.sprite = data.iconItem;
             quantity.text   = data.quantity.ToString();
+            premium.SetActive(data.isPremium);
         }
 
         public void OnClick()
