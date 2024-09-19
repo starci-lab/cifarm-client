@@ -34,6 +34,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var data = await NakamaRpcService.Instance.ListDeliveringProductsRpcAsync();
             deliveringProducts = data.deliveringProducts;
+            OnDeliveringProductsUpdated?.Invoke();
             DLogger.Log("Delivering product loaded", "Nakama - Delivering Products", LogColors.LimeGreen);
         }
         
