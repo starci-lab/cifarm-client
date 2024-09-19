@@ -18,6 +18,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         public UnityAction OnSearchUsersUpdate;
+        public UnityAction OnVisitUser;
+        public UnityAction OnReturn;
         [ReadOnly]
         public List<User> searchUsers;
 
@@ -59,6 +61,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     userId = userId,
                 });
                 visitUserId = userId;
+                OnVisitUser?.Invoke();
             }
             catch (Exception ex)
             {
@@ -72,6 +75,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 await NakamaRpcService.Instance.ReturnRpc();
                 visitUserId = null;
+                OnReturn?.Invoke();
             }
             catch (Exception ex)
             {

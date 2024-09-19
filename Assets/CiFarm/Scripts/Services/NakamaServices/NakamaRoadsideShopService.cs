@@ -7,11 +7,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaRoadsideShopService : ManualSingletonMono<NakamaRoadsideShopService>
     {
+        public UnityAction OnDeliveringProductsUpdated;
         public override void Awake()
         {
             base.Awake();
