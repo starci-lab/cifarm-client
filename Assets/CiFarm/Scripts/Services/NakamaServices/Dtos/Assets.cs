@@ -40,6 +40,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
     [Serializable]
     public class PlayerStats
     {
+        [JsonProperty("key")]
+        public string key;
+
         [JsonProperty("experiences")]
         public long experiences;
 
