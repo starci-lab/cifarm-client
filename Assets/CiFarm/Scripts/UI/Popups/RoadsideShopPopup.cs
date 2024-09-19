@@ -51,6 +51,11 @@ namespace CiFarm.Scripts.UI.Popups
             roadsideData = new List<RoadSideItemData>();
             var rawData = NakamaRoadsideShopService.Instance.deliveringProducts;
 
+            if (rawData == null)
+            {
+                rawData = new List<DeliveringProduct>();
+            }
+
             foreach (var delivering in rawData)
             {
                 var spriteRender = ResourceService.Instance.ModelGameObjectConfig.GetPlant(delivering.referenceKey)
@@ -134,16 +139,21 @@ namespace CiFarm.Scripts.UI.Popups
             {
                 // call NAKAMA
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                var currentDelivering = new List<Services.NakamaServices.Inventory>();
-                currentDelivering.Add(new Services.NakamaServices.Inventory
-                {
-                    key          = plantData.inventoryKey,
-                    referenceKey = plantData.itemKey,
-                    type         = plantData.type,
-                    quantity     = plantData.quantity
-                });
-
-                NakamaRoadsideShopService.Instance.DeliverProductsAsync(currentDelivering);
+                NakamaRoadsideShopService.Instance.DeliverProductsAsync(
+                    new()
+                    {
+                        new()
+                        {
+                            index = index,
+                            inventory = new()
+                            {
+                                key          = plantData.inventoryKey,
+                                referenceKey = plantData.itemKey,
+                                type         = plantData.type,
+                                quantity     = plantData.quantity
+                            }
+                        }
+                    });
             }
             catch (Exception e)
             {

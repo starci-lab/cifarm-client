@@ -191,7 +191,7 @@ namespace CiFarm.Scripts.UI.Popups
                     inventoryKey = data.key,
                     itemKey      = data.referenceKey,
                     quantity     = data.quantity,
-                    iconItem     = gameConfig.GameShopIcon
+                    iconItem     = gameConfig.GameHarvestIcon
                 });
             }
 

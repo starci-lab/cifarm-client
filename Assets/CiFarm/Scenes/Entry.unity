@@ -2591,7 +2591,7 @@ PrefabInstance:
     - target: {fileID: 1846383361580452009, guid: 1795a6e8cf4acb740b5fd7b132ea7a14, type: 3}
       propertyPath: _database.Array.data[0].AudioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 6c292c4d9f18d5543847298f6b25bbe6, type: 3}
+      objectReference: {fileID: 8300000, guid: fb064478e58db08439252a1eaa709bb7, type: 3}
     - target: {fileID: 1846383361580452009, guid: 1795a6e8cf4acb740b5fd7b132ea7a14, type: 3}
       propertyPath: _database.Array.data[1].IsLooping
       value: 0
@@ -2828,7 +2828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: message
-      value: cc2f6583-3d45-42d6-8e50-d80ac5fe9bc4
+      value: a046bfaa-e99b-4274-a2de-8aed85245076
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: useLocal
@@ -2836,11 +2836,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: publicKey
-      value: '0xfd48deC9d0E0183Fd77A3E45daBf6183314af61B '
+      value: 0xA4a3e0d4fF06d38ae945FfE01a7BC009a05cFb9E
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: signature
-      value: 0xc33a20270158605556f3cd07b11b39c0c7f72f208d704f7decb4925c0c8726dc3fc292788de5b03de5a7ae0eaca36e2459c864becd88e0307110a4cbc877dc511b
+      value: 0xb8d9bf3ecd4ed0b9ad8e0748825089de3e0f67c7127bd3b9a5edcaed355862e353288d1019b0df194801f9945de01d0b817be8a5dcc1efc38ec6752da49bf65d1c
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

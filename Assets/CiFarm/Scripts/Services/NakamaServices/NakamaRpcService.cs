@@ -307,24 +307,31 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
         #region DeliverProductsAsync
-
+        public class InventoryWithIndex
+        {
+            [JsonProperty("index")]
+            public int index;
+            [JsonProperty("inventory")]
+            public Inventory inventory;
+        }
         public class DeliverProductsRpcAsyncParams
         {
-            [JsonProperty("inventories")]
-            public List<Inventory> inventories;
+            [JsonProperty("inventoryWithIndexes")]
+            public List<InventoryWithIndex> inventoryWithIndexes;
         }
         public class DeliverProductsRpcAsyncResponse
         {
             [JsonProperty("deliveryProductKeys")]
             public List<string> deliveryProductKeys;
         }
+       
         public async Task<DeliverProductsRpcAsyncResponse> DeliverProductsRpcAsync(DeliverProductsRpcAsyncParams _params)
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "deliver_products", JsonConvert.SerializeObject(_params));
-
+            
             return JsonConvert.DeserializeObject<DeliverProductsRpcAsyncResponse>(result.Payload);
         }
         
