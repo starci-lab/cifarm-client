@@ -28,7 +28,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
     public enum ConfigKey
     {
         [EnumStringValue("visitState")]
-        VisitState
+        VisitState,
+        [EnumStringValue("playerStats")]
+        PlayerStats,
     }
 
     public enum SystemKey

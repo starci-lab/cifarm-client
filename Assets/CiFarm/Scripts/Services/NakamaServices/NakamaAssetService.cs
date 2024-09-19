@@ -1,9 +1,11 @@
 using CiFarm.Scripts.Utilities;
 using Imba.Utils;
+using Nakama;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,20 +24,41 @@ namespace CiFarm.Scripts.Services.NakamaServices
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
 
             //load
+            LoadPlayerStatsAsync();
             LoadInventoriesAsync();
             LoadWalletAsync();
         }
 
+        [Header("Level")]
+        [ReadOnly]
+        public PlayerStats playerStats;
 
         [Header("Wallets")]
         [ReadOnly]
         public int golds;
        
         [Header("Inventories")]
-        [SerializeField]
         public int inventoryPage;
         [ReadOnly]
         public List<Inventory> inventories;
+
+
+        public async void LoadPlayerStatsAsync()
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
+            {
+                new ()
+                {
+                    Collection = CollectionType.Config.GetStringValue(),
+                    Key = ConfigKey.PlayerStats.GetStringValue(),
+                    UserId = session.UserId,
+                }
+            });
+            playerStats = JsonConvert.DeserializeObject<PlayerStats>(objects.Objects.First().Value); 
+        }
 
         public async void LoadWalletAsync()
         {
