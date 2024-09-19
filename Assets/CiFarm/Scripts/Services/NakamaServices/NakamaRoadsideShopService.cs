@@ -1,7 +1,5 @@
 using CiFarm.Scripts.Utilities;
-using Codice.CM.Common;
 using Imba.Utils;
-using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,16 +27,13 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void LoadDeliveringProductsAsync()
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var data = await NakamaRpcService.Instance.ListDeliveringProductsRpcAsync();
             deliveringProducts = data.deliveringProducts;
             DLogger.Log("Delivering product loaded", "Nakama - Delivering Products", LogColors.LimeGreen);
         }
         
         public async void DeliverProductsAsync(List<NakamaRpcService.InventoryWithIndex> inventoryWithIndexes)
-        {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
-            
+        {   
             await NakamaRpcService.Instance.DeliverProductsRpcAsync(new NakamaRpcService.DeliverProductsRpcAsyncParams
             {
                 inventoryWithIndexes = inventoryWithIndexes

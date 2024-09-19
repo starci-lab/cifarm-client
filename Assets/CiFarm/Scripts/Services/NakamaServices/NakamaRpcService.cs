@@ -25,7 +25,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             DoIntergrationTests();
         }
 
-        private async void DoIntergrationTests ()
+        private async void DoIntergrationTests()
         {
             //var result = await BuySeedRpcAsync(new()
             //{
@@ -143,7 +143,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
-           
+
 
             var result = await client.RpcAsync(session, "plant_seed", JsonConvert.SerializeObject(_params));
             NakamaAssetService.Instance.LoadInventoriesAsync();
@@ -259,7 +259,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         public async Task<ClaimDailyRewardRpcAsyncResponse> ClaimDailyRequestRpcAsync()
-        {       
+        {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -324,17 +324,17 @@ namespace CiFarm.Scripts.Services.NakamaServices
             [JsonProperty("deliveryProductKeys")]
             public List<string> deliveryProductKeys;
         }
-       
+
         public async Task<DeliverProductsRpcAsyncResponse> DeliverProductsRpcAsync(DeliverProductsRpcAsyncParams _params)
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "deliver_products", JsonConvert.SerializeObject(_params));
-            
+
             return JsonConvert.DeserializeObject<DeliverProductsRpcAsyncResponse>(result.Payload);
         }
-        
+
         #endregion
         #region RetainProductsAsync
 
@@ -359,7 +359,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
 
-        //Users Rpcs
+        //Community Rpcs
         #region SearchUsersRpc
         public class SearchUsersRpcAsyncParams
         {
@@ -420,6 +420,82 @@ namespace CiFarm.Scripts.Services.NakamaServices
             await client.RpcAsync(session, "return");
         }
         #endregion
+        #region HelpWaterRpc
+        public class HelpWaterRpcAsyncParams
+        {
+            [JsonProperty("userId")]
+            public string userId;
+
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+
+        }
+
+        public class HelpWaterRpcAsyncResponse
+        {
+        }
+        public async Task<HelpWaterRpcAsyncResponse> HelpWaterRpcAsync(
+            HelpWaterRpcAsyncParams _params
+            )
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "help_water", JsonConvert.SerializeObject(_params));
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+            return JsonConvert.DeserializeObject<HelpWaterRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+        #region HelpUsePestisideRpc
+        public class HelpUsePestisideRpcAsyncParams
+        {
+            [JsonProperty("userId")]
+            public string userId;
+
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public class HelpUsePestisideRpcAsyncResponse
+        {
+        }
+        public async Task<HelpUsePestisideRpcAsyncResponse> HelpUsePestisideRpcAsync(
+            HelpUsePestisideRpcAsyncParams _params
+            )
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "help_use_pestiside", JsonConvert.SerializeObject(_params));
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+            return JsonConvert.DeserializeObject<HelpUsePestisideRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+        #region HelpUseHerbicideRpc
+        public class HelpUseHerbicideRpcAsyncParams
+        {
+            [JsonProperty("userId")]
+            public string userId;
+
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public class HelpUseHerbicideRpcAsyncResponse
+        {
+        }
+        public async Task<HelpUseHerbicideRpcAsyncResponse> HelpUseHerbicideRpcAsync(
+            HelpUseHerbicideRpcAsyncParams _params
+            )
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "help_use_herbicide", JsonConvert.SerializeObject(_params));
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+            return JsonConvert.DeserializeObject<HelpUseHerbicideRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
 
         //Nft Rpcs
         #region UpdatePremiumTileNftsRpc
@@ -439,4 +515,4 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
         #endregion
     }
-}   
+}
