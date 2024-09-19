@@ -25,6 +25,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("quantity")]
         public int quantity;
+
+        [JsonProperty("isPremium")]
+        public bool isPremium;
     }
 
     [Serializable]
