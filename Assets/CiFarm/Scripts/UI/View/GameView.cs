@@ -42,9 +42,11 @@ namespace CiFarm.Scripts.UI.View
             base.OnShown();
             FetchUserCoin();
 
-            userName.text  = "UserAxxy";
+            userName.text = string.IsNullOrEmpty(NakamaAssetService.Instance.displayName)
+                ? NakamaAssetService.Instance.username
+                : NakamaAssetService.Instance.displayName;
             userLevel.text = NakamaAssetService.Instance.playerStats.level.ToString();
-            var process = NakamaAssetService.Instance.playerStats.experiences /
+            var process = (float)NakamaAssetService.Instance.playerStats.experiences /
                           NakamaAssetService.Instance.playerStats.experienceQuota;
             userExperiencesProcessed.fillAmount = process;
         }
