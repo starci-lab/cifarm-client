@@ -66,7 +66,7 @@ namespace CiFarm.Scripts.UI.Popups
                 return null;
             }
 
-            var item = listView.NewListViewItem("FriendItem");
+            var item       = listView.NewListViewItem("FriendItem");
             var itemScript = item.GetComponent<FriendItem>();
             itemScript.InitItem(itemData, OnClickVisitFriend);
             return item;
@@ -81,7 +81,14 @@ namespace CiFarm.Scripts.UI.Popups
 
         private void LoadSearchUser()
         {
+            _friendItemsData.Clear();
             var rawData = NakamaCommunityService.Instance.searchUsers;
+            if (rawData == null)
+            {
+                rawData = new List<User>();
+            }
+
+
             foreach (var userData in rawData)
             {
                 _friendItemsData.Add(new()
@@ -111,7 +118,13 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void SearchingFriend()
         {
-            NakamaCommunityService.Instance.SearchAsync(inputField.text);
+            if (string.IsNullOrEmpty(inputField.text))
+            {
+                return;
+            }
+
+            var inputData = inputField.text.Trim();
+            NakamaCommunityService.Instance.SearchAsync(inputData);
         }
 
         private void OnClickVisitFriend(FriendItemData friendItemData)
