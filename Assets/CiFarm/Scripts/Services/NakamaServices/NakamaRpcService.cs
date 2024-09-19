@@ -496,6 +496,38 @@ namespace CiFarm.Scripts.Services.NakamaServices
             return JsonConvert.DeserializeObject<HelpUseHerbicideRpcAsyncResponse>(result.Payload);
         }
         #endregion
+        #region ThiefPlantRpc
+        public class ThiefPlantRpcAsyncParams
+        {
+            [JsonProperty("userId")]
+            public string userId;
+
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public class ThiefPlantRpcAsyncResponse
+        {
+            [JsonProperty("thiefPlantInventoryKey")]
+            public string thiefPlantInventoryKey;
+
+            [JsonProperty("thiefQuantity")]
+            public int thiefQuantity;
+        }
+
+        public async Task<ThiefPlantRpcAsyncResponse> ThiefPlantRpcAsync(
+            ThiefPlantRpcAsyncParams _params
+        )
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "thief_plant", JsonConvert.SerializeObject(_params));
+            NakamaAssetService.Instance.LoadInventoriesAsync();
+            return JsonConvert.DeserializeObject<ThiefPlantRpcAsyncResponse>(result.Payload);
+        }
+        #endregion
+
 
         //Nft Rpcs
         #region UpdatePremiumTileNftsRpc

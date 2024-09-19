@@ -1891,6 +1891,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2076709548279248251, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 102.8999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076709548279248251, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -233.69995
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976012464656396240, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -75.6001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2976012464656396240, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -236.8999
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231139608854104813, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -28.600098
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231139608854104813, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623805211250284054, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 102.8999
+      objectReference: {fileID: 0}
+    - target: {fileID: 4623805211250284054, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -233.69995
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083304207115184512, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -28.600098
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083304207115184512, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481986267281509565, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -75.6001
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481986267281509565, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -236.8999
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

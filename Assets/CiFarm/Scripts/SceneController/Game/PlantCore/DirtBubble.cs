@@ -55,6 +55,8 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     _timerCounter = timeData;
                     StartCoroutine(StartTimerCounting());
                     break;
+                case InjectionType.TextQuantity:
+                    break;
             }
         }
 
@@ -103,5 +105,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         Worm,
         Grass,
         Timer,
+        TextQuantity,
     }
 }

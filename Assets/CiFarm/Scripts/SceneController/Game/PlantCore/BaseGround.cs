@@ -61,56 +61,11 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
-            // Planting
-            if (!dirtData.isPlanted)
-            {
-                UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new CustomInventoryPopupParam
-                {
-                    PlantingPopupType =  PlantingPopupType.Planting,
-                    CloseAction = null,
-                    PlantAction = OnConfirmSetPlant
-                });
-                return;
-            }
-
-            // Harvest
-            if (dirtData.isPlanted && dirtData.fullyMatured)
-            {
-                GameController.Instance.OnHarvestPlant(this);
-                return;
-            }
-
-            // Planted and everything normal
-            if (dirtData.isPlanted && dirtData.seedGrowthInfo.plantCurrentState == PlantCurrentState.Normal)
-            {
-                var bubble = SpawnBubble();
-                bubble.SetBubble(dirtData.key, InjectionType.Timer,
-                    dirtData.seedGrowthInfo.seed.growthStageDuration -
-                    (int)dirtData.seedGrowthInfo.currentStageTimeElapsed);
-                return;
-            }
-
-            // REQUIRED SOME THING
-            if (dirtData.isPlanted && dirtData.seedGrowthInfo.plantCurrentState != PlantCurrentState.Normal)
-            {
-                switch (dirtData.seedGrowthInfo.plantCurrentState)
-                {
-                    case PlantCurrentState.NeedWater:
-                        GameController.Instance.OnWaterPlant(this);
-                        break;
-                    case PlantCurrentState.IsWeedy:
-                        GameController.Instance.OnHerbicidePlant(this);
-                        break;
-                    case PlantCurrentState.IsInfested:
-                        GameController.Instance.OnPesticidePlant(this);
-                        break;
-                }
-
-                return;
-            }
+            GameController.Instance.OnClickGround(this);
+        
         }
 
-        private DirtBubble SpawnBubble()
+        public DirtBubble SpawnBubble()
         {
             var dirtBubbleObj = SimplePool.Spawn(dirtBubbleModel, transform.position, Quaternion.identity);
             return dirtBubbleObj.GetComponent<DirtBubble>();
