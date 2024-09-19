@@ -79,6 +79,7 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
     public enum ToolType
     {
         WaterCan,
+        Steal,
         Scythe,
         Pesticide,
         Herbicide,

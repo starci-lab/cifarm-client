@@ -963,6 +963,7 @@ MonoBehaviour:
     StartPosition: {x: 0, y: 0, z: 0}
     StartRotation: {x: 0, y: 0, z: 0}
     StartScale: {x: 1, y: 1, z: 1}
+  textHeader: {fileID: 901602627967240695}
   loopGridView: {fileID: 7428737200565891616}
   plantingTab: {fileID: 3304792061708278634}
   sellingTab: {fileID: 45818414188067598}
@@ -2096,7 +2097,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: 7
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4
@@ -3464,11 +3465,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2358124396224674750, guid: d7f0804b3fc97694eba1b2162b5d7022, type: 3}
       propertyPath: StartPosition.x
-      value: 463.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2358124396224674750, guid: d7f0804b3fc97694eba1b2162b5d7022, type: 3}
       propertyPath: StartPosition.y
-      value: -90.826294
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3677630773894749281, guid: d7f0804b3fc97694eba1b2162b5d7022, type: 3}
       propertyPath: m_Pivot.x

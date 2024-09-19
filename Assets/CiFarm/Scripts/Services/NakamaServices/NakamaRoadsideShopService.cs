@@ -5,11 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaRoadsideShopService : ManualSingletonMono<NakamaRoadsideShopService>
     {
+        public UnityAction OnDeliveringProductsUpdated;
         public override void Awake()
         {
             base.Awake();
@@ -29,6 +31,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             var data = await NakamaRpcService.Instance.ListDeliveringProductsRpcAsync();
             deliveringProducts = data.deliveringProducts;
+            OnDeliveringProductsUpdated?.Invoke();
             DLogger.Log("Delivering product loaded", "Nakama - Delivering Products", LogColors.LimeGreen);
         }
         

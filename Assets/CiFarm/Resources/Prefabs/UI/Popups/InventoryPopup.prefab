@@ -2101,7 +2101,7 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      AudioName: 7
+      AudioName: 9
     PunchAnimation:
       Move:
         AnimationType: 4
@@ -3801,6 +3801,10 @@ PrefabInstance:
     - target: {fileID: 2499116866836455505, guid: 509ef9414b31c1a47ad363c5380c04ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327562483833147253, guid: 509ef9414b31c1a47ad363c5380c04ea, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000045776367
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

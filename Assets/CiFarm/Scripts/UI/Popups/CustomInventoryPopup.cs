@@ -6,6 +6,7 @@ using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Inventory;
 using Imba.UI;
 using SuperScrollView;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -26,6 +27,7 @@ namespace CiFarm.Scripts.UI.Popups
 
     public class CustomInventoryPopup : UIPopup
     {
+        [SerializeField] private TextMeshProUGUI textHeader;
         [SerializeField] private LoopGridView loopGridView;
         [SerializeField] private GameObject   plantingTab;
         [SerializeField] private GameObject   sellingTab;
@@ -64,6 +66,8 @@ namespace CiFarm.Scripts.UI.Popups
                     LoadAllUserProductItem();
                     break;
             }
+
+            textHeader.text = param.PlantingPopupType.ToString();
         }
 
         private LoopGridViewItem OnGetItemByIndex(LoopGridView listView, int indexParam, int indexParam2,

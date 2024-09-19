@@ -7,39 +7,45 @@ namespace CiFarm.Scripts.SceneController.Game
 {
     public class TileBubbleController : ManualSingletonMono<TileBubbleController>
     {
-        private HashSet<string> showingId;
-        private Dictionary<string, DirtBubble>   showingBubble;
+        private Dictionary<string, DirtBubble>   _showingBubble;
 
         public override void Awake()
         {
             base.Awake();
-            showingBubble = new Dictionary<string, DirtBubble>();
+            _showingBubble = new Dictionary<string, DirtBubble>();
         }
 
         public bool CheckBubble(string id)
         {
-            return showingBubble.ContainsKey(id);
+            return _showingBubble.ContainsKey(id);
         }
         
         public void OnBubbleAppear(string id, DirtBubble bubble)
         {
-            showingBubble.TryAdd(id, bubble);
+            _showingBubble.TryAdd(id, bubble);
         }
 
         public void OnBubbleDisappear(string id)
         {
-            if (showingBubble.ContainsKey(id))
+            if (_showingBubble.ContainsKey(id))
             {
-                showingBubble.Remove(id);
+                _showingBubble.Remove(id);
             }
         }
 
         public void HideBubble(string id)
         {
-            if (showingBubble.TryGetValue(id, out DirtBubble bubble))
+            if (_showingBubble.TryGetValue(id, out DirtBubble bubble))
             {
                 bubble.OffBubble();
-                showingBubble.Remove(id);
+                _showingBubble.Remove(id);
+            }
+        }
+        public void ClearAllBubble()
+        {
+            foreach (var bubble in _showingBubble.Values)
+            {
+                bubble.OffBubble();
             }
         }
     }

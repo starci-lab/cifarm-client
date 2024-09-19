@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
+using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.UI.View.GameViewComponent;
 using CiFarm.Scripts.Utilities;
@@ -20,6 +22,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private List<BaseGround> _baseGrounds;
         private GameView         _gameView;
+        private VisitView        _visitView;
+
+        private FriendItemData _friendItemData;
 
         #region GETTET SETTER
 
@@ -28,18 +33,84 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
+        public override void Awake()
+        {
+            base.Awake();
+            _baseGrounds = new List<BaseGround>();
+            _gameView    = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
+            _visitView   = UIManager.Instance.ViewManager.GetViewByName<VisitView>(UIViewName.VisitView);
+        }
+
         private void Start()
         {
-            _baseGrounds = new List<BaseGround>();
             UIManager.Instance.ViewManager.ShowView(UIViewName.GameView);
-            _gameView = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
             _gameView.Show();
+
             LoadUserTileMap();
+
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
+            NakamaCommunityService.Instance.OnVisitUser              = OnVisitUser;
+            NakamaCommunityService.Instance.OnReturn                 = OnReturnHome;
 
             UIManager.Instance.HideTransition(() => { });
-            // SHOW TO UI
-            // LoadNormalDirt();
+        }
+
+        public void LoadFriendHouse(FriendItemData friendData)
+        {
+            _friendItemData = friendData;
+            LoadFriendWithAnimation(friendData.userId);
+        }
+
+        public void ReturnHome()
+        {
+            _friendItemData = null;
+            LoadHomeWithAnimation();
+        }
+
+        public void OnVisitUser(bool status)
+        {
+            TileBubbleController.Instance.ClearAllBubble();
+            OnFetchPlacedDataFromServer();
+            if (status)
+            {
+
+                _gameView.Hide();
+                _visitView.Show(new VisitViewParam
+                {
+                    userName         = _friendItemData.userName,
+                    userLevel        = 1,
+                    userLevelProcess = 0.7f,
+                    userAva          = null
+                });
+            }
+
+            UIManager.Instance.HideTransition(() =>
+            {
+                if (!status)
+                {
+                    UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Visit fail...");
+                }
+            });
+        }
+
+        public void OnReturnHome(bool status)
+        {
+        
+            TileBubbleController.Instance.ClearAllBubble();
+            OnFetchPlacedDataFromServer();
+            if (status)
+            {
+                _gameView.Show();
+                _visitView.Hide();
+            }
+
+            UIManager.Instance.HideTransition(() =>
+            {
+                if (!status)
+                {
+                    UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Return fail...");
+                }
+            });
         }
 
         #region Nakama Communicated
@@ -186,7 +257,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 DLogger.Log("Current tool not Pesticide");
                 return;
             }
-            
+
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
@@ -221,13 +292,24 @@ namespace CiFarm.Scripts.SceneController.Game
                 {
                     placedItemTileKey = ground.dirtData.key
                 });
-                
+
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
                 DLogger.LogError("UseHerbicideRpcAsync error: " + e.Message, "Ground");
             }
+        }
+
+        private void LoadFriendWithAnimation(string friendId)
+        {
+            DLogger.Log("Try visit: " + friendId);
+            UIManager.Instance.ShowTransition(() => { NakamaCommunityService.Instance.VisitAsync(friendId); });
+        }
+
+        private void LoadHomeWithAnimation()
+        {
+            UIManager.Instance.ShowTransition(() => { NakamaCommunityService.Instance.ReturnAsync(); });
         }
 
         #endregion

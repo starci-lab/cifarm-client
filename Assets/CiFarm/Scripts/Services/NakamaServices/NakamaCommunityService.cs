@@ -6,15 +6,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaCommunityService : ManualSingletonMono<NakamaCommunityService>
-    {   
+    {
         public override void Awake()
         {
             base.Awake();
         }
+
+        public UnityAction       OnSearchUsersUpdate;
+        public UnityAction<bool> OnVisitUser;
+        public UnityAction<bool> OnReturn;
 
         [ReadOnly]
         public List<User> searchUsers;
@@ -34,11 +39,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public async void SearchAsync(string value)
         {
             var response = await NakamaRpcService.Instance.SearchUsersRpcAsync(new()
-            {
-                value = value,
-            }
+                {
+                    value = value,
+                }
             );
             searchUsers = response.users;
+            OnSearchUsersUpdate?.Invoke();
         }
 
         public async void SetRandomUserAsync()
@@ -56,11 +62,13 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     userId = userId,
                 });
                 visitUserId = userId;
+                OnVisitUser?.Invoke(true);
             }
             catch (Exception ex)
             {
                 DLogger.LogError(ex.Message);
-            }  
+                OnVisitUser?.Invoke(false);
+            }
         }
 
         public async void ReturnAsync()
@@ -69,16 +77,18 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 await NakamaRpcService.Instance.ReturnRpc();
                 visitUserId = null;
+                OnReturn?.Invoke(true);
             }
             catch (Exception ex)
             {
                 DLogger.LogError(ex.Message);
+                OnReturn?.Invoke(false);
             }
         }
 
         public async void AddFriendByUsernameAsync(string username)
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             await client.AddFriendsAsync(session, null, new List<string> { username });
@@ -86,7 +96,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async Task<IApiFriendList> ListFriendsAsync(string cursor)
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
             return await client.ListFriendsAsync(session, null, 10, cursor);
         }
