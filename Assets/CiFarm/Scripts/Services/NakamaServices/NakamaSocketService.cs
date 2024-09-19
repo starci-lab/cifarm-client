@@ -30,6 +30,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
             socket.ReceivedMatchState += OnReceivedMatchState;
         }
 
+        public async void FetchCentralInstantlyAsync()
+        {
+            await NakamaRpcService.Instance.FetchCentralInstantlyAsync();
+        }
+
         [Tooltip("Enable to display logs for updates on the state of placed items. Disable to hide these logs.")]
         [SerializeField]
         private bool debugPlacedItems = true;
@@ -39,6 +44,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         private void OnReceivedMatchState(IMatchState matchState)
         {
+            Debug.Log("called");
             var opCode = (OpCode)matchState.OpCode;
             switch (opCode)
             {
