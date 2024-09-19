@@ -52,6 +52,7 @@ namespace CiFarm.Scripts.UI.Popups
         protected override void OnShowing()
         {
             base.OnShowing();
+            counter = 1;
             if (Parameter != null)
             {
                 var param = (ItemDetailPopupParam)Parameter;
