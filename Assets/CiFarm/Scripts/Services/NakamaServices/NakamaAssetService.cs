@@ -39,7 +39,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void LoadWalletAsync()
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
@@ -53,10 +52,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void LoadInventoriesAsync()
         {
-            if (!NakamaInitializerService.Instance.authenticated) throw new Exception("Unauthenticated");
-
-            var response = await NakamaRpcService.Instance.ListInventoriesRpcAsync();
-            inventories = response.inventories;
+            var updatePremiumTileNftsRpcResponse = await NakamaRpcService.Instance.UpdatePremiumTileNftsRpcAsync();
+            if (updatePremiumTileNftsRpcResponse.tokenIds != null)
+            {
+                DLogger.Log($"{updatePremiumTileNftsRpcResponse.tokenIds.Count} nfts loaded", "Nakama - Inventories", LogColors.LimeGreen);
+            }
+            
+            var listInventoriesResponse = await NakamaRpcService.Instance.ListInventoriesRpcAsync();
+            inventories = listInventoriesResponse.inventories;
 
             DLogger.Log("Inventories loaded", "Nakama - Inventories", LogColors.LimeGreen);
         }
