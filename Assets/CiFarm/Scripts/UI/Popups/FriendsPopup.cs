@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using CiFarm.Scripts.Services.NakamaServices;
+using CiFarm.Scripts.UI.Popups.Friend;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
 using Imba.UI;
+using SuperScrollView;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,19 +14,20 @@ namespace CiFarm.Scripts.UI.Popups
 {
     public class FriendsPopup : UIPopup
     {
-        [SerializeField]
-        private TMP_InputField inputField;
+        [SerializeField] private FriendItem     randomUser;
+        [SerializeField] private TMP_InputField inputField;
+        [SerializeField] private LoopListView2  friendListView;
 
         private UnityAction _onClose;
+
+        private List<FriendItemData> _friendItemsData;
 
         protected override void OnInit()
         {
             base.OnInit();
-            inputField.onEndEdit.AddListener((value) =>
-            {
-                DLogger.Log(value, "Search", LogColors.Chartreuse);
-                NakamaCommunityService.Instance.SearchAsync(value);
-            });
+            friendListView.InitListView(0, OnGetItemByIndex);
+            _friendItemsData = new();
+            inputField.onEndEdit.AddListener((value) => { SearchingFriend(); });
         }
 
         protected override void OnShowing()
@@ -34,17 +38,85 @@ namespace CiFarm.Scripts.UI.Popups
                 var param = (GameViewParam)Parameter;
                 _onClose = param.callBack;
             }
+
+            NakamaCommunityService.Instance.OnSearchUsersUpdate = LoadSearchUser;
+
+            LoadSearchUser();
+            LoadRandomUser();
         }
 
         protected override void OnHiding()
         {
             base.OnHiding();
+            NakamaCommunityService.Instance.OnSearchUsersUpdate = null;
             _onClose?.Invoke();
         }
 
-        protected override void OnHidden()
+        private LoopListViewItem2 OnGetItemByIndex(LoopListView2 listView, int index)
         {
-            base.OnHidden();
+            if (index < 0 || index >= _friendItemsData.Count)
+            {
+                return null;
+            }
+
+            var itemData = _friendItemsData[index];
+
+            if (itemData == null)
+            {
+                return null;
+            }
+
+            var item = listView.NewListViewItem("FriendItem");
+            var itemScript = item.GetComponent<FriendItem>();
+            itemScript.InitItem(itemData, OnClickVisitFriend);
+            return item;
+        }
+
+        private void ResetListView()
+        {
+            friendListView.RecycleAllItem();
+            friendListView.SetListItemCount(_friendItemsData.Count);
+            friendListView.MovePanelToItemIndex(0, 0);
+        }
+
+        private void LoadSearchUser()
+        {
+            var rawData = NakamaCommunityService.Instance.searchUsers;
+            foreach (var userData in rawData)
+            {
+                _friendItemsData.Add(new()
+                {
+                    userId   = userData.userId,
+                    userName = userData.username,
+                    userAva  = null,
+                    type     = FriendType.Search
+                });
+            }
+
+            ResetListView();
+        }
+
+        private void LoadRandomUser()
+        {
+            var rawData = NakamaCommunityService.Instance.randomUser;
+
+            randomUser.InitItem(new()
+            {
+                userId   = rawData.userId,
+                userName = rawData.username,
+                userAva  = null,
+                type     = FriendType.Search
+            }, OnClickVisitFriend);
+        }
+
+        public void SearchingFriend()
+        {
+            NakamaCommunityService.Instance.SearchAsync(inputField.text);
+        }
+
+        private void OnClickVisitFriend(FriendItemData friendItemData)
+        {
+            DLogger.Log("Try to visit: " + friendItemData.userId);
         }
     }
 

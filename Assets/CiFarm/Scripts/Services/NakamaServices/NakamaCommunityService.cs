@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
@@ -16,6 +17,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             base.Awake();
         }
 
+        public UnityAction OnSearchUsersUpdate;
         [ReadOnly]
         public List<User> searchUsers;
 
@@ -39,6 +41,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             }
             );
             searchUsers = response.users;
+            OnSearchUsersUpdate?.Invoke();
         }
 
         public async void SetRandomUserAsync()
