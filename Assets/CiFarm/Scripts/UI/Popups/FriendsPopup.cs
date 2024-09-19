@@ -1,3 +1,4 @@
+using System;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
@@ -14,6 +15,7 @@ namespace CiFarm.Scripts.UI.Popups
         private TMP_InputField inputField;
 
         private UnityAction _onClose;
+
         protected override void OnInit()
         {
             base.OnInit();
@@ -44,5 +46,21 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnHidden();
         }
+    }
+
+    [Serializable]
+    public class FriendItemData
+    {
+        public string     userId;
+        public string     userName;
+        public Sprite     userAva;
+        public FriendType type;
+    }
+
+    public enum FriendType
+    {
+        Random,
+        Friend,
+        Search
     }
 }
