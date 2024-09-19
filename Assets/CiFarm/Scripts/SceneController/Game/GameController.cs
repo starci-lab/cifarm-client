@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
@@ -69,11 +70,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void OnVisitUser(bool status)
         {
-            TileBubbleController.Instance.ClearAllBubble();
-            OnFetchPlacedDataFromServer();
             if (status)
             {
-
                 _gameView.Hide();
                 _visitView.Show(new VisitViewParam
                 {
@@ -95,9 +93,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void OnReturnHome(bool status)
         {
-        
             TileBubbleController.Instance.ClearAllBubble();
             OnFetchPlacedDataFromServer();
+
             if (status)
             {
                 _gameView.Show();
@@ -134,6 +132,10 @@ namespace CiFarm.Scripts.SceneController.Game
                         break;
                 }
             }
+            DLogger.Log("VALIDATE " + rawData.Select(o => o.key).ToList());
+            TileBubbleController.Instance.ValidateBubble(
+                rawData.Select(o => o.key).ToList());
+
         }
 
         private void PlacedDirt(PlacedItem placedItem)
@@ -173,7 +175,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void OnFetchPlacedDataFromServer()
         {
-            DLogger.Log("REALTIME FETCH", "GAME TILE");
+            // DLogger.Log("REALTIME FETCH", "GAME TILE");
 
             _baseGrounds.Reverse();
             foreach (var dirt in _baseGrounds)

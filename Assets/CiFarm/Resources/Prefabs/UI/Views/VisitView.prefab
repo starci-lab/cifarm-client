@@ -361,7 +361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2090088833413275619
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3555,8 +3555,16 @@ PrefabInstance:
       value: BAck
       objectReference: {fileID: 0}
     - target: {fileID: 3051778054033045011, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051778054033045011, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051778054033045011, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -119
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3940352356594027546, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3604,11 +3612,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4525908884367802540, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 116.8848
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 4525908884367802540, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 119.0418
+      value: 88
       objectReference: {fileID: 0}
     - target: {fileID: 4525908884367802540, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: m_LocalScale.x
@@ -3668,12 +3676,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5038318545096066788, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5038318545096066788, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: bb9f8c0dbd7c1e2438df594996427f86, type: 3}
+      objectReference: {fileID: 21300000, guid: 2d6f7cf835f2b0b43ad56d5ca95821f7, type: 3}
+    - target: {fileID: 5860275171674371893, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
