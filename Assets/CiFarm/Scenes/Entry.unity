@@ -2688,7 +2688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: message
-      value: 56d4f9ec-b932-4115-ba94-306a170b6ee7
+      value: eb51b114-0e30-4175-8e95-cbfc8793eb1d
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: useLocal
@@ -2696,11 +2696,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: publicKey
-      value: 0x652534489C829deB0583eCFd7a242EDEC33a9492
+      value: 0x08083eA2fa405C9605A3807a7Aa27ec604786a03
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: signature
-      value: 0x5797f8b386a1bc5ab72811317349d8fb6469dface88c7fcc7c142e5439ca550e1da789c9cb68f33cc12df89bc99ea0cc4cbbf4736131fad36472fb220285b09c1c
+      value: 0x36790d8cfa240acf8df958ee25b0cda4c243f25b886d91eb608ebe000f5aeea81562ce6546422a68cf8e1759da72be48da8f28a56c73d6887c1c5bb4ea91b3361b
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

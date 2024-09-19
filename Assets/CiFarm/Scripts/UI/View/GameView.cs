@@ -42,9 +42,11 @@ namespace CiFarm.Scripts.UI.View
             base.OnShown();
             FetchUserCoin();
 
-            userName.text                       = "UserAxxy";
-            userLevel.text                      = "1";
-            userExperiencesProcessed.fillAmount = 0.5f;
+            userName.text  = "UserAxxy";
+            userLevel.text = NakamaAssetService.Instance.playerStats.level.ToString();
+            var process = NakamaAssetService.Instance.playerStats.experiences /
+                          NakamaAssetService.Instance.playerStats.experienceQuota;
+            userExperiencesProcessed.fillAmount = process;
         }
 
         #region UI BUTTON

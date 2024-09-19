@@ -3,7 +3,6 @@ using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.Utilities;
 using Imba.Audio;
-using Imba.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -93,7 +92,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                         inventorySeedKey  = plantData.inventoryKey,
                         placedItemTileKey = dirtData.key
                     });
-                //GameController.Instance.OnFetchPlacedDataFromServer();
+                await NakamaRpcService.Instance.FetchCentralInstantlyAsync();
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)

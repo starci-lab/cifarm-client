@@ -62,6 +62,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     userId = userId,
                 });
                 visitUserId = userId;
+                await NakamaRpcService.Instance.FetchCentralInstantlyAsync();
                 OnVisitUser?.Invoke(true);
             }
             catch (Exception ex)
@@ -77,6 +78,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 await NakamaRpcService.Instance.ReturnAsyncRpc();
                 visitUserId = null;
+                await NakamaRpcService.Instance.FetchCentralInstantlyAsync();
                 OnReturn?.Invoke(true);
             }
             catch (Exception ex)

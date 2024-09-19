@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,7 +31,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             socket.ReceivedMatchState += OnReceivedMatchState;
         }
 
-        public async void FetchCentralInstantlyAsync()
+        public async Task FetchCentralInstantlyAsync()
         {
             await NakamaRpcService.Instance.FetchCentralInstantlyAsync();
         }
