@@ -3620,7 +3620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3940352356594027546, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: OnClick.OnTrigger.AudioName
-      value: 6
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3940352356594027546, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
