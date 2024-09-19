@@ -1,4 +1,3 @@
-using UnityEngine;
 
 namespace CiFarm.Scripts.SceneController.Game.PlantCore.Plants
 {

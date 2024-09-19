@@ -65,10 +65,19 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             var timerDisplayLeft = timerTotalDisplayTime;
             while (timerDisplayLeft > 0)
             {
-                var minutes = _timerCounter / 60;
+                var hours   = _timerCounter / 3600;
+                var minutes = (_timerCounter % 3600) / 60;
                 var seconds = _timerCounter % 60;
 
-                timerText.SetText($"{minutes:D2}:{seconds:D2}");
+                if (hours > 0)
+                {
+                    timerText.SetText($"{hours:D2}:{minutes:D2}:{seconds:D2}");
+                }
+                else
+                {
+                    timerText.SetText($"{minutes:D2}:{seconds:D2}");
+                }
+
                 timerText.SetActive(true);
 
                 yield return new WaitForSeconds(1);
