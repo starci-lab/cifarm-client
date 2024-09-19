@@ -43,6 +43,7 @@ namespace CiFarm.Scripts.UI.Popups
                 _onClose = param.callBack;
             }
 
+            NakamaRoadsideShopService.Instance.OnDeliveringProductsUpdated = LoadItemsOnSale;
             LoadItemsOnSale();
         }
 
@@ -123,6 +124,7 @@ namespace CiFarm.Scripts.UI.Popups
         protected override void OnHiding()
         {
             base.OnHiding();
+            NakamaRoadsideShopService.Instance.OnDeliveringProductsUpdated = null;
             _onClose?.Invoke();
         }
 
