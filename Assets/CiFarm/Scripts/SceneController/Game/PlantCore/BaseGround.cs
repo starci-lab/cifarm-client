@@ -24,20 +24,31 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         {
             dirtData = placedItem;
             DirtBubble bubble;
-            switch (placedItem.seedGrowthInfo.plantCurrentState)
+            if (dirtData.fullyMatured)
             {
-                case PlantCurrentState.NeedWater:
-                    bubble = SpawnBubble();
-                    bubble.SetBubble(dirtData.key, InjectionType.Water);
-                    break;
-                case PlantCurrentState.IsWeedy:
-                    bubble = SpawnBubble();
-                    bubble.SetBubble(dirtData.key, InjectionType.Grass);
-                    break;
-                case PlantCurrentState.IsInfested:
-                    bubble = SpawnBubble();
-                    bubble.SetBubble(dirtData.key, InjectionType.Worm);
-                    break;
+                bubble = SpawnBubble();
+                bubble.SetBubble(dirtData.key, InjectionType.TextQuantity,
+                    currentQuantity: dirtData.seedGrowthInfo.harvestQuantityRemaining,
+                    maxQuantity: dirtData.seedGrowthInfo.seed.maxHarvestQuantity
+                );
+            }
+            else
+            {
+                switch (placedItem.seedGrowthInfo.plantCurrentState)
+                {
+                    case PlantCurrentState.NeedWater:
+                        bubble = SpawnBubble();
+                        bubble.SetBubble(dirtData.key, InjectionType.Water);
+                        break;
+                    case PlantCurrentState.IsWeedy:
+                        bubble = SpawnBubble();
+                        bubble.SetBubble(dirtData.key, InjectionType.Grass);
+                        break;
+                    case PlantCurrentState.IsInfested:
+                        bubble = SpawnBubble();
+                        bubble.SetBubble(dirtData.key, InjectionType.Worm);
+                        break;
+                }
             }
         }
 
@@ -62,7 +73,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             }
 
             GameController.Instance.OnClickGround(this);
-        
         }
 
         public DirtBubble SpawnBubble()

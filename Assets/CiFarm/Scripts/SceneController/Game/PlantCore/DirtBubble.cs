@@ -20,7 +20,9 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         private int    _timerCounter;
         private string _tileId;
 
-        public void SetBubble(string tileId, InjectionType type, int timeData = 0)
+        public void SetBubble(string tileId, InjectionType type, int timeData = 0,
+            int currentQuantity = 0,
+            int maxQuantity = 0)
         {
             _tileId = tileId;
             if (TileBubbleController.Instance.CheckBubble(_tileId))
@@ -28,6 +30,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 SimplePool.Despawn(gameObject);
                 return;
             }
+
             timerText.SetActive(false);
             iconRender.SetActive(false);
             bubble.SetActive(true);
@@ -56,6 +59,8 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     StartCoroutine(StartTimerCounting());
                     break;
                 case InjectionType.TextQuantity:
+                    timerText.SetActive(true);
+                    timerText.text = currentQuantity + "/" + maxQuantity;
                     break;
             }
         }
