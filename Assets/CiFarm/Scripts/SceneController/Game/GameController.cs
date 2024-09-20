@@ -206,7 +206,7 @@ namespace CiFarm.Scripts.SceneController.Game
             editModeController.ExitEditMode();
         }
 
-        public void OnVisitUser(bool status)
+        public async void OnVisitUser(bool status)
         {
             if (status)
             {
@@ -219,7 +219,7 @@ namespace CiFarm.Scripts.SceneController.Game
                     userAva          = null
                 });
             }
-
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
             UIManager.Instance.HideTransition(() =>
             {
                 if (!status)
