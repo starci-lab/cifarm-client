@@ -33,6 +33,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [Header("Info")]
         [ReadOnly]
+        public string userId;
+        [ReadOnly]
         public string username;
         [ReadOnly]
         public string displayName;
@@ -60,6 +62,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
+            userId = session.UserId;
             username = session.Username;
 
             var account = await client.GetAccountAsync(session);
