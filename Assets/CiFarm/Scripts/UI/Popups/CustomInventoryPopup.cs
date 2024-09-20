@@ -111,11 +111,11 @@ namespace CiFarm.Scripts.UI.Popups
                 case PlantingPopupType.Selling:
                     UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ItemDetailPopup, new ItemDetailPopupParam
                     {
-                        ItemId   = data.itemKey,
+                        ItemId   = data.referenceKey,
                         Quantity = data.quantity,
                         IconItem = data.iconItem,
                         CanSell  = true,
-                        OnSellItem = (quantity) =>
+                        ConfirmCallBack = (quantity) =>
                         {
                             data.quantity = quantity;
                             _callBackAction?.Invoke(data);
@@ -158,8 +158,8 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    inventoryKey = data.key,
-                    itemKey      = data.referenceKey,
+                    key = data.key,
+                    referenceKey      = data.referenceKey,
                     quantity     = data.quantity,
                     iconItem     = gameConfig.GameShopIcon
                 });
@@ -192,8 +192,8 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    inventoryKey = data.key,
-                    itemKey      = data.referenceKey,
+                    key = data.key,
+                    referenceKey      = data.referenceKey,
                     quantity     = data.quantity,
                     iconItem     = gameConfig.GameHarvestIcon
                 });

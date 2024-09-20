@@ -1,6 +1,7 @@
 using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.UI.View.GameViewComponent;
+using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using UnityEngine;
 
@@ -20,8 +21,10 @@ namespace CiFarm.Scripts.UI.View
         protected override void OnShown()
         {
             base.OnShown();
+            DLogger.Log("LOADED 1");
             if (Parameter != null)
             {
+                DLogger.Log("LOADED 2");
                 var pr = (EditViewParameter)Parameter;
 
                 var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(pr.InventoryId);
@@ -31,6 +34,7 @@ namespace CiFarm.Scripts.UI.View
                     toolType = ToolType.PlacingItem,
                     toolIc   = gameConfig.GameShopIcon
                 });
+                DLogger.Log(gameConfig.ToString());
                 toolManager.LoadTool();
             }
         }

@@ -44,7 +44,7 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
         {
             for (int i = 0; i < toolItems.Count; i++)
             {
-                toolItems[0].InitIcon(toolDatas[_inventoryPage * toolItems.Count + i].toolIc);
+                toolItems[i].InitIcon(toolDatas[_inventoryPage * toolItems.Count + i].toolIc);
             }
         }
 

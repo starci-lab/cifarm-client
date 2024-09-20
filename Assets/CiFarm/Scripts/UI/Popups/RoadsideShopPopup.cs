@@ -150,8 +150,8 @@ namespace CiFarm.Scripts.UI.Popups
                             index = index,
                             inventory = new()
                             {
-                                key          = plantData.inventoryKey,
-                                referenceKey = plantData.itemKey,
+                                key          = plantData.key,
+                                referenceKey = plantData.referenceKey,
                                 type         = plantData.type,
                                 quantity     = plantData.quantity
                             }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.GameDatas;
 using CiFarm.Scripts.Services.NakamaServices;
@@ -91,14 +92,30 @@ namespace CiFarm.Scripts.UI.Popups
         {
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ItemDetailPopup, new ItemDetailPopupParam
             {
-                ItemId     = data.itemKey,
-                Quantity   = data.quantity,
-                IconItem   = data.iconItem,
-                CanSell    = false,
-                OnSellItem = (dt) => { currentTab.OnClick(); }
+                ItemId          = data.referenceKey,
+                Quantity        = data.quantity,
+                IconItem        = data.iconItem,
+                CanPlace        = data.type == InventoryType.Tile,
+                CanSell         = false,
+                ConfirmCallBack = (dt) =>
+                {
+                    if (data.type == InventoryType.Tile)
+                    {
+                        PlacingItem(data);
+                    }
+                    else
+                    {
+                        currentTab.OnClick();
+                    }
+                }
             });
         }
 
+        private void PlacingItem(InvenItemData data)
+        {
+            Hide(true);
+            GameController.Instance.EnterEditMode( data);
+        }
         #region NAKAMA
 
         public void LoadAllUserItem()
@@ -140,8 +157,8 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    inventoryKey = data.key,
-                    itemKey      = data.referenceKey,
+                    key = data.key,
+                    referenceKey      = data.referenceKey,
                     quantity     = data.quantity,
                     isUnique     = data.unique,
                     iconItem     = icon,
@@ -173,8 +190,8 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    inventoryKey = data.key,
-                    itemKey      = data.referenceKey,
+                    key = data.key,
+                    referenceKey      = data.referenceKey,
                     type         = data.type,
                     isUnique     = data.unique,
                     quantity     = data.quantity,
@@ -217,8 +234,8 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    inventoryKey = data.key,
-                    itemKey      = data.referenceKey,
+                    key = data.key,
+                    referenceKey      = data.referenceKey,
                     quantity     = data.quantity,
                     isUnique     = data.unique,
                     iconItem     = gameConfig.GameHarvestIcon,
@@ -242,8 +259,8 @@ namespace CiFarm.Scripts.UI.Popups
     [System.Serializable]
     public class InvenItemData
     {
-        public string        inventoryKey;
-        public string        itemKey;
+        public string        key;
+        public string        referenceKey;
         public int           quantity;
         public bool          isPremium;
         public bool          isUnique;
