@@ -80,6 +80,8 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             {
                 SimplePool.Despawn(plant.gameObject);
             }
+
+            plant    = null;
             dirtData = null;
             SimplePool.Despawn(gameObject);
         }
