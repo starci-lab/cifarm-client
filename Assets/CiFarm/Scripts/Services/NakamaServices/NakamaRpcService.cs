@@ -638,5 +638,87 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         #endregion
+
+        //Placement Rpcs
+
+        #region PlaceTile
+
+        public class PlaceTileRpcAsyncParams
+        {
+            [JsonProperty("inventoryTileKey")]
+            public string inventoryTileKey;
+
+            [JsonProperty("position")]
+            public Position position;
+        }
+
+        public class PlaceTileRpcAsyncResponse
+        {
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public async Task<PlaceTileRpcAsyncResponse> PlaceTileRpcAsync(PlaceTileRpcAsyncParams _params)
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "place_tile", JsonConvert.SerializeObject(_params));
+
+            return JsonConvert.DeserializeObject<PlaceTileRpcAsyncResponse>(result.Payload);
+        }
+
+        #endregion
+
+        #region RecoverTileRpc
+
+        public class RecoverTileRpcAsyncParams
+        {
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+
+            [JsonProperty("position")]
+            public Position position;
+        }
+
+        public class RecoverTileRpcAsyncResponse
+        {
+            [JsonProperty("inventoryTileKey")]
+            public string inventoryTileKey;
+        }
+
+        public async Task<RecoverTileRpcAsyncResponse> RecoverTileRpcAsync(PlaceTileRpcAsyncParams _params)
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "recover_tile", JsonConvert.SerializeObject(_params));
+
+            return JsonConvert.DeserializeObject<RecoverTileRpcAsyncResponse>(result.Payload);
+        }
+
+        #endregion
+
+        #region MoveRpc
+
+        public class MoveRpcAsyncParams
+        {
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+
+            [JsonProperty("position")]
+            public Position position;
+        }
+
+
+        public async Task MoveRpcAsync(MoveRpcAsyncParams _params)
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "move", JsonConvert.SerializeObject(_params));
+        }
+
+        #endregion
     }
 }
