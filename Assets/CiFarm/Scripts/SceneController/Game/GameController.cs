@@ -461,6 +461,17 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <param name="ground"></param>
         public async void OnHandOfMidasPlant(BaseGround ground)
         {
+            if (ground.dirtData.seedGrowthInfo.thiefedBy.Contains(NakamaUserService.Instance.userId))
+            {
+                UIManager.Instance.AlertManager.ShowAlertMessage("You have already stolen this crop.");
+                return;
+            }
+            if (ground.dirtData.seedGrowthInfo.harvestQuantityRemaining == ground.dirtData.seedGrowthInfo.crop.minHarvestQuantity)
+            {
+                UIManager.Instance.AlertManager.ShowAlertMessage("This crop has reached the minimum harvest quantity");
+                return;
+            }
+
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
@@ -468,7 +479,6 @@ namespace CiFarm.Scripts.SceneController.Game
 
                 UIManager.Instance.AlertManager.ShowAlertMessage("Get " + 1 + " " +
                                                                  ground.dirtData.seedGrowthInfo.crop.key);
-
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
