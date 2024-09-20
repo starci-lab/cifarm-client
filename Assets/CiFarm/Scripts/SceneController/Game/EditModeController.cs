@@ -1,4 +1,3 @@
-using System;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View;
@@ -37,6 +36,12 @@ namespace CiFarm.Scripts.SceneController.Game
                 cameraController.LockCamera();
                 _controllingItem.SetActive(true);
                 tileMapController.SetFakeGround(Input.mousePosition, _controllingItem);
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    ShowConfirmPopup();
+                }
+
                 return;
             }
 
@@ -61,7 +66,30 @@ namespace CiFarm.Scripts.SceneController.Game
         public void ExitEditMode()
         {
             tileMapController.ClearAvailableToPlacingItem();
+            _controllingItem.SetActive(false);
             isInit = false;
+        }
+
+        public void ShowConfirmPopup()
+        {
+            UIManager.Instance.PopupManager.ShowMessageDialog("Confirm", "Are you sure to place crop to this position",
+                UIMessageBox.MessageBoxType.Yes_No, (st) =>
+                {
+                    if (st == UIMessageBox.MessageBoxAction.Accept)
+                    {
+                        OnConfirmPlaceDirt();
+                    }
+                    else
+                    {
+                        
+                    }
+                    return true;
+                });
+        }
+
+        public void OnConfirmPlaceDirt()
+        {
+            _controllingItem.SetActive(false);
         }
     }
 }
