@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace CiFarm.Scripts.Services.NakamaServices
 {   
     [Serializable]
-    public class Seed
+    public class Crop
     {
         [JsonProperty("key")]
         public string key;
@@ -88,8 +88,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
     [Serializable]
     public class SeedGrowthInfo
     {
-        [JsonProperty("seed")]
-        public Seed seed; 
+        [JsonProperty("crop")]
+        public Crop crop; 
 
         [JsonProperty("currentStage")]
         public int currentStage; 

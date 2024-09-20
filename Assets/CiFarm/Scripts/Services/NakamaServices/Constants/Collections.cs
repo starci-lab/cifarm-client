@@ -7,8 +7,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
    
     public enum CollectionType
     {
-        [EnumStringValue("Seeds")]
-        Seeds,
+        [EnumStringValue("Crops")]
+        Crops,
 
         [EnumStringValue("Animals")]
         Animals,

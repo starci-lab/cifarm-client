@@ -28,7 +28,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 bubble = SpawnBubble();
                 bubble.SetBubble(dirtData.key, InjectionType.TextQuantity,
                     currentQuantity: dirtData.seedGrowthInfo.harvestQuantityRemaining,
-                    maxQuantity: dirtData.seedGrowthInfo.seed.maxHarvestQuantity
+                    maxQuantity: dirtData.seedGrowthInfo.crop.maxHarvestQuantity
                 );
             }
             else
@@ -92,7 +92,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                         inventorySeedKey  = plantData.inventoryKey,
                         placedItemTileKey = dirtData.key
                     });
-                await NakamaRpcService.Instance.FetchCentralInstantlyAsync();
+                await NakamaRpcService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)
