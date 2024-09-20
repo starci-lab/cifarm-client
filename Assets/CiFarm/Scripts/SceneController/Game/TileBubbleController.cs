@@ -11,6 +11,8 @@ namespace CiFarm.Scripts.SceneController.Game
     {
         private Dictionary<string, DirtBubble> _showingBubble;
 
+        [SerializeField] private GameObject dirtBubbleModel;
+
         public override void Awake()
         {
             base.Awake();
@@ -66,6 +68,12 @@ namespace CiFarm.Scripts.SceneController.Game
                 SimplePool.Despawn(_showingBubble[bubbleNotValid].gameObject);
                 _showingBubble.Remove(bubbleNotValid);
             }
+        }
+
+        public DirtBubble SpawnBubble(Vector3 position)
+        {
+            var dirtBubbleObj = SimplePool.Spawn(dirtBubbleModel, position, Quaternion.identity);
+            return dirtBubbleObj.GetComponent<DirtBubble>();
         }
     }
 }

@@ -77,7 +77,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 {
                     PlantingPopupType = PlantingPopupType.Planting,
                     CloseAction       = null,
-                    PlantAction       = clickedGround.OnConfirmSetPlant
+                    PlantAction       = data => { OnPlantSeed(clickedGround, data); }
                 });
                 return;
             }
@@ -93,7 +93,7 @@ namespace CiFarm.Scripts.SceneController.Game
             if (clickedGround.dirtData.isPlanted &&
                 clickedGround.dirtData.seedGrowthInfo.plantCurrentState == PlantCurrentState.Normal)
             {
-                var bubble = clickedGround.SpawnBubble();
+                var bubble = TileBubbleController.Instance.SpawnBubble(clickedGround.transform.position);
                 bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
                     clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
                     (int)clickedGround.dirtData.seedGrowthInfo.currentStageTimeElapsed);
@@ -134,7 +134,7 @@ namespace CiFarm.Scripts.SceneController.Game
             if (clickedGround.dirtData.isPlanted &&
                 clickedGround.dirtData.seedGrowthInfo.plantCurrentState == PlantCurrentState.Normal)
             {
-                var bubble = clickedGround.SpawnBubble();
+                var bubble = TileBubbleController.Instance.SpawnBubble(clickedGround.transform.position);
                 bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
                     clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
                     (int)clickedGround.dirtData.seedGrowthInfo.currentStageTimeElapsed);
@@ -302,6 +302,23 @@ namespace CiFarm.Scripts.SceneController.Game
         #region My Ground Manage
 
         /// <summary>
+        /// Plants a seed asynchronously using NakamaFarmingService.
+        /// </summary>
+        /// <param name="ground"></param>
+        public async void OnPlantSeed(BaseGround ground, InvenItemData plantData)
+        {
+            try
+            {
+                await NakamaFarmingService.Instance.PlantSeedAsync(plantData.inventoryKey, ground.dirtData.key);
+                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("Plant Seed error: " + e.Message, "Ground");
+            }
+        }
+
+        /// <summary>
         /// Thu hoach
         /// </summary>
         /// <param name="ground"></param>
@@ -310,10 +327,7 @@ namespace CiFarm.Scripts.SceneController.Game
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                await NakamaRpcService.Instance.HarvestCropRpcAsync(new()
-                {
-                    placedItemTileKey = ground.dirtData.key,
-                });
+                await NakamaFarmingService.Instance.HarvestCropAsync(ground.dirtData.key);
 
                 UIManager.Instance.AlertManager.ShowAlertMessage("Get " +
                                                                  ground.dirtData.seedGrowthInfo
@@ -336,23 +350,19 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.WaterCan)
             {
-                DLogger.Log("Current tool not water ");
+                DLogger.Log("Current tool is not Water Can.");
                 return;
             }
 
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Watering);
-                await NakamaRpcService.Instance.WaterRpcAsync(new()
-                {
-                    placedItemTileKey = ground.dirtData.key,
-                });
-
+                await NakamaFarmingService.Instance.WaterAsync(ground.dirtData.key);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
-                DLogger.LogError("OnWaterPlant error: " + e.Message, "Ground");
+                DLogger.LogError("OnWaterPlantAsync error: " + e.Message, "Ground");
             }
         }
 
@@ -364,22 +374,19 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Pesticide)
             {
-                DLogger.Log("Current tool not Pesticide");
+                DLogger.Log("Current tool is not Pesticide.");
                 return;
             }
 
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
-                await NakamaRpcService.Instance.UsePestisideRpcAsync(new()
-                {
-                    placedItemTileKey = ground.dirtData.key,
-                });
+                await NakamaFarmingService.Instance.UsePesticideAsync(ground.dirtData.key);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
-                DLogger.LogError("UsePestisideRpcAsync error: " + e.Message, "Ground");
+                DLogger.LogError("OnPesticidePlantAsync error: " + e.Message, "Ground");
             }
         }
 
@@ -391,23 +398,19 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Herbicide)
             {
-                DLogger.Log("Current tool not Herbicide");
+                DLogger.Log("Current tool is not Herbicide.");
                 return;
             }
 
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
-                await NakamaRpcService.Instance.UseHerbicideRpcAsync(new()
-                {
-                    placedItemTileKey = ground.dirtData.key
-                });
-
+                await NakamaFarmingService.Instance.UseHerbicideAsync(ground.dirtData.key);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
-                DLogger.LogError("UseHerbicideRpcAsync error: " + e.Message, "Ground");
+                DLogger.LogError("OnHerbicidePlantAsync error: " + e.Message, "Ground");
             }
         }
 
@@ -435,11 +438,7 @@ namespace CiFarm.Scripts.SceneController.Game
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                await NakamaRpcService.Instance.ThiefCropRpcAsync(new()
-                {
-                    userId            = _friendItemData.userId,
-                    placedItemTileKey = ground.dirtData.key,
-                });
+                await NakamaFarmingService.Instance.ThiefCropAsync(_friendItemData.userId, ground.dirtData.key);
 
                 UIManager.Instance.AlertManager.ShowAlertMessage("Get " + 1 + " " +
                                                                  ground.dirtData.seedGrowthInfo.crop.key);
@@ -460,24 +459,19 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.WaterCan)
             {
-                DLogger.Log("Current tool not water ");
+                DLogger.Log("Current tool is not Water Can.");
                 return;
             }
 
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Watering);
-                await NakamaRpcService.Instance.HelpWaterRpcAsync(new()
-                {
-                    userId            = _friendItemData.userId,
-                    placedItemTileKey = ground.dirtData.key,
-                });
-
+                await NakamaFarmingService.Instance.HelpWaterAsync(_friendItemData.userId, ground.dirtData.key);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
-                DLogger.LogError("OnWaterPlant error: " + e.Message, "Ground");
+                DLogger.LogError("OnHelpWaterPlantAsync error: " + e.Message, "Ground");
             }
         }
 
@@ -489,23 +483,19 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Pesticide)
             {
-                DLogger.Log("Current tool not Pesticide");
+                DLogger.Log("Current tool is not Pesticide.");
                 return;
             }
 
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
-                await NakamaRpcService.Instance.HelpUsePestisideRpcAsync(new()
-                {
-                    userId            = _friendItemData.userId,
-                    placedItemTileKey = ground.dirtData.key,
-                });
+                await NakamaFarmingService.Instance.HelpUsePesticideAsync(_friendItemData.userId, ground.dirtData.key);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
-                DLogger.LogError("UsePestisideRpcAsync error: " + e.Message, "Ground");
+                DLogger.LogError("OnHelpPesticidePlantAsync error: " + e.Message, "Ground");
             }
         }
 
@@ -517,24 +507,19 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Herbicide)
             {
-                DLogger.Log("Current tool not Herbicide");
+                DLogger.Log("Current tool is not Herbicide.");
                 return;
             }
 
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
-                await NakamaRpcService.Instance.HelpUseHerbicideRpcAsync(new()
-                {
-                    userId            = _friendItemData.userId,
-                    placedItemTileKey = ground.dirtData.key
-                });
-
+                await NakamaFarmingService.Instance.HelpUseHerbicideAsync(_friendItemData.userId, ground.dirtData.key);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
             {
-                DLogger.LogError("UseHerbicideRpcAsync error: " + e.Message, "Ground");
+                DLogger.LogError("OnHelpHerbicidePlantAsync error: " + e.Message, "Ground");
             }
         }
 

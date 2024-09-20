@@ -11,7 +11,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
     public class BaseGround : MonoBehaviour
     {
         [SerializeField] private Transform  positionPlant;
-        [SerializeField] private GameObject dirtBubbleModel;
 
         [ReadOnly]
         public BasePlant plant;
@@ -25,7 +24,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             DirtBubble bubble;
             if (dirtData.fullyMatured)
             {
-                bubble = SpawnBubble();
+                bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
                 bubble.SetBubble(dirtData.key, InjectionType.TextQuantity,
                     currentQuantity: dirtData.seedGrowthInfo.harvestQuantityRemaining,
                     maxQuantity: dirtData.seedGrowthInfo.crop.maxHarvestQuantity
@@ -36,15 +35,15 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 switch (placedItem.seedGrowthInfo.plantCurrentState)
                 {
                     case PlantCurrentState.NeedWater:
-                        bubble = SpawnBubble();
+                        bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Water);
                         break;
                     case PlantCurrentState.IsWeedy:
-                        bubble = SpawnBubble();
+                        bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Grass);
                         break;
                     case PlantCurrentState.IsInfested:
-                        bubble = SpawnBubble();
+                        bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Worm);
                         break;
                 }
@@ -74,31 +73,5 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             GameController.Instance.OnClickGround(this);
         }
 
-        public DirtBubble SpawnBubble()
-        {
-            var dirtBubbleObj = SimplePool.Spawn(dirtBubbleModel, transform.position, Quaternion.identity);
-            return dirtBubbleObj.GetComponent<DirtBubble>();
-        }
-
-        public async void OnConfirmSetPlant(InvenItemData plantData)
-        {
-            DLogger.Log("Planting Item: " + plantData.inventoryKey + " To: " + dirtData.key, "SHOP");
-
-            try
-            {
-                var resultData = await NakamaRpcService.Instance.PlantSeedRpcAsync(
-                    new NakamaRpcService.PlantSeedRpcAsyncParams
-                    {
-                        inventorySeedKey  = plantData.inventoryKey,
-                        placedItemTileKey = dirtData.key
-                    });
-                await NakamaRpcService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
-                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-            }
-            catch (Exception e)
-            {
-                DLogger.LogError("Planting Item error: " + e.Message, "Ground");
-            }
-        }
     }
 }
