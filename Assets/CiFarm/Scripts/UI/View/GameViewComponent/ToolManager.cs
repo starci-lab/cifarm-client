@@ -8,7 +8,8 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
     public class ToolManager : MonoBehaviour
     {
         [SerializeField] private List<ToolItem> toolItems;
-        [SerializeField] private List<ToolData> toolDatas;
+
+        [SerializeField] public List<ToolData> toolDatas;
 
         private int _inventoryPage = 0;
         private int _currentSelectIndex;
@@ -16,7 +17,7 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
         public ToolData CurrentTool
         {
             get
-            {                
+            {
                 DLogger.Log("Index Tool: " + _inventoryPage * 4 + _currentSelectIndex, "ToolManager");
 
                 var tool = toolDatas[_inventoryPage * 4 + _currentSelectIndex];
@@ -41,6 +42,10 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
 
         public void LoadTool()
         {
+            for (int i = 0; i < toolItems.Count; i++)
+            {
+                toolItems[0].InitIcon(toolDatas[_inventoryPage * toolItems.Count + i].toolIc);
+            }
         }
 
         public void OnClickItem(int index)
@@ -83,6 +88,8 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
         Scythe,
         Pesticide,
         Herbicide,
-        Fertilizer
+        Fertilizer,
+        Moving,
+        PlacingItem
     }
 }
