@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
@@ -18,8 +17,9 @@ namespace CiFarm.Scripts.SceneController.Game
 {
     public class GameController : ManualSingletonMono<GameController>
     {
-        [SerializeField] private TileMapController tileMapController;
-        [SerializeField] private CameraController  cameraController;
+        [SerializeField] private TileMapController  tileMapController;
+        [SerializeField] private CameraController   cameraController;
+        [SerializeField] private EditModeController editModeController;
 
         private List<BaseGround> _baseGrounds;
         private GameView         _gameView;
@@ -174,6 +174,22 @@ namespace CiFarm.Scripts.SceneController.Game
             LoadHomeWithAnimation();
         }
 
+        public void EditMode()
+        {
+            // Stop Realtime
+            NakamaSocketService.Instance.OnFetchPlacedDataFromServer = null;
+            
+            editModeController.SetUpEditMode();
+        }
+
+        public void ExitEditMode()
+        {
+            // Resume Realtime
+            NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
+            
+            editModeController.ExitEditMode();
+        }
+
         public void OnVisitUser(bool status)
         {
             if (status)
@@ -219,7 +235,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #region Nakama Communicated
 
-        #region Loader Data
+        #region Loader Init
 
         /// <summary>
         /// INIT METHOD
@@ -260,7 +276,8 @@ namespace CiFarm.Scripts.SceneController.Game
             if (placedItem.isPlanted)
             {
                 var prefabPlantData =
-                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.crop.key);
+                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.crop
+                        .key);
                 // var plantObj = Instantiate(prefabPlantData);
                 var plantObj = SimplePool.Spawn(prefabPlantData, Vector3.zero, Quaternion.identity);
                 var plant    = plantObj.GetComponent<BasePlant>();
@@ -274,8 +291,6 @@ namespace CiFarm.Scripts.SceneController.Game
         private void PlacedBuilding(PlacedItem placedItem)
         {
         }
-
-        #endregion
 
         public void OnFetchPlacedDataFromServer()
         {
@@ -291,6 +306,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
             LoadUserTileMap();
         }
+
+        #endregion
 
         #region My Ground Manage
 

@@ -1146,11 +1146,11 @@ MonoBehaviour:
   - key: water
     toolType: 0
     toolIc: {fileID: 21300000, guid: ce7aaf0270008bb4da8423c6145dfa43, type: 3}
-  - key: pesicle
-    toolType: 3
-    toolIc: {fileID: 21300000, guid: 97039de347741c84ebce1d040fcba6f7, type: 3}
   - key: herbicide
     toolType: 4
+    toolIc: {fileID: 21300000, guid: 97039de347741c84ebce1d040fcba6f7, type: 3}
+  - key: persticle
+    toolType: 3
     toolIc: {fileID: 21300000, guid: 1369958ed5723e340a53ee57aefea2d4, type: 3}
 --- !u!1 &3242406227228726380
 GameObject:

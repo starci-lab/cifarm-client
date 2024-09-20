@@ -10,6 +10,7 @@ namespace Imba.UI
         MainView  =0,
         GameView  =1,
         VisitView =2,
+        EditView =3,
     }
 }
 
