@@ -20,7 +20,12 @@ namespace CiFarm.Scripts.UI.Popups.Inventory
             onClick         = callBack;
             itemIcon.sprite = data.iconItem;
             quantity.text   = data.quantity.ToString();
-            premium.SetActive(data.isPremium);
+            if (data.isUnique)
+            {
+                quantity.text = "1";
+                
+            }
+            premium.SetActive(data.isPremium || data.isUnique);
         }
 
         public void OnClick()

@@ -143,6 +143,7 @@ namespace CiFarm.Scripts.UI.Popups
                     inventoryKey = data.key,
                     itemKey      = data.referenceKey,
                     quantity     = data.quantity,
+                    isUnique     = data.unique,
                     iconItem     = icon,
                     isPremium    = data.isPremium,
                     type         = data.type
@@ -175,6 +176,7 @@ namespace CiFarm.Scripts.UI.Popups
                     inventoryKey = data.key,
                     itemKey      = data.referenceKey,
                     type         = data.type,
+                    isUnique     = data.unique,
                     quantity     = data.quantity,
                     isPremium    = data.isPremium,
                     iconItem     = gameConfig.GameShopIcon
@@ -218,6 +220,7 @@ namespace CiFarm.Scripts.UI.Popups
                     inventoryKey = data.key,
                     itemKey      = data.referenceKey,
                     quantity     = data.quantity,
+                    isUnique     = data.unique,
                     iconItem     = gameConfig.GameHarvestIcon,
                     isPremium    = data.isPremium,
                     type         = data.type
@@ -243,6 +246,7 @@ namespace CiFarm.Scripts.UI.Popups
         public string        itemKey;
         public int           quantity;
         public bool          isPremium;
+        public bool          isUnique;
         public InventoryType type;
         public Sprite        iconItem;
     }

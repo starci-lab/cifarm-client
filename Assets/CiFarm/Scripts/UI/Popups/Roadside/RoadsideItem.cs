@@ -11,6 +11,7 @@ namespace CiFarm.Scripts.UI.Popups.Roadside
         [SerializeField] private TextMeshProUGUI textQuantity;
         [SerializeField] private GameObject      plusButtonGroup;
         [SerializeField] private GameObject      productGroup;
+        [SerializeField] private GameObject      premium;
         [SerializeField] private Image           productRender;
 
         private UnityAction _onClickAdd;
@@ -22,7 +23,7 @@ namespace CiFarm.Scripts.UI.Popups.Roadside
             _onClickRemove = onClickRemove;
         }
 
-        public void SetProductOnSale(Sprite sprite = null, int quantity = 0)
+        public void SetProductOnSale(Sprite sprite = null, int quantity = 0, bool isPremium = false)
         {
             if (sprite != null && quantity != 0)
             {
@@ -37,6 +38,7 @@ namespace CiFarm.Scripts.UI.Popups.Roadside
                 plusButtonGroup.SetActive(true);
                 textQuantity.text = "";
             }
+            premium.SetActive(isPremium);
         }
 
         public void OnClickAdd()

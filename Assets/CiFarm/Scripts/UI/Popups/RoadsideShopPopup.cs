@@ -68,7 +68,8 @@ namespace CiFarm.Scripts.UI.Popups
                     Key               = delivering.key,
                     ReferenceKey      = delivering.referenceKey,
                     SpriteItemProduct = spriteRender,
-                    Quantity          = delivering.quantity
+                    Quantity          = delivering.quantity,
+                    Premium           = delivering.isPremium
                 });
             }
 
@@ -82,7 +83,7 @@ namespace CiFarm.Scripts.UI.Popups
                 }
                 else
                 {
-                    roadsideItems[i].SetProductOnSale(item.SpriteItemProduct, item.Quantity);
+                    roadsideItems[i].SetProductOnSale(item.SpriteItemProduct, item.Quantity, item.Premium);
                 }
             }
         }
@@ -197,5 +198,6 @@ namespace CiFarm.Scripts.UI.Popups
         public string ReferenceKey;
         public Sprite SpriteItemProduct;
         public int    Quantity;
+        public bool    Premium;
     }
 }
