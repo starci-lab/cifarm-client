@@ -1,3 +1,4 @@
+using System;
 using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using Nakama;
@@ -116,11 +117,19 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void LoadInventoriesAsync()
         {
-            var updatePremiumTileNftsRpcResponse = await NakamaRpcService.Instance.UpdatePremiumTileNftsRpcAsync();
-            if (updatePremiumTileNftsRpcResponse.tokenIds != null)
+            try
             {
-                DLogger.Log($"{updatePremiumTileNftsRpcResponse.tokenIds.Count} nfts loaded", "Nakama - Inventories", LogColors.LimeGreen);
+                var updatePremiumTileNftsRpcResponse = await NakamaRpcService.Instance.UpdatePremiumTileNftsRpcAsync();
+                if (updatePremiumTileNftsRpcResponse != null && updatePremiumTileNftsRpcResponse.tokenIds != null)
+                {
+                    DLogger.Log($"{updatePremiumTileNftsRpcResponse.tokenIds.Count} nfts loaded", "Nakama - Inventories", LogColors.LimeGreen);
+                }
             }
+            catch (Exception e)
+            {
+                DLogger.LogError("NFT LOAD FAIL: " + e.Message, "Nakama - Inventories", LogColors.LimeGreen);
+            }
+          
             
             var listInventoriesResponse = await NakamaRpcService.Instance.ListInventoriesRpcAsync();
             inventories = listInventoriesResponse.inventories;

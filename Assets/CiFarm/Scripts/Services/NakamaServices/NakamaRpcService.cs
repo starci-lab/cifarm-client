@@ -590,7 +590,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "thief_crop", JsonConvert.SerializeObject(_params));
-      
+
             return JsonConvert.DeserializeObject<ThiefCropRpcAsyncResponse>(result.Payload);
         }
 
@@ -611,8 +611,17 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
-            var result = await client.RpcAsync(session, "update_premium_tile_nfts");
-            return JsonConvert.DeserializeObject<UpdatePremiumTileNftsRpcAsyncResponse>(result.Payload);
+            try
+            {
+                var result = await client.RpcAsync(session, "update_premium_tile_nfts");
+                return JsonConvert.DeserializeObject<UpdatePremiumTileNftsRpcAsyncResponse>(result.Payload);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("NFT LOAD FAIL: " + e.Message, "Nakama - Inventories", LogColors.LimeGreen);
+                return null;
+            }
+
         }
 
         #endregion
