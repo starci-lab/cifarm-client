@@ -92,11 +92,8 @@ namespace CiFarm.Scripts.UI.Popups
             }
 
 
-            DateTime utcNow           = DateTime.UtcNow;
-            DateTime nextDay          = utcNow.Date.AddDays(1);
-            var      secondsRemaining = (nextDay - utcNow).TotalSeconds;
-            
-            StartCoroutine(StartTimerClock(secondsRemaining));
+            var remain = NakamaSocketService.Instance.nextDeliveryTime;
+            StartCoroutine(StartTimerClock(remain));
         }
 
         /// <summary>
@@ -145,9 +142,9 @@ namespace CiFarm.Scripts.UI.Popups
             var timerDisplayLeft = remainTimeInSec;
             while (timerDisplayLeft > 0)
             {
-                int hours   = (int)(timerDisplayLeft / 3600);  // Convert to int
-                int minutes = (int)((timerDisplayLeft % 3600) / 60);  // Convert to int
-                int seconds = (int)(timerDisplayLeft % 60);  // Convert to int
+                int hours   = (int)(timerDisplayLeft / 3600); // Convert to int
+                int minutes = (int)((timerDisplayLeft % 3600) / 60); // Convert to int
+                int seconds = (int)(timerDisplayLeft % 60); // Convert to int
 
                 if (hours > 0)
                 {
