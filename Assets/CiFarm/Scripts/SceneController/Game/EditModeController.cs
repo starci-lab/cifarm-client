@@ -1,9 +1,12 @@
+using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
+using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.UI.View.GameViewComponent;
 using Imba.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace CiFarm.Scripts.SceneController.Game
 {
@@ -16,6 +19,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private GameObject    _controllingItem;
         private InvenItemData _invenItemData;
+
+        private Vector2Int _currentPosition;
 
         private bool isInit;
 
@@ -35,9 +40,9 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 cameraController.LockCamera();
                 _controllingItem.SetActive(true);
-                tileMapController.SetFakeGround(Input.mousePosition, _controllingItem);
+                _currentPosition = tileMapController.SetFakeGround(Input.mousePosition, _controllingItem);
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     ShowConfirmPopup();
                 }
@@ -58,6 +63,7 @@ namespace CiFarm.Scripts.SceneController.Game
             var prefabDirtData =
                 ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
             _controllingItem = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
+        
             _controllingItem.SetActive(false);
             tileMapController.DisplayAvailableToPlacingItem();
             isInit = true;
@@ -79,17 +85,22 @@ namespace CiFarm.Scripts.SceneController.Game
                     {
                         OnConfirmPlaceDirt();
                     }
-                    else
-                    {
-                        
-                    }
+
                     return true;
                 });
         }
 
-        public void OnConfirmPlaceDirt()
+        public async void OnConfirmPlaceDirt()
         {
+            UIManager.Instance.ShowLoading();
             _controllingItem.SetActive(false);
+            await NakamaEditFarmService.Instance.PlaceTileRpcAsync(_invenItemData.key, new Position
+            {
+                x = _currentPosition.x,
+                y = _currentPosition.y
+            });
+            ExitEditMode();
+            UIManager.Instance.HideLoading();
         }
     }
 }

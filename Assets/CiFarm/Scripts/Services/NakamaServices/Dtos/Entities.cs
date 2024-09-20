@@ -82,10 +82,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
     public class Position
     {
         [JsonProperty("x")]
-        public float x;
+        public int x;
 
         [JsonProperty("y")]
-        public float y;
+        public int y;
     }
 
     [Serializable]

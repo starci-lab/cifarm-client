@@ -72,6 +72,13 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void HandleClickMyGround(BaseGround clickedGround)
         {
+            // Not init ground
+            DLogger.Log("CLICKED "+ clickedGround.dirtData.ToString());
+            if (string.IsNullOrEmpty(clickedGround.dirtData.key))
+            {
+                return;
+            }
+            
             // Planting
             if (!clickedGround.dirtData.isPlanted)
             {
