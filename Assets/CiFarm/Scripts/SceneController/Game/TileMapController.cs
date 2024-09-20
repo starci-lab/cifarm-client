@@ -116,14 +116,14 @@ namespace CiFarm.Scripts.SceneController.Game
             }
             else
             {
-                if (tile == null)
-                {
-                    DLogger.Log("No tile at this position (NULL)", "TileManager", LogColors.Lime);
-                }
-                else
-                {
-                    DLogger.Log($"Tile name: {tile.name}", "TileManager", LogColors.Lime);
-                }
+                // if (tile == null)
+                // {
+                //     DLogger.Log("No tile at this position (NULL)", "TileManager", LogColors.Lime);
+                // }
+                // else
+                // {
+                //     DLogger.Log($"Tile name: {tile.name}", "TileManager", LogColors.Lime);
+                // }
             }
 
             return (Vector2Int)cellPosition;

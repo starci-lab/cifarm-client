@@ -77,6 +77,7 @@ namespace CiFarm.Scripts.SceneController.Game
             _controllingItem.SetActive(false);
             _isInit  = false;
             _isPause = false;
+            GameController.Instance.ExitEditMode();
         }
 
         public void ShowConfirmPopup()
