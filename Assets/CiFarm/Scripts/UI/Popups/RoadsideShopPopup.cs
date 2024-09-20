@@ -90,13 +90,13 @@ namespace CiFarm.Scripts.UI.Popups
                     roadsideItems[i].SetProductOnSale(item.SpriteItemProduct, item.Quantity, item.Premium);
                 }
             }
-            
-            
-            DateTime utcNow = DateTime.UtcNow;
-            DateTime nextDay = utcNow.Date.AddDays(1);
-            double secondsRemaining = (nextDay - utcNow).TotalSeconds;
-           StartCoroutine(StartTimerClock(secondsRemaining));
 
+
+            DateTime utcNow           = DateTime.UtcNow;
+            DateTime nextDay          = utcNow.Date.AddDays(1);
+            var      secondsRemaining = (nextDay - utcNow).TotalSeconds;
+            
+            StartCoroutine(StartTimerClock(secondsRemaining));
         }
 
         /// <summary>
@@ -145,9 +145,9 @@ namespace CiFarm.Scripts.UI.Popups
             var timerDisplayLeft = remainTimeInSec;
             while (timerDisplayLeft > 0)
             {
-                var hours   = timerDisplayLeft / 3600;
-                var minutes = (timerDisplayLeft % 3600) / 60;
-                var seconds = timerDisplayLeft % 60;
+                int hours   = (int)(timerDisplayLeft / 3600);  // Convert to int
+                int minutes = (int)((timerDisplayLeft % 3600) / 60);  // Convert to int
+                int seconds = (int)(timerDisplayLeft % 60);  // Convert to int
 
                 if (hours > 0)
                 {
@@ -165,7 +165,6 @@ namespace CiFarm.Scripts.UI.Popups
             }
         }
 
-        
         #region NAKAMA
 
         /// <summary>
