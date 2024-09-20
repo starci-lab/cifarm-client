@@ -17,7 +17,8 @@ namespace CiFarm.Scripts.SceneController.Game
         [Header("Tile Interactions")]
         public Tilemap interactableMap;
 
-        public Tile validTile;
+        public Tile   validTile;
+        public string validTileName = "";
 
         public HashSet<Vector2Int> PlacedPositionHashSet;
 
@@ -83,6 +84,35 @@ namespace CiFarm.Scripts.SceneController.Game
                 tileCenterPosition.y += gameTileMap.cellSize.y / 2.0f;
                 var obj = Instantiate(objectPlaced);
                 obj.transform.position = tileCenterPosition;
+            }
+            else
+            {
+                if (tile == null)
+                {
+                    DLogger.Log("No tile at this position (NULL)", "TileManager", LogColors.Lime);
+                }
+                else
+                {
+                    DLogger.Log($"Tile name: {tile.name}", "TileManager", LogColors.Lime);
+                }
+            }
+        }
+
+        public void SetFakeGround(Vector3 position, GameObject objectPlaced)
+        {
+            var worldPosition = Camera.main.ScreenToWorldPoint(position);
+            worldPosition.z = 0;
+
+            var cellPosition       = interactableMap.WorldToCell(worldPosition);
+            var tileCenterPosition = interactableMap.CellToWorld(cellPosition);
+
+            TileBase tile = interactableMap.GetTile(cellPosition);
+
+            if (tile != null && tile.name == validTileName)
+            {
+                tileCenterPosition.z =  0;
+                tileCenterPosition.y += interactableMap.cellSize.y / 2.0f;
+                objectPlaced.transform.position = tileCenterPosition;
             }
             else
             {

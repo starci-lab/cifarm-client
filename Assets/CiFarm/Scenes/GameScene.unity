@@ -4961,7 +4961,6 @@ GameObject:
   m_Component:
   - component: {fileID: 669348099}
   - component: {fileID: 669348100}
-  - component: {fileID: 669348101}
   - component: {fileID: 669348102}
   - component: {fileID: 669348103}
   m_Layer: 0
@@ -4983,7 +4982,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1023139359}
+  - {fileID: 694534288}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &669348100
@@ -4998,26 +4999,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8584cf6d435d5c249a755d78509a1693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMapController: {fileID: 669348101}
+  tileMapController: {fileID: 694534289}
   cameraController: {fileID: 669348102}
---- !u!114 &669348101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669348098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8e4f488af7b824fafdebbe134b9d2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameTileMap: {fileID: 491174393}
-  hiddenInteractableTile: {fileID: 11400000, guid: a8f76e7927bac384aab77386069b7e2e, type: 2}
-  interactableTileName: interactions
-  interactableTileVisibleName: interactions_visible
-  interactableMap: {fileID: 35937608}
-  validTile: {fileID: 11400000, guid: 6ff0e98226c9dbe41b3cccccaf43ce30, type: 2}
+  editModeController: {fileID: 1023139360}
 --- !u!114 &669348102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5059,6 +5043,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dirtBubbleModel: {fileID: 6684993111980555023, guid: f6f48fca014f77f468a65d45d2d1c886, type: 3}
+--- !u!1 &694534287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 694534288}
+  - component: {fileID: 694534289}
+  m_Layer: 0
+  m_Name: TileMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &694534288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694534287}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 669348099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &694534289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694534287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b8e4f488af7b824fafdebbe134b9d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameTileMap: {fileID: 491174393}
+  hiddenInteractableTile: {fileID: 11400000, guid: a8f76e7927bac384aab77386069b7e2e, type: 2}
+  interactableTileName: interactions
+  interactableTileVisibleName: interactions_visible
+  interactableMap: {fileID: 35937608}
+  validTile: {fileID: 11400000, guid: 6ff0e98226c9dbe41b3cccccaf43ce30, type: 2}
+  validTileName: datBorder
 --- !u!1 &718507045
 GameObject:
   m_ObjectHideFlags: 0
@@ -9868,6 +9903,52 @@ Transform:
   - {fileID: 437954223}
   m_Father: {fileID: 1662688231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1023139358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1023139359}
+  - component: {fileID: 1023139360}
+  m_Layer: 0
+  m_Name: EditMode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1023139359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023139358}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 669348099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1023139360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023139358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b028936d48dc4dcd8b1b4ed3f7303226, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMapController: {fileID: 694534289}
+  cameraController: {fileID: 669348102}
 --- !u!1 &1028042058
 GameObject:
   m_ObjectHideFlags: 0

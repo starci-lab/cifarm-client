@@ -1,6 +1,7 @@
 using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.UI.View.GameViewComponent;
+using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ namespace CiFarm.Scripts.UI.View
                     toolType = ToolType.PlacingItem,
                     toolIc   = gameConfig.GameShopIcon
                 });
+                DLogger.Log(gameConfig.ToString());
                 toolManager.LoadTool();
             }
         }

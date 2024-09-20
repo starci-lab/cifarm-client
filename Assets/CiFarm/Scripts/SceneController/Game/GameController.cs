@@ -24,6 +24,7 @@ namespace CiFarm.Scripts.SceneController.Game
         private List<BaseGround> _baseGrounds;
         private GameView         _gameView;
         private VisitView        _visitView;
+        private EditView         _editView;
 
         private FriendItemData _friendItemData;
 
@@ -40,6 +41,7 @@ namespace CiFarm.Scripts.SceneController.Game
             _baseGrounds = new List<BaseGround>();
             _gameView    = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
             _visitView   = UIManager.Instance.ViewManager.GetViewByName<VisitView>(UIViewName.VisitView);
+            _editView    = UIManager.Instance.ViewManager.GetViewByName<EditView>(UIViewName.EditView);
         }
 
         private void Start()
@@ -174,19 +176,27 @@ namespace CiFarm.Scripts.SceneController.Game
             LoadHomeWithAnimation();
         }
 
-        public void EditMode()
+        public void EnterEditMode(InvenItemData data)
         {
             // Stop Realtime
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = null;
-            
-            editModeController.SetUpEditMode();
+
+            _gameView.Hide();
+            _editView.Show(new EditViewParameter
+            {
+                InventoryId = data.referenceKey
+            });
+
+            editModeController.SetUpEditMode(data);
         }
 
         public void ExitEditMode()
         {
             // Resume Realtime
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
-            
+            _gameView.Show();
+            _editView.Hide();
+
             editModeController.ExitEditMode();
         }
 
@@ -319,7 +329,7 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             try
             {
-                await NakamaFarmingService.Instance.PlantSeedAsync(plantData.inventoryKey, ground.dirtData.key);
+                await NakamaFarmingService.Instance.PlantSeedAsync(plantData.key, ground.dirtData.key);
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)

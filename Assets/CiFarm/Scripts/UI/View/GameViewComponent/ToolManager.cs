@@ -18,10 +18,7 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
         {
             get
             {
-                DLogger.Log("Index Tool: " + _inventoryPage * 4 + _currentSelectIndex, "ToolManager");
-
                 var tool = toolDatas[_inventoryPage * 4 + _currentSelectIndex];
-                DLogger.Log("Current Tool: " + tool.toolType, "ToolManager");
                 return tool;
             }
         }
@@ -44,7 +41,7 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
         {
             for (int i = 0; i < toolItems.Count; i++)
             {
-                toolItems[0].InitIcon(toolDatas[_inventoryPage * toolItems.Count + i].toolIc);
+                toolItems[i].InitIcon(toolDatas[_inventoryPage * toolItems.Count + i].toolIc);
             }
         }
 

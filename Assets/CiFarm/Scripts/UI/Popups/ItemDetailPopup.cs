@@ -14,8 +14,9 @@ namespace CiFarm.Scripts.UI.Popups
         public string           ItemId;
         public int              Quantity;
         public bool             CanSell;
+        public bool             CanPlace;
         public Sprite           IconItem;
-        public UnityAction<int> OnSellItem;
+        public UnityAction<int> ConfirmCallBack;
     }
 
     public class ItemDetailPopup : UIPopup
@@ -24,6 +25,7 @@ namespace CiFarm.Scripts.UI.Popups
         [SerializeField] private List<GameObject> detailGroup;
 
         [SerializeField] private List<GameObject> sellingGroup;
+        [SerializeField] private List<GameObject> placingGroup;
 
         [Header("Customize popup")]
         [SerializeField] private Image itemIcon;
@@ -37,10 +39,11 @@ namespace CiFarm.Scripts.UI.Popups
         public int counter = 1;
         public int basePrice;
 
-        private UnityAction<int> _onSellItem;
+        private UnityAction<int> _onConfirm;
 
         private int    _quantity;
         private bool   _canSell;
+        private bool   _canPlace;
         private string _itemId;
 
         protected override void OnInit()
@@ -59,18 +62,25 @@ namespace CiFarm.Scripts.UI.Popups
                 itemIcon.sprite = param.IconItem;
                 _itemId         = param.ItemId;
                 _quantity       = param.Quantity;
-                _onSellItem     = param.OnSellItem;
+                _onConfirm      = param.ConfirmCallBack;
                 _canSell        = param.CanSell;
+                _canPlace       = param.CanPlace;
             }
+
 
             foreach (var o in detailGroup)
             {
-                o.SetActive(!_canSell);
+                o.SetActive(!_canSell && !_canPlace);
             }
 
             foreach (var o in sellingGroup)
             {
                 o.SetActive(_canSell);
+            }
+
+            foreach (var o in placingGroup)
+            {
+                o.SetActive(_canPlace);
             }
 
             if (_canSell)
@@ -157,7 +167,13 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void OnClickSell()
         {
-            _onSellItem?.Invoke(counter);
+            _onConfirm?.Invoke(counter);
+            Hide(true);
+        }
+
+        public void OnClickPlace()
+        {
+            _onConfirm?.Invoke(counter);
             Hide(true);
         }
     }

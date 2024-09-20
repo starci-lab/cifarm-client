@@ -1185,9 +1185,9 @@ MonoBehaviour:
   - {fileID: 4878487699336469972}
   - {fileID: 5346340387407951590}
   toolDatas:
-  - key: steal
-    toolType: 1
-    toolIc: {fileID: 21300000, guid: ea8cc3d4b7a622d469315a1e00655ddb, type: 3}
+  - key: moving
+    toolType: 6
+    toolIc: {fileID: 21300000, guid: 5efd9c08e1ca764469517b248cb046cc, type: 3}
 --- !u!114 &-4729930508446532697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,7 +1209,7 @@ MonoBehaviour:
   ShowProps: 0
   ShowBackBtn: 0
   Title: 
-  toolManager: {fileID: 0}
+  toolManager: {fileID: 1415905298764901039}
 --- !u!1 &3242406227228726380
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,12 +3565,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3940352356594027546, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
+      propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: -4729930508446532697}
+    - target: {fileID: 3940352356594027546, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnClickReturn
       objectReference: {fileID: 0}
     - target: {fileID: 3940352356594027546, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: CiFarm.Scripts.UI.View.VisitView, Game
+      value: CiFarm.Scripts.UI.View.EditView, Game
       objectReference: {fileID: 0}
     - target: {fileID: 3940352356594027546, guid: 295bfe4992357104fb5258c56bc182f8, type: 3}
       propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
