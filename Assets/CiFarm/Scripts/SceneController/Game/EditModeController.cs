@@ -75,6 +75,7 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             tileMapController.ClearAvailableToPlacingItem();
             _controllingItem.SetActive(false);
+            cameraController.UnLockCamera();
             _isInit  = false;
             _isPause = false;
         }
@@ -97,6 +98,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public async void OnConfirmPlaceDirt()
         {
+            _isPause = true;
             UIManager.Instance.ShowLoading();
             _controllingItem.SetActive(false);
             await NakamaEditFarmService.Instance.PlaceTileRpcAsync(_invenItemData.key, new Position
@@ -104,6 +106,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 x = _currentPosition.x,
                 y = _currentPosition.y
             });
+            _isPause = false;
             GameController.Instance.ExitEditMode();
             UIManager.Instance.HideLoading();
         }

@@ -12,8 +12,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 inventoryTileKey = inventoryTileKey,
                 position         = position
             });
-            await NakamaUserService.Instance.LoadInventoriesAsync();
-            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+            
+            var loadInventoriesTask = NakamaUserService.Instance.LoadInventoriesAsync();
+            var broadcastTask       = NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+
+            await Task.WhenAll(loadInventoriesTask, broadcastTask);
         }
     }
 }
