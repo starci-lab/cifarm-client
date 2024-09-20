@@ -108,6 +108,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
         
         [JsonProperty("plantCurrentState")]
         public PlantCurrentState plantCurrentState;
+
+        [JsonProperty("thiefedBy")]
+        public List<string> thiefedBy;
     }
     public enum PlantCurrentState
     {
