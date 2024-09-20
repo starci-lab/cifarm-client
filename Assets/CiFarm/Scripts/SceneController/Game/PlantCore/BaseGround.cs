@@ -73,5 +73,15 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             GameController.Instance.OnClickGround(this);
         }
 
+        public void ClearGround()
+        {
+            if (plant)
+            {
+                SimplePool.Despawn(plant.gameObject);
+            }
+            dirtData = null;
+            plant    = null;
+            SimplePool.Despawn(gameObject);
+        }
     }
 }

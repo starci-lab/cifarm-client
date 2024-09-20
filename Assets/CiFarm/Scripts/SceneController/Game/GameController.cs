@@ -260,12 +260,10 @@ namespace CiFarm.Scripts.SceneController.Game
             if (placedItem.isPlanted)
             {
                 var prefabPlantData =
-                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.crop
-                        .key);
+                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.crop.key);
                 // var plantObj = Instantiate(prefabPlantData);
-                var plantObj = SimplePool.Spawn(prefabPlantData, Vector3.zero, prefabPlantData.transform.rotation);
-
-                var plant = plantObj.GetComponent<BasePlant>();
+                var plantObj = SimplePool.Spawn(prefabPlantData, Vector3.zero, Quaternion.identity);
+                var plant    = plantObj.GetComponent<BasePlant>();
                 plant.SetPlantState(placedItem.seedGrowthInfo.currentStage);
                 dirtScript.SetPlant(plant);
             }
@@ -286,12 +284,7 @@ namespace CiFarm.Scripts.SceneController.Game
             _baseGrounds.Reverse();
             foreach (var dirt in _baseGrounds)
             {
-                if (dirt.plant != null)
-                {
-                    SimplePool.Despawn(dirt.plant.gameObject);
-                }
-
-                SimplePool.Despawn(dirt.gameObject);
+                dirt.ClearGround();
             }
 
             _baseGrounds.Clear();
