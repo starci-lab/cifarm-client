@@ -187,7 +187,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 InventoryId = data.referenceKey
             });
 
-            editModeController.SetUpEditMode();
+            editModeController.SetUpEditMode(data);
         }
 
         public void ExitEditMode()

@@ -5093,6 +5093,7 @@ MonoBehaviour:
   interactableTileVisibleName: interactions_visible
   interactableMap: {fileID: 35937608}
   validTile: {fileID: 11400000, guid: 6ff0e98226c9dbe41b3cccccaf43ce30, type: 2}
+  validTileName: datBorder
 --- !u!1 &718507045
 GameObject:
   m_ObjectHideFlags: 0
@@ -9947,6 +9948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMapController: {fileID: 694534289}
+  cameraController: {fileID: 669348102}
 --- !u!1 &1028042058
 GameObject:
   m_ObjectHideFlags: 0

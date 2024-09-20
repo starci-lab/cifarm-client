@@ -18,10 +18,7 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
         {
             get
             {
-                DLogger.Log("Index Tool: " + _inventoryPage * 4 + _currentSelectIndex, "ToolManager");
-
                 var tool = toolDatas[_inventoryPage * 4 + _currentSelectIndex];
-                DLogger.Log("Current Tool: " + tool.toolType, "ToolManager");
                 return tool;
             }
         }
