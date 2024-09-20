@@ -105,7 +105,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             inventoryItemsData.Clear();
 
-            var rawData = NakamaAssetService.Instance.inventories;
+            var rawData = NakamaUserService.Instance.inventories;
             if (rawData == null)
             {
                 rawData = new();
@@ -157,7 +157,7 @@ namespace CiFarm.Scripts.UI.Popups
             inventoryItemsData.Clear();
             inventoryItemsData.Clear();
 
-            var rawData = NakamaAssetService.Instance.inventories;
+            var rawData = NakamaUserService.Instance.inventories;
             foreach (var data in rawData)
             {
                 ModelConfigEntity gameConfig;
@@ -200,7 +200,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             inventoryItemsData.Clear();
 
-            var rawData = NakamaAssetService.Instance.inventories;
+            var rawData = NakamaUserService.Instance.inventories;
             foreach (var data in rawData)
             {
                 ModelConfigEntity gameConfig;

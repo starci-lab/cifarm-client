@@ -34,7 +34,7 @@ namespace CiFarm.Scripts.UI.View
         protected override void OnInit()
         {
             base.OnInit();
-            NakamaAssetService.Instance.onGoldChange = (FetchUserCoin);
+            NakamaUserService.Instance.onGoldChange = (FetchUserCoin);
         }
 
         protected override void OnShown()
@@ -42,12 +42,12 @@ namespace CiFarm.Scripts.UI.View
             base.OnShown();
             FetchUserCoin();
 
-            userName.text = string.IsNullOrEmpty(NakamaAssetService.Instance.displayName)
-                ? NakamaAssetService.Instance.username
-                : NakamaAssetService.Instance.displayName;
-            userLevel.text = NakamaAssetService.Instance.playerStats.level.ToString();
-            var process = (float)NakamaAssetService.Instance.playerStats.experiences /
-                          NakamaAssetService.Instance.playerStats.experienceQuota;
+            userName.text = string.IsNullOrEmpty(NakamaUserService.Instance.displayName)
+                ? NakamaUserService.Instance.username
+                : NakamaUserService.Instance.displayName;
+            userLevel.text = NakamaUserService.Instance.playerStats.level.ToString();
+            var process = (float)NakamaUserService.Instance.playerStats.experiences /
+                          NakamaUserService.Instance.playerStats.experienceQuota;
             userExperiencesProcessed.fillAmount = process;
         }
 
@@ -133,7 +133,7 @@ namespace CiFarm.Scripts.UI.View
 
         public void FetchUserCoin()
         {
-            var targetCoin = NakamaAssetService.Instance.golds;
+            var targetCoin = NakamaUserService.Instance.golds;
             DOTween.To(() => _currentCoin, x => _currentCoin = x, targetCoin, 0.3f)
                 .OnUpdate(() => { userCoin.text = _currentCoin.ToString(); });
         }

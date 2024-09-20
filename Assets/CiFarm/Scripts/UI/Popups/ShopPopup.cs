@@ -31,7 +31,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnInit();
             shopItemLoopListView.InitListView(0, OnGetItemByIndex);
-            NakamaAssetService.Instance.onGoldChange = (FetchUserCoin);
+            NakamaUserService.Instance.onGoldChange = (FetchUserCoin);
         }
 
         protected override void OnShowing()
@@ -97,7 +97,7 @@ namespace CiFarm.Scripts.UI.Popups
         }
         public void FetchUserCoin()
         {
-            var targetCoin = NakamaAssetService.Instance.golds;
+            var targetCoin = NakamaUserService.Instance.golds;
             DOTween.To(() => _currentCoin, x => _currentCoin = x, targetCoin, 0.3f)
                 .OnUpdate(() => { userWallet.text = _currentCoin.ToString(); });
         }

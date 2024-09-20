@@ -2,17 +2,15 @@ using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using Nakama;
 using Newtonsoft.Json;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Profiling.Memory.Experimental;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
-    public class NakamaAssetService : ManualSingletonMono<NakamaAssetService>
+    public class NakamaUserService : ManualSingletonMono<NakamaUserService>
     {
         public UnityAction onGoldChange;
         public override void Awake()

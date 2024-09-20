@@ -44,7 +44,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             
             DLogger.Log("DeliverProductsAsync", "Nakama - Delivering Products", LogColors.LimeGreen);
             LoadDeliveringProductsAsync();
-            NakamaAssetService.Instance.LoadInventoriesAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
         }
         
         public async void RetainProductsAsync(List<DeliveringProduct> deliveringProduct)
@@ -58,7 +58,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             
             DLogger.Log("RetainProductsAsync", "Nakama - Delivering Products", LogColors.LimeGreen);
             LoadDeliveringProductsAsync();
-            NakamaAssetService.Instance.LoadInventoriesAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
         }
 
     }

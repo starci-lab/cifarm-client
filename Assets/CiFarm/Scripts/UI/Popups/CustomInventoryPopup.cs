@@ -138,7 +138,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             inventoryItemsData.Clear();
 
-            var rawData = NakamaAssetService.Instance.inventories;
+            var rawData = NakamaUserService.Instance.inventories;
             if (rawData == null || rawData.Count == 0)
             {
                 rawData = new();
@@ -172,7 +172,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             inventoryItemsData.Clear();
 
-            var rawData = NakamaAssetService.Instance.inventories;
+            var rawData = NakamaUserService.Instance.inventories;
             if (rawData == null || rawData.Count == 0)
             {
                 rawData = new();
