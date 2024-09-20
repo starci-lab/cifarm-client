@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CiFarm.Scripts.Services;
@@ -8,6 +9,7 @@ using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
 using Imba.Audio;
 using Imba.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,6 +20,8 @@ namespace CiFarm.Scripts.UI.Popups
         [SerializeField] private List<RoadsideItem> roadsideItems;
 
         [Unity.Collections.ReadOnly] public List<RoadSideItemData> roadsideData;
+
+        [SerializeField] private TextMeshProUGUI timerNextDelivery;
 
         private UnityAction _onClose;
 
@@ -86,6 +90,13 @@ namespace CiFarm.Scripts.UI.Popups
                     roadsideItems[i].SetProductOnSale(item.SpriteItemProduct, item.Quantity, item.Premium);
                 }
             }
+            
+            
+            DateTime utcNow = DateTime.UtcNow;
+            DateTime nextDay = utcNow.Date.AddDays(1);
+            double secondsRemaining = (nextDay - utcNow).TotalSeconds;
+           StartCoroutine(StartTimerClock(secondsRemaining));
+
         }
 
         /// <summary>
@@ -129,6 +140,32 @@ namespace CiFarm.Scripts.UI.Popups
             _onClose?.Invoke();
         }
 
+        private IEnumerator StartTimerClock(double remainTimeInSec)
+        {
+            var timerDisplayLeft = remainTimeInSec;
+            while (timerDisplayLeft > 0)
+            {
+                var hours   = timerDisplayLeft / 3600;
+                var minutes = (timerDisplayLeft % 3600) / 60;
+                var seconds = timerDisplayLeft % 60;
+
+                if (hours > 0)
+                {
+                    timerNextDelivery.SetText($"{hours:D2}:{minutes:D2}:{seconds:D2}");
+                }
+                else
+                {
+                    timerNextDelivery.SetText($"{minutes:D2}:{seconds:D2}");
+                }
+
+                timerNextDelivery.SetActive(true);
+
+                yield return new WaitForSeconds(1);
+                timerDisplayLeft--;
+            }
+        }
+
+        
         #region NAKAMA
 
         /// <summary>
@@ -198,6 +235,6 @@ namespace CiFarm.Scripts.UI.Popups
         public string ReferenceKey;
         public Sprite SpriteItemProduct;
         public int    Quantity;
-        public bool    Premium;
+        public bool   Premium;
     }
 }
