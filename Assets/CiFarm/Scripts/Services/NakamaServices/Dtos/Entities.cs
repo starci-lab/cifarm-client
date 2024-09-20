@@ -68,10 +68,13 @@ namespace CiFarm.Scripts.Services.NakamaServices
     }
 
     [Serializable]
-    public class CentralMatchInfo
+    public class MatchInfo
     {
-        [JsonProperty("matchId")]
-        public string matchId;
+        [JsonProperty("centralMatchId")]
+        public string centralMatchId;
+
+        [JsonProperty("timerMatchId")]
+        public string timerMatchId;
     }
 
 
@@ -151,6 +154,15 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("placedItems")]
         public List<PlacedItem> placedItems;
     }
+
+
+    [Serializable]
+    public class NextDeliveryTime
+    {
+        [JsonProperty("time")]
+        public long time;
+    }
+
 
     [Serializable]
     public class DeliveringProduct

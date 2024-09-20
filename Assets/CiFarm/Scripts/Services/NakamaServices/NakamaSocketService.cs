@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -28,7 +29,30 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
             yield return new WaitUntil(() => initialized);
             //register event
-            socket.ReceivedMatchState += OnReceivedMatchState;
+            centralSocket.ReceivedMatchState += (matchState) =>
+            {
+                var opCode = (OpCode)matchState.OpCode;
+                switch (opCode)
+                {
+                    case OpCode.PlacedItems:
+                        {
+                            OnPlacedItemsStateReceived(matchState);
+                            break;
+                        }
+                }
+            };
+            timerSocket.ReceivedMatchState += (matchState) =>
+            {
+                var opCode = (OpCode)matchState.OpCode;
+                switch (opCode)
+                {
+                    case OpCode.NextDeliveryTime:
+                        {
+                            OnNextDeliveryTimeStateReceived(matchState);
+                            break;
+                        }
+                }
+            };
         }
 
         public async Task ForceCentralBroadcastInstantlyRpcAsync()
@@ -43,19 +67,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [ReadOnly]
         public List<PlacedItem> placedItems;
 
-        private void OnReceivedMatchState(IMatchState matchState)
-        {
-            Debug.Log("called");
-            var opCode = (OpCode)matchState.OpCode;
-            switch (opCode)
-            {
-                case OpCode.PlacedItems:
-                    {
-                        OnPlacedItemsStateReceived(matchState);
-                        break;
-                    }
-            }
-        }
+        [ReadOnly]
+        public long nextDeliveryTime;
 
         private void OnPlacedItemsStateReceived(IMatchState matchState)
         {
@@ -65,13 +78,24 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 DLogger.Log($"{placedItems.Count} placed items loaded. See the inspector for details.", "Nakama - Placed Items State", LogColors.Aquamarine);
             }
-            
+
             OnFetchPlacedDataFromServer?.Invoke();
+        }
+
+        private void OnNextDeliveryTimeStateReceived(IMatchState matchState)
+        {
+            var content = Encoding.UTF8.GetString(matchState.State);
+            nextDeliveryTime = JsonConvert.DeserializeObject<NextDeliveryTime>(content).time;
+            if (debugPlacedItems)
+            {
+                DLogger.Log($"Next delivery time loaded. See the inspector for details.", "Nakama - Next Delivery Time State", LogColors.Aquamarine);
+            }
         }
 
         [HideInInspector]
 
-        public ISocket socket = null;
+        public ISocket centralSocket = null;
+        public ISocket timerSocket = null;
 
         private bool initialized = false;
         private async void InitializeAsync()
@@ -80,8 +104,13 @@ namespace CiFarm.Scripts.Services.NakamaServices
             var session = NakamaInitializerService.Instance.session;
 
             //connect to socket
-            socket = client.NewSocket(true);
-            await socket.ConnectAsync(session);
+            centralSocket = client.NewSocket(true);
+            timerSocket = client.NewSocket(true);
+            await Task.WhenAll(
+                centralSocket.ConnectAsync(session),
+                timerSocket.ConnectAsync(session)
+            );
+
             initialized = true;
 
             var objects = await client.ReadStorageObjectsAsync(session, new Nakama.IApiReadStorageObjectId[]
@@ -89,15 +118,20 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 new StorageObjectId()
                 {
                     Collection = CollectionType.System.GetStringValue(),
-                    Key = SystemKey.CentralMatchInfo.GetStringValue(),
+                    Key = SystemKey.MatchInfo.GetStringValue(),
+
                 }
             });
 
-            var centralMatchInfo = JsonConvert.DeserializeObject<CentralMatchInfo>(objects.Objects.First().Value);
-            var matchId = centralMatchInfo.matchId;
+            var matchInfo = JsonConvert.DeserializeObject<MatchInfo>(objects.Objects.First().Value);
+            var centralMatchId = matchInfo.centralMatchId;
+            var timerMatchId = matchInfo.timerMatchId;
 
             //join
-            await socket.JoinMatchAsync(matchId);
+            await Task.WhenAll(
+                centralSocket.JoinMatchAsync(centralMatchId),
+                timerSocket.JoinMatchAsync(timerMatchId)
+            );
         }
     }
 }

@@ -78,9 +78,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             //    network = "testnet",
             //}
             {
-                message = "84651c85-519b-46ec-ab16-4fc9b8a72aab",
-                publicKey = "0xd0e698A8FEebE32106E607aDFe4368FD781d8822",
-                signature = "0x63ebbbda7852a919eb45da72f8a98d1ded1a83237c2f2a2e02ef228d2d5391567bc6051fef89c5c49412b2feb79756035e00de30d7aafdaafd7b257fb50276d81b",
+                message = "1cde8eaa-739c-4bc6-ab86-f35d15eb6e6b",
+                publicKey = "0x453Ef991B58486851B7a4D477fc69Be2906Ff0FB",
+                signature = "0x11edf2a629655cb05a5e30da96ff8bb49694369fe0ca350a3c271fe4fe284caf0f882918978a5a8a0ca743f5f671580ad3800a3b887b57397af5bbd519a830f71c",
                 chainKey = "avalanche",
                 network = "testnet",
             }

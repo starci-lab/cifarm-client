@@ -37,7 +37,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
     public enum SystemKey
     {
-        [EnumStringValue("centralMatchInfo")]
-        CentralMatchInfo
+        [EnumStringValue("matchInfo")]
+        MatchInfo
     }
 }
