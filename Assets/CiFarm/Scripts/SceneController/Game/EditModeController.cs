@@ -77,7 +77,6 @@ namespace CiFarm.Scripts.SceneController.Game
             _controllingItem.SetActive(false);
             _isInit  = false;
             _isPause = false;
-            GameController.Instance.ExitEditMode();
         }
 
         public void ShowConfirmPopup()
@@ -105,7 +104,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 x = _currentPosition.x,
                 y = _currentPosition.y
             });
-            ExitEditMode();
+            GameController.Instance.ExitEditMode();
             UIManager.Instance.HideLoading();
         }
     }

@@ -73,12 +73,12 @@ namespace CiFarm.Scripts.SceneController.Game
         public void HandleClickMyGround(BaseGround clickedGround)
         {
             // Not init ground
-            DLogger.Log("CLICKED " + clickedGround.dirtData.ToString());
+            DLogger.Log("CLICKED "+ clickedGround.dirtData.ToString());
             if (string.IsNullOrEmpty(clickedGround.dirtData.key))
             {
                 return;
             }
-
+            
             // Planting
             if (!clickedGround.dirtData.isPlanted)
             {
@@ -202,6 +202,8 @@ namespace CiFarm.Scripts.SceneController.Game
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
             _gameView.Show();
             _editView.Hide();
+
+            editModeController.ExitEditMode();
         }
 
         public void OnVisitUser(bool status)
