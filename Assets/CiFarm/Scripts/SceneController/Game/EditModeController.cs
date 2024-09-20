@@ -22,7 +22,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private Vector2Int _currentPosition;
 
-        private bool isInit;
+        private bool _isInit;
+        private bool _isPause;
 
         private void Awake()
         {
@@ -31,7 +32,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void Update()
         {
-            if (!isInit)
+            if (!_isInit || _isPause)
             {
                 return;
             }
@@ -63,21 +64,24 @@ namespace CiFarm.Scripts.SceneController.Game
             var prefabDirtData =
                 ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
             _controllingItem = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
-        
+
             _controllingItem.SetActive(false);
             tileMapController.DisplayAvailableToPlacingItem();
-            isInit = true;
+            _isInit  = true;
+            _isPause = false;
         }
 
         public void ExitEditMode()
         {
             tileMapController.ClearAvailableToPlacingItem();
             _controllingItem.SetActive(false);
-            isInit = false;
+            _isInit  = false;
+            _isPause = false;
         }
 
         public void ShowConfirmPopup()
         {
+            _isPause = true;
             UIManager.Instance.PopupManager.ShowMessageDialog("Confirm", "Are you sure to place crop to this position",
                 UIMessageBox.MessageBoxType.Yes_No, (st) =>
                 {
@@ -86,6 +90,7 @@ namespace CiFarm.Scripts.SceneController.Game
                         OnConfirmPlaceDirt();
                     }
 
+                    _isPause = false;
                     return true;
                 });
         }
