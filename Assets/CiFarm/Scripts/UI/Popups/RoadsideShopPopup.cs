@@ -26,7 +26,7 @@ namespace CiFarm.Scripts.UI.Popups
         private UnityAction _onClose;
 
         private DeliveringProduct rawDelivering;
-
+        private IEnumerator       timerClock;
         protected override void OnInit()
         {
             base.OnInit();
@@ -93,7 +93,13 @@ namespace CiFarm.Scripts.UI.Popups
 
 
             var remain = NakamaSocketService.Instance.nextDeliveryTime;
-            StartCoroutine(StartTimerClock(remain));
+
+            if (timerClock != null)
+            {
+                StopCoroutine(timerClock);
+            }
+            timerClock = StartTimerClock(remain);
+            StartCoroutine(timerClock);
         }
 
         /// <summary>
@@ -160,6 +166,11 @@ namespace CiFarm.Scripts.UI.Popups
                 yield return new WaitForSeconds(1);
                 timerDisplayLeft--;
             }
+        }
+
+        protected override void OnHidden()
+        {
+            base.OnHidden();
         }
 
         #region NAKAMA

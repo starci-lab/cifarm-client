@@ -26,12 +26,12 @@ public class VFXDatabase : ScriptableObject
 
 public enum VFXType
 {
-    Harvest,
-    Experience,
-    WaterCan,
-    Steal,
-    Scythe,
-    Pesticide,
-    Herbicide,
-    Fertilizer,
+    Harvest    = 1,
+    Experience = 2,
+    WaterCan   = 3,
+    Steal      = 4,
+    Scythe     = 5,
+    Pesticide  = 6,
+    Herbicide  = 7,
+    Fertilizer = 8,
 }

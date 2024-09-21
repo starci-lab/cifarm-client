@@ -161,7 +161,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 42
+  m_SortingOrder: 41
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2019596682193435496
 MonoBehaviour:
