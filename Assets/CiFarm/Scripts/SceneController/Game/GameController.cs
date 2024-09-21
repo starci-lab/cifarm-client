@@ -472,7 +472,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <param name="ground"></param>
         public async void OnHandOfMidasPlant(BaseGround ground)
         {
-            if (ground.dirtData.seedGrowthInfo.thiefedBy.Contains(NakamaUserService.Instance.userId))
+            if (ground.dirtData.seedGrowthInfo.thiefedBy != null &&
+                ground.dirtData.seedGrowthInfo.thiefedBy.Contains(NakamaUserService.Instance.userId))
             {
                 UIManager.Instance.AlertManager.ShowAlertMessage("You have already stolen this crop.");
                 return;
