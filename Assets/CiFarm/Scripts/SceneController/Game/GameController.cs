@@ -8,6 +8,7 @@ using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.UI.View.GameViewComponent;
 using CiFarm.Scripts.Utilities;
+using CiFarm.Scripts.Vfx;
 using Imba.Audio;
 using Imba.UI;
 using Imba.Utils;
@@ -72,6 +73,13 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void HandleClickMyGround(BaseGround clickedGround)
         {
+            // Not init ground
+            DLogger.Log("CLICKED " + clickedGround.dirtData.ToString());
+            if (string.IsNullOrEmpty(clickedGround.dirtData.key))
+            {
+                return;
+            }
+
             // Planting
             if (!clickedGround.dirtData.isPlanted)
             {
@@ -192,7 +200,6 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void ExitEditMode()
         {
-            // Resume Realtime
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
             _gameView.Show();
             _editView.Hide();
@@ -200,7 +207,7 @@ namespace CiFarm.Scripts.SceneController.Game
             editModeController.ExitEditMode();
         }
 
-        public void OnVisitUser(bool status)
+        public async void OnVisitUser(bool status)
         {
             if (status)
             {
@@ -214,6 +221,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 });
             }
 
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
             UIManager.Instance.HideTransition(() =>
             {
                 if (!status)
@@ -349,10 +357,13 @@ namespace CiFarm.Scripts.SceneController.Game
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
                 await NakamaFarmingService.Instance.HarvestCropAsync(ground.dirtData.key);
 
-                UIManager.Instance.AlertManager.ShowAlertMessage("Get " +
-                                                                 ground.dirtData.seedGrowthInfo
-                                                                     .harvestQuantityRemaining +
-                                                                 " " + ground.dirtData.seedGrowthInfo.crop.key);
+                PlayHarvestEf(ground.transform.position, ground.dirtData.seedGrowthInfo.crop.key, ground.dirtData
+                    .seedGrowthInfo
+                    .harvestQuantityRemaining);
+                // UIManager.Instance.AlertManager.ShowAlertMessage("Get " +
+                //                                                  ground.dirtData.seedGrowthInfo
+                //                                                      .harvestQuantityRemaining +
+                //                                                  " " + ground.dirtData.seedGrowthInfo.crop.key);
                 ground.RemovePlant();
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -376,8 +387,11 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Watering);
                 await NakamaFarmingService.Instance.WaterAsync(ground.dirtData.key);
+
+                EffectService.Instance.PlayVFX(VFXType.WaterCan, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Watering);
+
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -400,8 +414,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaFarmingService.Instance.UsePesticideAsync(ground.dirtData.key);
+                EffectService.Instance.PlayVFX(VFXType.Pesticide, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -424,8 +439,10 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaFarmingService.Instance.UseHerbicideAsync(ground.dirtData.key);
+                EffectService.Instance.PlayVFX(VFXType.Herbicide, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
+
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -455,13 +472,27 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <param name="ground"></param>
         public async void OnHandOfMidasPlant(BaseGround ground)
         {
+            if (ground.dirtData.seedGrowthInfo.thiefedBy != null &&
+                ground.dirtData.seedGrowthInfo.thiefedBy.Contains(NakamaUserService.Instance.userId))
+            {
+                UIManager.Instance.AlertManager.ShowAlertMessage("You have already stolen this crop.");
+                return;
+            }
+
+            if (ground.dirtData.seedGrowthInfo.harvestQuantityRemaining ==
+                ground.dirtData.seedGrowthInfo.crop.minHarvestQuantity)
+            {
+                UIManager.Instance.AlertManager.ShowAlertMessage("This crop has reached the minimum harvest quantity");
+                return;
+            }
+
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
                 await NakamaFarmingService.Instance.ThiefCropAsync(_friendItemData.userId, ground.dirtData.key);
-
-                UIManager.Instance.AlertManager.ShowAlertMessage("Get " + 1 + " " +
-                                                                 ground.dirtData.seedGrowthInfo.crop.key);
+                PlayHarvestEf(ground.transform.position, ground.dirtData.seedGrowthInfo.crop.key, 1);
+                // UIManager.Instance.AlertManager.ShowAlertMessage("Get " + 1 + " " +
+                //                                                  ground.dirtData.seedGrowthInfo.crop.key);
 
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -485,8 +516,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Watering);
                 await NakamaFarmingService.Instance.HelpWaterAsync(_friendItemData.userId, ground.dirtData.key);
+                EffectService.Instance.PlayVFX(VFXType.WaterCan, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Watering);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -509,8 +541,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaFarmingService.Instance.HelpUsePesticideAsync(_friendItemData.userId, ground.dirtData.key);
+                EffectService.Instance.PlayVFX(VFXType.Pesticide, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -533,8 +566,10 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaFarmingService.Instance.HelpUseHerbicideAsync(_friendItemData.userId, ground.dirtData.key);
+                EffectService.Instance.PlayVFX(VFXType.Herbicide, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
+
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -544,6 +579,19 @@ namespace CiFarm.Scripts.SceneController.Game
         }
 
         #endregion
+
+        #endregion
+
+        #region EF
+
+        private void PlayHarvestEf(Vector3 positionSpawn, string itemRefId, int quantity)
+        {
+            var harvestObject = EffectService.Instance.PlayVFX(VFXType.Harvest, positionSpawn, 1f);
+            var harvestEf     = harvestObject.GetComponent<HarvestEf>();
+
+            var model = ResourceService.Instance.ModelGameObjectConfig.GetPlant(itemRefId);
+            harvestEf.Init(model.GameHarvestIcon, quantity, 4);
+        }
 
         #endregion
     }

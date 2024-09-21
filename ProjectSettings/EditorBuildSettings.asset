@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CiFarm/Scenes/GameScene.unity
     guid: 84504f2763dd7534d94f51e75ad72c33
-  - enabled: 1
-    path: Assets/CiFarm/Scenes/MainScene.unity
-    guid: 8c0a058aca37b694a91cf3f29ee911e1
   m_configObjects: {}

@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 6693157797563031162}
   - component: {fileID: 7705744654907592501}
   - component: {fileID: 3112657604779473215}
+  - component: {fileID: 374563676962013783}
+  - component: {fileID: 8306669354461030226}
   m_Layer: 0
   m_Name: NakamaService
   m_TagString: Untagged
@@ -56,9 +58,9 @@ MonoBehaviour:
   host: api.cifarm-server.starci.net
   port: 443
   serverKey: defaultkey
-  message: 1ccd5c84-93c9-4bb9-default-285b4c5405e2
-  publicKey: default
-  signature: default
+  message: 5e411bff-09c1-461a-b654-80e10ec9d664
+  publicKey: 0xBbe3dBA9d49Ac48953B695f79bD755afeE0924bb
+  signature: 0xe955ba83eeac72c3ab6350bc7252956319e8273cd6b2e95e94a4bf1f9cb35f2c03d2e65bb0f0bb5ff21d310ee3de91cb3477565ae0fcae8e145a7d18eda3de581c
   chainKey: avalanche
   authenticated: 0
 --- !u!114 &1602844812581178767
@@ -73,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25e91cdc0f4fe84a85ef17ecd46714f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeds: []
+  crops: []
   tiles: []
   animals: []
 --- !u!114 &6616302030822056925
@@ -90,6 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugPlacedItems: 1
   placedItems: []
+  nextDeliveryTime: 0
 --- !u!114 &1483126429237669449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +117,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9882119fc2e0f014991903965ee15156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userId: 
+  username: 
+  displayName: 
+  avatarUrl: 
+  metadata:
+    key: 
+    accountAddress: 
+    chainKey: 
+    network: 
+  playerStats:
+    key: 
+    experiences: 0
+    experienceQuota: 0
+    level: 0
   golds: 0
   inventoryPage: 0
   inventories: []
@@ -157,5 +174,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70bc44b9ae652da4b8ed1e074c6e47fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &374563676962013783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328878227380581963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74022c9a680455ab496165ad72e1e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8306669354461030226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328878227380581963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddae6aed3ab44119b4cb6660ec2ccf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

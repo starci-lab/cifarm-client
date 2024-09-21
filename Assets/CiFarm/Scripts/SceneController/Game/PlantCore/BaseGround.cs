@@ -48,6 +48,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                         break;
                 }
             }
+
         }
 
         public void SetPlant(BasePlant plantToSet)
@@ -79,9 +80,12 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             {
                 SimplePool.Despawn(plant.gameObject);
             }
-            dirtData = null;
+
             plant    = null;
+            dirtData = null;
             SimplePool.Despawn(gameObject);
         }
+
+     
     }
 }

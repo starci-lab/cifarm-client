@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CiFarm.Scripts.Services;
@@ -8,6 +9,7 @@ using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
 using Imba.Audio;
 using Imba.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,10 +21,12 @@ namespace CiFarm.Scripts.UI.Popups
 
         [Unity.Collections.ReadOnly] public List<RoadSideItemData> roadsideData;
 
+        [SerializeField] private TextMeshProUGUI timerNextDelivery;
+
         private UnityAction _onClose;
 
         private DeliveringProduct rawDelivering;
-
+        private IEnumerator       timerClock;
         protected override void OnInit()
         {
             base.OnInit();
@@ -86,6 +90,16 @@ namespace CiFarm.Scripts.UI.Popups
                     roadsideItems[i].SetProductOnSale(item.SpriteItemProduct, item.Quantity, item.Premium);
                 }
             }
+
+
+            var remain = NakamaSocketService.Instance.nextDeliveryTime;
+
+            if (timerClock != null)
+            {
+                StopCoroutine(timerClock);
+            }
+            timerClock = StartTimerClock(remain);
+            StartCoroutine(timerClock);
         }
 
         /// <summary>
@@ -127,6 +141,36 @@ namespace CiFarm.Scripts.UI.Popups
             base.OnHiding();
             NakamaRoadsideShopService.Instance.OnDeliveringProductsUpdated = null;
             _onClose?.Invoke();
+        }
+
+        private IEnumerator StartTimerClock(double remainTimeInSec)
+        {
+            var timerDisplayLeft = remainTimeInSec;
+            while (timerDisplayLeft > 0)
+            {
+                int hours   = (int)(timerDisplayLeft / 3600); // Convert to int
+                int minutes = (int)((timerDisplayLeft % 3600) / 60); // Convert to int
+                int seconds = (int)(timerDisplayLeft % 60); // Convert to int
+
+                if (hours > 0)
+                {
+                    timerNextDelivery.SetText($"{hours:D2}:{minutes:D2}:{seconds:D2}");
+                }
+                else
+                {
+                    timerNextDelivery.SetText($"{minutes:D2}:{seconds:D2}");
+                }
+
+                timerNextDelivery.SetActive(true);
+
+                yield return new WaitForSeconds(1);
+                timerDisplayLeft--;
+            }
+        }
+
+        protected override void OnHidden()
+        {
+            base.OnHidden();
         }
 
         #region NAKAMA
@@ -198,6 +242,6 @@ namespace CiFarm.Scripts.UI.Popups
         public string ReferenceKey;
         public Sprite SpriteItemProduct;
         public int    Quantity;
-        public bool    Premium;
+        public bool   Premium;
     }
 }

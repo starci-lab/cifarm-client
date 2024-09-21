@@ -114,6 +114,7 @@ namespace CiFarm.Scripts.UI.Popups
                         ItemId   = data.referenceKey,
                         Quantity = data.quantity,
                         IconItem = data.iconItem,
+                        
                         CanSell  = true,
                         ConfirmCallBack = (quantity) =>
                         {
@@ -158,9 +159,11 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    key = data.key,
-                    referenceKey      = data.referenceKey,
+                    key          = data.key,
+                    referenceKey = data.referenceKey,
                     quantity     = data.quantity,
+                    isUnique     = data.unique,
+                    isPremium    = data.isPremium,
                     iconItem     = gameConfig.GameShopIcon
                 });
             }
@@ -192,9 +195,11 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    key = data.key,
-                    referenceKey      = data.referenceKey,
+                    key          = data.key,
+                    referenceKey = data.referenceKey,
                     quantity     = data.quantity,
+                    isUnique     = data.unique,
+                    isPremium    = data.isPremium,
                     iconItem     = gameConfig.GameHarvestIcon
                 });
             }

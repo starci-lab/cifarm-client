@@ -92,11 +92,11 @@ namespace CiFarm.Scripts.UI.Popups
         {
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ItemDetailPopup, new ItemDetailPopupParam
             {
-                ItemId          = data.referenceKey,
-                Quantity        = data.quantity,
-                IconItem        = data.iconItem,
-                CanPlace        = data.type == InventoryType.Tile,
-                CanSell         = false,
+                ItemId   = data.referenceKey,
+                Quantity = data.quantity,
+                IconItem = data.iconItem,
+                CanPlace = data.type == InventoryType.Tile,
+                CanSell  = false,
                 ConfirmCallBack = (dt) =>
                 {
                     if (data.type == InventoryType.Tile)
@@ -114,8 +114,9 @@ namespace CiFarm.Scripts.UI.Popups
         private void PlacingItem(InvenItemData data)
         {
             Hide(true);
-            GameController.Instance.EnterEditMode( data);
+            GameController.Instance.EnterEditMode(data);
         }
+
         #region NAKAMA
 
         public void LoadAllUserItem()
@@ -157,8 +158,8 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    key = data.key,
-                    referenceKey      = data.referenceKey,
+                    key          = data.key,
+                    referenceKey = data.referenceKey,
                     quantity     = data.quantity,
                     isUnique     = data.unique,
                     iconItem     = icon,
@@ -190,8 +191,8 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    key = data.key,
-                    referenceKey      = data.referenceKey,
+                    key          = data.key,
+                    referenceKey = data.referenceKey,
                     type         = data.type,
                     isUnique     = data.unique,
                     quantity     = data.quantity,
@@ -212,6 +213,42 @@ namespace CiFarm.Scripts.UI.Popups
         public void LoadAllUserItemByTile()
         {
             inventoryItemsData.Clear();
+
+            var rawData = NakamaUserService.Instance.inventories;
+            if (rawData == null)
+            {
+                rawData = new();
+            }
+
+            foreach (var data in rawData)
+            {
+                ModelConfigEntity gameConfig;
+                switch (data.type)
+                {
+                    case InventoryType.Tile:
+                        gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(data.referenceKey);
+                        break;
+                    default:
+                        continue;
+                }
+
+                var icon = data.type == InventoryType.PlantHarvested
+                    ? gameConfig.GameHarvestIcon
+                    : gameConfig.GameShopIcon;
+
+
+                inventoryItemsData.Add(new InvenItemData
+                {
+                    key          = data.key,
+                    referenceKey = data.referenceKey,
+                    quantity     = data.quantity,
+                    isUnique     = data.unique,
+                    iconItem     = icon,
+                    isPremium    = data.isPremium,
+                    type         = data.type
+                });
+            }
+
             ResetGridView();
         }
 
@@ -234,8 +271,8 @@ namespace CiFarm.Scripts.UI.Popups
 
                 inventoryItemsData.Add(new InvenItemData
                 {
-                    key = data.key,
-                    referenceKey      = data.referenceKey,
+                    key          = data.key,
+                    referenceKey = data.referenceKey,
                     quantity     = data.quantity,
                     isUnique     = data.unique,
                     iconItem     = gameConfig.GameHarvestIcon,

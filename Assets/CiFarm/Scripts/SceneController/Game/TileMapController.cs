@@ -98,7 +98,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public void SetFakeGround(Vector3 position, GameObject objectPlaced)
+        public Vector2Int SetFakeGround(Vector3 position, GameObject objectPlaced)
         {
             var worldPosition = Camera.main.ScreenToWorldPoint(position);
             worldPosition.z = 0;
@@ -110,21 +110,23 @@ namespace CiFarm.Scripts.SceneController.Game
 
             if (tile != null && tile.name == validTileName)
             {
-                tileCenterPosition.z =  0;
-                tileCenterPosition.y += interactableMap.cellSize.y / 2.0f;
-                objectPlaced.transform.position = tileCenterPosition;
+                tileCenterPosition.z            =  0;
+                tileCenterPosition.y            += interactableMap.cellSize.y / 2.0f;
+                objectPlaced.transform.position =  tileCenterPosition;
             }
             else
             {
-                if (tile == null)
-                {
-                    DLogger.Log("No tile at this position (NULL)", "TileManager", LogColors.Lime);
-                }
-                else
-                {
-                    DLogger.Log($"Tile name: {tile.name}", "TileManager", LogColors.Lime);
-                }
+                // if (tile == null)
+                // {
+                //     DLogger.Log("No tile at this position (NULL)", "TileManager", LogColors.Lime);
+                // }
+                // else
+                // {
+                //     DLogger.Log($"Tile name: {tile.name}", "TileManager", LogColors.Lime);
+                // }
             }
+
+            return (Vector2Int)cellPosition;
         }
 
         private void Update()

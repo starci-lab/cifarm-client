@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -118,7 +119,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             onGoldChange?.Invoke();
         }
 
-        public async void LoadInventoriesAsync()
+        public async Task LoadInventoriesAsync()
         {
             try
             {
