@@ -27,7 +27,6 @@ public class VFXDatabase : ScriptableObject
 public enum VFXType
 {
     Harvest,
-    Water,
     Experience,
     WaterCan,
     Steal,

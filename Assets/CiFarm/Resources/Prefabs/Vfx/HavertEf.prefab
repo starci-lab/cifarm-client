@@ -264,6 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1056897277191460249}
+  - component: {fileID: 3184981285980485429}
   m_Layer: 0
   m_Name: HavertEf
   m_TagString: Untagged
@@ -288,3 +289,17 @@ Transform:
   - {fileID: 688830056860884016}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3184981285980485429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919471309350851279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a6d070c0b2ac449b79e80db1661aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 7915561539594979726}
+  textValue: {fileID: 2019596682193435496}
