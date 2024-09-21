@@ -387,10 +387,11 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Watering);
                 await NakamaFarmingService.Instance.WaterAsync(ground.dirtData.key);
 
                 EffectService.Instance.PlayVFX(VFXType.WaterCan, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Watering);
+
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -413,9 +414,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaFarmingService.Instance.UsePesticideAsync(ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.Pesticide, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -438,9 +439,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaFarmingService.Instance.UseHerbicideAsync(ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.Herbicide, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
 
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -514,10 +515,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Watering);
                 await NakamaFarmingService.Instance.HelpWaterAsync(_friendItemData.userId, ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.WaterCan, ground.transform.position, 1f);
-
+                AudioManager.Instance.PlaySFX(AudioName.Watering);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -540,9 +540,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaFarmingService.Instance.HelpUsePesticideAsync(_friendItemData.userId, ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.Pesticide, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -565,9 +565,9 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                AudioManager.Instance.PlaySFX(AudioName.Spray);
                 await NakamaFarmingService.Instance.HelpUseHerbicideAsync(_friendItemData.userId, ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.Herbicide, ground.transform.position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
 
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
