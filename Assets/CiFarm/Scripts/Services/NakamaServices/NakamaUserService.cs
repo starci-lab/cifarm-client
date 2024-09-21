@@ -15,6 +15,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
     public class NakamaUserService : ManualSingletonMono<NakamaUserService>
     {
         public UnityAction onGoldChange;
+        public UnityAction onPlayerStatsUpdate;
         public override void Awake()
         {
             base.Awake();
@@ -104,6 +105,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 }
             });
             playerStats = JsonConvert.DeserializeObject<PlayerStats>(objects.Objects.First().Value); 
+            onPlayerStatsUpdate?.Invoke();
+            
         }
 
         public async void LoadWalletAsync()

@@ -129,15 +129,6 @@ namespace CiFarm.Scripts.SceneController.Game
             return (Vector2Int)cellPosition;
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                DLogger.Log("Gotcha");
-                DisplayAvailableToPlacingItem();
-            }
-        }
-
         public void DisplayAvailableToPlacingItem()
         {
             foreach (var position in gameTileMap.cellBounds.allPositionsWithin)

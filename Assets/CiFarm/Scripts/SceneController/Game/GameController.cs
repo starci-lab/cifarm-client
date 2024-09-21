@@ -360,10 +360,9 @@ namespace CiFarm.Scripts.SceneController.Game
                 PlayHarvestEf(ground.transform.position, ground.dirtData.seedGrowthInfo.crop.key, ground.dirtData
                     .seedGrowthInfo
                     .harvestQuantityRemaining);
-                // UIManager.Instance.AlertManager.ShowAlertMessage("Get " +
-                //                                                  ground.dirtData.seedGrowthInfo
-                //                                                      .harvestQuantityRemaining +
-                //                                                  " " + ground.dirtData.seedGrowthInfo.crop.key);
+                PlayExperiencesEf(ground.transform.position,
+                    ground.dirtData.seedGrowthInfo.crop.basicHarvestExperiences);
+
                 ground.RemovePlant();
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -388,10 +387,9 @@ namespace CiFarm.Scripts.SceneController.Game
             try
             {
                 await NakamaFarmingService.Instance.WaterAsync(ground.dirtData.key);
-
                 EffectService.Instance.PlayVFX(VFXType.WaterCan, ground.transform.position, 1f);
+                PlayExperiencesEf(ground.transform.position, ExperienceConstants.ExperienceFromActivity);
                 AudioManager.Instance.PlaySFX(AudioName.Watering);
-
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -416,6 +414,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 await NakamaFarmingService.Instance.UsePesticideAsync(ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.Pesticide, ground.transform.position, 1f);
+                PlayExperiencesEf(ground.transform.position, ExperienceConstants.ExperienceFromActivity);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -441,6 +440,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 await NakamaFarmingService.Instance.UseHerbicideAsync(ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.Herbicide, ground.transform.position, 1f);
+                PlayExperiencesEf(ground.transform.position, ExperienceConstants.ExperienceFromActivity);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
 
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
@@ -491,9 +491,8 @@ namespace CiFarm.Scripts.SceneController.Game
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
                 await NakamaFarmingService.Instance.ThiefCropAsync(_friendItemData.userId, ground.dirtData.key);
                 PlayHarvestEf(ground.transform.position, ground.dirtData.seedGrowthInfo.crop.key, 1);
-                // UIManager.Instance.AlertManager.ShowAlertMessage("Get " + 1 + " " +
-                //                                                  ground.dirtData.seedGrowthInfo.crop.key);
-
+                PlayExperiencesEf(ground.transform.position, ExperienceConstants.ExperienceFromActivity);
+     
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -518,6 +517,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 await NakamaFarmingService.Instance.HelpWaterAsync(_friendItemData.userId, ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.WaterCan, ground.transform.position, 1f);
+                PlayExperiencesEf(ground.transform.position, ExperienceConstants.ExperienceFromActivity);
                 AudioManager.Instance.PlaySFX(AudioName.Watering);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -543,6 +543,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 await NakamaFarmingService.Instance.HelpUsePesticideAsync(_friendItemData.userId, ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.Pesticide, ground.transform.position, 1f);
+                PlayExperiencesEf(ground.transform.position, ExperienceConstants.ExperienceFromActivity);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -568,8 +569,8 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 await NakamaFarmingService.Instance.HelpUseHerbicideAsync(_friendItemData.userId, ground.dirtData.key);
                 EffectService.Instance.PlayVFX(VFXType.Herbicide, ground.transform.position, 1f);
+                PlayExperiencesEf(ground.transform.position, ExperienceConstants.ExperienceFromActivity);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
-
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -591,6 +592,27 @@ namespace CiFarm.Scripts.SceneController.Game
 
             var model = ResourceService.Instance.ModelGameObjectConfig.GetPlant(itemRefId);
             harvestEf.Init(model.GameHarvestIcon, quantity, 4);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                PlayExperiencesEf(new Vector3(0, 0, 0), 99);
+            }
+        }
+
+        private void PlayExperiencesEf(Vector3 positionSpawn, int experienceEarn)
+        {
+            var rectPosition = Camera.main!.WorldToScreenPoint(positionSpawn);
+            var vfxObj       = EffectService.Instance.PlayVFX(VFXType.Experience, rectPosition);
+            var vfxControl   = vfxObj.GetComponent<ExperienceEf>();
+
+            vfxObj.transform.SetParent(_gameView.transform);
+            vfxControl.InitEf(_gameView.ExperienceBar, experienceEarn, () =>
+            {
+                NakamaUserService.Instance.LoadPlayerStatsAsync();
+            });
         }
 
         #endregion

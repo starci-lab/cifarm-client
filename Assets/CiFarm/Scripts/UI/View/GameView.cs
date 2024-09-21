@@ -21,13 +21,15 @@ namespace CiFarm.Scripts.UI.View
     {
         [SerializeField] private TextMeshProUGUI userName;
         [SerializeField] private TextMeshProUGUI userLevel;
+        [SerializeField] private Transform       experiencesBar;
         [SerializeField] private Image           userExperiencesProcessed;
         [SerializeField] private TextMeshProUGUI userCoin;
         [SerializeField] private TextMeshProUGUI userNtfCoinA;
         [SerializeField] private TextMeshProUGUI userNtfCoinB;
         [SerializeField] private ToolManager     toolManager;
 
-        public ToolManager ToolManager => toolManager;
+        public Transform   ExperienceBar => userExperiencesProcessed.transform;
+        public ToolManager ToolManager   => toolManager;
 
         private int _currentCoin;
 
@@ -49,6 +51,14 @@ namespace CiFarm.Scripts.UI.View
             var process = (float)NakamaUserService.Instance.playerStats.experiences /
                           NakamaUserService.Instance.playerStats.experienceQuota;
             userExperiencesProcessed.fillAmount = process;
+
+            NakamaUserService.Instance.onPlayerStatsUpdate = OnPlayerStatsUpdate;
+        }
+
+        protected override void OnHiding()
+        {
+            base.OnHiding();
+            NakamaUserService.Instance.onPlayerStatsUpdate = null;
         }
 
         #region UI BUTTON
@@ -125,6 +135,15 @@ namespace CiFarm.Scripts.UI.View
         {
             DLogger.Log("CLOSED POPUP");
             GameController.Instance.CameraController.UnLockCamera();
+        }
+
+        private void OnPlayerStatsUpdate()
+        {
+            var process = (float)NakamaUserService.Instance.playerStats.experiences /
+                          NakamaUserService.Instance.playerStats.experienceQuota;
+
+            userExperiencesProcessed.DOFillAmount(process, 0.2f);
+            experiencesBar.transform.DOShakePosition(0.2f, new Vector3(2.5f, 0, 2.5f));
         }
 
         #endregion
