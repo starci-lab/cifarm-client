@@ -90,8 +90,10 @@ namespace CiFarm.Scripts.SceneController.Game
                     {
                         OnConfirmPlaceDirt();
                     }
-
-                    _isPause = false;
+                    else
+                    {
+                        _isPause = false;
+                    }
                     return true;
                 });
         }
