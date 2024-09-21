@@ -11,16 +11,20 @@ namespace CiFarm.Scripts.UI.View
     public class VisitViewParam
     {
         public string userName;
-        public int userLevel;
+        public int    userLevel;
         public float  userLevelProcess;
         public Sprite userAva;
     }
+
     public class VisitView : UIView
     {
         [SerializeField] private TextMeshProUGUI userName;
         [SerializeField] private TextMeshProUGUI userLevel;
         [SerializeField] private Image           userExperiencesProcessed;
         [SerializeField] private ToolManager     toolManager;
+        [SerializeField] private Transform       fakeEx;
+
+        public Transform ExperienceBar => fakeEx;
 
         public ToolManager ToolManager => toolManager;
 

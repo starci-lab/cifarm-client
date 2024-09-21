@@ -492,7 +492,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 await NakamaFarmingService.Instance.ThiefCropAsync(_friendItemData.userId, ground.dirtData.key);
                 PlayHarvestEf(ground.transform.position, ground.dirtData.seedGrowthInfo.crop.key, 1);
                 PlayExperiencesEf(ground.transform.position, ExperienceConstants.ExperienceFromActivity);
-     
+
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -594,25 +594,20 @@ namespace CiFarm.Scripts.SceneController.Game
             harvestEf.Init(model.GameHarvestIcon, quantity, 4);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                PlayExperiencesEf(new Vector3(0, 0, 0), 99);
-            }
-        }
-
         private void PlayExperiencesEf(Vector3 positionSpawn, int experienceEarn)
         {
             var rectPosition = Camera.main!.WorldToScreenPoint(positionSpawn);
-            var vfxObj       = EffectService.Instance.PlayVFX(VFXType.Experience, rectPosition);
-            var vfxControl   = vfxObj.GetComponent<ExperienceEf>();
 
-            vfxObj.transform.SetParent(_gameView.transform);
-            vfxControl.InitEf(_gameView.ExperienceBar, experienceEarn, () =>
-            {
-                NakamaUserService.Instance.LoadPlayerStatsAsync();
-            });
+
+            var vfxObj     = EffectService.Instance.PlayVFX(VFXType.Experience, rectPosition);
+            var vfxControl = vfxObj.GetComponent<ExperienceEf>();
+
+            var targetFly    = _friendItemData == null ? _gameView.ExperienceBar : _visitView.ExperienceBar;
+            var parentCanvas = _friendItemData == null ? _gameView.transform : _visitView.transform;
+
+            vfxObj.transform.SetParent(parentCanvas);
+
+            vfxControl.InitEf(targetFly, experienceEarn, () => { NakamaUserService.Instance.LoadPlayerStatsAsync(); });
         }
 
         #endregion
