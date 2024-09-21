@@ -1,5 +1,5 @@
 mergeInto(LibraryManager.library, {
-  Quit: function (userName, score) {
+  Quit: function () {
     window.dispatchReactUnityEvent("Quit");
   },
 });
