@@ -14,6 +14,7 @@ namespace CiFarm.Scripts.Services
 
         public override void Awake()
         {
+            base.Awake();
             dic = new();
             foreach (var item in Database.entries)
             {

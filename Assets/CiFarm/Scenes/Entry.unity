@@ -155,29 +155,11 @@ Transform:
   - {fileID: 1298724190}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &121461703 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7699049026401565824, guid: 88d9b321d46951b49b12d58ab4e830b0, type: 3}
-  m_PrefabInstance: {fileID: 3045574163749731587}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &121461704 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6654582206117817647, guid: 88d9b321d46951b49b12d58ab4e830b0, type: 3}
   m_PrefabInstance: {fileID: 3045574163749731587}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &121461705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 121461703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af802f4a967fae409633a7a34f23961, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Database: {fileID: 0}
 --- !u!1 &232146016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,10 +2708,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7070011561205548465, guid: 88d9b321d46951b49b12d58ab4e830b0, type: 3}
-      propertyPath: listAtlasData.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7699049026401565824, guid: 88d9b321d46951b49b12d58ab4e830b0, type: 3}
       propertyPath: m_Name
       value: EffectService
@@ -2737,10 +2715,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7699049026401565824, guid: 88d9b321d46951b49b12d58ab4e830b0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 121461705}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88d9b321d46951b49b12d58ab4e830b0, type: 3}
 --- !u!1001 &6966371345340147135
 PrefabInstance:
@@ -2793,6 +2768,18 @@ PrefabInstance:
     - target: {fileID: 2328878227380581963, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: m_Name
       value: NakamaService
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: message
+      value: e035b238-5903-49ba-936c-3bfe1b07268c
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: publicKey
+      value: 0xF0e0E2de882d49646995B329d90b259448295814
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: signature
+      value: 0x1df17c3b7553c7e371d85488f94af1b2d601a914dff517c0aaff3f2f86e7f1727cddae377150b52db06dc867f668c3ec680e832346be95d10085c1411e7f4b021c
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
