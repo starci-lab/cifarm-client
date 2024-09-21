@@ -352,6 +352,12 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <param name="ground"></param>
         public async void OnHarvestPlant(BaseGround ground)
         {
+            if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Scythe)
+            {
+                DLogger.Log("Current tool is not Scythe.");
+                return;
+            }
+
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
@@ -472,6 +478,12 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <param name="ground"></param>
         public async void OnHandOfMidasPlant(BaseGround ground)
         {
+            if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Steal)
+            {
+                DLogger.Log("Current tool is not Steal.");
+                return;
+            }
+            
             if (ground.dirtData.seedGrowthInfo.thiefedBy != null &&
                 ground.dirtData.seedGrowthInfo.thiefedBy.Contains(NakamaUserService.Instance.userId))
             {
@@ -606,7 +618,7 @@ namespace CiFarm.Scripts.SceneController.Game
             var parentCanvas = _friendItemData == null ? _gameView.transform : _visitView.transform;
 
             vfxObj.transform.SetParent(parentCanvas);
-
+            vfxObj.transform.localScale = Vector3.one;
             vfxControl.InitEf(targetFly, experienceEarn, () => { NakamaUserService.Instance.LoadPlayerStatsAsync(); });
         }
 

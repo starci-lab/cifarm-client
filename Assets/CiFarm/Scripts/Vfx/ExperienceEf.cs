@@ -18,6 +18,7 @@ namespace CiFarm.Scripts.Vfx
         private List<GameObject> _starTracking;
 
         private UnityAction _onCompleteAnimation;
+
         private void Awake()
         {
             _starTracking = new List<GameObject>();
@@ -29,7 +30,7 @@ namespace CiFarm.Scripts.Vfx
             _starTracking.Clear();
             _targetPosition      = targetPositionFLyTo;
             _onCompleteAnimation = onCompleteAnimation;
-            
+
             var spawnNumber = Random.Range(numberStarSpawnMin, numberStarMax);
 
             for (int i = 0; i < NumberOfEf; i++)
@@ -37,6 +38,7 @@ namespace CiFarm.Scripts.Vfx
                 Debug.Log(i.ToString());
                 var objet = SimplePool.Spawn(starEf, transform.position, Quaternion.identity);
                 objet.SetParent(transform);
+                objet.transform.localScale = Vector3.one;
                 _starTracking.Add(objet);
             }
 
