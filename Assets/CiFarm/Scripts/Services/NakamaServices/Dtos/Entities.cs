@@ -33,6 +33,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("nextGrowthStageAfterHarvest")]
         public int nextGrowthStageAfterHarvest;
+
+        [JsonProperty("basicHarvestExperiences")]
+        public int basicHarvestExperiences;
+
+        [JsonProperty("premiumHarvestExperiences")]
+        public int premiumHarvestExperiences;
     }
 
     [Serializable]
