@@ -1,7 +1,7 @@
-using Imba.Utils;
 using System.Runtime.InteropServices;
+using Imba.Utils;
 
-namespace CiFarm.Scripts.Services.BrowserService
+namespace CiFarm.Scripts.Services
 {
     public class BrowserService : ManualSingletonMono<BrowserService>
     {

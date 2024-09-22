@@ -1,3 +1,4 @@
+using CiFarm.Scripts.Services;
 using CiFarm.Scripts.UI.View;
 using Imba.Audio;
 using Imba.UI;
@@ -41,7 +42,10 @@ namespace CiFarm.Scripts.UI.Popups
         {
             Hide();
         }
-
+        public void BTN_QuitGame()
+        {
+            BrowserService.Instance.HandleQuit();
+        }
         public void OnChangeMusic(float value)
         {
             AudioManager.Instance.SetMusicVolume(value);
