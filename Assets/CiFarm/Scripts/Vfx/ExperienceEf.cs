@@ -26,7 +26,6 @@ namespace CiFarm.Scripts.Vfx
 
         public void InitEf(Transform targetPositionFLyTo, int NumberOfEf, UnityAction onCompleteAnimation)
         {
-            Debug.Log("spawnNumber.ToString()");
             _starTracking.Clear();
             _targetPosition      = targetPositionFLyTo;
             _onCompleteAnimation = onCompleteAnimation;
@@ -35,7 +34,6 @@ namespace CiFarm.Scripts.Vfx
 
             for (int i = 0; i < NumberOfEf; i++)
             {
-                Debug.Log(i.ToString());
                 var objet = SimplePool.Spawn(starEf, transform.position, Quaternion.identity);
                 objet.SetParent(transform);
                 objet.transform.localScale = Vector3.one;
