@@ -8,6 +8,7 @@ using Imba.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -315,6 +316,17 @@ namespace Imba.Audio
 
                         s.Source.mute = _isMuteSfx;
                     }
+                }
+            }
+        }
+
+        public void StopAllMusic()
+        {
+            foreach (var s in _database.Where(o => o.Type == AudioType.BGM))
+            {
+                if (s.Source != null)
+                {
+                    s.Source.Stop();
                 }
             }
         }

@@ -29,7 +29,7 @@ namespace CiFarm.Scripts.UI.Popups
                 _onClose = param.callBack;
             }
         }
-        
+
         protected override void OnHiding()
         {
             base.OnHiding();
@@ -40,12 +40,15 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void BTN_Home()
         {
+            AudioManager.Instance.StopAllMusic();
             Hide();
         }
+
         public void BTN_QuitGame()
         {
             BrowserService.Instance.HandleQuit();
         }
+
         public void OnChangeMusic(float value)
         {
             AudioManager.Instance.SetMusicVolume(value);
@@ -55,10 +58,10 @@ namespace CiFarm.Scripts.UI.Popups
         {
             AudioManager.Instance.SetAudioVolume(value);
         }
+
         public void OnDoneEdit()
         {
             AudioManager.Instance.PlaySFX(AudioName.Click4);
-
         }
     }
 }
