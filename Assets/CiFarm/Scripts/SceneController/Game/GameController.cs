@@ -478,7 +478,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <param name="ground"></param>
         public async void OnHandOfMidasPlant(BaseGround ground)
         {
-            if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Steal)
+            if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Steal)
             {
                 DLogger.Log("Current tool is not Steal.");
                 return;
