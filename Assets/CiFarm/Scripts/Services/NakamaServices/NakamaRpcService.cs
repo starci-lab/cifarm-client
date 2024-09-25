@@ -669,6 +669,35 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         #endregion
+        #region ConstructBuilding
+
+        public class ConstructBuildingRpcParams
+        {
+            [JsonProperty("key")]
+            public string Key { get; set; }
+
+            [JsonProperty("position")]
+            public Position Position { get; set; }
+        }
+
+        public class ConstructBuildingRpcResponse
+        {
+            [JsonProperty("buildingKey")]
+            public string BuildingKey { get; set; }
+        }
+
+        public async Task<ConstructBuildingRpcResponse> ConstructBuildingRpcAsync(ConstructBuildingRpcParams _params)
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "construct_building", JsonConvert.SerializeObject(_params));
+
+            return JsonConvert.DeserializeObject<ConstructBuildingRpcResponse>(result.Payload);
+        }
+
+        #endregion
+
 
         #region RecoverTileRpc
 
