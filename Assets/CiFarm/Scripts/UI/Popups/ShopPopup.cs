@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Shop;
@@ -122,6 +123,7 @@ namespace CiFarm.Scripts.UI.Popups
                 {
                     itemKey      = data.key,
                     textItemName = gameConfig.ItemName,
+                    shopType     = ShopType.Seed,
                     // textItemTimeDetail   = (data.growthStageDuration).ToString(),
                     // textItemProfitDetail = data.maxHarvestQuantity.ToString(),
                     textItemTimeDetail =
@@ -171,6 +173,7 @@ namespace CiFarm.Scripts.UI.Popups
                 shopItemsData.Add(new ShopItemData
                 {
                     itemKey              = data.key,
+                    shopType             = ShopType.Building,
                     textItemName         = gameConfig.ItemName,
                     textItemTimeDetail   = detail.ItemDescription,
                     textItemProfitDetail = "",
@@ -182,10 +185,34 @@ namespace CiFarm.Scripts.UI.Popups
             ResetListView();
         }
 
-        public async void OnClickBuyItem(ShopItemData item)
+        private void OnClickBuyItem(ShopItemData item)
         {
-            DLogger.Log("Buy Item: " + item.textItemName, "SHOP");
+            //Validate
+            if (_currentCoin < int.Parse(item.textItemPrice))
+            {
+                UIManager.Instance.PopupManager.ShowMessageDialog("Buy fail",
+                    "You do not have enough gold to buy this item", UIMessageBox.MessageBoxType.OK);
+                NakamaUserService.Instance.LoadWalletAsync();
+                return;
+            }
 
+            DLogger.Log("Buy Item: " + item.textItemName, "SHOP");
+            switch (item.shopType)
+            {
+                case ShopType.Seed:
+                case ShopType.Animal:
+                    BuyToInventory(item);
+                    break;
+                case ShopType.Building:
+                    ConstructionBuilding(item);
+                    break;
+                case ShopType.Tree:
+                    break;
+            }
+        }
+
+        private async void BuyToInventory(ShopItemData item)
+        {
             try
             {
                 var resultData = await NakamaRpcService.Instance.BuySeedRpcAsync(
@@ -205,17 +232,41 @@ namespace CiFarm.Scripts.UI.Popups
             }
         }
 
+        private void ConstructionBuilding(ShopItemData item)
+        {
+            Hide(true);
+            GameController.Instance.EnterEditMode(new InvenItemData
+            {
+                key          = item.itemKey,
+                referenceKey = item.itemKey,
+                quantity     = 1,
+                isPremium    = false,
+                isUnique     = false,
+                type         = InventoryType.Building,
+                iconItem     = item.iconItem
+            });
+        }
+
         #endregion
     }
 
     [System.Serializable]
     public class ShopItemData
     {
-        public string itemKey;
-        public string textItemName;
-        public string textItemTimeDetail;
-        public string textItemProfitDetail;
-        public string textItemPrice;
-        public Sprite iconItem;
+        public string   itemKey;
+        public string   textItemName;
+        public string   textItemTimeDetail;
+        public string   textItemProfitDetail;
+        public string   textItemPrice;
+        public ShopType shopType;
+        public Sprite   iconItem;
+    }
+
+    public enum ShopType
+    {
+        Seed,
+        Animal,
+        Building,
+        Tree
     }
 }

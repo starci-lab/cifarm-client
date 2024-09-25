@@ -1,3 +1,4 @@
+using System;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
@@ -61,8 +62,35 @@ namespace CiFarm.Scripts.SceneController.Game
         public void SetUpEditMode(InvenItemData data)
         {
             _invenItemData = data;
-            var prefabDirtData =
-                ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
+            GameObject prefabDirtData;
+            switch (data.type)
+            {
+                case InventoryType.Seed:
+                    prefabDirtData =
+                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
+                    break;
+                case InventoryType.Tile:
+                    prefabDirtData =
+                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
+                    break;
+                case InventoryType.Animal:
+                    prefabDirtData =
+                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
+                    break;
+                case InventoryType.Building:
+                     prefabDirtData =
+                        ResourceService.Instance.ModelGameObjectConfig.GetConstructionObjectModel(_invenItemData.referenceKey);
+                    break;
+                case InventoryType.PlantHarvested:
+                    prefabDirtData =
+                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
+                    break;
+                default:
+                    prefabDirtData =
+                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
+                    break;
+            }
+            
             _controllingItem = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
 
             _controllingItem.SetActive(false);
