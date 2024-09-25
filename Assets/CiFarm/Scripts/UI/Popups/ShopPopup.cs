@@ -18,16 +18,17 @@ namespace CiFarm.Scripts.UI.Popups
     public class ShopPopup : UIPopup
     {
         [SerializeField] private TextMeshProUGUI userWallet;
-        [SerializeField] private LoopListView2 shopItemLoopListView;
-        [SerializeField] private ShopTab       seedTab;
-        [SerializeField] private ShopTab       animaTab;
-        [SerializeField] private ShopTab       buildingTab;
-        [SerializeField] private ShopTab       treeTab;
+        [SerializeField] private LoopListView2   shopItemLoopListView;
+        [SerializeField] private ShopTab         seedTab;
+        [SerializeField] private ShopTab         animaTab;
+        [SerializeField] private ShopTab         buildingTab;
+        [SerializeField] private ShopTab         treeTab;
 
         private UnityAction        _onClose;
         public  List<ShopItemData> shopItemsData;
 
         public int _currentCoin = 0;
+
         protected override void OnInit()
         {
             base.OnInit();
@@ -97,12 +98,14 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnHidden();
         }
+
         public void FetchUserCoin()
         {
             var targetCoin = NakamaUserService.Instance.golds;
             DOTween.To(() => _currentCoin, x => _currentCoin = x, targetCoin, 0.3f)
                 .OnUpdate(() => { userWallet.text = _currentCoin.ToString(); });
         }
+
         #region NAKAMA COMMUNICATE
 
         public void LoadItemShopSeed()
@@ -114,12 +117,15 @@ namespace CiFarm.Scripts.UI.Popups
             foreach (var data in rawData)
             {
                 var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+
                 shopItemsData.Add(new ShopItemData
                 {
-                    itemKey              = data.key,
-                    textItemName         = gameConfig.ItemName,
-                    textItemTimeDetail   = (data.growthStageDuration).ToString(),
-                    textItemProfitDetail = data.maxHarvestQuantity.ToString(),
+                    itemKey      = data.key,
+                    textItemName = gameConfig.ItemName,
+                    // textItemTimeDetail   = (data.growthStageDuration).ToString(),
+                    // textItemProfitDetail = data.maxHarvestQuantity.ToString(),
+                    textItemTimeDetail   = "Plant Time: " + data.growthStageDuration + " per stage",
+                    textItemProfitDetail = "Products: " + data.maxHarvestQuantity,
                     textItemPrice        = data.price.ToString(),
                     iconItem             = gameConfig.GameShopIcon
                 });
@@ -132,7 +138,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             ClearSelectedShop();
             animaTab.SetSelect(true);
-            
+
             shopItemsData.Clear();
             ResetListView();
         }
@@ -141,25 +147,27 @@ namespace CiFarm.Scripts.UI.Popups
         {
             ClearSelectedShop();
             treeTab.SetSelect(true);
-            
+
             shopItemsData.Clear();
             ResetListView();
         }
+
         public void LoadItemShopByBuilding()
         {
             ClearSelectedShop();
             seedTab.SetSelect(true);
-            var rawData = NakamaLoaderService.Instance.crops;
+            var rawData = NakamaLoaderService.Instance.buildings;
             shopItemsData.Clear();
             foreach (var data in rawData)
             {
                 var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+                var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(data.key);
                 shopItemsData.Add(new ShopItemData
                 {
                     itemKey              = data.key,
                     textItemName         = gameConfig.ItemName,
-                    textItemTimeDetail   = (data.growthStageDuration).ToString(),
-                    textItemProfitDetail = data.maxHarvestQuantity.ToString(),
+                    textItemTimeDetail   = detail.ItemDescription,
+                    textItemProfitDetail = "",
                     textItemPrice        = data.price.ToString(),
                     iconItem             = gameConfig.GameShopIcon
                 });
@@ -167,6 +175,7 @@ namespace CiFarm.Scripts.UI.Popups
 
             ResetListView();
         }
+
         public async void OnClickBuyItem(ShopItemData item)
         {
             DLogger.Log("Buy Item: " + item.textItemName, "SHOP");
@@ -184,7 +193,8 @@ namespace CiFarm.Scripts.UI.Popups
             }
             catch (Exception e)
             {
-                UIManager.Instance.PopupManager.ShowMessageDialog("Buy fail","You do not have enough gold to buy this item", UIMessageBox.MessageBoxType.OK);
+                UIManager.Instance.PopupManager.ShowMessageDialog("Buy fail",
+                    "You do not have enough gold to buy this item", UIMessageBox.MessageBoxType.OK);
                 DLogger.LogWarning("Buy Item error: " + e.Message, "SHOP");
             }
         }

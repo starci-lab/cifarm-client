@@ -37,6 +37,7 @@ namespace CiFarm.Scripts.Services.GameDatas
     {
         Seed,
         Tile,
-        Product
+        Product,
+        Building
     }
 }

@@ -64,3 +64,11 @@ MonoBehaviour:
     itemName: NFT crop
     type: 1
     itemDescription: NFT crop
+  - key: coop
+    itemName: Coop
+    type: 3
+    itemDescription: Chicken coop
+  - key: pasture
+    itemName: Pasture
+    type: 3
+    itemDescription: Cow pasture
