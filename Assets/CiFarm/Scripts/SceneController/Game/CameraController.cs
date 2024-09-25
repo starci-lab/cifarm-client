@@ -49,6 +49,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 return;
             }
+
             HandleCameraDrag();
             HandleZoom();
         }
@@ -82,12 +83,31 @@ namespace CiFarm.Scripts.SceneController.Game
 
         void HandleZoom()
         {
-            var scrollInput = Input.GetAxis("Mouse ScrollWheel");
-
-            if (scrollInput != 0f)
+            if (Input.touchSupported && Input.touchCount == 2)
             {
-                targetZoom -= scrollInput * zoomSpeed;
+                var touchZero = Input.GetTouch(0);
+                var touchOne  = Input.GetTouch(1);
+
+                var touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+                var touchOnePrevPos  = touchOne.position - touchOne.deltaPosition;
+
+                var prevTouchDeltaMag  = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                var touchDeltaMag      = (touchZero.position - touchOne.position).magnitude;
+                var deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+                targetZoom += deltaMagnitudeDiff * zoomSpeed * Time.deltaTime;
                 targetZoom =  Mathf.Clamp(targetZoom, minZoom, maxZoom);
+            }
+            else
+            {
+                // Mouse scroll input for zoom (if applicable)
+                var scrollInput = Input.GetAxis("Mouse ScrollWheel");
+
+                if (scrollInput != 0f)
+                {
+                    targetZoom -= scrollInput * zoomSpeed;
+                    targetZoom =  Mathf.Clamp(targetZoom, minZoom, maxZoom);
+                }
             }
 
             mainCam.DOOrthoSize(targetZoom, zoomSmoothTime);

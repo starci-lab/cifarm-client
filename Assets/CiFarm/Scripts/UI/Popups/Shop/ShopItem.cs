@@ -19,15 +19,15 @@ namespace CiFarm.Scripts.UI.Popups.Shop
 
         public void InitData(ShopItemData data, UnityAction<ShopItemData> callBack)
         {
-            _shopItemData             = data;
-            _buyAction                = callBack;
-            textItemName.text         = data.textItemName;
-            textItemTimeDetail.text   = data.textItemTimeDetail;
+            _shopItemData              = data;
+            _buyAction                 = callBack;
+            textItemName.text          = data.textItemName;
+            textItemTimeDetail.text    = data.textItemTimeDetail;
             textItemProductDetail.text = data.textItemProfitDetail;
-            textItemPrice.text        = data.textItemPrice + "$";
-            iconItem.sprite           = data.iconItem;
+            textItemPrice.text         = data.textItemPrice + "$";
+            iconItem.sprite            = data.iconItem;
         }
-    
+
         public void OnBuy()
         {
             _buyAction?.Invoke(_shopItemData);
