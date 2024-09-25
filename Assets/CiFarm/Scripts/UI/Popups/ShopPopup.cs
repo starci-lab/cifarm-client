@@ -34,7 +34,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnInit();
             shopItemLoopListView.InitListView(0, OnGetItemByIndex);
-            NakamaUserService.Instance.onGoldChange = (FetchUserCoin);
+            NakamaUserService.Instance.OnGoldChange = (FetchUserCoin);
         }
 
         protected override void OnShowing()

@@ -36,7 +36,7 @@ namespace CiFarm.Scripts.UI.View
         protected override void OnInit()
         {
             base.OnInit();
-            NakamaUserService.Instance.onGoldChange = (FetchUserCoin);
+            NakamaUserService.Instance.OnGoldChange = (FetchUserCoin);
         }
 
         protected override void OnShown()
@@ -52,13 +52,13 @@ namespace CiFarm.Scripts.UI.View
                           NakamaUserService.Instance.playerStats.experienceQuota;
             userExperiencesProcessed.fillAmount = process;
 
-            NakamaUserService.Instance.onPlayerStatsUpdate = OnPlayerStatsUpdate;
+            NakamaUserService.Instance.OnPlayerStatsUpdate = OnPlayerStatsUpdate;
         }
 
         protected override void OnHiding()
         {
             base.OnHiding();
-            NakamaUserService.Instance.onPlayerStatsUpdate = null;
+            NakamaUserService.Instance.OnPlayerStatsUpdate = null;
         }
 
         #region UI BUTTON
