@@ -11,7 +11,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
         Crops,
 
         [EnumStringValue("Animals")]
-        Animals,
+        Animals,    
+        [EnumStringValue("Buildings")]
+        Buildings,
 
         [EnumStringValue("Tiles")]
         Tiles,

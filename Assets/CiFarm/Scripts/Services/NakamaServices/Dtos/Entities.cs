@@ -72,7 +72,18 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("offspringPrice")]
         public int offspringPrice;
     }
+    [Serializable]
+    public class Building
+    {
+        [JsonProperty("key")]
+        public string key;
 
+        [JsonProperty("price")]
+        public long price;
+        [JsonProperty("availableInShop")]
+        public bool availableInShop;
+
+    }
     [Serializable]
     public class MatchInfo
     {

@@ -21,6 +21,7 @@ namespace CiFarm.Scripts.UI.Popups
         [SerializeField] private LoopListView2 shopItemLoopListView;
         [SerializeField] private ShopTab       seedTab;
         [SerializeField] private ShopTab       animaTab;
+        [SerializeField] private ShopTab       buildingTab;
         [SerializeField] private ShopTab       treeTab;
 
         private UnityAction        _onClose;
@@ -61,6 +62,7 @@ namespace CiFarm.Scripts.UI.Popups
             seedTab.SetSelect();
             animaTab.SetSelect();
             treeTab.SetSelect();
+            buildingTab.SetSelect();
         }
 
         private LoopListViewItem2 OnGetItemByIndex(LoopListView2 listView, int index)
@@ -143,7 +145,28 @@ namespace CiFarm.Scripts.UI.Popups
             shopItemsData.Clear();
             ResetListView();
         }
+        public void LoadItemShopByBuilding()
+        {
+            ClearSelectedShop();
+            seedTab.SetSelect(true);
+            var rawData = NakamaLoaderService.Instance.crops;
+            shopItemsData.Clear();
+            foreach (var data in rawData)
+            {
+                var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+                shopItemsData.Add(new ShopItemData
+                {
+                    itemKey              = data.key,
+                    textItemName         = gameConfig.ItemName,
+                    textItemTimeDetail   = (data.growthStageDuration).ToString(),
+                    textItemProfitDetail = data.maxHarvestQuantity.ToString(),
+                    textItemPrice        = data.price.ToString(),
+                    iconItem             = gameConfig.GameShopIcon
+                });
+            }
 
+            ResetListView();
+        }
         public async void OnClickBuyItem(ShopItemData item)
         {
             DLogger.Log("Buy Item: " + item.textItemName, "SHOP");
