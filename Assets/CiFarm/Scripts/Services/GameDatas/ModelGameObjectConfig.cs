@@ -11,11 +11,9 @@ namespace CiFarm.Scripts.Services.GameDatas
     {
         [SerializeField] private List<ModelConfigEntity> tileMapper;
         [SerializeField] private List<ModelConfigEntity> plantMapper;
-        [SerializeField] private List<ModelConfigEntity> productMapper;
 
-        public List<ModelConfigEntity> TileMapper         => tileMapper;
-        public List<ModelConfigEntity> PlantMapper        => plantMapper;
-        public List<ModelConfigEntity> ProductMapper      => productMapper;
+        public List<ModelConfigEntity> TileMapper    => tileMapper;
+        public List<ModelConfigEntity> PlantMapper   => plantMapper;
 
         public GameObject GetTileObjectModel(string keyToFind)
         {
@@ -41,7 +39,6 @@ namespace CiFarm.Scripts.Services.GameDatas
             return result.PrefabModel;
         }
 
-   
         public ModelConfigEntity GetPlant(string keyToFind)
         {
             var result = PlantMapper.FirstOrDefault(o => o.Key == keyToFind);
@@ -66,35 +63,6 @@ namespace CiFarm.Scripts.Services.GameDatas
             return result;
         }
 
-
-        public ModelConfigEntity GetProductModel(string keyToFind)
-        {
-            var result = productMapper.FirstOrDefault(o => o.Key == keyToFind);
-            if (result == null)
-            {
-                DLogger.LogError("GetProductModel not found for: " + keyToFind, "ModelGameObjectConfig");
-                return productMapper[0];
-            }
-
-            return result;
-        }
-
-        public ModelConfigEntity GetAnyMatchId(string keyToFind)
-        {
-            var result = PlantMapper.FirstOrDefault(o => o.Key == keyToFind);
-            if (result != null)
-            {
-                return result;
-            }
-
-            result = tileMapper.FirstOrDefault(o => o.Key == keyToFind);
-            if (result != null)
-            {
-                return result;
-            }
-
-            return result;
-        }
     }
 
     [Serializable]
@@ -102,12 +70,14 @@ namespace CiFarm.Scripts.Services.GameDatas
     {
         [SerializeField] private string     key;
         [SerializeField] private string     itemName;
+        [SerializeField] private Vector2Int size = Vector2Int.one;
         [SerializeField] private GameObject prefabModel;
         [SerializeField] private Sprite     gameShopIcon;
         [SerializeField] private Sprite     gameHarvestIcon;
 
         public string Key      => key;
         public string ItemName => itemName;
+        public Vector2Int Size => size;
 
         public GameObject PrefabModel => prefabModel;
 

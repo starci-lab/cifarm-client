@@ -15,119 +15,135 @@ MonoBehaviour:
   tileMapper:
   - key: starter
     itemName: 
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: basic1
     itemName: 
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: basic2
     itemName: 
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: basic3
     itemName: 
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: basic4
     itemName: 
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: premium
     itemName: 
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: b6de7067fa900f7408a20f7263a1a552, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 41039d56d004c8940a242d7f7d43bbda, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: coop
     itemName: Coop
+    size: {x: 3, y: 3}
     prefabModel: {fileID: 5646978862015493990, guid: 34f75f98d37a46b488f986de98271fa9, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: pasture
     itemName: Pasture
+    size: {x: 3, y: 3}
+    prefabModel: {fileID: 5646978862015493990, guid: 7f097764168709d489f4de9f4226ef73, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
+    gameHarvestIcon: {fileID: 0}
+  - key: house
+    itemName: House
+    size: {x: 4, y: 4}
     prefabModel: {fileID: 5646978862015493990, guid: 7f097764168709d489f4de9f4226ef73, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
     gameHarvestIcon: {fileID: 0}
   plantMapper:
   - key: cauliflower
     itemName: Cauliflower
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 1158725481770596654, guid: 4f4b72c51e2d1644d8629d7287bd4b8c, type: 3}
     gameShopIcon: {fileID: 21300000, guid: dd497ffeb4968114aa60fc066650e589, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: 9a3d2acbec3f99d4ba1985db144d68cc, type: 3}
   - key: carrot
     itemName: Carrot
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 1158725481770596654, guid: f037a6288d43dff4ab6709dc5619e09b, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 8aa3495ff514f0a469e94ae1cbb83316, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: dfe2237f8fd9f694ba6ef243ba12b0eb, type: 3}
   - key: pineapple
     itemName: Pineapple
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 1158725481770596654, guid: a836ac0abe428844f8f4b916883480f0, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 0719284c009ca8542ac7689800a4c5d4, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: ef90404062d303e478ee7a7162dd983a, type: 3}
   - key: watermelon
     itemName: Watermelon
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 1158725481770596654, guid: 52bbf58fd026b164f84df12581310a10, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 5a4426b8877ff2241b33545eb4d1c9d3, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: adaeaaced2990024186c91cde1cd9cef, type: 3}
   - key: cucumber
     itemName: Cucumber
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 1158725481770596654, guid: 1457bcb785280af44b18d59564b2b139, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 04a4624e0da32de429ec21b5b1961554, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: 34bfa7678573cf74d81261bb459723f4, type: 3}
   - key: bellPepper
     itemName: Bell Pepper
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 1158725481770596654, guid: b82723a35cca55c488517d05e0541fb7, type: 3}
     gameShopIcon: {fileID: 21300000, guid: d6e42fd964fa4f640a6dbe9c81da3737, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: 1477943f41cea004181a76ae795c5d00, type: 3}
   - key: potato
     itemName: Potato
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 1158725481770596654, guid: 5c81c55820bd8444fadb58a75c97adf6, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 10d90b2e8bd69454f99f09abed716621, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: 5160280a488a444488012be34e7a2698, type: 3}
-  constructionMapper:
-  - key: coop
-    itemName: Coop
-    prefabModel: {fileID: 5646978862015493990, guid: 34f75f98d37a46b488f986de98271fa9, type: 3}
-    gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
-    gameHarvestIcon: {fileID: 0}
-  - key: pasture
-    itemName: Pasture
-    prefabModel: {fileID: 5646978862015493990, guid: 7f097764168709d489f4de9f4226ef73, type: 3}
-    gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
-    gameHarvestIcon: {fileID: 0}
   productMapper:
   - key: carrot
     itemName: Carrot
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 0}
     gameShopIcon: {fileID: 0}
     gameHarvestIcon: {fileID: 0}
   - key: cauliflower
     itemName: Cauliflower
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 0}
     gameShopIcon: {fileID: 0}
     gameHarvestIcon: {fileID: 0}
   - key: pineapple
     itemName: Pineapple
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 0}
     gameShopIcon: {fileID: 0}
     gameHarvestIcon: {fileID: 0}
   - key: watermelon
     itemName: Watermelon
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 0}
     gameShopIcon: {fileID: 0}
     gameHarvestIcon: {fileID: 0}
   - key: cucumber
     itemName: Cucumber
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 0}
     gameShopIcon: {fileID: 0}
     gameHarvestIcon: {fileID: 0}
   - key: bellpepper
     itemName: Bell Pepper
+    size: {x: 1, y: 1}
     prefabModel: {fileID: 0}
     gameShopIcon: {fileID: 0}
     gameHarvestIcon: {fileID: 0}
