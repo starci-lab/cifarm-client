@@ -22,8 +22,8 @@ namespace CiFarm.Scripts.UI.Popups.Shop
             _shopItemData             = data;
             _buyAction                = callBack;
             textItemName.text         = data.textItemName;
-            textItemTimeDetail.text   = "Plant Time: " + data.textItemTimeDetail + " per stage";
-            textItemProductDetail.text = "Products: " + data.textItemProfitDetail;
+            textItemTimeDetail.text   = data.textItemTimeDetail;
+            textItemProductDetail.text = data.textItemProfitDetail;
             textItemPrice.text        = data.textItemPrice + "$";
             iconItem.sprite           = data.iconItem;
         }

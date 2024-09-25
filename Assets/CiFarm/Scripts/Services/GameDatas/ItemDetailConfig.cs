@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CiFarm.Scripts.Utilities;
 using UnityEngine;
 
 namespace CiFarm.Scripts.Services.GameDatas
@@ -12,7 +13,14 @@ namespace CiFarm.Scripts.Services.GameDatas
 
         public ItemDetailConfigEntity GetItemDetail(string id)
         {
-            return itemDetail.FirstOrDefault(o => o.Key == id);
+            var rs = itemDetail.FirstOrDefault(o => o.Key == id);
+            if (rs == null)
+            {
+                DLogger.Log("Not found item detail for: " + id);
+                return null;
+            }
+
+            return rs;
         }
     }
 

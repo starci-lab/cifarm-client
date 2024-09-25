@@ -160,7 +160,11 @@ namespace CiFarm.Scripts.UI.Popups
             shopItemsData.Clear();
             foreach (var data in rawData)
             {
-                var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+                if (!data.availableInShop)
+                {
+                    continue;
+                }
+                var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetConstruction(data.key);
                 var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(data.key);
                 shopItemsData.Add(new ShopItemData
                 {
