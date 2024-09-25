@@ -83,19 +83,10 @@ namespace CiFarm.Scripts.UI.Popups
                 o.SetActive(_canPlace);
             }
 
-            if (_canSell)
-            {
-                var config = ResourceService.Instance.ShopSellConfig.GetItemDetail(_itemId);
-                basePrice          = config.SellValue;
-                textItemPrice.text = "Price: " + basePrice;
-                textItemName.text  = config.ItemName;
-            }
-            else
-            {
-                var config = ResourceService.Instance.ItemDetailConfig.GetItemDetail(_itemId);
-                textItemDetail.text = config.ItemDescription;
-                textItemName.text   = config.ItemName;
-            }
+
+            var config = ResourceService.Instance.ItemDetailConfig.GetItemDetail(_itemId);
+            textItemDetail.text = config.ItemDescription;
+            textItemName.text   = config.ItemName;
 
             UpdateCounter();
         }

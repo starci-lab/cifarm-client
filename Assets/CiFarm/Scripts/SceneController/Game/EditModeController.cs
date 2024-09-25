@@ -79,7 +79,7 @@ namespace CiFarm.Scripts.SceneController.Game
                     break;
                 case InventoryType.Building:
                      prefabDirtData =
-                        ResourceService.Instance.ModelGameObjectConfig.GetConstructionObjectModel(_invenItemData.referenceKey);
+                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
                     break;
                 case InventoryType.PlantHarvested:
                     prefabDirtData =

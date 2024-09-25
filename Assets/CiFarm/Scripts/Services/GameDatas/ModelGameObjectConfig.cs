@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CiFarm.Scripts.Utilities;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace CiFarm.Scripts.Services.GameDatas
@@ -12,12 +11,10 @@ namespace CiFarm.Scripts.Services.GameDatas
     {
         [SerializeField] private List<ModelConfigEntity> tileMapper;
         [SerializeField] private List<ModelConfigEntity> plantMapper;
-        [SerializeField] private List<ModelConfigEntity> constructionMapper;
         [SerializeField] private List<ModelConfigEntity> productMapper;
 
         public List<ModelConfigEntity> TileMapper         => tileMapper;
         public List<ModelConfigEntity> PlantMapper        => plantMapper;
-        public List<ModelConfigEntity> ConstructionMapper => constructionMapper;
         public List<ModelConfigEntity> ProductMapper      => productMapper;
 
         public GameObject GetTileObjectModel(string keyToFind)
@@ -44,18 +41,7 @@ namespace CiFarm.Scripts.Services.GameDatas
             return result.PrefabModel;
         }
 
-        public GameObject GetConstructionObjectModel(string keyToFind)
-        {
-            var result = ConstructionMapper.FirstOrDefault(o => o.Key == keyToFind);
-            if (result == null)
-            {
-                DLogger.LogError("GetConstruction not found for: " + keyToFind, "ModelGameObjectConfig");
-                return ConstructionMapper[0].PrefabModel;
-            }
-
-            return result.PrefabModel;
-        }
-
+   
         public ModelConfigEntity GetPlant(string keyToFind)
         {
             var result = PlantMapper.FirstOrDefault(o => o.Key == keyToFind);
@@ -80,17 +66,7 @@ namespace CiFarm.Scripts.Services.GameDatas
             return result;
         }
 
-        public ModelConfigEntity GetConstruction(string keyToFind)
-        {
-            var result = constructionMapper.FirstOrDefault(o => o.Key == keyToFind);
-            if (result == null)
-            {
-                DLogger.LogError("GetConstruction not found for: " + keyToFind, "ModelGameObjectConfig");
-                return PlantMapper[0];
-            }
 
-            return result;
-        }  
         public ModelConfigEntity GetProductModel(string keyToFind)
         {
             var result = productMapper.FirstOrDefault(o => o.Key == keyToFind);
@@ -112,12 +88,6 @@ namespace CiFarm.Scripts.Services.GameDatas
             }
 
             result = tileMapper.FirstOrDefault(o => o.Key == keyToFind);
-            if (result != null)
-            {
-                return result;
-            }
-
-            result = constructionMapper.FirstOrDefault(o => o.Key == keyToFind);
             if (result != null)
             {
                 return result;

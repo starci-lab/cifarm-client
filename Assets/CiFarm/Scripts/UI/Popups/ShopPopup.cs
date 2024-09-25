@@ -168,7 +168,7 @@ namespace CiFarm.Scripts.UI.Popups
                     continue;
                 }
 
-                var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetConstruction(data.key);
+                var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(data.key);
                 var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(data.key);
                 shopItemsData.Add(new ShopItemData
                 {
