@@ -70,14 +70,14 @@ namespace CiFarm.Scripts.Services.GameDatas
     {
         [SerializeField] private string     key;
         [SerializeField] private string     itemName;
-        [SerializeField] private Vector2Int size = Vector2Int.one;
+        [SerializeField] private Vector2Int tileSize = Vector2Int.one;
         [SerializeField] private GameObject prefabModel;
         [SerializeField] private Sprite     gameShopIcon;
         [SerializeField] private Sprite     gameHarvestIcon;
 
         public string Key      => key;
         public string ItemName => itemName;
-        public Vector2Int Size => size;
+        public Vector2Int TileSize => tileSize;
 
         public GameObject PrefabModel => prefabModel;
 

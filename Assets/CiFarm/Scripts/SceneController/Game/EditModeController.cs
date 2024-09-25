@@ -1,5 +1,3 @@
-using System;
-using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups;
@@ -22,6 +20,7 @@ namespace CiFarm.Scripts.SceneController.Game
         private InvenItemData _invenItemData;
 
         private Vector2Int _currentPosition;
+        private Vector2Int _currentItemSize;
 
         private bool _isInit;
         private bool _isPause;
@@ -42,7 +41,8 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 cameraController.LockCamera();
                 _controllingItem.SetActive(true);
-                _currentPosition = tileMapController.SetFakeGround(Input.mousePosition, _controllingItem);
+                _currentPosition =
+                    tileMapController.SetFakeGround(Input.mousePosition, _controllingItem, _currentItemSize);
 
                 if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
@@ -59,40 +59,15 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public void SetUpEditMode(InvenItemData data)
+        public void EnterEditMode(InvenItemData data)
         {
             _invenItemData = data;
-            GameObject prefabDirtData;
-            switch (data.type)
-            {
-                case InventoryType.Seed:
-                    prefabDirtData =
-                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
-                    break;
-                case InventoryType.Tile:
-                    prefabDirtData =
-                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
-                    break;
-                case InventoryType.Animal:
-                    prefabDirtData =
-                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
-                    break;
-                case InventoryType.Building:
-                     prefabDirtData =
-                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
-                    break;
-                case InventoryType.PlantHarvested:
-                    prefabDirtData =
-                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
-                    break;
-                default:
-                    prefabDirtData =
-                        ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(_invenItemData.referenceKey);
-                    break;
-            }
-            
-            _controllingItem = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
+            var configData = ResourceService.Instance.ModelGameObjectConfig.GetTile(_invenItemData.referenceKey);
 
+            var prefabDirtData = configData.PrefabModel;
+
+            _currentItemSize = configData.TileSize;
+            _controllingItem = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
             _controllingItem.SetActive(false);
             tileMapController.DisplayAvailableToPlacingItem();
             _isInit  = true;
@@ -122,8 +97,24 @@ namespace CiFarm.Scripts.SceneController.Game
                     {
                         _isPause = false;
                     }
+
                     return true;
                 });
+        }
+
+        public async void OnConfirmPlaceBuilding()
+        {
+            _isPause = true;
+            UIManager.Instance.ShowLoading();
+            _controllingItem.SetActive(false);
+            await NakamaEditFarmService.Instance.ConstructBuildingRpcAsync(_invenItemData.key, new Position
+            {
+                x = _currentPosition.x,
+                y = _currentPosition.y
+            });
+            _isPause = false;
+            GameController.Instance.ExitEditMode();
+            UIManager.Instance.HideLoading();
         }
 
         public async void OnConfirmPlaceDirt()

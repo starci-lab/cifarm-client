@@ -18,7 +18,7 @@ namespace CiFarm.Scripts.SceneController.Game
         public Tilemap interactableMap;
 
         public Tile   validTile;
-        public string validTileName = "";
+        public string validTileName = "datBorder";
 
         public HashSet<Vector2Int> PlacedPositionHashSet;
 
@@ -98,7 +98,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public Vector2Int SetFakeGround(Vector3 position, GameObject objectPlaced)
+        public Vector2Int SetFakeGround(Vector3 position, GameObject objectPlaced, Vector2Int itemSize)
         {
             var worldPosition = Camera.main.ScreenToWorldPoint(position);
             worldPosition.z = 0;
@@ -106,24 +106,38 @@ namespace CiFarm.Scripts.SceneController.Game
             var cellPosition       = interactableMap.WorldToCell(worldPosition);
             var tileCenterPosition = interactableMap.CellToWorld(cellPosition);
 
-            TileBase tile = interactableMap.GetTile(cellPosition);
+            var isValid = true;
 
-            if (tile != null && tile.name == validTileName)
+            if (PlacedPositionHashSet.Contains((Vector2Int)cellPosition))
+            {
+                return (Vector2Int)cellPosition;
+            }
+
+            for (int x = 0; x < itemSize.x; x++)
+            {
+                for (int y = 0; y < itemSize.y; y++)
+                {
+                    var checkPosition = new Vector3Int(cellPosition.x + x, cellPosition.y + y, cellPosition.z);
+                    var tile          = interactableMap.GetTile(checkPosition);
+
+                    if (tile == null || tile.name != validTileName)
+                    {
+                        isValid = false;
+                        break;
+                    }
+                }
+
+                if (!isValid)
+                {
+                    break;
+                }
+            }
+
+            if (isValid)
             {
                 tileCenterPosition.z            =  0;
                 tileCenterPosition.y            += interactableMap.cellSize.y / 2.0f;
                 objectPlaced.transform.position =  tileCenterPosition;
-            }
-            else
-            {
-                // if (tile == null)
-                // {
-                //     DLogger.Log("No tile at this position (NULL)", "TileManager", LogColors.Lime);
-                // }
-                // else
-                // {
-                //     DLogger.Log($"Tile name: {tile.name}", "TileManager", LogColors.Lime);
-                // }
             }
 
             return (Vector2Int)cellPosition;

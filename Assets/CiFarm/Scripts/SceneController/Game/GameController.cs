@@ -195,7 +195,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 InventoryId = data.referenceKey
             });
 
-            editModeController.SetUpEditMode(data);
+            editModeController.EnterEditMode(data);
         }
 
         public void ExitEditMode()
@@ -260,6 +260,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// </summary>
         private void LoadUserTileMap()
         {
+            TileMapController.ResetPosition();
             var rawData = NakamaSocketService.Instance.placedItems;
             foreach (var placed in rawData)
             {
@@ -269,6 +270,7 @@ namespace CiFarm.Scripts.SceneController.Game
                         PlacedDirt(placed);
                         break;
                     case PlacedItemType.Building:
+                        PlacedBuilding(placed);
                         break;
                 }
             }
