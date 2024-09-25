@@ -1319,6 +1319,7 @@ MonoBehaviour:
   toolItems:
   - {fileID: 4878487699336469972}
   - {fileID: 5346340387407951590}
+  textCurrentTool: {fileID: 8419484862819125999}
   toolDatas:
   - key: moving
     toolType: 6

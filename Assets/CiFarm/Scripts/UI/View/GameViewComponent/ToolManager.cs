@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using CiFarm.Scripts.Utilities;
+using TMPro;
 using UnityEngine;
 
 namespace CiFarm.Scripts.UI.View.GameViewComponent
 {
     public class ToolManager : MonoBehaviour
     {
-        [SerializeField] private List<ToolItem> toolItems;
+        [SerializeField] private List<ToolItem>  toolItems;
+        [SerializeField] private TextMeshProUGUI textCurrentTool;
 
         [SerializeField] public List<ToolData> toolDatas;
 
@@ -53,6 +54,15 @@ namespace CiFarm.Scripts.UI.View.GameViewComponent
             }
 
             _currentSelectIndex = index;
+            DisplayCurrenTool();
+        }
+
+        public void DisplayCurrenTool()
+        {
+            if (textCurrentTool)
+            {
+                textCurrentTool.text = CurrentTool.toolType.ToString();
+            }
         }
 
         public void OnClickLeft()

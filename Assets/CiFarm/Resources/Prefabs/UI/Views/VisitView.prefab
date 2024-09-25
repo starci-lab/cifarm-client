@@ -1214,6 +1214,7 @@ MonoBehaviour:
   - {fileID: 5346340387407951590}
   - {fileID: 7556310623403817842}
   - {fileID: 6968344629009985097}
+  textCurrentTool: {fileID: 2723328177899792788}
   toolDatas:
   - key: steal
     toolType: 1
