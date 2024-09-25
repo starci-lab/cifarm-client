@@ -124,7 +124,8 @@ namespace CiFarm.Scripts.UI.Popups
                     textItemName = gameConfig.ItemName,
                     // textItemTimeDetail   = (data.growthStageDuration).ToString(),
                     // textItemProfitDetail = data.maxHarvestQuantity.ToString(),
-                    textItemTimeDetail   = "Plant Time: " + data.growthStageDuration + " per stage",
+                    textItemTimeDetail =
+                        "Time: " + ((float)data.growthStageDuration / 60).ToString("F2") + " per stage",
                     textItemProfitDetail = "Products: " + data.maxHarvestQuantity,
                     textItemPrice        = data.price.ToString(),
                     iconItem             = gameConfig.GameShopIcon
@@ -164,6 +165,7 @@ namespace CiFarm.Scripts.UI.Popups
                 {
                     continue;
                 }
+
                 var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetConstruction(data.key);
                 var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(data.key);
                 shopItemsData.Add(new ShopItemData

@@ -273,7 +273,6 @@ namespace CiFarm.Scripts.SceneController.Game
                 }
             }
 
-            DLogger.Log("VALIDATE " + rawData.Select(o => o.key).ToList());
             TileBubbleController.Instance.ValidateBubble(
                 rawData.Select(o => o.key).ToList());
         }
