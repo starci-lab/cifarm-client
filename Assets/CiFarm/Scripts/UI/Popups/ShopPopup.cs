@@ -140,7 +140,7 @@ namespace CiFarm.Scripts.UI.Popups
         public void LoadItemShopByAnimal()
         {
             ClearSelectedShop();
-            seedTab.SetSelect(true);
+            animaTab.SetSelect(true);
             var rawData = NakamaLoaderService.Instance.animals;
             shopItemsData.Clear();
             foreach (var data in rawData)
@@ -156,7 +156,7 @@ namespace CiFarm.Scripts.UI.Popups
                     textItemTimeDetail =
                         "Time: " + ((float)data.growthTime / 60).ToString("F2") + " to grow",
                     textItemProfitDetail = "Provide product each: " + ((float)data.yieldTime / 60).ToString("F2"),
-                    textItemPrice        = data.offspringPrice ==0 ? "5000" : data.offspringPrice.ToString(),
+                    textItemPrice        = data.offspringPrice == 0 ? "5000" : data.offspringPrice.ToString(),
                     iconItem             = gameConfig.GameShopIcon
                 });
             }
@@ -176,7 +176,7 @@ namespace CiFarm.Scripts.UI.Popups
         public void LoadItemShopByBuilding()
         {
             ClearSelectedShop();
-            seedTab.SetSelect(true);
+            buildingTab.SetSelect(true);
             var rawData = NakamaLoaderService.Instance.buildings;
             shopItemsData.Clear();
             foreach (var data in rawData)
