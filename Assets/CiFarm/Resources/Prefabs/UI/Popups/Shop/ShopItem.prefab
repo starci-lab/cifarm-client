@@ -1232,7 +1232,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22.2, y: -49.058}
+  m_AnchoredPosition: {x: -22.2, y: -31.327}
   m_SizeDelta: {x: 292.4631, y: 26.8843}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6272854661978620869
@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Product : 20'
+  m_text: 'Product : 20Product : 20Product : 20Product : 20'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 207ee1e5dbb7504488e32d428a922186, type: 2}
   m_sharedMaterial: {fileID: -5589675249571846086, guid: 207ee1e5dbb7504488e32d428a922186, type: 2}
@@ -1290,12 +1290,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
+  m_fontSize: 18
   m_fontSizeBase: 25
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1367,7 +1367,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.4, y: 33.5}
+  m_AnchoredPosition: {x: -39, y: 45}
   m_SizeDelta: {x: 273, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3861672247479085324
@@ -1442,7 +1442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22.2, y: -15.9422}
+  m_AnchoredPosition: {x: -22.2, y: -4.4421997}
   m_SizeDelta: {x: 292.4631, y: 26.8843}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8907365245994539171
@@ -1500,12 +1500,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
+  m_fontSize: 19.2
   m_fontSizeBase: 25
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -1711,7 +1711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8830888296308285582
 RectTransform:
   m_ObjectHideFlags: 0

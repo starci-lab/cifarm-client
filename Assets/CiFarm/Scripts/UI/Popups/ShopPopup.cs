@@ -140,9 +140,27 @@ namespace CiFarm.Scripts.UI.Popups
         public void LoadItemShopByAnimal()
         {
             ClearSelectedShop();
-            animaTab.SetSelect(true);
-
+            seedTab.SetSelect(true);
+            var rawData = NakamaLoaderService.Instance.animals;
             shopItemsData.Clear();
+            foreach (var data in rawData)
+            {
+                var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
+                shopItemsData.Add(new ShopItemData
+                {
+                    itemKey      = data.key,
+                    textItemName = gameConfig.ItemName,
+                    shopType     = ShopType.Seed,
+                    // textItemTimeDetail   = (data.growthStageDuration).ToString(),
+                    // textItemProfitDetail = data.maxHarvestQuantity.ToString(),
+                    textItemTimeDetail =
+                        "Time: " + ((float)data.growthTime / 60).ToString("F2") + " to grow",
+                    textItemProfitDetail = "Provide product each: " + ((float)data.yieldTime / 60).ToString("F2"),
+                    textItemPrice        = data.offspringPrice ==0 ? "5000" : data.offspringPrice.ToString(),
+                    iconItem             = gameConfig.GameShopIcon
+                });
+            }
+
             ResetListView();
         }
 
