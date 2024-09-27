@@ -8,8 +8,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         Seed,
         Tile,
         Animal,
+        PlantHarvested,
         Building,
-        PlantHarvested
     }
 
     [Serializable]

@@ -40,12 +40,12 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void BTN_Home()
         {
-            AudioManager.Instance.StopAllMusic();
             Hide();
         }
 
         public void BTN_QuitGame()
         {
+            AudioManager.Instance.StopAllMusic();
             BrowserService.Instance.HandleQuit();
         }
 
