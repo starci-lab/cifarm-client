@@ -53,14 +53,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054d476c5d0c4a34fb37204ae629edea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testChainKey: 0
+  testAccountNumber: 1
   useLocal: 0
   useHttps: 1
   host: api.cifarm-server.starci.net
   port: 443
   serverKey: defaultkey
-  message: 5e411bff-09c1-461a-b654-80e10ec9d664
-  publicKey: 0xBbe3dBA9d49Ac48953B695f79bD755afeE0924bb
-  signature: 0xe955ba83eeac72c3ab6350bc7252956319e8273cd6b2e95e94a4bf1f9cb35f2c03d2e65bb0f0bb5ff21d310ee3de91cb3477565ae0fcae8e145a7d18eda3de581c
+  message: 3db6e5cc-539f-4b1a-ae65-d28197dfbeb7
+  publicKey: 0xE32ae3c394B3176F15d5260D2a6588f516a9B43b
+  signature: 0xce92163d73571598fa8605d61787e845a56353dc048321371597e6e5b389ff9c11c2c2c67049b45cb94a252d70fc2da238e71fc18cacaf033ff5b5bee5b7504c1c
   chainKey: avalanche
   authenticated: 0
 --- !u!114 &1602844812581178767
@@ -78,6 +80,7 @@ MonoBehaviour:
   crops: []
   tiles: []
   animals: []
+  buildings: []
 --- !u!114 &6616302030822056925
 MonoBehaviour:
   m_ObjectHideFlags: 0
