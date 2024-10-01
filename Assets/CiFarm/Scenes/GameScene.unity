@@ -197,7 +197,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 2.175, y: 1.74, z: 0}
+  m_ChunkCullingBounds: {x: 0.5, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
@@ -4598,7 +4598,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modelGameObjectConfig: {fileID: 0}
   itemDetailConfig: {fileID: 0}
-  shopSellConfig: {fileID: 0}
 --- !u!1 &620426393
 GameObject:
   m_ObjectHideFlags: 0
@@ -4615,7 +4614,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &620426394
 Grid:
   m_ObjectHideFlags: 0

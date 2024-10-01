@@ -2917,15 +2917,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: message
-      value: 8dc39550-d34b-4dc6-a739-3dc65e127901
+      value: 3db6e5cc-539f-4b1a-ae65-d28197dfbeb7
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: publicKey
-      value: 0xc782BFd8D475f96eE504627B553dd1B5B9A6D1e8
+      value: 0xE32ae3c394B3176F15d5260D2a6588f516a9B43b
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: signature
-      value: 0xa5f91689eb0c7ec97c36194e00f8d4e2b12c19aba445eaa20ad11ea0b9b781557672a61dd02fdbffc5a2e4d0ff6a5989c738d690d7eeb41870998098d8e461171b
+      value: 0xce92163d73571598fa8605d61787e845a56353dc048321371597e6e5b389ff9c11c2c2c67049b45cb94a252d70fc2da238e71fc18cacaf033ff5b5bee5b7504c1c
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
