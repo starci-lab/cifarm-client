@@ -13,8 +13,8 @@ namespace CiFarm.Scripts.Configs
 
         #region GAME_CONFIG
 
-       [ReadOnly] public TutorialsDetailConfig TutorialsDetailConfig;
-       [ReadOnly] public TutorialsConfig       TutorialsConfig;
+        public TutorialsDetailConfig TutorialsDetailConfig;
+        public TutorialsConfig       TutorialsConfig;
 
         #endregion
 
@@ -34,10 +34,6 @@ namespace CiFarm.Scripts.Configs
             TutorialsConfig = new();
             TutorialsConfig.LoadFromAssetPath(ConfigSharePath + "TutorialsConfig");
 
-            foreach (var r in TutorialsDetailConfig.Records)
-            {
-                Debug.Log(r.Type);
-            }
             _isLoadedConfigLocal = true;
         }
     }
