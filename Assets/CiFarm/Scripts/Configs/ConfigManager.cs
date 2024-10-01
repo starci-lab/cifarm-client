@@ -1,58 +1,44 @@
-using DuckSurvivor.Scripts.Configs.DataClass;
+using CiFarm.Scripts.Configs.DataClass;
 using Imba.Utils;
-using System.Diagnostics;
+using Unity.Collections;
+using UnityEngine;
 
-namespace DuckSurvivor.Scripts.Configs
+namespace CiFarm.Scripts.Configs
 {
-    public class ConfigManager : Singleton<ConfigManager>
+    public class ConfigManager : ManualSingletonMono<ConfigManager>
     {
-        private const string ConfigSharePath = "Configs/";
+        private const string ConfigSharePath = "CsvConfigs/";
+
+        private bool _isLoadedConfigLocal = false;
 
         #region GAME_CONFIG
-        
-        public ConfigSkills configSkills;
-        public LevelConfig configLevels;
-        public ConfigWaveDetail configWaveDetails;
-        public ConfigDucks configDucks;
-        public ConfigDuckLevels configDuckLevels;
-        public ConfigWaves configWaves;
+
+       [ReadOnly] public TutorialsDetailConfig TutorialsDetailConfig;
+       [ReadOnly] public TutorialsConfig       TutorialsConfig;
 
         #endregion
 
-        //======================================================
-
-        public void LoadAllConfigLocal()
+        private void Start()
         {
-            if (isLoadedConfigLocal)
+            LoadAllConfigLocal();
+        }
+
+        private void LoadAllConfigLocal()
+        {
+            if (_isLoadedConfigLocal)
                 return;
 
-            configSkills = new ConfigSkills();
-            configSkills.LoadFromAssetPath(ConfigSharePath + "ConfigSkills");
+            TutorialsDetailConfig = new();
+            TutorialsDetailConfig.LoadFromAssetPath(ConfigSharePath + "TutorialsDetailConfig");
 
-            configLevels = new LevelConfig();
-            configLevels.LoadFromAssetPath(ConfigSharePath + "ConfigLevels");
-            
-            configWaveDetails = new ConfigWaveDetail();
-            configWaveDetails.LoadFromAssetPath(ConfigSharePath + "ConfigWaveDetails");
+            TutorialsConfig = new();
+            TutorialsConfig.LoadFromAssetPath(ConfigSharePath + "TutorialsConfig");
 
-            configDucks = new ConfigDucks();
-            configDucks.LoadFromAssetPath(ConfigSharePath + "ConfigDucks");
-
-            configDuckLevels = new ConfigDuckLevels();
-            configDuckLevels.LoadFromAssetPath(ConfigSharePath + "ConfigDuckLevels");
-
-            configWaves = new ConfigWaves();
-            configWaves.LoadFromAssetPath(ConfigSharePath + "ConfigWaves");
-
-            isLoadedConfigLocal = true;
+            foreach (var r in TutorialsDetailConfig.Records)
+            {
+                Debug.Log(r.Type);
+            }
+            _isLoadedConfigLocal = true;
         }
-
-        private static bool isLoadedConfigLocal = false;
-        public static bool IsLoadedConfigLocal
-        {
-            set { isLoadedConfigLocal = value; }
-            get { return isLoadedConfigLocal; }
-        }
-
     }
 }

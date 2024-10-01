@@ -51,71 +51,50 @@ namespace DuckSurvivor.Scripts.Configs
             if (fields == null || fields.Count == 0)
                 return;
 
-            FileInfo   theSourceFile = null;
-            TextReader reader        = null; // NOTE: TextReader, superclass of StreamReader and StringReader
+            TextReader reader; // NOTE: TextReader, superclass of StreamReader and StringReader
+            var theSourceFile = useAppDataPath
+                ? new FileInfo(Application.dataPath + "/" + path + ".txt")
+                : new FileInfo(path);
 
-            if (useAppDataPath)
-                theSourceFile = new FileInfo(Application.dataPath + "/" + path + ".txt");
-            else
-                theSourceFile = new FileInfo(path);
-            if (theSourceFile != null && theSourceFile.Exists)
+            if (theSourceFile.Exists)
             {
                 reader = theSourceFile.OpenText(); // returns StreamReader
             }
             else
             {
-                TextAsset puzdata = (TextAsset)Resources.Load(path, typeof(TextAsset));
-                reader = new StringReader(puzdata.text); // returns StringReader
+                TextAsset textData = (TextAsset)Resources.Load(path, typeof(TextAsset));
+                reader = new StringReader(textData.text); // returns StringReader
             }
 
-            if (reader == null)
+            var readLine = reader.ReadLine(); // skip firstLine (Header)
+            while (true)
             {
-                Debug.Log("not found or not readable");
-            }
-            else
-            {
-                int    line = 0;
-                string txt  = reader.ReadLine(); // bo dong dau
-                while (true)
+                readLine = reader.ReadLine();
+                if (string.IsNullOrEmpty(readLine))
                 {
-                    txt = reader.ReadLine();
-                    line++;
-                    if (txt == null || txt == "")
-                    {
-                        break;
-                    }
-                    TDataRecord record = new TDataRecord(); //Activator.CreateInstance<TDataRecord>();
-                    string[] columns = txt.Split('\t');
-                    int  i     = 0;
-                    bool error = false;
-                    foreach (FieldInfo field in fields)
-                    {
-                        if (fields.IndexOf(field) < columns.Length - 1)
-                        {
-                            object convert = ConvertData(columns[i], field.FieldType);
-                            if (convert != null)
-                                field.SetValue(record, convert);
-                        }
-
-                        //Ignore null Data
-                        //else
-                        //{
-                        //                   error = true;
-                        //                   break;
-                        //               }
-                        i++;
-                    }
-                    if (error)
-                    {
-                        Debug.LogError("Load config " + path + " line " + line + " error");
-                        continue;
-                    }
-                    records.Add(record);
+                    break;
                 }
 
-                RebuildIndex();
-                isLoaded = true;
+                var record  = new TDataRecord();
+                var columns = readLine.Split('\t');
+                var i       = 0;
+                foreach (FieldInfo field in fields)
+                {
+                    if (fields.IndexOf(field) < columns.Length)
+                    {
+                        object convert = ConvertData(columns[i], field.FieldType);
+                        if (convert != null)
+                            field.SetValue(record, convert);
+                    }
+
+                    i++;
+                }
+
+                records.Add(record);
             }
+
+            RebuildIndex();
+            isLoaded = true;
         }
 
         public void LoadFromTextAsset(TextAsset textAsset)
@@ -201,7 +180,6 @@ namespace DuckSurvivor.Scripts.Configs
 
         protected void RebuildIndexByField<TIndex>(string fieldName)
         {
-//		object dic;
             Type      recordType = typeof(TDataRecord);
             FieldInfo fieldInfo  = recordType.GetField(fieldName);
             if (fieldInfo == null)
@@ -257,13 +235,15 @@ namespace DuckSurvivor.Scripts.Configs
             return null;
         }
 
-        object ConvertData(string value, Type t)
+        private object ConvertData(string value, Type t)
         {
             if (t.IsEnum)
             {
                 Array arr = Enum.GetValues(t);
                 if (string.IsNullOrEmpty(value))
+                {
                     return arr.GetValue(0);
+                }
                 foreach (object item in arr)
                 {
                     if (item.ToString().ToLower().Equals(value.Trim().ToLower()))
@@ -273,85 +253,120 @@ namespace DuckSurvivor.Scripts.Configs
             else
             {
                 TypeCode typeCode = Type.GetTypeCode(t);
-                if (typeCode == TypeCode.Int32)
+                switch (typeCode)
                 {
-                    int result;
-                    if (int.TryParse(value, out result))
-                        return result;
-                    return null;
-                }
-                else if (typeCode == TypeCode.UInt32)
-                {
-                    uint result;
-                    if (uint.TryParse(value, out result))
-                        return result;
-                    return null;
-                }
-                else if (typeCode == TypeCode.Int64)
-                {
-                    long result;
-                    if (long.TryParse(value, out result))
-                        return result;
-                    return null;
-                }
-                else if (typeCode == TypeCode.Int16)
-                {
-                    short result;
-                    if (short.TryParse(value, out result))
-                        return result;
-                    return null;
-                }
-                else if (typeCode == TypeCode.Single || typeCode == TypeCode.Decimal)
-                {
-                    float result;
-                    if (float.TryParse(value, out result))
-                        return result;
-                    return null;
-                }
-                else if (typeCode == TypeCode.String)
-                {
-                    //xu ly xuong dong
-                    string[] regex = { @"\n" };
-                    string[] temp2 = value.Split(regex, StringSplitOptions.None);
-                    value = "";
-                    for (int i = 0; i < temp2.Length; i++)
+                    case TypeCode.Int32:
                     {
-                        if (i == temp2.Length - 1)
+                        if (int.TryParse(value, out var intResult))
                         {
-                            value += temp2[i];
-                            break;
+                            return intResult;
                         }
 
-                        value += temp2[i] + "\n";
+                        return null;
                     }
 
-                    return value;
-                }
-                else if (typeCode == TypeCode.Boolean)
-                {
-                    bool result;
-                    if (bool.TryParse(value, out result))
-                        return result;
-                    if (value == "0")
-                        return false;
-                    else if (value == "1")
-                        return true;
-                }
-                else if (typeCode == TypeCode.Double)
-                {
-                    double result;
-                    if (double.TryParse(value, out result))
-                        return result;
-                    return null;
-                }
-                else if (typeCode == TypeCode.DateTime)
-                {
-                    DateTime result;
-                    if (DateTime.TryParseExact(value, "yyyy-MM-dd HH:mm:ss,fff",
-                            System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None,
-                            out result))
-                        return result;
-                    return null;
+                    case TypeCode.UInt32:
+                    {
+                        if (uint.TryParse(value, out var uintResult))
+                        {
+                            return uintResult;
+                        }
+
+                        return null;
+                    }
+                    case TypeCode.Int64:
+                    {
+                        if (long.TryParse(value, out var longResult))
+                        {
+                            return longResult;
+                        }
+
+                        return null;
+                    }
+                    case TypeCode.Int16:
+                    {
+                        if (short.TryParse(value, out var shortResult))
+                        {
+                            return shortResult;
+                        }
+
+                        return null;
+                    }
+                    case TypeCode.Single:
+                    case TypeCode.Decimal:
+                    {
+                        if (float.TryParse(value, out var floatResult))
+                        {
+                            return floatResult;
+                        }
+
+                        return null;
+                    }
+                    case TypeCode.String:
+                    {
+                        string[] regex = { @"\n" };
+                        string[] temp2 = value.Split(regex, StringSplitOptions.None);
+                        value = "";
+                        for (int i = 0; i < temp2.Length; i++)
+                        {
+                            if (i == temp2.Length - 1)
+                            {
+                                value += temp2[i];
+                                break;
+                            }
+
+                            value += temp2[i] + "\n";
+                        }
+
+                        {
+                            return value;
+                        }
+                    }
+                    case TypeCode.Boolean:
+                    {
+                        if (bool.TryParse(value, out var boolResult))
+                        {
+                            return boolResult;
+                        }
+
+                        if (value == "0")
+                        {
+                            return false;
+                        }
+
+                        if (value == "1")
+                        {
+                            return true;
+                        }
+
+                        return null;
+                    }
+
+                    case TypeCode.Double:
+                    {
+                        if (double.TryParse(value, out var doubleResult))
+                        {
+                            return doubleResult;
+                        }
+
+                        return null;
+                    }
+                    case TypeCode.DateTime:
+                    {
+                        DateTime dateTimeResult;
+                        if (DateTime.TryParseExact(value, "yyyy-MM-dd HH:mm:ss,fff",
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                System.Globalization.DateTimeStyles.None,
+                                out dateTimeResult))
+                        {
+                            return dateTimeResult;
+                        }
+
+                        return null;
+                    }
+
+                    default:
+                        return null;
                 }
             }
 
