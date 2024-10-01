@@ -12,11 +12,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaInitializerService : ManualSingletonMono<NakamaInitializerService>
     {
-        [Header("TestingConfig")]
-        [SerializeField] private SupportChain testChainKey;
-
-        [SerializeField] private int testAccountNumber;
-
         [Header("Nakama Config")]
         [SerializeField] private bool useLocal = true;
 
@@ -25,6 +20,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [SerializeField] private int    port      = 443;
         [SerializeField] private string serverKey = "defaultkey";
+
+        [Header("Testing Config Editor")]
+        public SupportChain testChainKey;
+        public int testAccountNumber;
 
         [Header("Fake user loaded")]
         [SerializeField] [ReadOnly] private string message = "1ccd5c84-93c9-4bb9-default-285b4c5405e2";
@@ -48,6 +47,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         //authenticate state
         [HideInInspector]
         public bool authenticated = false;
+
+        public bool Uselocal => useLocal;
 
         public override void Awake()
         {
@@ -171,7 +172,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         private IEnumerator FetchCredentialsFromApi()
         {
             var url = "https://api.cifarm.starci.net/api/v1/authenticator/fake-signature";
-            
+
             using UnityWebRequest webRequest = UnityWebRequest.Post(url, new Dictionary<string, string>()
             {
                 { "chainKey", testChainKey.ToString() },

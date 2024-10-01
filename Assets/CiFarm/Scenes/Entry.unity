@@ -2916,19 +2916,7 @@ PrefabInstance:
       value: NakamaService
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
-      propertyPath: message
-      value: 3db6e5cc-539f-4b1a-ae65-d28197dfbeb7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
-      propertyPath: publicKey
-      value: 0xE32ae3c394B3176F15d5260D2a6588f516a9B43b
-      objectReference: {fileID: 0}
-    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
-      propertyPath: signature
-      value: 0xce92163d73571598fa8605d61787e845a56353dc048321371597e6e5b389ff9c11c2c2c67049b45cb94a252d70fc2da238e71fc18cacaf033ff5b5bee5b7504c1c
-      objectReference: {fileID: 0}
-    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
-      propertyPath: testAccountNumber
+      propertyPath: useLocal
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
