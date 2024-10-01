@@ -1905,6 +1905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc15612a97e1f4e27a7e9b07f67d377b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TutorialsConfig:
+    isLoaded: 0
 --- !u!4 &988256067 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7272541869065131550, guid: e3554b8735ebc7648bc988d50b551ef2, type: 3}
@@ -3001,6 +3003,10 @@ PrefabInstance:
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: useLocal
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
+      propertyPath: testChainKey
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

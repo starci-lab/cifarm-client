@@ -22,8 +22,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [SerializeField] private string serverKey = "defaultkey";
 
         [Header("Testing Config Editor")]
-        public SupportChain testChainKey;
-        public int testAccountNumber;
+        [HideInInspector]public SupportChain testChainKey;
+        [HideInInspector]public int testAccountNumber;
 
         [Header("Fake user loaded")]
         [SerializeField] [ReadOnly] private string message = "1ccd5c84-93c9-4bb9-default-285b4c5405e2";
@@ -32,13 +32,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [SerializeField] [ReadOnly] private string signature = "default";
         [SerializeField] [ReadOnly] private string chainKey  = "avalanche";
 
-        [HideInInspector]
         public Client client = null;
-
-        [HideInInspector]
         public ISession session = null;
-
-        [HideInInspector]
         public IApiUser user = null;
 
         //credentials

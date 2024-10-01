@@ -1,7 +1,6 @@
 using CiFarm.Scripts.Configs.DataClass;
 using Imba.Utils;
-using Unity.Collections;
-using UnityEngine;
+
 
 namespace CiFarm.Scripts.Configs
 {
