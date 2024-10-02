@@ -12,7 +12,7 @@ namespace CiFarm.Scripts.Configs.DataClass
             RebuildIndexByField<int>("Id");
         }
 
-        public TutorialDetailRecord GetConfigSkillById(int id)
+        public TutorialDetailRecord GetConfigById(int id)
         {
             var record = Records.FirstOrDefault(x => x.Id == id);
             return record;
@@ -33,11 +33,7 @@ namespace CiFarm.Scripts.Configs.DataClass
         public string              CharacterId;
         public string              TargetClickId;
         public string              TargetImageId;
-
-        // public bool TryGetTutorialDetailType(out TutorialsDetailType tutorialDetailType)
-        // {
-        //     return Enum.TryParse(Type, out tutorialDetailType);
-        // }
+        
     }
 
     public enum TutorialsDetailType

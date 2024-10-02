@@ -59,6 +59,20 @@ namespace CiFarm.Scripts.SceneController.Game
             UIManager.Instance.HideTransition(() => { });
         }
 
+        private void Update()
+        {
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                UIManager.Instance.PopupManager.ShowPopup(UIPopupName.CharacterMessagePopup);
+            }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                UIManager.Instance.PopupManager.HidePopup(UIPopupName.CharacterMessagePopup);
+            }
+#endif
+        }
+
         public void OnClickGround(BaseGround clickedGround)
         {
             if (_friendItemData == null)

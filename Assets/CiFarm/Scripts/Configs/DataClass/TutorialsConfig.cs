@@ -13,7 +13,7 @@ namespace CiFarm.Scripts.Configs.DataClass
             RebuildIndexByField<int>("Id");
         }
 
-        public TutorialRecord GetConfigSkillById(int id)
+        public TutorialRecord GetConfigById(int id)
         {
             var record = Records.FirstOrDefault(x => x.Id == id);
             return record;
@@ -21,7 +21,7 @@ namespace CiFarm.Scripts.Configs.DataClass
 
         public List<int> GetTutorialDetailsId(int id)
         {
-            var record = GetConfigSkillById(id);
+            var record = GetConfigById(id);
             if (record != null)
             {
                 return record.TutorialStep
@@ -43,5 +43,15 @@ namespace CiFarm.Scripts.Configs.DataClass
         public string Name;
         public string Detail;
         public string TutorialStep;
+
+        public List<int> GetTutorialDetailsId()
+        {
+            return TutorialStep
+                .Split(';')
+                .Select(step => int.TryParse(step, out var stepId) ? stepId : (int?)null)
+                .Where(stepId => stepId.HasValue)
+                .Select(stepId => stepId.Value)
+                .ToList();
+        }
     }
 }
