@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.Configs;
 using CiFarm.Scripts.Configs.DataClass;
@@ -56,6 +57,27 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void HandleTutorialStep(TutorialDetailRecord tutorialDetail)
         {
+            // CleanUp Old
+            var lastStep = tutorialDetailRecord[_currentIndex == 0 ? _currentIndex : _currentIndex - 1];
+            switch (lastStep.Type)
+            {
+                case TutorialsDetailType.PopupMessage:
+                    if (_currentIndex < tutorialDetailRecord.Count)
+                    {
+                        if (tutorialDetail.Type != TutorialsDetailType.PopupMessage)
+                        {
+                            UIManager.Instance.PopupManager.HidePopup(UIPopupName.CharacterMessagePopup, true);
+                        }
+                    }
+
+                    break;
+                case TutorialsDetailType.ActionClick:
+                    break;
+                case TutorialsDetailType.PopupMessageImage:
+                    break;
+            }
+
+            // Handle new
             switch (tutorialDetail.Type)
             {
                 case TutorialsDetailType.PopupMessage:

@@ -326,6 +326,7 @@ MonoBehaviour:
   dialogMessage: {fileID: 7795705800385390678}
   dialogMessageContainer: {fileID: 4633493553810062365}
   characterModelContainer: {fileID: 3791872544621868516}
+  textStreaming: 0.02
 --- !u!1 &993249171431571139
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,7 +553,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1570932625633626297}
         m_TargetAssemblyTypeName: CiFarm.Scripts.UI.Popups.CharacterMessagePopup,
           Game
-        m_MethodName: Close
+        m_MethodName: NextStepHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -1,7 +1,7 @@
+using System.Collections;
 using CiFarm.Scripts.Configs.DataClass;
 using CiFarm.Scripts.Utilities;
 using Imba.UI;
-using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,20 +14,20 @@ namespace CiFarm.Scripts.UI.Popups
         [SerializeField] private TextMeshProUGUI dialogMessage;
         [SerializeField] private Transform       dialogMessageContainer;
         [SerializeField] private Transform       characterModelContainer;
+        [SerializeField] private float           textStreaming = 0.05f;
 
         private CharacterMessageParam _characterMessageParam;
         private UnityAction           _onClose;
+        private GameObject            _characterObject;
 
-        private GameObject _characterObject;
+        private bool _isDoneStream = false;
+        private bool _skipStream   = false; // Flag to skip streaming
 
-        protected override void OnInit()
+        protected override void OnShown()
         {
-            base.OnInit();
-        }
-
-        protected override void OnShowing()
-        {
-            base.OnShowing();
+            base.OnShown();
+            _isDoneStream = false;
+            _skipStream   = false; // Reset the flag on shown
             dialogMessageContainer.SetActive(false);
             if (Parameter == null)
             {
@@ -38,24 +38,47 @@ namespace CiFarm.Scripts.UI.Popups
 
             _characterMessageParam = (CharacterMessageParam)Parameter;
             _onClose               = _characterMessageParam.OnClose;
-            dialogMessage.text     = _characterMessageParam.Details;
+
+            dialogMessage.text = "";
+            StartCoroutine(StreamText(_characterMessageParam.Details, textStreaming));
+
             dialogMessageContainer.SetActive(true);
             LoadCharacter();
         }
 
-        protected override void OnShown()
+        private IEnumerator StreamText(string text, float delay)
         {
-            base.OnShown();
+            dialogMessage.text = "";
+            foreach (char letter in text)
+            {
+                if (_skipStream)
+                {
+                    dialogMessage.text = text;
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(dialogMessage.GetComponent<RectTransform>()); // Force layout rebuild
+
+                    break;
+                }
+
+                dialogMessage.text += letter;
+                yield return new WaitForSeconds(delay);
+            }
+
+            _isDoneStream = true;
         }
 
-        public void Close()
+        public void NextStepHandler()
         {
+            if (!_isDoneStream)
+            {
+                _skipStream = true;
+                return;
+            }
+
             if (_characterObject)
             {
                 Destroy(_characterObject);
             }
 
-            Hide(true);
             _onClose?.Invoke();
         }
 
