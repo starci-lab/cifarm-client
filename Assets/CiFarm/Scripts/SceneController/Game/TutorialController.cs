@@ -106,12 +106,21 @@ namespace CiFarm.Scripts.SceneController.Game
             });
         }
 
-        private void ShowPopupWithImage(TutorialDetailRecord tutorialDetailRecord)
+        private void ShowPopupWithImage(TutorialDetailRecord tutorialDetail)
         {
         }
 
-        private void HandleActionClick(TutorialDetailRecord tutorialDetailRecord)
+        private void HandleActionClick(TutorialDetailRecord tutorialDetail)
         {
+            DLogger.Log("HandleActionClick tutor: " + tutorialDetail.Details, nameof(TutorialController));
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.TutorActionPopup, new TutorButtonActionParam()
+            {
+                Type          = TutorialsDetailType.PopupMessage,
+                Localization  = tutorialDetail.Localization,
+                Details       = tutorialDetail.Details,
+                TargetClickId = tutorialDetail.TargetClickId,
+                OnClose = ProceedToNextStep
+            });
         }
 
         private void OnActionClickCompleted(Button targetButton)

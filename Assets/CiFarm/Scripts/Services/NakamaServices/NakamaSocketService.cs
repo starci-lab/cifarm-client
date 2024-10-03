@@ -76,7 +76,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             placedItems = JsonConvert.DeserializeObject<PlacedItems>(content).placedItems;
             if (debugPlacedItems)
             {
-                DLogger.Log($"{placedItems.Count} placed items loaded. See the inspector for details.", "Nakama - Placed Items State", LogColors.Aquamarine);
+//                DLogger.Log($"{placedItems.Count} placed items loaded. See the inspector for details.", "Nakama - Placed Items State", LogColors.Aquamarine);
             }
 
             OnFetchPlacedDataFromServer?.Invoke();
@@ -88,7 +88,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             nextDeliveryTime = JsonConvert.DeserializeObject<NextDeliveryTime>(content).time;
             if (debugPlacedItems)
             {
-                DLogger.Log($"Next delivery time loaded. See the inspector for details.", "Nakama - Next Delivery Time State", LogColors.Aquamarine);
+//                DLogger.Log($"Next delivery time loaded. See the inspector for details.", "Nakama - Next Delivery Time State", LogColors.Aquamarine);
             }
         }
 

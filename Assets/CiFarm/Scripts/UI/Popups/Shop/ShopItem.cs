@@ -13,6 +13,7 @@ namespace CiFarm.Scripts.UI.Popups.Shop
         [SerializeField] private TextMeshProUGUI textItemProductDetail;
         [SerializeField] private TextMeshProUGUI textItemPrice;
         [SerializeField] private Image           iconItem;
+        [SerializeField] private GameObject      buyBtn;
 
         private ShopItemData              _shopItemData;
         private UnityAction<ShopItemData> _buyAction;
@@ -26,6 +27,7 @@ namespace CiFarm.Scripts.UI.Popups.Shop
             textItemProductDetail.text = data.textItemProfitDetail;
             textItemPrice.text         = data.textItemPrice + "$";
             iconItem.sprite            = data.iconItem;
+            buyBtn.name                = data.textItemName + "BuyItemBtn";
         }
 
         public void OnBuy()

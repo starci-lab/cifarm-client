@@ -299,6 +299,7 @@ namespace Imba.UI
 
 
 
+        // ReSharper disable Unity.PerformanceAnalysis
         /// <summary>
         /// Raises the hide event.
         /// </summary>

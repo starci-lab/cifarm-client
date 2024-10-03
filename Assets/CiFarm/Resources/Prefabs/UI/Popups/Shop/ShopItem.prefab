@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8213874878934393989}
   - component: {fileID: 4521577249902213695}
   m_Layer: 5
-  m_Name: BuyBtn
+  m_Name: BuyItemBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1791,6 +1791,7 @@ MonoBehaviour:
   textItemProductDetail: {fileID: 3729930885933936664}
   textItemPrice: {fileID: 2527672094180751584}
   iconItem: {fileID: 2419079072136225689}
+  buyBtn: {fileID: 722969329470602460}
 --- !u!1 &8532068869180100779
 GameObject:
   m_ObjectHideFlags: 0

@@ -1964,6 +1964,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1224886399621071804, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: m_Name
+      value: TutorActionPopup
+      objectReference: {fileID: 0}
     - target: {fileID: 2076709548279248251, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 102.8999

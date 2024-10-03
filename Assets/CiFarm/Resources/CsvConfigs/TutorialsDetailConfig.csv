@@ -4,16 +4,16 @@ ID	Type	Localization	Details	CharacterId	TargetClickId	TargetImageId	Note
 3	PopupMessage	_Tutorial	At the request of your grandmother, I will now hand over this land to you; it is her most treasured possession	normal			
 4	PopupMessage	_Tutorial	You've never tried farming before, have you? Now, I'll help you with a few basic steps	normal			
 5	PopupMessage	_Tutorial	Now, let's go to the shop and buy some seeds to try	normal			
-6	ActionClick	_Tutorial	Click shop button		ShopButton		
+6	ActionClick	_Tutorial	Click shop button		MarketBtn		
 7	PopupMessage	_Tutorial	This is the seed shop. You can see its description information	normal			
 8	PopupMessage	_Tutorial	 Each type of seed will have a different growth time, and plants will go through a total of 5 growth stages	normal			
 9	PopupMessage	_Tutorial	Try clicking to buy one seed	normal			
-10	ActionClick	_Tutorial	Click buy		BuyItemCarrotButton		
+10	ActionClick	_Tutorial	Click buy		CarrotBuyItemBtn		
 11	PopupMessage	_Tutorial	Congratulations! You've successfully purchased it. Now, please check your inventory	happy			
 12	ActionClick	_Tutorial	Click close		CloseShopButton		
-13	ActionClick	_Tutorial	Click inventory		InventoryButton		
+13	ActionClick	_Tutorial	Click inventory		InventoryBtn		
 14	PopupMessage	_Tutorial	Here's the seed you just purchased. Now, let's start planting it!	normal			
-15	ActionClick	_Tutorial	Click Close	normal	CloseInventoryButton		
+15	ActionClick	_Tutorial	Click Close	normal	CloseInventoryBtn		
 16	ActionClick	_Tutorial	Click Anytile	normal	EmptyTile		
 17	ActionClick	_Tutorial	Click Carrot	normal	CarrotItem		
 18	PopupMessage	_Tutorial	That's it! Now you can click on the plant to check when it will grow	normal			
