@@ -35,6 +35,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         PlayerStats,
         [EnumStringValue("metadata")]
         Metadata,
+        [EnumStringValue("activityExperiences")]
+        ActivityExperiences,
     }
 
     public enum SystemKey

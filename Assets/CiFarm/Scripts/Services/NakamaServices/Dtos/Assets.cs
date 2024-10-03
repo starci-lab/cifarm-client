@@ -75,5 +75,21 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("level")]
         public int level;
+
+        [JsonProperty("tutorialIndex")]
+        public int tutorialIndex;
+
+        [JsonProperty("stepIndex")]
+        public int stepIndex;
+    }
+
+    [Serializable]
+    public class VisitState
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("userId")]
+        public string userId;
     }
 }

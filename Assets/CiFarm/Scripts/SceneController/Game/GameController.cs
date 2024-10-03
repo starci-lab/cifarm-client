@@ -97,7 +97,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
 
             // Planting
-            if (!clickedGround.dirtData.isPlanted)
+            if (!clickedGround.dirtData.seedGrowthInfo.isPlanted)
             {
                 UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new CustomInventoryPopupParam
                 {
@@ -109,25 +109,25 @@ namespace CiFarm.Scripts.SceneController.Game
             }
 
             // Harvest
-            if (clickedGround.dirtData.isPlanted && clickedGround.dirtData.fullyMatured)
+            if (clickedGround.dirtData.seedGrowthInfo.isPlanted && clickedGround.dirtData.seedGrowthInfo.fullyMatured)
             {
                 OnHarvestPlant(clickedGround);
                 return;
             }
 
             // Planted and everything normal
-            if (clickedGround.dirtData.isPlanted &&
+            if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
                 clickedGround.dirtData.seedGrowthInfo.plantCurrentState == PlantCurrentState.Normal)
             {
                 var bubble = TileBubbleController.Instance.SpawnBubble(clickedGround.transform.position);
                 bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
-                    clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
+                    (int)clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
                     (int)clickedGround.dirtData.seedGrowthInfo.currentStageTimeElapsed);
                 return;
             }
 
             // REQUIRED SOME THING
-            if (clickedGround.dirtData.isPlanted &&
+            if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
                 clickedGround.dirtData.seedGrowthInfo.plantCurrentState != PlantCurrentState.Normal)
             {
                 switch (clickedGround.dirtData.seedGrowthInfo.plantCurrentState)
@@ -150,25 +150,25 @@ namespace CiFarm.Scripts.SceneController.Game
         public void HandleClickOtherGround(BaseGround clickedGround)
         {
             // An trom
-            if (clickedGround.dirtData.isPlanted && clickedGround.dirtData.fullyMatured)
+            if (clickedGround.dirtData.seedGrowthInfo.isPlanted && clickedGround.dirtData.seedGrowthInfo.fullyMatured)
             {
                 OnHandOfMidasPlant(clickedGround);
                 return;
             }
 
             // Planted and everything normal
-            if (clickedGround.dirtData.isPlanted &&
+            if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
                 clickedGround.dirtData.seedGrowthInfo.plantCurrentState == PlantCurrentState.Normal)
             {
                 var bubble = TileBubbleController.Instance.SpawnBubble(clickedGround.transform.position);
                 bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
-                    clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
+                    (int)clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
                     (int)clickedGround.dirtData.seedGrowthInfo.currentStageTimeElapsed);
                 return;
             }
 
             // REQUIRED SOMETHING
-            if (clickedGround.dirtData.isPlanted &&
+            if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
                 clickedGround.dirtData.seedGrowthInfo.plantCurrentState != PlantCurrentState.Normal)
             {
                 switch (clickedGround.dirtData.seedGrowthInfo.plantCurrentState)
@@ -308,7 +308,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
             var dirtScript = dirtObj.GetComponent<BaseGround>();
             dirtScript.Init(placedItem);
-            if (placedItem.isPlanted)
+            if (placedItem.seedGrowthInfo.isPlanted)
             {
                 var prefabPlantData =
                     ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.crop

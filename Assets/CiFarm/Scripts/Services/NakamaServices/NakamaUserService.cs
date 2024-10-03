@@ -25,11 +25,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
             LoadInfoAsync();
             LoadMetadataAsync();
             LoadPlayerStatsAsync();
-
-            // wait for this
-            InitInventoriesAsync();
-
             LoadWalletAsync();
+            LoadActivityExperiencesAsync();
+
+            //inventory
+            InitInventoriesAsync();
         }
 
         private async void InitInventoriesAsync()
@@ -58,6 +58,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [Header("Player Status")]
         [ReadOnly]
         public PlayerStats playerStats;
+
+        [Header("ActivityExperiences")]
+        [ReadOnly]
+        public ActivityExperiences activityExperiences;
 
         [Header("Wallets")]
         [ReadOnly]
@@ -96,6 +100,23 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 }
             });
             metadata = JsonConvert.DeserializeObject<Metadata>(objects.Objects.First().Value);
+        }
+
+        public async void LoadActivityExperiencesAsync()
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
+            {
+                new()
+                {
+                    Collection = CollectionType.Config.GetStringValue(),
+                    Key        = ConfigKey.ActivityExperiences.GetStringValue(),
+                    UserId     = session.UserId,
+                }
+            });
+            activityExperiences = JsonConvert.DeserializeObject<ActivityExperiences>(objects.Objects.First().Value);
         }
 
         public async void LoadPlayerStatsAsync()

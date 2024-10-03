@@ -22,7 +22,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         {
             dirtData = placedItem;
             DirtBubble bubble;
-            if (dirtData.fullyMatured)
+            if (dirtData.seedGrowthInfo.fullyMatured)
             {
                 bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
                 bubble.SetBubble(dirtData.key, InjectionType.TextQuantity,
@@ -61,7 +61,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         public void RemovePlant()
         {
             SimplePool.Despawn(plant.gameObject);
-            dirtData.isPlanted = false;
+            dirtData.seedGrowthInfo.isPlanted = false;
         }
 
         private void OnMouseDown()

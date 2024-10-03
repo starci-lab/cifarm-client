@@ -71,22 +71,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         private void SetEditorCredentials()
         {
-            if (useLocal)
-            {
-                credentials = new()
-                {
-                    message   = "1cde8eaa-739c-4bc6-ab86-f35d15eb6e6b",
-                    publicKey = "0x453Ef991B58486851B7a4D477fc69Be2906Ff0FB",
-                    signature =
-                        "0x11edf2a629655cb05a5e30da96ff8bb49694369fe0ca350a3c271fe4fe284caf0f882918978a5a8a0ca743f5f671580ad3800a3b887b57397af5bbd519a830f71c",
-                    chainKey = "avalanche",
-                    network  = "testnet",
-                };
-            }
-            else
-            {
-                StartCoroutine(FetchCredentialsFromApi());
-            }
+            StartCoroutine(FetchCredentialsFromApi(useLocal));
         }
 
         //called from React app to set credentials, then break the coroutine
@@ -164,9 +149,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         #region Testing
 
-        private IEnumerator FetchCredentialsFromApi()
+        private IEnumerator FetchCredentialsFromApi(bool useLocal = false)
         {
-            var url = "https://api.cifarm.starci.net/api/v1/authenticator/fake-signature";
+            var url = useLocal ? "http://localhost:9999/api/v1/authenticator/fake-signature" : "https://api.cifarm.starci.net/api/v1/authenticator/fake-signature";
 
             using UnityWebRequest webRequest = UnityWebRequest.Post(url, new Dictionary<string, string>()
             {

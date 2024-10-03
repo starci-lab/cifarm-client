@@ -10,8 +10,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("key")]
         public string key;
 
+        [JsonProperty("growthStageDuration")]
+        public long growthStageDuration;
+
+        [JsonProperty("growthStages")]
+        public int growthStages;
+
         [JsonProperty("price")]
-        public int price;
+        public long price;
 
         [JsonProperty("premium")]
         public bool premium;
@@ -19,26 +25,23 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("perennial")]
         public bool perennial;
 
-        [JsonProperty("growthStages")]
-        public int growthStages;
-
-        [JsonProperty("maxHarvestQuantity")]
-        public int maxHarvestQuantity;
+        [JsonProperty("nextGrowthStageAfterHarvest")]
+        public int nextGrowthStageAfterHarvest;
 
         [JsonProperty("minHarvestQuantity")]
         public int minHarvestQuantity;
 
-        [JsonProperty("growthStageDuration")]
-        public int growthStageDuration;
-
-        [JsonProperty("nextGrowthStageAfterHarvest")]
-        public int nextGrowthStageAfterHarvest;
+        [JsonProperty("maxHarvestQuantity")]
+        public int maxHarvestQuantity;
 
         [JsonProperty("basicHarvestExperiences")]
         public int basicHarvestExperiences;
 
         [JsonProperty("premiumHarvestExperiences")]
         public int premiumHarvestExperiences;
+
+        [JsonProperty("availableInShop")]
+        public bool availableInShop;
     }
 
     [Serializable]
@@ -48,10 +51,16 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public string key;
 
         [JsonProperty("price")]
-        public int Price { get; set; }
+        public long price;
 
         [JsonProperty("maxOwnership")]
-        public int MaxOwnership { get; set; }
+        public int maxOwnership;
+
+        [JsonProperty("isNft")]
+        public bool isNFT;
+
+        [JsonProperty("availableInShop")]
+        public bool availableInShop;
     }
 
     [Serializable]
@@ -60,30 +69,66 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("key")]
         public string key;
 
-        [JsonProperty("premium")]
-        public bool premium;
-
         [JsonProperty("yieldTime")]
-        public int yieldTime;
-
-        [JsonProperty("growthTime")]
-        public int growthTime;
+        public long yieldTime;
 
         [JsonProperty("offspringPrice")]
-        public int offspringPrice;
+        public long offspringPrice;
+
+        [JsonProperty("isNft")]
+        public bool isNFT;
+
+        [JsonProperty("growthTime")]
+        public long growthTime;
+
+        [JsonProperty("availableInShop")]
+        public bool availableInShop;
+
+        [JsonProperty("hungerTime")]
+        public long hungerTime;
+
+        [JsonProperty("minHarvestQuantity")]
+        public int minHarvestQuantity;
+
+        [JsonProperty("maxHarvestQuantity")]
+        public int maxHarvestQuantity;
+
+        [JsonProperty("basicHarvestExperiences")]
+        public long basicHarvestExperiences;
+
+        [JsonProperty("premiumHarvestExperiences")]
+        public long premiumHarvestExperiences;
     }
+
+    [Serializable]
+    public class UpgradeSummary
+    {
+        [JsonProperty("price")]
+        public long Price;
+
+        [JsonProperty("capacity")]
+        public int Capacity;
+    }
+
     [Serializable]
     public class Building
     {
         [JsonProperty("key")]
         public string key;
 
-        [JsonProperty("price")]
-        public long price;
         [JsonProperty("availableInShop")]
         public bool availableInShop;
 
+        [JsonProperty("maxUpgrade")]
+        public int maxUpgrade;
+
+        [JsonProperty("upgradeSummaries")]
+        public Dictionary<int, UpgradeSummary> upgradeSummaries;
+
+        [JsonProperty("animalKey")]
+        public string animalKey;
     }
+
     [Serializable]
     public class MatchInfo
     {
@@ -126,9 +171,60 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("plantCurrentState")]
         public PlantCurrentState plantCurrentState;
 
+        [JsonProperty("isPlanted")]
+        public bool isPlanted;
+
+        [JsonProperty("fullyMatured")]
+        public bool fullyMatured;
+
         [JsonProperty("thiefedBy")]
         public List<string> thiefedBy;
     }
+
+    [Serializable]
+    public class AnimalInfo
+    {
+        [JsonProperty("currentGrowth")]
+        public long currentGrowthTime;
+
+        [JsonProperty("currentHungryTime")]
+        public long currentHungryTime;
+
+        [JsonProperty("currentYieldTime")]
+        public long currentYieldTime;
+
+        [JsonProperty("hasYielded")]
+        public bool hasYielded;
+
+        [JsonProperty("isAdult")]
+        public bool isAdult;
+
+        [JsonProperty("animal")]
+        public Animal animal;
+
+        [JsonProperty("needFed")]
+        public bool needFed;
+
+        [JsonProperty("harvestQuantityRemaining")]
+        public int harvestQuantityRemaining;
+
+        [JsonProperty("thiefedBy")]
+        public List<string> thiefedBy;
+    }
+
+    [Serializable]
+    public class BuildingInfo
+    {
+        [JsonProperty("currentUpgrade")]
+        public int currentUpgrade;
+
+        [JsonProperty("currentStageTimeElapsed")]
+        public int occupancy;
+
+        [JsonProperty("building")]
+        public Building building;
+    }
+
     public enum PlantCurrentState
     {
         Normal,
@@ -140,7 +236,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
     public enum PlacedItemType
     {
         Tile,
-        Building
+        Building,
+        Animal
     }
 
     [Serializable]
@@ -149,23 +246,29 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("key")]
         public string key;
 
-        [JsonProperty("type")]
-        public PlacedItemType type;
+        [JsonProperty("referenceKey")]
+        public string referenceKey;
+
+        [JsonProperty("inventoryKey")]
+        public string inventoryKey;
 
         [JsonProperty("position")]
         public Position position;
 
-        [JsonProperty("isPlanted")]
-        public bool isPlanted;
-
-        [JsonProperty("referenceKey")]
-        public string referenceKey;
-
-        [JsonProperty("fullyMatured")]
-        public bool fullyMatured;
+        [JsonProperty("type")]
+        public PlacedItemType type;
 
         [JsonProperty("seedGrowthInfo")]
         public SeedGrowthInfo seedGrowthInfo;
+
+        [JsonProperty("buildingInfo")]
+        public BuildingInfo buildingInfo;
+
+        [JsonProperty("animalInfo")]
+        public AnimalInfo animalInfo;
+
+        [JsonProperty("parentPlacedItemKey")]
+        public string parentPlacedItemKey;
     }
 
     [Serializable]
@@ -206,13 +309,40 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public int index;
     }
 
-    [Serializable]
-    public class VisitState
+    public class ActivityExperiences
     {
         [JsonProperty("key")]
         public string key;
 
-        [JsonProperty("userId")]
-        public string userId;
+        [JsonProperty("water")]
+        public int water;
+
+        [JsonProperty("usePestiside")]
+        public int usePestiside;
+
+        [JsonProperty("useFertilizer")]
+        public int useFertilizer;
+
+        [JsonProperty("useHerbicide")]
+        public int useHerbicide;
+
+        [JsonProperty("helpUseHerbicide")]
+        public int helpUseHerbicide;
+
+        [JsonProperty("helpUsePestiside")]
+        public int helpUsePestiside;
+
+        [JsonProperty("helpWater")]
+        public int helpWater;
+
+        [JsonProperty("thiefCrop")]
+        public long thiefCrop;
+
+        [JsonProperty("helpFeedAnimal")]
+        public int helpFeedAnimal;
+
+        [JsonProperty("thiefAnimalProduct")]
+        public int thiefAnimalProduct;
     }
 }
+

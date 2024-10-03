@@ -195,7 +195,7 @@ namespace CiFarm.Scripts.UI.Popups
                     textItemName         = gameConfig.ItemName,
                     textItemTimeDetail   = detail.ItemDescription,
                     textItemProfitDetail = "",
-                    textItemPrice        = data.price.ToString(),
+                    textItemPrice        = data.upgradeSummaries[1].Price.ToString(),
                     iconItem             = gameConfig.GameShopIcon
                 });
             }
@@ -233,8 +233,8 @@ namespace CiFarm.Scripts.UI.Popups
         {
             try
             {
-                var resultData = await NakamaRpcService.Instance.BuySeedRpcAsync(
-                    new NakamaRpcService.BuySeedRpcAsyncParams
+                var resultData = await NakamaRpcService.Instance.BuySeedsRpcAsync(
+                    new NakamaRpcService.BuySeedsRpcAsyncParams
                     {
                         key      = item.itemKey,
                         quantity = 1
