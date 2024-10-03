@@ -1,6 +1,7 @@
 using CiFarm.Scripts.Configs.DataClass;
 using CiFarm.Scripts.Utilities;
 using Imba.UI;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +12,7 @@ namespace CiFarm.Scripts.UI.Popups
     public class CharacterMessagePopup : UIPopup
     {
         [SerializeField] private TextMeshProUGUI dialogMessage;
+        [SerializeField] private Transform       dialogMessageContainer;
         [SerializeField] private Transform       characterModelContainer;
 
         private CharacterMessageParam _characterMessageParam;
@@ -18,8 +20,15 @@ namespace CiFarm.Scripts.UI.Popups
 
         private GameObject _characterObject;
 
-        private void Start()
+        protected override void OnInit()
         {
+            base.OnInit();
+        }
+
+        protected override void OnShowing()
+        {
+            base.OnShowing();
+            dialogMessageContainer.SetActive(false);
             if (Parameter == null)
             {
                 DLogger.LogWarning("CharacterMessagePopup open without param, close instead", "CharacterMessagePopup");
@@ -30,7 +39,13 @@ namespace CiFarm.Scripts.UI.Popups
             _characterMessageParam = (CharacterMessageParam)Parameter;
             _onClose               = _characterMessageParam.OnClose;
             dialogMessage.text     = _characterMessageParam.Details;
+            dialogMessageContainer.SetActive(true);
             LoadCharacter();
+        }
+
+        protected override void OnShown()
+        {
+            base.OnShown();
         }
 
         public void Close()
@@ -46,7 +61,8 @@ namespace CiFarm.Scripts.UI.Popups
 
         private void LoadCharacter()
         {
-            var charModel = Resources.Load<GameObject>("CharacterModel/" + _characterMessageParam.CharacterId);
+            var charModel =
+                Resources.Load<GameObject>("Prefabs/UI/CharacterModel/" + _characterMessageParam.CharacterId);
             if (_characterObject)
             {
                 Destroy(_characterObject);

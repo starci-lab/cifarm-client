@@ -5166,6 +5166,7 @@ GameObject:
   - component: {fileID: 669348100}
   - component: {fileID: 669348102}
   - component: {fileID: 669348103}
+  - component: {fileID: 669348104}
   m_Layer: 0
   m_Name: '@Controller'
   m_TagString: Untagged
@@ -5246,6 +5247,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dirtBubbleModel: {fileID: 6684993111980555023, guid: f6f48fca014f77f468a65d45d2d1c886, type: 3}
+--- !u!114 &669348104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669348098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407fd72c7c2f449d99e1d1237dfb7add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialRecord:
+    Id: 0
+    Name: 
+    Detail: 
+    TutorialStep: 
 --- !u!1 &694534287
 GameObject:
   m_ObjectHideFlags: 0

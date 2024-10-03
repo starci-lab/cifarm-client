@@ -1,7 +1,9 @@
-using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.Configs;
 using CiFarm.Scripts.Configs.DataClass;
+using CiFarm.Scripts.UI.Popups;
+using CiFarm.Scripts.Utilities;
+using Imba.UI;
 using Imba.Utils;
 using UnityEngine.UI;
 
@@ -11,23 +13,25 @@ namespace CiFarm.Scripts.SceneController.Game
     {
         public TutorialRecord tutorialRecord;
 
-        public List<int>                  tutorialDetailStep;
         public List<TutorialDetailRecord> tutorialDetailRecord;
+
+        private int _currentIndex;
 
         public override void Awake()
         {
             base.Awake();
-            tutorialDetailStep   = new();
             tutorialDetailRecord = new();
         }
 
         public void StartTutorial(int tutorId)
         {
             LoadTutorial(tutorId);
+            ProceedToNextStep();
         }
 
         public void LoadTutorial(int tutorId)
         {
+            _currentIndex  = 0;
             tutorialRecord = ConfigManager.Instance.TutorialsConfig.GetConfigById(tutorId);
             var step = tutorialRecord.GetTutorialDetailsId();
             foreach (var idDetail in step)
@@ -36,31 +40,55 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public void HandleTutorialStep(TutorialDetailRecord tutorialDetailRecord)
+        private void ProceedToNextStep()
         {
-            switch (tutorialDetailRecord.Type)
+            if (_currentIndex < tutorialDetailRecord.Count)
+            {
+                var nextStep = tutorialDetailRecord[_currentIndex];
+                HandleTutorialStep(nextStep);
+                _currentIndex++;
+            }
+            else
+            {
+                EndTutorial();
+            }
+        }
+
+        public void HandleTutorialStep(TutorialDetailRecord tutorialDetail)
+        {
+            switch (tutorialDetail.Type)
             {
                 case TutorialsDetailType.PopupMessage:
-                    ShowPopupMessage();
+                    ShowPopupMessage(tutorialDetail);
                     break;
                 case TutorialsDetailType.ActionClick:
-                    HandleActionClick();
+                    HandleActionClick(tutorialDetail);
                     break;
                 case TutorialsDetailType.PopupMessageImage:
-                    ShowPopupWithImage();
+                    ShowPopupWithImage(tutorialDetail);
                     break;
             }
         }
 
-        private void ShowPopupMessage()
+        private void ShowPopupMessage(TutorialDetailRecord tutorialDetail)
+        {
+            DLogger.Log("Message tutor: " + tutorialDetail.Details, nameof(TutorialController));
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.CharacterMessagePopup, new CharacterMessageParam
+            {
+                Type          = TutorialsDetailType.PopupMessage,
+                Localization  = tutorialDetail.Localization,
+                Details       = tutorialDetail.Details,
+                CharacterId   = tutorialDetail.CharacterId,
+                TargetImageId = tutorialDetail.TargetImageId,
+                OnClose       = ProceedToNextStep
+            });
+        }
+
+        private void ShowPopupWithImage(TutorialDetailRecord tutorialDetailRecord)
         {
         }
 
-        private void ShowPopupWithImage()
-        {
-        }
-
-        private void HandleActionClick()
+        private void HandleActionClick(TutorialDetailRecord tutorialDetailRecord)
         {
         }
 
@@ -69,22 +97,7 @@ namespace CiFarm.Scripts.SceneController.Game
             ProceedToNextStep();
         }
 
-        private void ProceedToNextStep()
-        {
-            if (tutorialDetailStep.Count > 0)
-            {
-                var nextStepId = tutorialDetailStep[0];
-                tutorialDetailStep.RemoveAt(0);
-                var nextStep = tutorialDetailRecord.Find(record => record.Id == nextStepId);
-                HandleTutorialStep(nextStep);
-            }
-            else
-            {
-                OnTutorialEnd();
-            }
-        }
-
-        public void OnTutorialEnd()
+        public void EndTutorial()
         {
         }
     }

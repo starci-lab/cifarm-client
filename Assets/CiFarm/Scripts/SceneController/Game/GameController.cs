@@ -57,6 +57,8 @@ namespace CiFarm.Scripts.SceneController.Game
             NakamaCommunityService.Instance.OnReturn                 = OnReturnHome;
 
             UIManager.Instance.HideTransition(() => { });
+            
+            TutorialController.Instance.StartTutorial(1);
         }
 
         private void Update()
