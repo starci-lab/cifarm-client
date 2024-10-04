@@ -1,16 +1,15 @@
-using System;
 using CiFarm.Scripts.Services.NakamaServices;
-using CiFarm.Scripts.UI.Popups;
+using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;
-using Imba.Audio;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 namespace CiFarm.Scripts.SceneController.Game.PlantCore
 {
-    public class BaseGround : MonoBehaviour
+    public class BaseGround : MonoBehaviour, ITutorialItem
     {
-        [SerializeField] private Transform  positionPlant;
+        [SerializeField] private Transform positionPlant;
 
         [ReadOnly]
         public BasePlant plant;
@@ -22,13 +21,22 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         {
             dirtData = placedItem;
             DirtBubble bubble;
+
+            if (!placedItem.seedGrowthInfo.isPlanted)
+            {
+                gameObject.name = "EmptyTile";
+            }
+            else
+            {
+                gameObject.name = placedItem.referenceKey + "Tile";
+            }
+
             if (dirtData.seedGrowthInfo.fullyMatured)
             {
                 bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
                 bubble.SetBubble(dirtData.key, InjectionType.TextQuantity,
                     currentQuantity: dirtData.seedGrowthInfo.harvestQuantityRemaining,
-                    maxQuantity: dirtData.seedGrowthInfo.crop.maxHarvestQuantity
-                );
+                    maxQuantity: dirtData.seedGrowthInfo.crop.maxHarvestQuantity);
             }
             else
             {
@@ -48,7 +56,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                         break;
                 }
             }
-
         }
 
         public void SetPlant(BasePlant plantToSet)
@@ -61,7 +68,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         public void RemovePlant()
         {
             SimplePool.Despawn(plant.gameObject);
-            dirtData.seedGrowthInfo.isPlanted = false;
+            dirtData = null;
         }
 
         private void OnMouseDown()
@@ -86,6 +93,10 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             SimplePool.Despawn(gameObject);
         }
 
-     
+        public void HandleClickInTutorial(GameObject baseObj)
+        {
+            Debug.Log("Try Clicked 1");
+            GameController.Instance.OnClickGround(baseObj.GetComponent<BaseGround>());
+        }
     }
 }

@@ -97,7 +97,6 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         public void OffBubble()
         {
-            DLogger.Log("REMOVE:" + _tileId);
             TileBubbleController.Instance.OnBubbleDisappear(_tileId);
             SimplePool.Despawn(gameObject);
         }

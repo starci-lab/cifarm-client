@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.Configs;
 using CiFarm.Scripts.Configs.DataClass;
@@ -26,6 +25,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void StartTutorial(int tutorId)
         {
+            GameController.Instance.CameraController.LockCamera();
+
             LoadTutorial(tutorId);
             ProceedToNextStep();
         }
@@ -58,13 +59,14 @@ namespace CiFarm.Scripts.SceneController.Game
         public void HandleTutorialStep(TutorialDetailRecord tutorialDetail)
         {
             // CleanUp Old
+            GameController.Instance.CameraController.LockCamera();
             var lastStep = tutorialDetailRecord[_currentIndex == 0 ? _currentIndex : _currentIndex - 1];
-            switch (lastStep.Type)
+            switch (lastStep.TutorialsDetailType)
             {
                 case TutorialsDetailType.PopupMessage:
                     if (_currentIndex < tutorialDetailRecord.Count)
                     {
-                        if (tutorialDetail.Type != TutorialsDetailType.PopupMessage)
+                        if (tutorialDetail.TutorialsDetailType != TutorialsDetailType.PopupMessage)
                         {
                             UIManager.Instance.PopupManager.HidePopup(UIPopupName.CharacterMessagePopup, true);
                         }
@@ -78,7 +80,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
 
             // Handle new
-            switch (tutorialDetail.Type)
+            switch (tutorialDetail.TutorialsDetailType)
             {
                 case TutorialsDetailType.PopupMessage:
                     ShowPopupMessage(tutorialDetail);
@@ -97,7 +99,7 @@ namespace CiFarm.Scripts.SceneController.Game
             DLogger.Log("Message tutor: " + tutorialDetail.Details, nameof(TutorialController));
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.CharacterMessagePopup, new CharacterMessageParam
             {
-                Type          = TutorialsDetailType.PopupMessage,
+                Type          = tutorialDetail.TutorialsDetailType,
                 Localization  = tutorialDetail.Localization,
                 Details       = tutorialDetail.Details,
                 CharacterId   = tutorialDetail.CharacterId,
@@ -115,11 +117,12 @@ namespace CiFarm.Scripts.SceneController.Game
             DLogger.Log("HandleActionClick tutor: " + tutorialDetail.Details, nameof(TutorialController));
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.TutorActionPopup, new TutorButtonActionParam()
             {
-                Type          = TutorialsDetailType.PopupMessage,
-                Localization  = tutorialDetail.Localization,
-                Details       = tutorialDetail.Details,
-                TargetClickId = tutorialDetail.TargetClickId,
-                OnClose = ProceedToNextStep
+                Type            = tutorialDetail.TutorialsDetailType,
+                TargetClickType = tutorialDetail.TargetClickType,
+                Localization    = tutorialDetail.Localization,
+                Details         = tutorialDetail.Details,
+                TargetClickId   = tutorialDetail.TargetClickId,
+                OnClose         = ProceedToNextStep
             });
         }
 
@@ -130,6 +133,20 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void EndTutorial()
         {
+            // CLEAN
+            var lastStep = tutorialDetailRecord[_currentIndex - 1];
+            switch (lastStep.TutorialsDetailType)
+            {
+                case TutorialsDetailType.PopupMessage:
+                    UIManager.Instance.PopupManager.HidePopup(UIPopupName.CharacterMessagePopup, true);
+                    break;
+                case TutorialsDetailType.ActionClick:
+                    break;
+                case TutorialsDetailType.PopupMessageImage:
+                    break;
+            }
+
+            GameController.Instance.CameraController.UnLockCamera();
         }
     }
 }

@@ -77,6 +77,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void OnClickGround(BaseGround clickedGround)
         {
+            Debug.Log("Try Clicked 2");
             if (_friendItemData == null)
             {
                 HandleClickMyGround(clickedGround);
@@ -90,7 +91,6 @@ namespace CiFarm.Scripts.SceneController.Game
         public void HandleClickMyGround(BaseGround clickedGround)
         {
             // Not init ground
-            DLogger.Log("CLICKED " + clickedGround.dirtData.ToString());
             if (string.IsNullOrEmpty(clickedGround.dirtData.key))
             {
                 return;
@@ -150,6 +150,7 @@ namespace CiFarm.Scripts.SceneController.Game
         public void HandleClickOtherGround(BaseGround clickedGround)
         {
             // An trom
+            Debug.Log("Try Clicked 3");
             if (clickedGround.dirtData.seedGrowthInfo.isPlanted && clickedGround.dirtData.seedGrowthInfo.fullyMatured)
             {
                 OnHandOfMidasPlant(clickedGround);

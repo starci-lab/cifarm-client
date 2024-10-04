@@ -1,119 +1,119 @@
-ID	Type	Localization	Details	CharacterId	TargetClickId	TargetImageId	Note
-1	PopupMessage	_Tutorial	Oh, hello! Guess who we have here!	normal			PopupMessage: hiển thị popup text PopupMessageImage ActionClick: req người chơi hành động Input:req người chơi input
-2	PopupMessage	_Tutorial	Who am I? I'm Lumi, the one who watches over this land	normal			
-3	PopupMessage	_Tutorial	At the request of your grandmother, I will now hand over this land to you; it is her most treasured possession	normal			
-4	PopupMessage	_Tutorial	You've never tried farming before, have you? Now, I'll help you with a few basic steps	normal			
-5	PopupMessage	_Tutorial	Now, let's go to the shop and buy some seeds to try	normal			
-6	ActionClick	_Tutorial	Click shop button		MarketBtn		
-7	PopupMessage	_Tutorial	This is the seed shop. You can see its description information	normal			
-8	PopupMessage	_Tutorial	 Each type of seed will have a different growth time, and plants will go through a total of 5 growth stages	normal			
-9	PopupMessage	_Tutorial	Try clicking to buy one seed	normal			
-10	ActionClick	_Tutorial	Click buy		CarrotBuyItemBtn		
-11	PopupMessage	_Tutorial	Congratulations! You've successfully purchased it. Now, please check your inventory	happy			
-12	ActionClick	_Tutorial	Click close		CloseShopButton		
-13	ActionClick	_Tutorial	Click inventory		InventoryBtn		
-14	PopupMessage	_Tutorial	Here's the seed you just purchased. Now, let's start planting it!	normal			
-15	ActionClick	_Tutorial	Click Close	normal	CloseInventoryBtn		
-16	ActionClick	_Tutorial	Click Anytile	normal	EmptyTile		
-17	ActionClick	_Tutorial	Click Carrot	normal	CarrotItem		
-18	PopupMessage	_Tutorial	That's it! Now you can click on the plant to check when it will grow	normal			
-19	ActionClick	_Tutorial	Click Carrot plant	normal	CarrotItem		
-20	PopupMessageImage	_Tutorial	This is the time it will take for the plant to grow to the next stage.	normal		GrowPlant	
-21	PopupMessageImage	_Tutorial	Because the plant may need watering, if you don't water it, the plant will stop growing	normal		WaterPlant	
-22	PopupMessageImage	_Tutorial	Sometimes, the plant may also get infected 	normal		InfectedPlant	
-23	PopupMessageImage	_Tutorial	Or weeds	normal		WeedsPlant	
-24	PopupMessage	_Tutorial	The plant will continue to grow, but if not treated in time, it will affect the yield	normal			
-25	PopupMessage	_Tutorial	That's it! Now, please continue with your farming. I have a little errand to run, bye bye ~ <3	normal			
-26							
-27							
-28							
-29							
-30							
-31							
-32							
-33							
-34							
-35							
-36							
-37							
-38							
-39							
-40							
-41							
-42							
-43							
-44							
-45							
-46							
-47							
-48							
-49							
-50							
-51							
-52							
-53							
-54							
-55							
-56							
-57							
-58							
-59							
-60							
-61							
-62							
-63							
-64							
-65							
-66							
-67							
-68							
-69							
-70							
-71							
-72							
-73							
-74							
-75							
-76							
-77							
-78							
-79							
-80							
-81							
-82							
-83							
-84							
-85							
-86							
-87							
-88							
-89							
-90							
-91							
-92							
-93							
-94							
-95							
-96							
-97							
-98							
-99							
-100							
-101							
-102							
-103							
-104							
-105							
-106							
-107							
-108							
-109							
-110							
-111							
-112							
-113							
-114							
-115							
-116							
-117							
-118							
+ID	Type	Localization	Details	CharacterId	TargetClickType	TargetClickId	TargetImageId	Note
+1	PopupMessage	_Tutorial	Oh, hello! Guess who we have here!	normal				PopupMessage: hiển thị popup text PopupMessageImage ActionClick: req người chơi hành động Input:req người chơi input
+2	PopupMessage	_Tutorial	Who am I? I'm Lumi, the one who watches over this land	normal				
+3	PopupMessage	_Tutorial	At the request of your grandmother, I will now hand over this land to you; it is her most treasured possession	normal				
+4	PopupMessage	_Tutorial	You've never tried farming before, have you? Now, I'll help you with a few basic steps	normal				
+5	PopupMessage	_Tutorial	Now, let's go to the shop and buy some seeds to try	normal				
+6	ActionClick	_Tutorial	Click shop button			MarketBtn		
+7	PopupMessage	_Tutorial	This is the seed shop. You can see its description information	normal				
+8	PopupMessage	_Tutorial	 Each type of seed will have a different growth time, and plants will go through a total of 5 growth stages	normal				
+9	PopupMessage	_Tutorial	Try clicking to buy one seed	normal				
+10	ActionClick	_Tutorial	Click buy			CarrotBuyItemBtn		
+11	PopupMessage	_Tutorial	Congratulations! You've successfully purchased it. Now, please check your inventory	happy				
+12	ActionClick	_Tutorial	Click close		UIObject	CloseShopButton		
+13	ActionClick	_Tutorial	Click inventory		UIObject	InventoryBtn		
+14	PopupMessage	_Tutorial	Here's the seed you just purchased. Now, let's start planting it!	normal				
+15	ActionClick	_Tutorial	Click Close		UIObject	CloseInventoryBtn		
+16	ActionClick	_Tutorial	Click Anytile		GameObject	EmptyTile		
+17	ActionClick	_Tutorial	Click Carrot		UIObject	carrotItem		
+18	PopupMessage	_Tutorial	That's it! Now you can click on the plant to check when it will grow	normal				
+19	PopupMessage	_Tutorial	 It will show the time it will take for the plant to grow to the next stage.	normal			GrowPlant	
+20	PopupMessage	_Tutorial	Because the plant may need watering, if you don't water it, the plant will stop growing	normal			WaterPlant	
+21	PopupMessage	_Tutorial	Sometimes, the plant may also get infected 	normal			InfectedPlant	
+22	PopupMessage	_Tutorial	Or weeds	normal			WeedsPlant	
+23	PopupMessage	_Tutorial	The plant will continue to grow, but if not treated in time, it will affect the yield	normal				
+24	PopupMessage	_Tutorial	That's it! Now, please continue with your farming. I have a little errand to run, bye bye ~ <3	normal				
+25								
+26								
+27								
+28								
+29								
+30								
+31								
+32								
+33								
+34								
+35								
+36								
+37								
+38								
+39								
+40								
+41								
+42								
+43								
+44								
+45								
+46								
+47								
+48								
+49								
+50								
+51								
+52								
+53								
+54								
+55								
+56								
+57								
+58								
+59								
+60								
+61								
+62								
+63								
+64								
+65								
+66								
+67								
+68								
+69								
+70								
+71								
+72								
+73								
+74								
+75								
+76								
+77								
+78								
+79								
+80								
+81								
+82								
+83								
+84								
+85								
+86								
+87								
+88								
+89								
+90								
+91								
+92								
+93								
+94								
+95								
+96								
+97								
+98								
+99								
+100								
+101								
+102								
+103								
+104								
+105								
+106								
+107								
+108								
+109								
+110								
+111								
+112								
+113								
+114								
+115								
+116								
+117								
+118								

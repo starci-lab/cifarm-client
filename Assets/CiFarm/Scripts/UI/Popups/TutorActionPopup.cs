@@ -1,9 +1,12 @@
+using System;
 using CiFarm.Scripts.Configs.DataClass;
+using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace CiFarm.Scripts.UI.Popups
@@ -12,10 +15,20 @@ namespace CiFarm.Scripts.UI.Popups
     {
         [SerializeField] private TextMeshProUGUI detailStepText;
         [SerializeField] private Transform       fakeButtonContainer;
+        [SerializeField] private RectTransform   holeRect;
+        [SerializeField] private Image           holeImage;
+        [SerializeField] private Image           bgImage;
 
-        private UIButton               _fakeTargetButton;
+        private GameObject             _fakeTargetButton;
         private TutorButtonActionParam _tutorParam;
         private UnityAction            _onClose;
+        private Camera                 _camera;
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+            _camera = Camera.main;
+        }
 
         protected override void OnShown()
         {
@@ -32,7 +45,55 @@ namespace CiFarm.Scripts.UI.Popups
             _onClose    = _tutorParam.OnClose;
 
             detailStepText.text = _tutorParam.Details;
-            _fakeTargetButton   = SetUpButton();
+
+            holeRect.SetActive(false);
+            ClearButton();
+            switch (_tutorParam.TargetClickType)
+            {
+                case TargetClickType.UIObject:
+                    _fakeTargetButton = SetUpButton().gameObject;
+                    break;
+                case TargetClickType.GameObject:
+                    _fakeTargetButton = SetUpGameObject();
+                    break;
+                default:
+                    _fakeTargetButton = SetUpButton().gameObject;
+                    break;
+            }
+        }
+
+        private GameObject SetUpGameObject()
+        {
+            GameObject targetObj = GameObject.Find(_tutorParam.TargetClickId);
+            if (targetObj == null)
+            {
+                DLogger.LogWarning($"Target with ID {_tutorParam.TargetClickId} not found.",
+                    "TutorButtonActionPopup");
+                Hide(true);
+                return null;
+            }
+
+            var fakeTargetObj = Instantiate(targetObj, fakeButtonContainer);
+            fakeTargetObj.transform.position = _camera.WorldToScreenPoint(targetObj.transform.position);
+
+            // Set display 
+            var spriteRenderer = targetObj.GetComponent<SpriteRenderer>();
+            var fakeRender     = fakeTargetObj.AddComponent<Image>();
+            fakeRender.sprite        = spriteRenderer.sprite;
+            fakeRender.SetNativeSize();
+
+            // Adjust scale based on camera size
+            float cameraSizeRatio = 10f / _camera.orthographicSize;
+            fakeTargetObj.transform.localScale *= cameraSizeRatio;
+
+            // Add the Button component to enable click interaction
+            var button        = fakeTargetObj.AddComponent<Button>();
+            var tutorHandler = targetObj.GetComponent<ITutorialItem>();
+            button.onClick.AddListener(() => { tutorHandler.HandleClickInTutorial(targetObj); });
+            button.onClick.AddListener(OnClickReqButton);
+
+
+            return fakeTargetObj;
         }
 
         private UIButton SetUpButton()
@@ -56,17 +117,16 @@ namespace CiFarm.Scripts.UI.Popups
                 return null;
             }
 
-            ClearButton();
 
-            _fakeTargetButton = Instantiate(targetButton, fakeButtonContainer);
+            var fakeTargetButton = Instantiate(targetButton, fakeButtonContainer);
 
-            _fakeTargetButton.transform.position = targetButtonObj.transform.position;
+            fakeTargetButton.transform.position = targetButtonObj.transform.position;
 
 
             // Add the click listener to the fake button
-            _fakeTargetButton.OnClick.OnTrigger.Event.AddListener(OnClickReqButton);
+            fakeTargetButton.OnClick.OnTrigger.Event.AddListener(OnClickReqButton);
 
-            return _fakeTargetButton;
+            return fakeTargetButton;
         }
 
         private void ClearButton()
@@ -79,6 +139,7 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void OnClickReqButton()
         {
+            DLogger.Log("Done CLicked: " + _tutorParam.Details);
             ClearButton();
             Hide(true);
             _onClose?.Invoke();
@@ -88,6 +149,7 @@ namespace CiFarm.Scripts.UI.Popups
     public class TutorButtonActionParam
     {
         public TutorialsDetailType Type;
+        public TargetClickType     TargetClickType;
         public string              Localization;
         public string              Details;
         public string              TargetClickId;

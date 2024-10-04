@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ModelGameConfig
   m_EditorClassIdentifier: 
   tileMapper:
-  - key: starter
+  - key: tileStarter
     itemName: 
     tileSize: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}

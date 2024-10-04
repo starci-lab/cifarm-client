@@ -27,13 +27,13 @@ namespace CiFarm.Scripts.Configs.DataClass
     public class TutorialDetailRecord
     {
         public int                 Id;
-        public TutorialsDetailType Type;
+        public TutorialsDetailType TutorialsDetailType;
         public string              Localization;
         public string              Details;
         public string              CharacterId;
+        public TargetClickType     TargetClickType;
         public string              TargetClickId;
         public string              TargetImageId;
-        
     }
 
     public enum TutorialsDetailType
@@ -41,5 +41,11 @@ namespace CiFarm.Scripts.Configs.DataClass
         PopupMessage,
         ActionClick,
         PopupMessageImage
+    }
+
+    public enum TargetClickType
+    {
+        UIObject,
+        GameObject
     }
 }

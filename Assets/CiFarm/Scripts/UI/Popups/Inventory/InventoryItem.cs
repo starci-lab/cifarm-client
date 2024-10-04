@@ -16,6 +16,7 @@ namespace CiFarm.Scripts.UI.Popups.Inventory
 
         public void InitData(InvenItemData data, UnityAction<InvenItemData> callBack)
         {
+            gameObject.name = data.referenceKey + "Item";
             invenItemData   = data;
             onClick         = callBack;
             itemIcon.sprite = data.iconItem;
