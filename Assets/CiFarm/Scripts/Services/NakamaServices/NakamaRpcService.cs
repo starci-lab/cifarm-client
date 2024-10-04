@@ -162,6 +162,32 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         #endregion
 
+        #region BuyTileRpc
+
+        public class BuyTileRpcAsyncParams
+        {
+            [JsonProperty("position")]
+            public Position position;
+        }
+        public class BuyTileRpcAsyncResponse
+        {
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public async Task<BuyTileRpcAsyncResponse> BuyTileRpcAsync(
+            BuyTileRpcAsyncParams _params
+        )
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var result = await client.RpcAsync(session, "buy_tile", JsonConvert.SerializeObject(_params));
+            return JsonConvert.DeserializeObject<BuyTileRpcAsyncResponse>(result.Payload);
+        }
+
+        #endregion
+
         //Farming Rpcs
 
         #region PlantSeedsRpc
