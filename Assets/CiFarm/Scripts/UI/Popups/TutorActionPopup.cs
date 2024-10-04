@@ -2,6 +2,7 @@ using System;
 using CiFarm.Scripts.Configs.DataClass;
 using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;
+using Imba.Audio;
 using Imba.UI;
 using TMPro;
 using UnityEngine;
@@ -124,7 +125,14 @@ namespace CiFarm.Scripts.UI.Popups
 
 
             // Add the click listener to the fake button
-            fakeTargetButton.OnClick.OnTrigger.Event.AddListener(OnClickReqButton);
+            fakeTargetButton.OnClick.OnTrigger.Event.RemoveAllListeners();
+            fakeTargetButton.OnClick.OnTrigger.AudioName = AudioName.NoSound;
+            fakeTargetButton.OnClick.OnTrigger.Event.AddListener(
+                () =>
+                {
+                    targetButton.OnClick.OnTrigger.Event.Invoke();
+                    OnClickReqButton();
+                });
 
             return fakeTargetButton;
         }
