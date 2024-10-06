@@ -8,18 +8,6 @@ namespace CiFarm.Scripts.UI.Popups
     {
         [SerializeField] private TextMeshProUGUI sampleTest;
 
-        protected override void OnShowing()
-        {
-            base.OnShowing();
-            // var parameter = (TestParam)Parameter;
-            // sampleTest.text = parameter.detail;
-        }
-
-        protected override void OnHiding()
-        {
-            base.OnHiding();
-        }
-
         public void OnHidePopupClick()
         {
             //UIManager.Instance.PopupManager.ShowMessageDialog("Confirm", "Are you sure to buy this item?", UIMessageBox.MessageBoxType.Yes_No,

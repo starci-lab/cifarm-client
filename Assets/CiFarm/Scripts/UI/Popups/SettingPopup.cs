@@ -2,10 +2,8 @@ using CiFarm.Scripts.Services;
 using CiFarm.Scripts.UI.View;
 using Imba.Audio;
 using Imba.UI;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace CiFarm.Scripts.UI.Popups

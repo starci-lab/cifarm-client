@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.GameDatas;
