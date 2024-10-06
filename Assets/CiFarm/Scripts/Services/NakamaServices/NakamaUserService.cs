@@ -116,7 +116,15 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     UserId     = session.UserId,
                 }
             });
-            activityExperiences = JsonConvert.DeserializeObject<ActivityExperiences>(objects.Objects.First().Value);
+      
+            if (objects.Objects.Any())
+            {
+                activityExperiences = JsonConvert.DeserializeObject<ActivityExperiences>(objects.Objects.First().Value);
+            }
+            else
+            {
+                DLogger.LogWarning("No activity experiences found for the user.");
+            }
         }
 
         public async void LoadPlayerStatsAsync()

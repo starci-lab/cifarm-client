@@ -151,24 +151,26 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         private IEnumerator FetchCredentialsFromApi(bool useLocal = false)
         {
-            var url = useLocal ? "http://localhost:9999/api/v1/authenticator/fake-signature" : "https://api.cifarm.starci.net/api/v1/authenticator/fake-signature";
+            var url = useLocal ? "http://localhost:9999/api/v1/authenticator/fake-signature" 
+                : "https://api.cifarm.starci.net/api/v1/authenticator/fake-signature";
 
             using UnityWebRequest webRequest = UnityWebRequest.Post(url, new Dictionary<string, string>()
             {
                 { "chainKey", testChainKey.ToString() },
                 { "accountNumber", testAccountNumber.ToString() }
             });
-
+            DLogger.Log("FetchCredentialsFromApi For: "+ testChainKey + " with account: " + testAccountNumber);
             yield return webRequest.SendWebRequest();
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError($"Error fetching credentials: {webRequest.error}");
+                DLogger.LogError($"Error fetching credentials: {webRequest.error}");
                 yield break;
             }
 
             var json     = webRequest.downloadHandler.text;
             var response = JsonConvert.DeserializeObject<TestAccountResponse>(json);
+            DLogger.Log("FetchCredentialsFromApi For: "+ testChainKey + " with account: " + testAccountNumber);
 
             if (response != null && response.Data != null)
             {
@@ -183,7 +185,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             }
             else
             {
-                Debug.LogError("Failed to parse API response.");
+                DLogger.LogError("Failed to parse API response.");
             }
         }
 
