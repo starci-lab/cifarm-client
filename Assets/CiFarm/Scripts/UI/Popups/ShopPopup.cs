@@ -233,13 +233,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             try
             {
-                var resultData = await NakamaRpcService.Instance.BuySeedsRpcAsync(
-                    new NakamaRpcService.BuySeedsRpcAsyncParams
-                    {
-                        key      = item.itemKey,
-                        quantity = 1
-                    });
-
+                await NakamaFarmingService.Instance.BuyShopItem(item.itemKey);
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)

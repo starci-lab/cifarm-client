@@ -37,6 +37,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     NakamaUserService.Instance.inventories.Remove(seed);
                 }
             }
+
             await NakamaRpcService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
             NakamaUserService.Instance.LoadInventoriesAsync();
             // Additional logic can be added here if needed
@@ -100,7 +101,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             };
 
             await NakamaRpcService.Instance.UsePestisideRpcAsync(paramsObj);
-            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();          
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
         }
 
         #endregion
@@ -213,8 +214,16 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         #endregion
 
-        #region Additional Operations
-        
-        #endregion
+        public async Task BuyShopItem(string itemKey, int quantity =1 )
+        {
+            var resultData = await NakamaRpcService.Instance.BuySeedsRpcAsync(
+                new NakamaRpcService.BuySeedsRpcAsyncParams
+                {
+                    key      = itemKey,
+                    quantity = quantity
+                });
+            NakamaUserService.Instance.LoadWalletAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
+        }
     }
 }
