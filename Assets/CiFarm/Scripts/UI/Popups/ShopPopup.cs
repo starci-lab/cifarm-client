@@ -233,7 +233,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             try
             {
-                await NakamaFarmingService.Instance.BuyShopItem(item.itemKey);
+                await NakamaFarmingService.Instance.BuySeed(item.itemKey);
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)

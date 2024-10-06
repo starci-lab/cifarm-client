@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Imba.Utils;
+using UnityEngine;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
@@ -214,7 +215,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         #endregion
 
-        public async Task BuyShopItem(string itemKey, int quantity =1 )
+        public async Task BuySeed(string itemKey, int quantity = 1)
         {
             var resultData = await NakamaRpcService.Instance.BuySeedsRpcAsync(
                 new NakamaRpcService.BuySeedsRpcAsyncParams
@@ -222,6 +223,50 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     key      = itemKey,
                     quantity = quantity
                 });
+            NakamaUserService.Instance.LoadWalletAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
+        }
+
+        public async Task BuyTile(Vector2Int placedPosition, int quantity = 1)
+        {
+            var resultData = await NakamaRpcService.Instance.BuyTileRpcAsync(
+                new NakamaRpcService.BuyTileRpcAsyncParams
+                {
+                    position = new Position
+                    {
+                        x = placedPosition.x,
+                        y = placedPosition.y
+                    }
+                });
+            NakamaUserService.Instance.LoadWalletAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
+        }
+
+        public async Task BuyAnimal(string itemKey, string coopKey)
+        {
+            var resultData = await NakamaRpcService.Instance.BuyAnimalRpcAsync(
+                new NakamaRpcService.BuyAnimalRpcAsyncParams()
+                {
+                    key                   = itemKey,
+                    placedItemBuildingKey = coopKey
+                });
+            NakamaUserService.Instance.LoadWalletAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
+        }
+
+        public async Task ConstructCoop(string itemKey, Vector2Int placedPosition)
+        {
+            var resultData = await NakamaRpcService.Instance.ConstructBuildingRpcAsync(
+                new NakamaRpcService.ConstructBuildingRpcParams
+                {
+                    Key = itemKey,
+                    Position = new Position
+                    {
+                        x = placedPosition.x,
+                        y = placedPosition.y
+                    }
+                }
+            );
             NakamaUserService.Instance.LoadWalletAsync();
             NakamaUserService.Instance.LoadInventoriesAsync();
         }
