@@ -1,4 +1,3 @@
-using System;
 using CiFarm.Scripts.Configs.DataClass;
 using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;
@@ -7,7 +6,6 @@ using Imba.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace CiFarm.Scripts.UI.Popups

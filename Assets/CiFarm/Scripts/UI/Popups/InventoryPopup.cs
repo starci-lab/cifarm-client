@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services;
@@ -6,7 +5,6 @@ using CiFarm.Scripts.Services.GameDatas;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Inventory;
 using CiFarm.Scripts.UI.View;
-using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using SuperScrollView;
 using UnityEngine;
