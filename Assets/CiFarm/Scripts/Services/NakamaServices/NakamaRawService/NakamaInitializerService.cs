@@ -14,6 +14,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
     public class NakamaInitializerService : ManualSingletonMono<NakamaInitializerService>
     {
         public UnityAction OnLoginError;
+        public UnityAction OnLoginSuccess;
         
         [Header("Nakama Config")]
         [SerializeField] private bool useLocal = true;
@@ -61,7 +62,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             //authenticate
             AuthenticateAsync();
             yield return new WaitUntil(() => authenticated);
-
+            OnLoginSuccess?.Invoke();
             //healthcheck
             HealthCheckAsync();
         }
@@ -127,6 +128,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             catch (Exception e)
             {
                 DLogger.Log(e.Message, "Nakama", LogColors.OrangeRed);
+                OnLoginError?.Invoke();
             }
         }
 

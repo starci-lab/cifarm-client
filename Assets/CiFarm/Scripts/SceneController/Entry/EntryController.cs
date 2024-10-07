@@ -1,33 +1,54 @@
 using System.Collections;
+using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
 using DG.Tweening;
 using Imba.Audio;
 using Imba.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace CiFarm.Scripts.SceneController.Entry
 {
     public class EntryController : MonoBehaviour
     {
-        [SerializeField] private GameObject services;
+        [SerializeField] private GameObject      services;
         [SerializeField] private Image           loaderBar;
         [SerializeField] private TextMeshProUGUI details;
-        [SerializeField] private GameObject loadingGroup;
-        [SerializeField] private GameObject playButton;
+        [SerializeField] private GameObject      loadingGroup;
+        [SerializeField] private GameObject      playButton;
 
+        private float  fillAmount    = 0;
         private string loadingDetais = "Loading";
 
         private void Awake()
         {
             Application.targetFrameRate = 60;
+
+            NakamaInitializerService.Instance.OnLoginError   = OnLoginError;
+            NakamaInitializerService.Instance.OnLoginSuccess = OnLoginSuccess;
+
             DontDestroyOnLoad(services);
         }
 
         private void Start()
         {
-            loaderBar.DOFillAmount(1, Random.Range(2f, 3f)).OnComplete(ShowPlayButton).SetEase(Ease.Linear);
+            fillAmount = 7f;
+            UpdateFillAmount();
             StartCoroutine(PlayDetailAnimation());
+        }
+
+        public void UpdateFillAmount()
+        {
+            if (fillAmount > 0.99f)
+            {
+                loaderBar.DOFillAmount(fillAmount, Random.Range(0.5f, 1f)).OnComplete(ShowPlayButton)
+                    .SetEase(Ease.Linear);
+            }
+            else
+            {
+                loaderBar.DOFillAmount(fillAmount, Random.Range(0.5f, 1f)).SetEase(Ease.Linear);
+            }
         }
 
         public IEnumerator PlayDetailAnimation()
@@ -56,8 +77,24 @@ namespace CiFarm.Scripts.SceneController.Entry
 
             UIManager.Instance.ShowTransition(() =>
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(Constants.GameScene);
+                SceneManager.LoadScene(Constants.GameScene);
             });
+        }
+
+        public void OnLoginSuccess()
+        {
+            fillAmount = 1;
+            UpdateFillAmount();
+        }
+
+        public void OnLoginError()
+        {
+            UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Login error",
+                UIMessageBox.MessageBoxType.Retry, action =>
+                {
+                    NakamaInitializerService.Instance.AuthenticateAsync();
+                    return true;
+                });
         }
     }
 }
