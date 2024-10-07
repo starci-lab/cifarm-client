@@ -51,21 +51,21 @@ MonoBehaviour:
     gameHarvestIcon: {fileID: 0}
   - key: coop
     itemName: Coop
-    tileSize: {x: 1, y: 1}
+    tileSize: {x: 4, y: 4}
     prefabModel: {fileID: 5646978862015493990, guid: 34f75f98d37a46b488f986de98271fa9, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: pasture
     itemName: Pasture
-    tileSize: {x: 1, y: 1}
+    tileSize: {x: 4, y: 4}
     prefabModel: {fileID: 5646978862015493990, guid: 7f097764168709d489f4de9f4226ef73, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
     gameHarvestIcon: {fileID: 0}
   - key: house
     itemName: House
-    tileSize: {x: 1, y: 1}
-    prefabModel: {fileID: 5646978862015493990, guid: 7f097764168709d489f4de9f4226ef73, type: 3}
-    gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
+    tileSize: {x: 4, y: 5}
+    prefabModel: {fileID: 5646978862015493990, guid: 4b4acc9cacd6c1741b99fe285f0a0c0c, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: ec05577267483ce46a452633f05293ca, type: 3}
     gameHarvestIcon: {fileID: 0}
   plantMapper:
   - key: cauliflower
