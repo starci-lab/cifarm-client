@@ -84,7 +84,6 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void OnClickGround(BaseGround clickedGround)
         {
-            Debug.Log("Try Clicked 2");
             if (_friendItemData == null)
             {
                 HandleClickMyGround(clickedGround);

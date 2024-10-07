@@ -33,7 +33,7 @@ namespace CiFarm.Scripts.SceneController.Entry
 
         private void Start()
         {
-            fillAmount = 7f;
+            fillAmount = 0.7f;
             UpdateFillAmount();
             StartCoroutine(PlayDetailAnimation());
         }
