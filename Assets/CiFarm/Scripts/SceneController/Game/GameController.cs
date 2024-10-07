@@ -24,6 +24,7 @@ namespace CiFarm.Scripts.SceneController.Game
         [SerializeField] private EditModeController editModeController;
 
         private List<BaseGround> _baseGrounds;
+        private List<GameObject> _constructor;
         private GameView         _gameView;
         private VisitView        _visitView;
         private EditView         _editView;
@@ -40,7 +41,8 @@ namespace CiFarm.Scripts.SceneController.Game
         public override void Awake()
         {
             base.Awake();
-            _baseGrounds = new List<BaseGround>();
+            _baseGrounds = new();
+            _constructor = new();
             _gameView    = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
             _visitView   = UIManager.Instance.ViewManager.GetViewByName<VisitView>(UIViewName.VisitView);
             _editView    = UIManager.Instance.ViewManager.GetViewByName<EditView>(UIViewName.EditView);
@@ -308,7 +310,7 @@ namespace CiFarm.Scripts.SceneController.Game
             var dirtObj = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
             // var dirtObj = Instantiate(prefabDirtData);
 
-            tileMapController.SetGroundWithTilePos(
+            tileMapController.SetAnyWithWithTilePos(
                 new Vector2Int(placedItem.position.x, placedItem.position.y)
                 , dirtObj);
 
@@ -331,9 +333,14 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void PlacedBuilding(PlacedItem placedItem)
         {
+            var tileObjectModel =
+                ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(placedItem.referenceKey);
+            var tileObject = SimplePool.Spawn(tileObjectModel, Vector3.zero, tileObjectModel.transform.rotation);
+            
+            _constructor.Add(tileObject);
         }
 
-        public void OnFetchPlacedDataFromServer()
+        private void OnFetchPlacedDataFromServer()
         {
             // DLogger.Log("REALTIME FETCH", "GAME TILE");
 
@@ -343,7 +350,13 @@ namespace CiFarm.Scripts.SceneController.Game
                 dirt.ClearGround();
             }
 
+            foreach (var construct in _constructor)
+            {
+                SimplePool.Despawn(construct);
+            }
+
             _baseGrounds.Clear();
+            _constructor.Clear();
 
             LoadUserTileMap();
         }

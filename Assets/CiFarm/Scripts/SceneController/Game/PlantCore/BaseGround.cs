@@ -2,7 +2,6 @@ using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 namespace CiFarm.Scripts.SceneController.Game.PlantCore
@@ -33,7 +32,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
             if (dirtData.seedGrowthInfo.fullyMatured)
             {
-                bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
+                bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
                 bubble.SetBubble(dirtData.key, InjectionType.TextQuantity,
                     currentQuantity: dirtData.seedGrowthInfo.harvestQuantityRemaining,
                     maxQuantity: dirtData.seedGrowthInfo.crop.maxHarvestQuantity);
@@ -43,15 +42,15 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 switch (placedItem.seedGrowthInfo.plantCurrentState)
                 {
                     case PlantCurrentState.NeedWater:
-                        bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
+                        bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Water);
                         break;
                     case PlantCurrentState.IsWeedy:
-                        bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
+                        bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Grass);
                         break;
                     case PlantCurrentState.IsInfested:
-                        bubble = TileBubbleController.Instance.SpawnBubble(transform.position);
+                        bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Worm);
                         break;
                 }

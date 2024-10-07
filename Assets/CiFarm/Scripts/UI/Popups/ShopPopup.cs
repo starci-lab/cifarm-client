@@ -33,6 +33,7 @@ namespace CiFarm.Scripts.UI.Popups
         protected override void OnInit()
         {
             base.OnInit();
+            shopItemsData = new();
             shopItemLoopListView.InitListView(0, OnGetItemByIndex);
             NakamaUserService.Instance.OnGoldChange = (FetchUserCoin);
         }
@@ -188,6 +189,10 @@ namespace CiFarm.Scripts.UI.Popups
 
                 var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(data.key);
                 var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(data.key);
+                if (detail == null || gameConfig == null)
+                {
+                    continue;
+                }
                 shopItemsData.Add(new ShopItemData
                 {
                     itemKey              = data.key,

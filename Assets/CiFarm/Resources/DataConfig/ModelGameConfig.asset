@@ -49,8 +49,8 @@ MonoBehaviour:
     prefabModel: {fileID: 7360233726201006671, guid: b6de7067fa900f7408a20f7263a1a552, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 41039d56d004c8940a242d7f7d43bbda, type: 3}
     gameHarvestIcon: {fileID: 0}
-  - key: coop
-    itemName: Coop
+  - key: chickenCoop
+    itemName: Chicken Coop
     tileSize: {x: 4, y: 4}
     prefabModel: {fileID: 5646978862015493990, guid: 34f75f98d37a46b488f986de98271fa9, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
@@ -61,8 +61,8 @@ MonoBehaviour:
     prefabModel: {fileID: 5646978862015493990, guid: 7f097764168709d489f4de9f4226ef73, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 1994c97658d262440b021c03f867a109, type: 3}
     gameHarvestIcon: {fileID: 0}
-  - key: house
-    itemName: House
+  - key: home
+    itemName: Home
     tileSize: {x: 4, y: 5}
     prefabModel: {fileID: 5646978862015493990, guid: 4b4acc9cacd6c1741b99fe285f0a0c0c, type: 3}
     gameShopIcon: {fileID: 21300000, guid: ec05577267483ce46a452633f05293ca, type: 3}
