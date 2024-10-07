@@ -6,12 +6,15 @@ using Imba.Utils;
 using Nakama;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Networking;
 
 namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 {
     public class NakamaInitializerService : ManualSingletonMono<NakamaInitializerService>
     {
+        public UnityAction OnLoginError;
+        
         [Header("Nakama Config")]
         [SerializeField] private bool useLocal = true;
 
@@ -116,7 +119,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
                     { "publicKey", credentials.publicKey },
                     { "signature", credentials.signature },
                     { "chainKey", credentials.chainKey },
-                    { "network", credentials.network }
+                    { "network", credentials.network },
+                    { "telegramInitDataRaw", "tranminhthien" }
                 });
                 authenticated = true;
             }
