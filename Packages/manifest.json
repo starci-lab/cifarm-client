@@ -1,5 +1,6 @@
 {
   "dependencies": {
+"com.gameframe.sceneswitcher": "https://github.com/coryleach/UnitySceneSwitcher.git#1.0.3",
     "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
     "com.unity.collab-proxy": "2.4.4",
     "com.unity.feature.2d": "2.0.1",
