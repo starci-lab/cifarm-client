@@ -309,7 +309,7 @@ namespace CiFarm.Scripts.SceneController.Game
             // var dirtObj = Instantiate(prefabDirtData);
 
             tileMapController.SetGroundWithTilePos(
-                new Vector2Int((int)placedItem.position.x, (int)placedItem.position.y)
+                new Vector2Int(placedItem.position.x, placedItem.position.y)
                 , dirtObj);
 
             var dirtScript = dirtObj.GetComponent<BaseGround>();

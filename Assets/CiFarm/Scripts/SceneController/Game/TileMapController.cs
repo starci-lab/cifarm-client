@@ -44,9 +44,10 @@ namespace CiFarm.Scripts.SceneController.Game
 
             if (tile != null && tile.name == interactableTileName)
             {
-                tileCenterPosition.z            =  0;
-                tileCenterPosition.y            += gameTileMap.cellSize.y / 2.0f;
-                objectPlaced.transform.position =  tileCenterPosition;
+                // Adjust the position to the bottom-left corner of the tile
+                tileCenterPosition -= new Vector3(gameTileMap.cellSize.x / 2.0f, gameTileMap.cellSize.y / 2.0f, 0);
+
+                objectPlaced.transform.position = tileCenterPosition;
                 PlacedPositionHashSet.Add(position2D);
             }
             else
@@ -65,37 +66,6 @@ namespace CiFarm.Scripts.SceneController.Game
         public void ResetPosition()
         {
             PlacedPositionHashSet.Clear();
-        }
-
-        public void SetGround(Vector3 position, GameObject objectPlaced)
-        {
-            var worldPosition = Camera.main.ScreenToWorldPoint(position);
-            worldPosition.z = 0;
-
-            var cellPosition       = gameTileMap.WorldToCell(worldPosition);
-            var tileCenterPosition = gameTileMap.CellToWorld(cellPosition);
-            DLogger.Log("Clicked Tile: " + cellPosition, "TileManager", LogColors.Lime);
-
-            TileBase tile = gameTileMap.GetTile(cellPosition);
-
-            if (tile != null && tile.name == interactableTileName)
-            {
-                tileCenterPosition.z =  0;
-                tileCenterPosition.y += gameTileMap.cellSize.y / 2.0f;
-                var obj = Instantiate(objectPlaced);
-                obj.transform.position = tileCenterPosition;
-            }
-            else
-            {
-                if (tile == null)
-                {
-                    DLogger.Log("No tile at this position (NULL)", "TileManager", LogColors.Lime);
-                }
-                else
-                {
-                    DLogger.Log($"Tile name: {tile.name}", "TileManager", LogColors.Lime);
-                }
-            }
         }
 
         public Vector2Int SetFakeGround(Vector3 position, GameObject objectPlaced, Vector2Int itemSize)
@@ -135,8 +105,11 @@ namespace CiFarm.Scripts.SceneController.Game
 
             if (isValid)
             {
-                tileCenterPosition.z            =  0;
-                tileCenterPosition.y            += interactableMap.cellSize.y / 2.0f;
+                // tileCenterPosition.z            =  0;
+                // tileCenterPosition.y            += interactableMap.cellSize.y / 2.0f;
+                // Adjust the position to the bottom-left corner of the tile
+                tileCenterPosition -= new Vector3(gameTileMap.cellSize.x / 2.0f, gameTileMap.cellSize.y / 2.0f, 0);
+
                 objectPlaced.transform.position =  tileCenterPosition;
             }
 
