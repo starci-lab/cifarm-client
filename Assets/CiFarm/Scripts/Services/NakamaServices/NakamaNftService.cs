@@ -2,6 +2,7 @@ using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using System.Collections;
+using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
 using UnityEngine;
 
 public class NakamaNftService : ManualSingletonMono<NakamaNftService>

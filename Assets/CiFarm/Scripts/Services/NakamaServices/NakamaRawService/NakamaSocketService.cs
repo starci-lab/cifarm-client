@@ -1,17 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using Nakama;
 using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CiFarm.Scripts.Services.NakamaServices
+namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 {
     public class NakamaSocketService : ManualSingletonMono<NakamaSocketService>
     {

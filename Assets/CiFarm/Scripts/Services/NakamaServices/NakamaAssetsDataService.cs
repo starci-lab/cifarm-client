@@ -4,11 +4,12 @@ using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
 using UnityEngine;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
-    public class NakamaLoaderService : ManualSingletonMono<NakamaLoaderService>
+    public class NakamaAssetsDataService : ManualSingletonMono<NakamaAssetsDataService>
     {
         public override void Awake()
         {

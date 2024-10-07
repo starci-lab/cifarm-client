@@ -113,7 +113,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             ClearSelectedShop();
             seedTab.SetSelect(true);
-            var rawData = NakamaLoaderService.Instance.crops;
+            var rawData = NakamaAssetsDataService.Instance.crops;
             shopItemsData.Clear();
             foreach (var data in rawData)
             {
@@ -141,7 +141,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             ClearSelectedShop();
             animaTab.SetSelect(true);
-            var rawData = NakamaLoaderService.Instance.animals;
+            var rawData = NakamaAssetsDataService.Instance.animals;
             shopItemsData.Clear();
             foreach (var data in rawData)
             {
@@ -177,7 +177,7 @@ namespace CiFarm.Scripts.UI.Popups
         {
             ClearSelectedShop();
             buildingTab.SetSelect(true);
-            var rawData = NakamaLoaderService.Instance.buildings;
+            var rawData = NakamaAssetsDataService.Instance.buildings;
             shopItemsData.Clear();
             foreach (var data in rawData)
             {

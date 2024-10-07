@@ -1,13 +1,13 @@
-using Imba.Utils;
 using System;
-using Newtonsoft.Json;
 using System.Collections;
-using System.Threading.Tasks;
-using UnityEngine;
-using CiFarm.Scripts.Utilities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using CiFarm.Scripts.Utilities;
+using Imba.Utils;
+using Newtonsoft.Json;
+using UnityEngine;
 
-namespace CiFarm.Scripts.Services.NakamaServices
+namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 {
     public class NakamaRpcService : ManualSingletonMono<NakamaRpcService>
     {

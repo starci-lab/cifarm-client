@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace CiFarm.Scripts.Services.NakamaServices
+namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 {
     public class NakamaInitializerService : ManualSingletonMono<NakamaInitializerService>
     {
