@@ -335,6 +335,10 @@ namespace CiFarm.Scripts.SceneController.Game
             var tileObjectModel =
                 ResourceService.Instance.ModelGameObjectConfig.GetTileObjectModel(placedItem.referenceKey);
             var tileObject = SimplePool.Spawn(tileObjectModel, Vector3.zero, tileObjectModel.transform.rotation);
+
+            tileMapController.SetAnyWithWithTilePos(
+                new Vector2Int(placedItem.position.x, placedItem.position.y)
+                , tileObject);
             
             _constructor.Add(tileObject);
         }

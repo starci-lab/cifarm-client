@@ -193,6 +193,7 @@ namespace CiFarm.Scripts.UI.Popups
                 {
                     continue;
                 }
+
                 shopItemsData.Add(new ShopItemData
                 {
                     itemKey              = data.key,
@@ -223,11 +224,15 @@ namespace CiFarm.Scripts.UI.Popups
             switch (item.shopType)
             {
                 case ShopType.Seed:
-                case ShopType.Animal:
                     BuyToInventory(item);
                     break;
+                case ShopType.Animal:
+                    UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
+                    //BuyToInventory(item);
+                    break;
                 case ShopType.Building:
-                    ConstructionBuilding(item);
+                    UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
+                    //ConstructionBuilding(item);
                     break;
                 case ShopType.Tree:
                     break;

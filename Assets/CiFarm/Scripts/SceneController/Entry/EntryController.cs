@@ -31,14 +31,18 @@ namespace CiFarm.Scripts.SceneController.Entry
             DontDestroyOnLoad(services);
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
             fillAmount = 0.7f;
             UpdateFillAmount();
             StartCoroutine(PlayDetailAnimation());
+
+            yield return new WaitUntil(() => NakamaInitializerService.Instance.IsLogin);
+            fillAmount = 1f;
+            UpdateFillAmount();
         }
 
-        public void UpdateFillAmount()
+        private void UpdateFillAmount()
         {
             if (fillAmount > 0.99f)
             {
