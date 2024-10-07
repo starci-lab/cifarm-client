@@ -46,6 +46,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
 
     [Serializable]
+    public class TelegramData
+    {
+        [JsonProperty("userId")]
+        public int userId;
+    }
+
+
+    [Serializable]
     public class Metadata
     {
         [JsonProperty("key")]
@@ -59,6 +67,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("network")]
         public string network;
+
+        [JsonProperty("telegramData")]
+        public TelegramData telegramData;
+
     }
 
     [Serializable]
