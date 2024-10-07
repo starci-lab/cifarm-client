@@ -23,18 +23,12 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         [Header("Testing Config Editor")]
         [SerializeField] private SupportChain testChainKey;
+
         [SerializeField] private int testAccountNumber;
 
-        [Header("Fake user loaded")]
-        [SerializeField] [ReadOnly] private string message = "1ccd5c84-93c9-4bb9-default-285b4c5405e2";
-
-        [SerializeField] [ReadOnly] private string publicKey = "default";
-        [SerializeField] [ReadOnly] private string signature = "default";
-        [SerializeField] [ReadOnly] private string chainKey  = "avalanche";
-
-        public Client client = null;
+        public Client   client  = null;
         public ISession session = null;
-        public IApiUser user = null;
+        public IApiUser user    = null;
 
         //credentials
         private Credentials credentials = null;
@@ -74,7 +68,10 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             StartCoroutine(FetchCredentialsFromApi(useLocal));
         }
 
-        //called from React app to set credentials, then break the coroutine
+        /// <summary>
+        /// Called from React app to set credentials, then break the coroutine
+        /// </summary>
+        /// <param name="payload"></param>
         public void SetCredentials(string payload)
         {
             credentials = JsonConvert.DeserializeObject<Credentials>(payload);
@@ -151,7 +148,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         private IEnumerator FetchCredentialsFromApi(bool useLocal = false)
         {
-            var url = useLocal ? "http://localhost:9999/api/v1/authenticator/fake-signature" 
+            var url = useLocal
+                ? "http://localhost:9999/api/v1/authenticator/fake-signature"
                 : "https://api.cifarm.starci.net/api/v1/authenticator/fake-signature";
 
             using UnityWebRequest webRequest = UnityWebRequest.Post(url, new Dictionary<string, string>()
@@ -159,7 +157,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
                 { "chainKey", testChainKey.ToString() },
                 { "accountNumber", testAccountNumber.ToString() }
             });
-            DLogger.Log("FetchCredentialsFromApi For: "+ testChainKey + " with account: " + testAccountNumber);
+            DLogger.Log("FetchCredentialsFromApi For: " + testChainKey + " with account: " + testAccountNumber);
             yield return webRequest.SendWebRequest();
 
             if (webRequest.result != UnityWebRequest.Result.Success)
@@ -170,7 +168,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
             var json     = webRequest.downloadHandler.text;
             var response = JsonConvert.DeserializeObject<TestAccountResponse>(json);
-            DLogger.Log("FetchCredentialsFromApi For: "+ testChainKey + " with account: " + testAccountNumber);
+            DLogger.Log("FetchCredentialsFromApi For: " + testChainKey + " with account: " + testAccountNumber);
 
             if (response != null && response.Data != null)
             {
