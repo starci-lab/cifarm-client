@@ -105,7 +105,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void LoadActivityExperiencesAsync()
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
@@ -117,7 +117,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     UserId     = session.UserId,
                 }
             });
-      
+
             if (objects.Objects.Any())
             {
                 activityExperiences = JsonConvert.DeserializeObject<ActivityExperiences>(objects.Objects.First().Value);
@@ -183,5 +183,17 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 DLogger.LogError("NFT LOAD FAIL: " + e.Message, "Nakama - Inventories", LogColors.LimeGreen);
             }
         }
+
+        public async Task SyncTutorial(int tutorialIndex, int stepIndex)
+        {
+            await NakamaRpcService.Instance.UpdateTutorialRpcAsync(new NakamaRpcService.UpdateTutorialRpcAsyncParams
+            {
+                tutorialIndex = tutorialIndex,
+                stepIndex     = stepIndex
+            });
+            playerStats.tutorialIndex = tutorialIndex;
+            playerStats.stepIndex     = stepIndex;
+        }
+        
     }
 }

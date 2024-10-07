@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CiFarm.Scripts.Configs;
 using CiFarm.Scripts.Configs.DataClass;
+using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.Utilities;
 using Imba.UI;
@@ -15,6 +16,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public List<TutorialDetailRecord> tutorialDetailRecord;
 
+        private int _tutorId;
         private int _currentIndex;
 
         public override void Awake()
@@ -23,17 +25,17 @@ namespace CiFarm.Scripts.SceneController.Game
             tutorialDetailRecord = new();
         }
 
-        public void StartTutorial(int tutorId)
+        public void StartTutorial()
         {
             GameController.Instance.CameraController.LockCamera();
-
-            LoadTutorial(tutorId);
+            _tutorId = NakamaUserService.Instance.playerStats.tutorialIndex;
+            LoadTutorial(NakamaUserService.Instance.playerStats.tutorialIndex, NakamaUserService.Instance.playerStats.stepIndex);
             ProceedToNextStep();
         }
 
-        public void LoadTutorial(int tutorId)
+        public void LoadTutorial(int tutorId, int currenIndex = 0)
         {
-            _currentIndex  = 0;
+            _currentIndex  = currenIndex;
             tutorialRecord = ConfigManager.Instance.TutorialsConfig.GetConfigById(tutorId);
             var step = tutorialRecord.GetTutorialDetailsId();
             foreach (var idDetail in step)
@@ -44,6 +46,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void ProceedToNextStep()
         {
+            SyncTutorial();
             if (_currentIndex < tutorialDetailRecord.Count)
             {
                 var nextStep = tutorialDetailRecord[_currentIndex];
@@ -147,6 +150,26 @@ namespace CiFarm.Scripts.SceneController.Game
             }
 
             GameController.Instance.CameraController.UnLockCamera();
+        }
+
+        /// <summary>
+        /// Todo: Update checking logic for tutorial
+        /// </summary>
+        /// <returns></returns>
+        public bool AvailableTutorCheck()
+        {
+            if (NakamaUserService.Instance.playerStats.tutorialIndex <= 1)
+            {
+                NakamaUserService.Instance.playerStats.tutorialIndex = 1;
+                return true;
+            }
+
+            return false;
+        }
+
+        public void SyncTutorial()
+        {
+            NakamaUserService.Instance.SyncTutorial(_tutorId, _currentIndex);
         }
     }
 }

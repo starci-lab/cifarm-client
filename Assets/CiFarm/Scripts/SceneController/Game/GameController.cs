@@ -58,8 +58,11 @@ namespace CiFarm.Scripts.SceneController.Game
             NakamaCommunityService.Instance.OnReturn                 = OnReturnHome;
 
             UIManager.Instance.HideTransition(() => { });
-            
-            TutorialController.Instance.StartTutorial(1);
+
+            if (TutorialController.Instance.AvailableTutorCheck())
+            {
+                TutorialController.Instance.StartTutorial();
+            }
         }
 
         private void Update()
@@ -69,6 +72,7 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 UIManager.Instance.PopupManager.ShowPopup(UIPopupName.CharacterMessagePopup);
             }
+
             if (Input.GetKeyDown(KeyCode.B))
             {
                 UIManager.Instance.PopupManager.HidePopup(UIPopupName.CharacterMessagePopup);
@@ -502,7 +506,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 DLogger.Log("Current tool is not Steal.");
                 return;
             }
-            
+
             if (ground.dirtData.seedGrowthInfo.thiefedBy != null &&
                 ground.dirtData.seedGrowthInfo.thiefedBy.Contains(NakamaUserService.Instance.userId))
             {
