@@ -296,7 +296,6 @@ namespace CiFarm.Scripts.SceneController.Game
             // clear bubble that not valid
             TileBubbleController.Instance.ValidateBubble(
                 rawData.Select(o => o.key).ToList()
-                            
                 );
         }
 
