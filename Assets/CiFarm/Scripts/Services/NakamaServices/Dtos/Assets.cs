@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
@@ -70,7 +71,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("telegramData")]
         public TelegramData telegramData;
-
     }
 
     [Serializable]
@@ -93,6 +93,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("stepIndex")]
         public int stepIndex;
+
+        [JsonProperty("invites")]
+        public List<int> invites;
     }
 
     [Serializable]

@@ -1,3 +1,4 @@
+using AYellowpaper.SerializedCollections;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -309,6 +310,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public int index;
     }
 
+    [Serializable]
     public class ActivityExperiences
     {
         [JsonProperty("key")]
@@ -344,5 +346,39 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("thiefAnimalProduct")]
         public int thiefAnimalProduct;
     }
-}
 
+    [Serializable]
+    public class Rewards
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("fromInvites")]
+        public FromInvites fromInvites;
+
+        [JsonProperty("referred")]
+        public long referred;
+    }
+
+    [Serializable]
+    public class FromInvites
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("metrics")]
+        [SerializedDictionary()]
+        public SerializedDictionary<int, Metric> metrics;
+    }
+
+    [Serializable]
+    public class Metric
+    {
+        [JsonProperty("key")]
+        public int key;
+
+        [JsonProperty("value")]
+        public long value;
+    }
+
+}

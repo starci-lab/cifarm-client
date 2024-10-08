@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3112657604779473215}
   - component: {fileID: 374563676962013783}
   - component: {fileID: 8306669354461030226}
+  - component: {fileID: 4256745325057689916}
   m_Layer: 0
   m_Name: NakamaService
   m_TagString: Untagged
@@ -53,17 +54,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054d476c5d0c4a34fb37204ae629edea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testChainKey: 0
-  testAccountNumber: 1
   useLocal: 0
   useHttps: 1
   host: api.cifarm-server.starci.net
   port: 443
   serverKey: defaultkey
-  message: 3db6e5cc-539f-4b1a-ae65-d28197dfbeb7
-  publicKey: 0xE32ae3c394B3176F15d5260D2a6588f516a9B43b
-  signature: 0xce92163d73571598fa8605d61787e845a56353dc048321371597e6e5b389ff9c11c2c2c67049b45cb94a252d70fc2da238e71fc18cacaf033ff5b5bee5b7504c1c
-  chainKey: avalanche
+  testChainKey: 0
+  testAccountNumber: 1
   authenticated: 0
 --- !u!114 &1602844812581178767
 MonoBehaviour:
@@ -129,11 +126,16 @@ MonoBehaviour:
     accountAddress: 
     chainKey: 
     network: 
+    telegramData:
+      userId: 0
   playerStats:
     key: 
     experiences: 0
     experienceQuota: 0
     level: 0
+    tutorialIndex: 0
+    stepIndex: 0
+    invites: 
   golds: 0
   inventoryPage: 0
   inventories: []
@@ -201,5 +203,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ddae6aed3ab44119b4cb6660ec2ccf35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4256745325057689916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328878227380581963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf3fd57063e2ce4996e3f24b3bc0718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
