@@ -87,31 +87,17 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 for (int y = 0; y < itemSize.y; y++)
                 {
-                    var checkPosition = new Vector3Int(cellPosition.x + x, cellPosition.y + y, cellPosition.z);
-                    var tile          = interactableMap.GetTile(checkPosition);
-
-                    if (tile == null || tile.name != validTileName)
+                    if (PlacedPositionHashSet.Contains(new Vector2Int(cellPosition.x + x, cellPosition.y + y)))
                     {
-                        isValid = false;
-                        break;
+                        return (Vector2Int)cellPosition;
                     }
                 }
-
-                if (!isValid)
-                {
-                    break;
-                }
             }
 
-            if (isValid)
-            {
-                // tileCenterPosition.z            =  0;
-                // tileCenterPosition.y            += interactableMap.cellSize.y / 2.0f;
-                // Adjust the position to the bottom-left corner of the tile
-                tileCenterPosition -= new Vector3(gameTileMap.cellSize.x / 2.0f, gameTileMap.cellSize.y / 2.0f, 0);
+            tileCenterPosition -= new Vector3(gameTileMap.cellSize.x / 2.0f, gameTileMap.cellSize.y / 2.0f, 0);
+            objectPlaced.transform.position = tileCenterPosition;
 
-                objectPlaced.transform.position =  tileCenterPosition;
-            }
+            Debug.Log("CHECKING FOR: " + tileCenterPosition + "| = " + isValid);
 
             return (Vector2Int)cellPosition;
         }

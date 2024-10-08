@@ -231,8 +231,8 @@ namespace CiFarm.Scripts.UI.Popups
                     //BuyToInventory(item);
                     break;
                 case ShopType.Building:
-                    UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
-                    //ConstructionBuilding(item);
+                    // UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
+                    ConstructionBuilding(item);
                     break;
                 case ShopType.Tree:
                     break;

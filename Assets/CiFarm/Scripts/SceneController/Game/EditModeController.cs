@@ -67,6 +67,7 @@ namespace CiFarm.Scripts.SceneController.Game
             var prefabDirtData = configData.PrefabModel;
 
             _currentItemSize = configData.TileSize;
+            Debug.Log("GOT CHA ITEM SIZE: " + _currentItemSize);
             _controllingItem = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
             _controllingItem.SetActive(false);
             tileMapController.DisplayAvailableToPlacingItem();
