@@ -151,13 +151,13 @@ namespace CiFarm.Scripts.UI.Popups
                 {
                     itemKey      = data.key,
                     textItemName = gameConfig.ItemName,
-                    shopType     = ShopType.Seed,
+                    shopType     = ShopType.Animal,
                     // textItemTimeDetail   = (data.growthStageDuration).ToString(),
                     // textItemProfitDetail = data.maxHarvestQuantity.ToString(),
                     textItemTimeDetail =
                         "Time: " + ((float)data.growthTime / 60).ToString("F2") + " to grow",
                     textItemProfitDetail = "Provide product each: " + ((float)data.yieldTime / 60).ToString("F2"),
-                    textItemPrice        = data.offspringPrice == 0 ? "5000" : data.offspringPrice.ToString(),
+                    textItemPrice        = data.offspringPrice.ToString(),
                     iconItem             = gameConfig.GameShopIcon
                 });
             }
