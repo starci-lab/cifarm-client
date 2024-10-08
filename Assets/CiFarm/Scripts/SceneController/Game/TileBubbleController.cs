@@ -42,7 +42,7 @@ namespace CiFarm.Scripts.SceneController.Game
             if (_showingBubble.TryGetValue(id, out DirtBubble bubble))
             {
                 // this type is auto close
-                if (bubble.typeBubble != InjectionType.Timer)
+                if (bubble.typeBubble == InjectionType.Timer)
                 {
                     return;
                 }
