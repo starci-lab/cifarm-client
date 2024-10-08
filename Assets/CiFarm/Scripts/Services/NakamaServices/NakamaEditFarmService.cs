@@ -27,6 +27,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 Position = position
             });
             
+            NakamaUserService.Instance.LoadWalletAsync();
             NakamaUserService.Instance.LoadInventoriesAsync();
             await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
 

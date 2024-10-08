@@ -49,6 +49,13 @@ namespace CiFarm.Scripts.SceneController.Game
 
                 objectPlaced.transform.position = tileCenterPosition;
                 PlacedPositionHashSet.Add(position2D);
+                for (int x = 0; x < objectSize.x; x++)
+                {
+                    for (int y = 0; y < objectSize.y; y++)
+                    {
+                        PlacedPositionHashSet.Add(new Vector2Int(position2D.x + x, position2D.y + y));
+                    }
+                }
             }
             else
             {
@@ -78,11 +85,13 @@ namespace CiFarm.Scripts.SceneController.Game
 
             var isValid = true;
 
+            // VALIDATE
             if (PlacedPositionHashSet.Contains((Vector2Int)cellPosition))
             {
                 return (Vector2Int)cellPosition;
             }
 
+            // VALIDATE
             for (int x = 0; x < itemSize.x; x++)
             {
                 for (int y = 0; y < itemSize.y; y++)
@@ -91,14 +100,18 @@ namespace CiFarm.Scripts.SceneController.Game
                     {
                         return (Vector2Int)cellPosition;
                     }
+
+                    var checkPosition = new Vector3Int(cellPosition.x + x, cellPosition.y + y, cellPosition.z);
+                    var tile          = interactableMap.GetTile(checkPosition);
+                    if (!tile || tile.name != validTileName)
+                    {
+                        return (Vector2Int)cellPosition;
+                    }
                 }
             }
 
             tileCenterPosition -= new Vector3(gameTileMap.cellSize.x / 2.0f, gameTileMap.cellSize.y / 2.0f, 0);
             objectPlaced.transform.position = tileCenterPosition;
-
-            Debug.Log("CHECKING FOR: " + tileCenterPosition + "| = " + isValid);
-
             return (Vector2Int)cellPosition;
         }
 
