@@ -72,12 +72,10 @@ namespace CiFarm.Scripts.SceneController.Game
 #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.A))
             {
-                UIManager.Instance.PopupManager.ShowPopup(UIPopupName.CharacterMessagePopup);
             }
 
             if (Input.GetKeyDown(KeyCode.B))
             {
-                UIManager.Instance.PopupManager.HidePopup(UIPopupName.CharacterMessagePopup);
             }
 #endif
         }
@@ -148,15 +146,12 @@ namespace CiFarm.Scripts.SceneController.Game
                         OnPesticidePlant(clickedGround);
                         break;
                 }
-
-                return;
             }
         }
 
         public void HandleClickOtherGround(BaseGround clickedGround)
         {
             // An trom
-            Debug.Log("Try Clicked 3");
             if (clickedGround.dirtData.seedGrowthInfo.isPlanted && clickedGround.dirtData.seedGrowthInfo.fullyMatured)
             {
                 OnHandOfMidasPlant(clickedGround);
@@ -298,8 +293,11 @@ namespace CiFarm.Scripts.SceneController.Game
                 }
             }
 
+            // clear bubble that not valid
             TileBubbleController.Instance.ValidateBubble(
-                rawData.Select(o => o.key).ToList());
+                rawData.Select(o => o.key).ToList()
+                            
+                );
         }
 
         private void PlacedDirt(PlacedItem placedItem)
@@ -339,7 +337,7 @@ namespace CiFarm.Scripts.SceneController.Game
             tileMapController.SetAnyWithWithTilePos(
                 new Vector2Int(placedItem.position.x, placedItem.position.y)
                 , tileObject);
-            
+
             _constructor.Add(tileObject);
         }
 
