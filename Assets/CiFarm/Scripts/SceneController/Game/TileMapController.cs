@@ -35,7 +35,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public void SetAnyWithWithTilePos(Vector2Int position2D, GameObject objectPlaced)
+        public void SetAnyWithWithTilePos(Vector2Int position2D, GameObject objectPlaced, Vector2Int objectSize)
         {
             var position           = new Vector3Int(position2D.x, position2D.y, 0);
             var tileCenterPosition = gameTileMap.CellToWorld(position);
