@@ -7,5 +7,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
     {
         PlacedItems = 1,
         NextDeliveryTime = 2,
+        PlayerStats = 3,
     }
 }

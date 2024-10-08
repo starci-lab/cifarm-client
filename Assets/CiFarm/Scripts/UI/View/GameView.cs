@@ -47,9 +47,9 @@ namespace CiFarm.Scripts.UI.View
             userName.text = string.IsNullOrEmpty(NakamaUserService.Instance.displayName)
                 ? NakamaUserService.Instance.username
                 : NakamaUserService.Instance.displayName;
-            userLevel.text = NakamaUserService.Instance.playerStats.level.ToString();
-            var process = (float)NakamaUserService.Instance.playerStats.experiences /
-                          NakamaUserService.Instance.playerStats.experienceQuota;
+            userLevel.text = NakamaUserService.Instance.playerStats.levelInfo.level.ToString();
+            var process = (float)NakamaUserService.Instance.playerStats.levelInfo.experiences /
+                          NakamaUserService.Instance.playerStats.levelInfo.experienceQuota;
             userExperiencesProcessed.fillAmount = process;
 
             NakamaUserService.Instance.OnPlayerStatsUpdate = OnPlayerStatsUpdate;
@@ -139,8 +139,8 @@ namespace CiFarm.Scripts.UI.View
 
         private void OnPlayerStatsUpdate()
         {
-            var process = (float)NakamaUserService.Instance.playerStats.experiences /
-                          NakamaUserService.Instance.playerStats.experienceQuota;
+            var process = (float)NakamaUserService.Instance.playerStats.levelInfo.experiences /
+                          NakamaUserService.Instance.playerStats.levelInfo.experienceQuota;
 
             userExperiencesProcessed.DOFillAmount(process, 0.2f);
             experiencesBar.transform.DOShakePosition(0.2f, new Vector3(2.5f, 0, 2.5f));

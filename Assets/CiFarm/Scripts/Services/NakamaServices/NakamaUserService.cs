@@ -25,6 +25,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             //load
             LoadInfoAsync();
             LoadMetadataAsync();
+            //Now load from both socket and api
             LoadPlayerStatsAsync();
             LoadWalletAsync();
 
@@ -161,8 +162,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 tutorialIndex = tutorialIndex,
                 stepIndex     = stepIndex
             });
-            playerStats.tutorialIndex = tutorialIndex;
-            playerStats.stepIndex     = stepIndex;
+            playerStats.tutorialInfo.tutorialIndex = tutorialIndex;
+            playerStats.tutorialInfo.stepIndex     = stepIndex;
         }
         
     }

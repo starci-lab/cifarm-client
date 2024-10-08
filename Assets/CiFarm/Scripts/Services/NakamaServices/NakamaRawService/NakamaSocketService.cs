@@ -15,6 +15,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
     public class NakamaSocketService : ManualSingletonMono<NakamaSocketService>
     {
         public UnityAction OnFetchPlacedDataFromServer;
+        public UnityAction OnFetchPlayerStats;
         public override void Awake()
         {
             base.Awake();
@@ -36,6 +37,11 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
                     case OpCode.PlacedItems:
                         {
                             OnPlacedItemsStateReceived(matchState);
+                            break;
+                        }
+                    case OpCode.PlayerStats:
+                        {
+                            OnPlayerStatsStateReceived(matchState);
                             break;
                         }
                 }
@@ -67,6 +73,9 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         public List<PlacedItem> placedItems;
 
         [ReadOnly]
+        public PlayerStats playerStats;
+
+        [ReadOnly]
         public long nextDeliveryTime;
 
         private void OnPlacedItemsStateReceived(IMatchState matchState)
@@ -79,6 +88,17 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             }
 
             OnFetchPlacedDataFromServer?.Invoke();
+        }
+
+        private void OnPlayerStatsStateReceived(IMatchState matchState)
+        {
+            var content = Encoding.UTF8.GetString(matchState.State);
+            playerStats = JsonConvert.DeserializeObject<PlayerStats>(content);
+            if (debugPlacedItems)
+            {
+                //DLogger.Log($"Player stats loaded.", "Nakama - Player Stats", LogColors.Aquamarine);
+            }
+            OnFetchPlayerStats?.Invoke();
         }
 
         private void OnNextDeliveryTimeStateReceived(IMatchState matchState)

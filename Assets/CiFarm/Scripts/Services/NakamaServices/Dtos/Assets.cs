@@ -74,25 +74,58 @@ namespace CiFarm.Scripts.Services.NakamaServices
     }
 
     [Serializable]
-    public class PlayerStats
+    public class TutorialInfo
     {
-        [JsonProperty("key")]
-        public string key;
-
-        [JsonProperty("experiences")]
-        public long experiences;
-
-        [JsonProperty("experienceQuota")]
-        public long experienceQuota;
-
-        [JsonProperty("level")]
-        public int level;
-
         [JsonProperty("tutorialIndex")]
         public int tutorialIndex;
 
         [JsonProperty("stepIndex")]
         public int stepIndex;
+    }
+
+    [Serializable]
+    public class LevelInfo
+    {
+        [JsonProperty("experiences")]
+        public int experiences;
+
+        [JsonProperty("experienceQuota")]
+        public int experienceQuota;
+
+        [JsonProperty("level")]
+        public int level;
+    }
+
+    [Serializable]
+    public class EnergyInfo
+    {
+        [JsonProperty("currentEnergy")]
+        public int currentEnergy;
+
+        [JsonProperty("maxEnergy")]
+        public int maxEnergy;
+
+        [JsonProperty("energyQuota")]
+        public int energyQuota;
+
+        [JsonProperty("recoveryTimeCount")]
+        public long recoveryTimeCount;
+    }
+
+    [Serializable]
+    public class PlayerStats
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("levelInfo")]
+        public LevelInfo levelInfo;
+
+        [JsonProperty("tutorialInfo")]
+        public TutorialInfo tutorialInfo;
+
+        [JsonProperty("energyInfo")]
+        public EnergyInfo energyInfo;
 
         [JsonProperty("invites")]
         public List<int> invites;

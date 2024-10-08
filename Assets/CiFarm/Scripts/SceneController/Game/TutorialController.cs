@@ -28,9 +28,9 @@ namespace CiFarm.Scripts.SceneController.Game
         public void StartTutorial()
         {
             GameController.Instance.CameraController.LockCamera();
-            _tutorId = NakamaUserService.Instance.playerStats.tutorialIndex;
-            LoadTutorial(NakamaUserService.Instance.playerStats.tutorialIndex,
-                NakamaUserService.Instance.playerStats.stepIndex);
+            _tutorId = NakamaUserService.Instance.playerStats.tutorialInfo.tutorialIndex;
+            LoadTutorial(NakamaUserService.Instance.playerStats.tutorialInfo.tutorialIndex,
+                NakamaUserService.Instance.playerStats.tutorialInfo.stepIndex);
             ProceedToNextStep();
         }
 
@@ -160,9 +160,9 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <returns></returns>
         public bool AvailableTutorCheck()
         {
-            if (NakamaUserService.Instance.playerStats.tutorialIndex <= 1)
+            if (NakamaUserService.Instance.playerStats.tutorialInfo.tutorialIndex <= 1)
             {
-                NakamaUserService.Instance.playerStats.tutorialIndex = 1;
+                NakamaUserService.Instance.playerStats.tutorialInfo.tutorialIndex = 1;
                 return true;
             }
 

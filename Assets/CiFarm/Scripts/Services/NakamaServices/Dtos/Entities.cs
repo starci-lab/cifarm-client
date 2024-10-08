@@ -311,40 +311,53 @@ namespace CiFarm.Scripts.Services.NakamaServices
     }
 
     [Serializable]
-    public class ActivityExperiences
+    public class ActivityInfo
+    {
+        [JsonProperty("experiencesGain")]
+        public int experiencesGain;
+
+        [JsonProperty("energyCost")]
+        public int energyCost;
+    }
+
+    [Serializable]
+    public class Activities
     {
         [JsonProperty("key")]
         public string key;
 
         [JsonProperty("water")]
-        public int water;
+        public ActivityInfo water;
+
+        [JsonProperty("feedAnimal")]
+        public ActivityInfo feedAnimal;
 
         [JsonProperty("usePestiside")]
-        public int usePestiside;
+        public ActivityInfo usePestiside;
 
         [JsonProperty("useFertilizer")]
-        public int useFertilizer;
+        public ActivityInfo useFertilizer;
 
         [JsonProperty("useHerbicide")]
-        public int useHerbicide;
+        public ActivityInfo useHerbicide;
 
         [JsonProperty("helpUseHerbicide")]
-        public int helpUseHerbicide;
+        public ActivityInfo helpUseHerbicide;
 
         [JsonProperty("helpUsePestiside")]
-        public int helpUsePestiside;
+        public ActivityInfo helpUsePestiside;
 
         [JsonProperty("helpWater")]
-        public int helpWater;
+        public ActivityInfo helpWater;
 
         [JsonProperty("thiefCrop")]
-        public long thiefCrop;
+        public ActivityInfo thiefCrop;
 
         [JsonProperty("helpFeedAnimal")]
-        public int helpFeedAnimal;
+        public ActivityInfo helpFeedAnimal;
 
         [JsonProperty("thiefAnimalProduct")]
-        public int thiefAnimalProduct;
+        public ActivityInfo thiefAnimalProduct;
     }
 
     [Serializable]

@@ -11,9 +11,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaSystemService : ManualSingletonMono<NakamaSystemService>
     {
-        [Header("ActivityExperiences")]
+        [Header("Activities")]
         [ReadOnly]
-        public ActivityExperiences activityExperiences;
+        public Activities activities;
 
         [Header("Rewards")]
         [ReadOnly]
@@ -29,10 +29,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
 
             //load
-            LoadActivityExperiencesAsync();
+            LoadActivitiesAsync();
             LoadRewardsAsync();
         }
-        public async void LoadActivityExperiencesAsync()
+        public async void LoadActivitiesAsync()
         {
             var client = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
@@ -42,10 +42,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 new()
                 {
                     Collection = CollectionType.System.GetStringValue(),
-                    Key        = SystemKey.ActivityExperiences.GetStringValue(),
+                    Key        = SystemKey.Activities.GetStringValue(),
                 }
             });
-            activityExperiences = JsonConvert.DeserializeObject<ActivityExperiences>(objects.Objects.First().Value);
+            activities = JsonConvert.DeserializeObject<Activities>(objects.Objects.First().Value);
         }
 
         public async void LoadRewardsAsync()

@@ -41,8 +41,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
     {
         [EnumStringValue("matchInfo")]
         MatchInfo,
-        [EnumStringValue("activityExperiences")]
-        ActivityExperiences,
+        [EnumStringValue("activities")]
+        Activities,
         [EnumStringValue("rewards")]
         Rewards,
     }
