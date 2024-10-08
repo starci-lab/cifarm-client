@@ -1,3 +1,4 @@
+using System;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups;
@@ -91,7 +92,23 @@ namespace CiFarm.Scripts.SceneController.Game
                 {
                     if (st == UIMessageBox.MessageBoxAction.Accept)
                     {
-                        OnConfirmPlaceDirt();
+                        switch (_invenItemData.type)
+                        {
+                            case InventoryType.Seed:
+                                break;
+                            case InventoryType.Tile:
+                                OnConfirmPlaceDirt();
+                                break;
+                            case InventoryType.Animal:
+                                break;
+                            case InventoryType.PlantHarvested:
+                                break;
+                            case InventoryType.Building:
+                                OnConfirmPlaceBuilding();
+                                break;
+                            default:
+                                return true;
+                        }
                     }
                     else
                     {

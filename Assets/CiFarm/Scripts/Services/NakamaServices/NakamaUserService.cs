@@ -35,7 +35,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         private async void InitInventoriesAsync()
         {
             await LoadPremiumTileNftInventoriesAsync();
-            await LoadInventoriesAsync();
+             LoadInventoriesAsync();
         }
 
         [Header("Info")]
@@ -129,7 +129,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             OnGoldChange?.Invoke();
         }
 
-        public async Task LoadInventoriesAsync()
+        public async void LoadInventoriesAsync()
         {
             var listInventoriesResponse = await NakamaRpcService.Instance.ListInventoriesRpcAsync();
             inventories = listInventoriesResponse.inventories;
@@ -154,7 +154,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             }
         }
 
-        public async Task SyncTutorial(int tutorialIndex, int stepIndex)
+        public async void SyncTutorial(int tutorialIndex, int stepIndex)
         {
             await NakamaRpcService.Instance.UpdateTutorialRpcAsync(new NakamaRpcService.UpdateTutorialRpcAsyncParams
             {

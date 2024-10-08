@@ -19,6 +19,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         private int    _timerCounter;
         private string _tileId;
+        public InjectionType typeBubble;
 
         public void SetBubble(string tileId, InjectionType type, int timeData = 0,
             int currentQuantity = 0,
@@ -31,6 +32,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 return;
             }
 
+            typeBubble = type;
             timerText.SetActive(false);
             iconRender.SetActive(false);
             bubble.SetActive(true);

@@ -81,7 +81,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        void HandleZoom()
+        private void HandleZoom()
         {
             if (Input.touchSupported && Input.touchCount == 2)
             {
@@ -93,7 +93,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
                 var prevTouchDeltaMag  = (touchZeroPrevPos - touchOnePrevPos).magnitude;
                 var touchDeltaMag      = (touchZero.position - touchOne.position).magnitude;
-                var deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+                var deltaMagnitudeDiff = touchDeltaMag - prevTouchDeltaMag;
 
                 targetZoom += deltaMagnitudeDiff * zoomSpeed * Time.deltaTime;
                 targetZoom =  Mathf.Clamp(targetZoom, minZoom, maxZoom);

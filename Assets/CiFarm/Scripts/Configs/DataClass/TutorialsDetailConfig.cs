@@ -34,6 +34,7 @@ namespace CiFarm.Scripts.Configs.DataClass
         public TargetClickType     TargetClickType;
         public string              TargetClickId;
         public string              TargetImageId;
+        public bool                AllowSave;
     }
 
     public enum TutorialsDetailType

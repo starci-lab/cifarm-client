@@ -18,10 +18,10 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
 
             //Testing
-            DoIntergrationTests();
+            DoIntegrationTests();
         }
 
-        private async void DoIntergrationTests()
+        private async void DoIntegrationTests()
         {
             //var result = await BuySeedRpcAsync(new()
             //{

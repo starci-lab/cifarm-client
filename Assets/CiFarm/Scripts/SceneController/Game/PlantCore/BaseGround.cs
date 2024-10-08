@@ -1,3 +1,4 @@
+using System;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;
@@ -30,6 +31,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                 gameObject.name = placedItem.referenceKey + "Tile";
             }
 
+            // show the fully grow
             if (dirtData.seedGrowthInfo.fullyMatured)
             {
                 bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
@@ -52,6 +54,9 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     case PlantCurrentState.IsInfested:
                         bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Worm);
+                        break;
+                    default:
+                        TileBubbleController.Instance.HideBubble(dirtData.key);
                         break;
                 }
             }
@@ -82,20 +87,23 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         public void ClearGround()
         {
-            if (plant)
+            SimplePool.Despawn(gameObject);
+        }
+
+        public void HandleClickInTutorial(GameObject baseObj)
+        {
+            GameController.Instance.OnClickGround(baseObj.GetComponent<BaseGround>());
+        }
+
+        private void OnDisable()
+        {
+            if (plant != null)
             {
                 SimplePool.Despawn(plant.gameObject);
             }
 
             plant    = null;
             dirtData = null;
-            SimplePool.Despawn(gameObject);
-        }
-
-        public void HandleClickInTutorial(GameObject baseObj)
-        {
-            Debug.Log("Try Clicked 1");
-            GameController.Instance.OnClickGround(baseObj.GetComponent<BaseGround>());
         }
     }
 }

@@ -30,6 +30,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         [SerializeField] private int testAccountNumber;
 
+        public bool IsLogin => (credentials != null) && authenticated;
+
         public Client   client  = null;
         public ISession session = null;
         public IApiUser user    = null;
@@ -62,7 +64,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             //authenticate
             AuthenticateAsync();
             yield return new WaitUntil(() => authenticated);
-            OnLoginSuccess?.Invoke();
+            
             //healthcheck
             HealthCheckAsync();
         }
@@ -121,7 +123,13 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
                     { "signature", credentials.signature },
                     { "chainKey", credentials.chainKey },
                     { "network", credentials.network },
+#if UNITY_EDITOR
                     { "telegramInitDataRaw", "tranminhthien" }
+#else
+                    { "telegramInitDataRaw", credentials.telegramInitDataRaw}
+
+#endif
+              
                 });
                 authenticated = true;
             }

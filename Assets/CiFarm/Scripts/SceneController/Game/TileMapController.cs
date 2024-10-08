@@ -35,7 +35,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public void SetAnyWithWithTilePos(Vector2Int position2D, GameObject objectPlaced)
+        public void SetAnyWithWithTilePos(Vector2Int position2D, GameObject objectPlaced, Vector2Int objectSize)
         {
             var position           = new Vector3Int(position2D.x, position2D.y, 0);
             var tileCenterPosition = gameTileMap.CellToWorld(position);
@@ -49,6 +49,13 @@ namespace CiFarm.Scripts.SceneController.Game
 
                 objectPlaced.transform.position = tileCenterPosition;
                 PlacedPositionHashSet.Add(position2D);
+                for (int x = 0; x < objectSize.x; x++)
+                {
+                    for (int y = 0; y < objectSize.y; y++)
+                    {
+                        PlacedPositionHashSet.Add(new Vector2Int(position2D.x + x, position2D.y + y));
+                    }
+                }
             }
             else
             {
@@ -78,41 +85,33 @@ namespace CiFarm.Scripts.SceneController.Game
 
             var isValid = true;
 
+            // VALIDATE
             if (PlacedPositionHashSet.Contains((Vector2Int)cellPosition))
             {
                 return (Vector2Int)cellPosition;
             }
 
+            // VALIDATE
             for (int x = 0; x < itemSize.x; x++)
             {
                 for (int y = 0; y < itemSize.y; y++)
                 {
+                    if (PlacedPositionHashSet.Contains(new Vector2Int(cellPosition.x + x, cellPosition.y + y)))
+                    {
+                        return (Vector2Int)cellPosition;
+                    }
+
                     var checkPosition = new Vector3Int(cellPosition.x + x, cellPosition.y + y, cellPosition.z);
                     var tile          = interactableMap.GetTile(checkPosition);
-
-                    if (tile == null || tile.name != validTileName)
+                    if (!tile || tile.name != validTileName)
                     {
-                        isValid = false;
-                        break;
+                        return (Vector2Int)cellPosition;
                     }
                 }
-
-                if (!isValid)
-                {
-                    break;
-                }
             }
 
-            if (isValid)
-            {
-                // tileCenterPosition.z            =  0;
-                // tileCenterPosition.y            += interactableMap.cellSize.y / 2.0f;
-                // Adjust the position to the bottom-left corner of the tile
-                tileCenterPosition -= new Vector3(gameTileMap.cellSize.x / 2.0f, gameTileMap.cellSize.y / 2.0f, 0);
-
-                objectPlaced.transform.position =  tileCenterPosition;
-            }
-
+            tileCenterPosition -= new Vector3(gameTileMap.cellSize.x / 2.0f, gameTileMap.cellSize.y / 2.0f, 0);
+            objectPlaced.transform.position = tileCenterPosition;
             return (Vector2Int)cellPosition;
         }
 

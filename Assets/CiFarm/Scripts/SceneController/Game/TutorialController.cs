@@ -29,7 +29,8 @@ namespace CiFarm.Scripts.SceneController.Game
         {
             GameController.Instance.CameraController.LockCamera();
             _tutorId = NakamaUserService.Instance.playerStats.tutorialIndex;
-            LoadTutorial(NakamaUserService.Instance.playerStats.tutorialIndex, NakamaUserService.Instance.playerStats.stepIndex);
+            LoadTutorial(NakamaUserService.Instance.playerStats.tutorialIndex,
+                NakamaUserService.Instance.playerStats.stepIndex);
             ProceedToNextStep();
         }
 
@@ -46,7 +47,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void ProceedToNextStep()
         {
-            SyncTutorial();
+            SyncTutorial(false);
             if (_currentIndex < tutorialDetailRecord.Count)
             {
                 var nextStep = tutorialDetailRecord[_currentIndex];
@@ -149,6 +150,7 @@ namespace CiFarm.Scripts.SceneController.Game
                     break;
             }
 
+            SyncTutorial(true);
             GameController.Instance.CameraController.UnLockCamera();
         }
 
@@ -167,9 +169,30 @@ namespace CiFarm.Scripts.SceneController.Game
             return false;
         }
 
-        public void SyncTutorial()
+        public void SyncTutorial(bool isDone)
         {
-            NakamaUserService.Instance.SyncTutorial(_tutorId, _currentIndex);
+            if (isDone)
+            {
+                _tutorId++;
+                NakamaUserService.Instance.SyncTutorial(_tutorId, _currentIndex);
+                return;
+            }
+
+            if (_currentIndex < tutorialDetailRecord.Count)
+            {
+                if (tutorialDetailRecord[_currentIndex].AllowSave)
+                {
+                    NakamaUserService.Instance.SyncTutorial(_tutorId, _currentIndex);
+                }
+                else
+                {
+                    NakamaUserService.Instance.SyncTutorial(_tutorId, _currentIndex);
+                }
+            }
+            else
+            {
+                NakamaUserService.Instance.SyncTutorial(_tutorId, _currentIndex);
+            }
         }
     }
 }

@@ -78,7 +78,7 @@ namespace CiFarm.Scripts.UI.Popups
             // Set display 
             var spriteRenderer = targetObj.GetComponent<SpriteRenderer>();
             var fakeRender     = fakeTargetObj.AddComponent<Image>();
-            fakeRender.sprite        = spriteRenderer.sprite;
+            fakeRender.sprite = spriteRenderer.sprite;
             fakeRender.SetNativeSize();
 
             // Adjust scale based on camera size
@@ -86,7 +86,7 @@ namespace CiFarm.Scripts.UI.Popups
             fakeTargetObj.transform.localScale *= cameraSizeRatio;
 
             // Add the Button component to enable click interaction
-            var button        = fakeTargetObj.AddComponent<Button>();
+            var button       = fakeTargetObj.AddComponent<Button>();
             var tutorHandler = targetObj.GetComponent<ITutorialItem>();
             button.onClick.AddListener(() => { tutorHandler.HandleClickInTutorial(targetObj); });
             button.onClick.AddListener(OnClickReqButton);
@@ -116,18 +116,14 @@ namespace CiFarm.Scripts.UI.Popups
                 return null;
             }
 
-
             var fakeTargetButton = Instantiate(targetButton, fakeButtonContainer);
-
             fakeTargetButton.transform.position = targetButtonObj.transform.position;
-
-
             // Add the click listener to the fake button
-            fakeTargetButton.OnClick.OnTrigger.Event.RemoveAllListeners();
-            fakeTargetButton.OnClick.OnTrigger.AudioName = AudioName.NoSound;
+            fakeTargetButton.OnClick.OnTrigger.Reset();
             fakeTargetButton.OnClick.OnTrigger.Event.AddListener(
                 () =>
                 {
+                    DLogger.Log("Clicked");
                     targetButton.OnClick.OnTrigger.Event.Invoke();
                     OnClickReqButton();
                 });
@@ -145,7 +141,6 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void OnClickReqButton()
         {
-            DLogger.Log("Done CLicked: " + _tutorParam.Details);
             ClearButton();
             Hide(true);
             _onClose?.Invoke();

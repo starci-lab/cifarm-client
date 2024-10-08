@@ -24,7 +24,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 placedItemTileKey = placedItemTileKey
             };
 
-            var response = await NakamaRpcService.Instance.PlantSeedRpcAsync(paramsObj);
+            await NakamaRpcService.Instance.PlantSeedRpcAsync(paramsObj);
 
             var seed = NakamaUserService.Instance.inventories.FirstOrDefault(o => o.key == inventorySeedKey);
 
@@ -41,7 +41,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             }
 
             await NakamaRpcService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
-            NakamaUserService.Instance.LoadInventoriesAsync();
+             NakamaUserService.Instance.LoadInventoriesAsync();
             // Additional logic can be added here if needed
         }
 
@@ -61,8 +61,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 placedItemTileKey = placedItemTileKey
             };
 
-            var response = await NakamaRpcService.Instance.HarvestCropRpcAsync(paramsObj);
-            NakamaUserService.Instance.LoadInventoriesAsync();
+            await NakamaRpcService.Instance.HarvestCropRpcAsync(paramsObj);
+             NakamaUserService.Instance.LoadInventoriesAsync();
             // Additional logic can be added here if needed
         }
 
@@ -145,8 +145,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 placedItemTileKey = placedItemTileKey
             };
 
-            var response = await NakamaRpcService.Instance.ThiefCropRpcAsync(paramsObj);
-            NakamaUserService.Instance.LoadInventoriesAsync();
+            await NakamaRpcService.Instance.ThiefCropRpcAsync(paramsObj);
+             NakamaUserService.Instance.LoadInventoriesAsync();
             await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
             // Handle response if necessary
         }
@@ -218,14 +218,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async Task BuySeed(string itemKey, int quantity = 1)
         {
-            var resultData = await NakamaRpcService.Instance.BuySeedsRpcAsync(
+            await NakamaRpcService.Instance.BuySeedsRpcAsync(
                 new NakamaRpcService.BuySeedsRpcAsyncParams
                 {
                     key      = itemKey,
                     quantity = quantity
                 });
             NakamaUserService.Instance.LoadWalletAsync();
-            NakamaUserService.Instance.LoadInventoriesAsync();
+             NakamaUserService.Instance.LoadInventoriesAsync();
         }
 
         public async Task BuyTile(Vector2Int placedPosition, int quantity = 1)
@@ -252,7 +252,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     placedItemBuildingKey = coopKey
                 });
             NakamaUserService.Instance.LoadWalletAsync();
-            NakamaUserService.Instance.LoadInventoriesAsync();
+             NakamaUserService.Instance.LoadInventoriesAsync();
         }
 
         public async Task ConstructCoop(string itemKey, Vector2Int placedPosition)

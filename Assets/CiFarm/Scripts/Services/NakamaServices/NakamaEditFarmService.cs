@@ -14,10 +14,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 position         = position
             });
 
-            var loadInventoriesTask = NakamaUserService.Instance.LoadInventoriesAsync();
-            var broadcastTask       = NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
 
-            await Task.WhenAll(loadInventoriesTask, broadcastTask);
         }
 
         public async Task ConstructBuildingRpcAsync(string buildingKey, Position position)
@@ -28,10 +27,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 Position = position
             });
             
-            var loadInventoriesTask = NakamaUserService.Instance.LoadInventoriesAsync();
-            var broadcastTask       = NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+            NakamaUserService.Instance.LoadWalletAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
 
-            await Task.WhenAll(loadInventoriesTask, broadcastTask);
         }
     }
 }

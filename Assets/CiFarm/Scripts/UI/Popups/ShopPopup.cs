@@ -151,13 +151,13 @@ namespace CiFarm.Scripts.UI.Popups
                 {
                     itemKey      = data.key,
                     textItemName = gameConfig.ItemName,
-                    shopType     = ShopType.Seed,
+                    shopType     = ShopType.Animal,
                     // textItemTimeDetail   = (data.growthStageDuration).ToString(),
                     // textItemProfitDetail = data.maxHarvestQuantity.ToString(),
                     textItemTimeDetail =
                         "Time: " + ((float)data.growthTime / 60).ToString("F2") + " to grow",
                     textItemProfitDetail = "Provide product each: " + ((float)data.yieldTime / 60).ToString("F2"),
-                    textItemPrice        = data.offspringPrice == 0 ? "5000" : data.offspringPrice.ToString(),
+                    textItemPrice        = data.offspringPrice.ToString(),
                     iconItem             = gameConfig.GameShopIcon
                 });
             }
@@ -193,6 +193,7 @@ namespace CiFarm.Scripts.UI.Popups
                 {
                     continue;
                 }
+
                 shopItemsData.Add(new ShopItemData
                 {
                     itemKey              = data.key,
@@ -223,10 +224,14 @@ namespace CiFarm.Scripts.UI.Popups
             switch (item.shopType)
             {
                 case ShopType.Seed:
-                case ShopType.Animal:
                     BuyToInventory(item);
                     break;
+                case ShopType.Animal:
+                    UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
+                    //BuyToInventory(item);
+                    break;
                 case ShopType.Building:
+                    // UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
                     ConstructionBuilding(item);
                     break;
                 case ShopType.Tree:
