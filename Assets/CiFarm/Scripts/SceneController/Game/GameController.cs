@@ -433,7 +433,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 await NakamaFarmingService.Instance.WaterAsync(ground.dirtData.key);
                 var position = ground.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.WaterCan, position, 1f);
-                PlayExperiencesEf(position, ExperienceConstants.ExperienceFromActivity);
+                PlayExperiencesEf(position, NakamaSystemService.Instance.activityExperiences.water);
                 AudioManager.Instance.PlaySFX(AudioName.Watering);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -460,7 +460,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 await NakamaFarmingService.Instance.UsePesticideAsync(ground.dirtData.key);
                 var position = ground.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.Pesticide, position, 1f);
-                PlayExperiencesEf(position, ExperienceConstants.ExperienceFromActivity);
+                PlayExperiencesEf(position, NakamaSystemService.Instance.activityExperiences.usePestiside);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -486,8 +486,8 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 await NakamaFarmingService.Instance.UseHerbicideAsync(ground.dirtData.key);
                 var position = ground.transform.position;
-                
-                PlayExperiencesEf(position, ExperienceConstants.ExperienceFromActivity);
+
+                PlayExperiencesEf(position, NakamaSystemService.Instance.activityExperiences.useHerbicide);
                 EffectService.Instance.PlayVFX(VFXType.Herbicide, position, 1f);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
 
@@ -546,7 +546,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 await NakamaFarmingService.Instance.ThiefCropAsync(_friendItemData.userId, ground.dirtData.key);
                 var position = ground.transform.position;
                 PlayHarvestEf(position, ground.dirtData.seedGrowthInfo.crop.key, 1);
-                PlayExperiencesEf(position, ExperienceConstants.ExperienceFromActivity);
+                PlayExperiencesEf(position, NakamaSystemService.Instance.activityExperiences.thiefCrop);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
             catch (Exception e)
@@ -572,7 +572,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 await NakamaFarmingService.Instance.HelpWaterAsync(_friendItemData.userId, ground.dirtData.key);
                 var position = ground.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.WaterCan, position, 1f);
-                PlayExperiencesEf(position, ExperienceConstants.ExperienceFromActivity);
+                PlayExperiencesEf(position, NakamaSystemService.Instance.activityExperiences.helpWater);
                 AudioManager.Instance.PlaySFX(AudioName.Watering);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -599,7 +599,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 await NakamaFarmingService.Instance.HelpUsePesticideAsync(_friendItemData.userId, ground.dirtData.key);
                 var position = ground.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.Pesticide, position, 1f);
-                PlayExperiencesEf(position, ExperienceConstants.ExperienceFromActivity);
+                PlayExperiencesEf(position, NakamaSystemService.Instance.activityExperiences.helpUsePestiside);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }
@@ -626,7 +626,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 await NakamaFarmingService.Instance.HelpUseHerbicideAsync(_friendItemData.userId, ground.dirtData.key);
                 var position = ground.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.Herbicide, position, 1f);
-                PlayExperiencesEf(position, ExperienceConstants.ExperienceFromActivity);
+                PlayExperiencesEf(position, NakamaSystemService.Instance.activityExperiences.helpUseHerbicide);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
                 TileBubbleController.Instance.HideBubble(ground.dirtData.key);
             }

@@ -338,7 +338,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public int helpWater;
 
         [JsonProperty("thiefCrop")]
-        public long thiefCrop;
+        public int thiefCrop;
 
         [JsonProperty("helpFeedAnimal")]
         public int helpFeedAnimal;
