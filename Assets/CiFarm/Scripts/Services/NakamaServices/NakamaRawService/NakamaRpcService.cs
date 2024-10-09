@@ -338,6 +338,27 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         }
         #endregion
 
+        #region UseFertilizerRpc
+        public class UseFertilizerRpcAsyncParams
+        {
+            [JsonProperty("inventoryFertilizerKey")]
+            public string inventoryFertilizerKey;
+
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+        }
+
+        public async Task UseFertilizerRpcAsync(
+            UseFertilizerRpcAsyncParams _params
+        )
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            await client.RpcAsync(session, "use_fertilizer", JsonConvert.SerializeObject(_params));
+        }
+        #endregion
+
         #region CollectAnimalProductRpc
         public class CollectAnimalProductRpcAsyncParams
         {
@@ -743,6 +764,29 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         }
         #endregion
 
+        #region HelpUseFertilizerRpc
+        public class HelpUseFertilizerRpcAsyncParams
+        {
+            [JsonProperty("inventoryFertilizerKey")]
+            public string inventoryFertilizerKey;
+
+            [JsonProperty("placedItemTileKey")]
+            public string placedItemTileKey;
+
+            [JsonProperty("userId")]
+            public string userId;
+        }
+
+        public async Task HelpUseFertilizerRpcAsync(
+            UseFertilizerRpcAsyncParams _params
+        )
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            await client.RpcAsync(session, "help_use_fertilizer", JsonConvert.SerializeObject(_params));
+        }
+        #endregion
 
         //Nft Rpcs
 

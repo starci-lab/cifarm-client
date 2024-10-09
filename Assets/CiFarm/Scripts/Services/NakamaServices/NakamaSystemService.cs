@@ -19,6 +19,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [ReadOnly]
         public Rewards rewards;
 
+        [Header("Global Constants")]
+        [ReadOnly]
+        public GlobalConstants globalConstants;
+
         public override void Awake()
         {
             base.Awake();
@@ -31,6 +35,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
             //load
             LoadActivitiesAsync();
             LoadRewardsAsync();
+            LoadGlobalConstantsAsync();
         }
         public async void LoadActivitiesAsync()
         {
@@ -62,6 +67,22 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 }
             });
             rewards = JsonConvert.DeserializeObject<Rewards>(objects.Objects.First().Value);
+        }
+
+        public async void LoadGlobalConstantsAsync()
+        {
+            var client = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
+            {
+                new()
+                {
+                    Collection = CollectionType.System.GetStringValue(),
+                    Key        = SystemKey.GlobalConstants.GetStringValue(),
+                }
+            });
+            globalConstants = JsonConvert.DeserializeObject<GlobalConstants>(objects.Objects.First().Value);
         }
     }
 }

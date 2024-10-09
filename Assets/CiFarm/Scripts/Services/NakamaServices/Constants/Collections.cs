@@ -45,5 +45,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         Activities,
         [EnumStringValue("rewards")]
         Rewards,
+        [EnumStringValue("globalConstants")]
+        GlobalConstants,
     }
 }

@@ -180,6 +180,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("thiefedBy")]
         public List<string> thiefedBy;
+
+        [JsonProperty("isFertilized")]
+        public bool isFertilized;
     }
 
     [Serializable]
@@ -393,5 +396,32 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("value")]
         public long value;
     }
+
+    [Serializable]
+    public class GameRandomness
+    {
+        [JsonProperty("theif3")]
+        public double theif3;
+
+        [JsonProperty("theif2")]
+        public double theif2;
+
+        [JsonProperty("needWater")]
+        public double needWater;
+
+        [JsonProperty("IsWeedyOrInfested")]
+        public double isWeedyOrInfested;
+    }
+
+    [Serializable]
+    public class GlobalConstants
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("gameRandomness")]
+        public GameRandomness gameRandomness;
+    }
+
 
 }
