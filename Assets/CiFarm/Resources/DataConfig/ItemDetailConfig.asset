@@ -67,11 +67,11 @@ MonoBehaviour:
   - key: chickenCoop
     itemName: Chicken Coop
     type: 3
-    itemDescription: Chicken coop
-  - key: pasture
-    itemName: Pasture
+    itemDescription: Provide eggs
+  - key: cowPasture
+    itemName: Cow Pasture
     type: 3
-    itemDescription: Cow pasture
+    itemDescription: Provide milks
   - key: coop
     itemName: Coop
     type: 3
