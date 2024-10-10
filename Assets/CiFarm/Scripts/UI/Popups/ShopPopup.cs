@@ -201,7 +201,7 @@ namespace CiFarm.Scripts.UI.Popups
                     textItemName         = gameConfig.ItemName,
                     textItemTimeDetail   = detail.ItemDescription,
                     textItemProfitDetail = "",
-                    textItemPrice        = data.upgradeSummaries[1].Price.ToString(),
+                    textItemPrice        = data.price.ToString(),
                     iconItem             = gameConfig.GameShopIcon
                 });
             }

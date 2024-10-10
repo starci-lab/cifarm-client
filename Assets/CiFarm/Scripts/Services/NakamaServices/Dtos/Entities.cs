@@ -99,16 +99,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("premiumHarvestExperiences")]
         public long premiumHarvestExperiences;
-    }
 
-    [Serializable]
-    public class UpgradeSummary
-    {
-        [JsonProperty("price")]
-        public long Price;
-
-        [JsonProperty("capacity")]
-        public int Capacity;
+        [JsonProperty("type")]
+        public string type;
     }
 
     [Serializable]
@@ -123,11 +116,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("maxUpgrade")]
         public int maxUpgrade;
 
-        [JsonProperty("upgradeSummaries")]
-        public Dictionary<int, UpgradeSummary> upgradeSummaries;
+        [JsonProperty("price")]
+        public long price;
 
-        [JsonProperty("animalKey")]
-        public string animalKey;
+        [JsonProperty("capacity")]
+        public int capacity;
+
+        [JsonProperty("type")]
+        public string type;
     }
 
     [Serializable]
