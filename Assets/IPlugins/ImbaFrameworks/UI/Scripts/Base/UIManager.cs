@@ -2,6 +2,7 @@
 // Author: Kaka
 // Created: 2019/08
 
+using System.Collections.Generic;
 using DG.Tweening;
 using Imba.Utils;
 using UnityEngine;
@@ -18,18 +19,20 @@ namespace Imba.UI
         public Camera         UICamera;
         public UIViewManager  ViewManager;
         public UIPopupManager PopupManager;
-        public RectTransform  LoadingObject;
         public UIAlertManager AlertManager;
 
         public RectTransform CanvasRect;
 
-        //public CanvasScaler mainCanvas;
-        //public static float ratioCustomizeItem = 170 / (16 / 9);
-        //public LevelManager LevelSystemManager;
-        //public RectTransform PopupContainer;
-        //public UITooltip tooltip;
-        //public GameObject objBugReport;
-        [Header("Transition")]
+        [Header("LOADING")]
+        public RectTransform LoadingObject;
+
+        public List<RectTransform> miniTomato;
+        public List<RectTransform> bigTomato;
+        public float               bigSize   = 1.5f;
+        public float               minSize   = 0.8f;
+        public float               interVert = 1f;
+
+        [Header("T  ransition")]
         public RectTransform transitionRect;
 
         public RectTransform transitionRender;
@@ -83,13 +86,41 @@ namespace Imba.UI
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
+
+
         void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
+        }
+
+        public void DoLoadingAnimation()
+        {
+            foreach (RectTransform mini in miniTomato)
+            {
+                mini.DOScale(bigSize, 0.2f)
+                    .OnComplete(() =>
+                    {
+                        mini.DOScale(minSize, 0.2f)
+                            .SetDelay(interVert)
+                            .SetLoops(-1, LoopType.Yoyo);
+                    });
+            }
+
+            foreach (RectTransform big in bigTomato)
+            {
+                big.DOScale(minSize, 0.2f)
+                    .OnComplete(() =>
+                    {
+                        big.DOScale(bigSize, 0.2f)
+                            .SetDelay(interVert)
+                            .SetLoops(-1, LoopType.Yoyo);
+                    });
+            }
         }
 
         public void ShowLoading(float timeToHide = 0)
         {
             //Debug.Log ("ShowLoading");
+            //DoLoadingAnimation();
             LoadingObject.gameObject.SetActive(true);
             if (timeToHide <= 0) CancelInvoke("HideLoadingCallback");
             else Invoke("HideLoadingCallback", timeToHide);
@@ -105,7 +136,8 @@ namespace Imba.UI
         {
             transitionRect.SetActive(true);
             transitionRender.localScale = Vector3.zero;
-            transitionRender.DOScale(Vector3.one * 8, 0.5f).OnComplete(() => { onDone?.Invoke(); }).SetEase(Ease.Linear);
+            transitionRender.DOScale(Vector3.one * 8, 0.5f).OnComplete(() => { onDone?.Invoke(); })
+                .SetEase(Ease.Linear);
         }
 
         public void HideTransition(UnityAction onDone)
