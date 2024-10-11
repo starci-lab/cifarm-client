@@ -188,8 +188,6 @@ namespace CiFarm.Scripts.UI.Popups
                 // call NAKAMA
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
                 NakamaRoadsideShopService.Instance.DeliverProductsAsync(
-                    new()
-                    {
                         new()
                         {
                             index = index,
@@ -200,7 +198,6 @@ namespace CiFarm.Scripts.UI.Popups
                                 type         = plantData.type,
                                 quantity     = plantData.quantity
                             }
-                        }
                     });
             }
             catch (Exception e)
@@ -220,10 +217,7 @@ namespace CiFarm.Scripts.UI.Popups
             {
                 var removeData =
                     NakamaRoadsideShopService.Instance.deliveringProducts.FirstOrDefault(o => o.key == removeItem.Key);
-                NakamaRoadsideShopService.Instance.RetainProductsAsync(new List<DeliveringProduct>()
-                {
-                    removeData
-                });
+                NakamaRoadsideShopService.Instance.RetainProductsAsync(removeData);
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)

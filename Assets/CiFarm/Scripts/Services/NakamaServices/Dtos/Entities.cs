@@ -165,8 +165,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("harvestQuantityRemaining")]
         public int harvestQuantityRemaining; 
         
-        [JsonProperty("plantCurrentState")]
-        public PlantCurrentState plantCurrentState;
+        [JsonProperty("currentState")]
+        public CurrentState currentState;
 
         [JsonProperty("isPlanted")]
         public bool isPlanted;
@@ -225,7 +225,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public Building building;
     }
 
-    public enum PlantCurrentState
+    public enum CurrentState
     {
         Normal,
         NeedWater,

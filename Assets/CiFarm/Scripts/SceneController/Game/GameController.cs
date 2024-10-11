@@ -121,7 +121,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
             // Planted and everything normal
             if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
-                clickedGround.dirtData.seedGrowthInfo.plantCurrentState == PlantCurrentState.Normal)
+                clickedGround.dirtData.seedGrowthInfo.currentState == CurrentState.Normal)
             {
                 var bubble = TileBubbleController.Instance.SpawnBubble(clickedGround.transform.position);
                 bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
@@ -132,17 +132,17 @@ namespace CiFarm.Scripts.SceneController.Game
 
             // REQUIRED SOME THING
             if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
-                clickedGround.dirtData.seedGrowthInfo.plantCurrentState != PlantCurrentState.Normal)
+                clickedGround.dirtData.seedGrowthInfo.currentState != CurrentState.Normal)
             {
-                switch (clickedGround.dirtData.seedGrowthInfo.plantCurrentState)
+                switch (clickedGround.dirtData.seedGrowthInfo.currentState)
                 {
-                    case PlantCurrentState.NeedWater:
+                    case CurrentState.NeedWater:
                         OnWaterPlant(clickedGround);
                         break;
-                    case PlantCurrentState.IsWeedy:
+                    case CurrentState.IsWeedy:
                         OnHerbicidePlant(clickedGround);
                         break;
-                    case PlantCurrentState.IsInfested:
+                    case CurrentState.IsInfested:
                         OnPesticidePlant(clickedGround);
                         break;
                 }
@@ -160,7 +160,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
             // Planted and everything normal
             if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
-                clickedGround.dirtData.seedGrowthInfo.plantCurrentState == PlantCurrentState.Normal)
+                clickedGround.dirtData.seedGrowthInfo.currentState == CurrentState.Normal)
             {
                 var bubble = TileBubbleController.Instance.SpawnBubble(clickedGround.transform.position);
                 bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
@@ -171,17 +171,17 @@ namespace CiFarm.Scripts.SceneController.Game
 
             // REQUIRED SOMETHING
             if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
-                clickedGround.dirtData.seedGrowthInfo.plantCurrentState != PlantCurrentState.Normal)
+                clickedGround.dirtData.seedGrowthInfo.currentState != CurrentState.Normal)
             {
-                switch (clickedGround.dirtData.seedGrowthInfo.plantCurrentState)
+                switch (clickedGround.dirtData.seedGrowthInfo.currentState)
                 {
-                    case PlantCurrentState.NeedWater:
+                    case CurrentState.NeedWater:
                         Instance.OnHelpWaterPlant(clickedGround);
                         break;
-                    case PlantCurrentState.IsWeedy:
+                    case CurrentState.IsWeedy:
                         Instance.OnHelpHerbicidePlant(clickedGround);
                         break;
-                    case PlantCurrentState.IsInfested:
+                    case CurrentState.IsInfested:
                         Instance.OnHelpPesticidePlant(clickedGround);
                         break;
                 }

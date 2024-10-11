@@ -41,17 +41,17 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             }
             else
             {
-                switch (placedItem.seedGrowthInfo.plantCurrentState)
+                switch (placedItem.seedGrowthInfo.currentState)
                 {
-                    case PlantCurrentState.NeedWater:
+                    case CurrentState.NeedWater:
                         bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Water);
                         break;
-                    case PlantCurrentState.IsWeedy:
+                    case CurrentState.IsWeedy:
                         bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Grass);
                         break;
-                    case PlantCurrentState.IsInfested:
+                    case CurrentState.IsInfested:
                         bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
                         bubble.SetBubble(dirtData.key, InjectionType.Worm);
                         break;

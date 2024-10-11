@@ -468,14 +468,14 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         public class DeliverProductsRpcAsyncParams
         {
-            [JsonProperty("inventoryWithIndexes")]
-            public List<InventoryWithIndex> inventoryWithIndexes;
+            [JsonProperty("inventoryWithIndex")]
+            public InventoryWithIndex inventoryWithIndex;
         }
 
         public class DeliverProductsRpcAsyncResponse
         {
-            [JsonProperty("deliveryProductKeys")]
-            public List<string> deliveryProductKeys;
+            [JsonProperty("deliveringProductKey")]
+            public string deliveringProductKey;
         }
 
         public async Task<DeliverProductsRpcAsyncResponse> DeliverProductsRpcAsync(
@@ -495,14 +495,14 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         public class RetainProductsRpcAsyncParams
         {
-            [JsonProperty("deliveringProducts")]
-            public List<DeliveringProduct> deliveringProducts;
+            [JsonProperty("deliveringProduct")]
+            public DeliveringProduct deliveringProduct;
         }
 
         public class RetainProductsRpcAsyncResponse
         {
-            [JsonProperty("inventoryKeys")]
-            public List<string> inventoryKeys;
+            [JsonProperty("inventoryKey")]
+            public string inventoryKey;
         }
 
         public async Task<RetainProductsRpcAsyncResponse> RetainProductsRpcAsync(RetainProductsRpcAsyncParams _params)
