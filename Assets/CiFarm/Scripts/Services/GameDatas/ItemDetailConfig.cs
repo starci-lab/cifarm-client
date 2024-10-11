@@ -11,7 +11,7 @@ namespace CiFarm.Scripts.Services.GameDatas
     {
         [SerializeField] private List<ItemDetailConfigEntity> itemDetail;
 
-        public ItemDetailConfigEntity GetItemDetail(string id)
+        public ItemDetailConfigEntity? GetItemDetail(string id)
         {
             var rs = itemDetail.FirstOrDefault(o => o.Key == id);
             if (rs == null)
