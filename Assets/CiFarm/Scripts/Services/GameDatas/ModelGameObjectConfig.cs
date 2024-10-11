@@ -51,13 +51,13 @@ namespace CiFarm.Scripts.Services.GameDatas
             return result;
         }
 
-        public ModelConfigEntity GetTile(string keyToFind)
+        public ModelConfigEntity? GetTile(string keyToFind)
         {
             var result = tileMapper.FirstOrDefault(o => o.Key == keyToFind);
             if (result == null)
             {
                 DLogger.LogError("GetTile not found for: " + keyToFind, "ModelGameObjectConfig");
-                return PlantMapper[0];
+                return null;
             }
 
             return result;
