@@ -1,5 +1,6 @@
 using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services.NakamaServices;
+using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View.GameViewComponent;
 using CiFarm.Scripts.Utilities;
 using DG.Tweening;
@@ -67,8 +68,9 @@ namespace CiFarm.Scripts.UI.View
         {
             GameController.Instance.CameraController.LockCamera();
             AudioManager.Instance.PlaySFX(AudioName.Click3);
-            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ShopPopup, new GameViewParam
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ShopPopup, new ShopPopupParam
             {
+                TabToOpen = 0,
                 callBack = () =>
                 {
                     OnPopupClose();

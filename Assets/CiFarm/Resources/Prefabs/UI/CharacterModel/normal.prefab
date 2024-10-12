@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3657477755054561378, guid: 4c99cb9476df54549af3eca1e91bb5b7, type: 3}
       propertyPath: m_Name
-      value: AnimeGirl
+      value: normal
       objectReference: {fileID: 0}
     - target: {fileID: 8285032708019554546, guid: 4c99cb9476df54549af3eca1e91bb5b7, type: 3}
       propertyPath: m_Pivot.x

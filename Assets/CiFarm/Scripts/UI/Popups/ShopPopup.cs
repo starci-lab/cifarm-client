@@ -4,7 +4,6 @@ using CiFarm.Scripts.SceneController.Game;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Shop;
-using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
 using DG.Tweening;
 using Imba.Audio;
@@ -41,15 +40,41 @@ namespace CiFarm.Scripts.UI.Popups
         protected override void OnShowing()
         {
             base.OnShowing();
+            ClearSelectedShop();
             if (Parameter != null)
             {
-                var param = (GameViewParam)Parameter;
+                var param = (ShopPopupParam)Parameter;
                 _onClose = param.callBack;
+                switch (param.TabToOpen)
+                {
+                    case ShopType.Seed:
+                        seedTab.SetSelect(true);
+                        LoadItemShopSeed();
+                        break;
+                    case ShopType.Animal:
+                        animaTab.SetSelect(true);
+                        LoadItemShopByAnimal();
+                        break;
+                    case ShopType.Building:
+                        buildingTab.SetSelect(true);
+                        LoadItemShopByBuilding();
+                        break;
+                    case ShopType.Tree:
+                        treeTab.SetSelect(true);
+                        LoadItemShopByTree();
+                        break;
+                    default:
+                        seedTab.SetSelect(true);
+                        LoadItemShopSeed();
+                        break;
+                }
+            }
+            else
+            {
+                seedTab.SetSelect(true);
+                LoadItemShopSeed();
             }
 
-            ClearSelectedShop();
-            seedTab.SetSelect(true);
-            LoadItemShopSeed();
             FetchUserCoin();
         }
 
@@ -286,9 +311,15 @@ namespace CiFarm.Scripts.UI.Popups
 
     public enum ShopType
     {
-        Seed,
-        Animal,
-        Building,
-        Tree
+        Seed     = 0,
+        Animal   = 1,
+        Building = 2,
+        Tree     = 3
+    }
+
+    public class ShopPopupParam
+    {
+        public ShopType    TabToOpen;
+        public UnityAction callBack;
     }
 }
