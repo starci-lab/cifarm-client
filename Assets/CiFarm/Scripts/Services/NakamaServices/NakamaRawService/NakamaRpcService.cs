@@ -118,9 +118,9 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             BuyAnimalRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
-            var result = await client.RpcAsync(session, "buy_animal", JsonConvert.SerializeObject(_params));
+            var result  = await client.RpcAsync(session, "buy_animal", JsonConvert.SerializeObject(_params));
 
             return JsonConvert.DeserializeObject<BuyAnimalRpcAsyncResponse>(result.Payload);
         }
@@ -137,6 +137,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             [JsonProperty("quantity")]
             public int quantity;
         }
+
         public class BuySuppliesRpcAsyncResponse
         {
             [JsonProperty("inventorySupplyKey")]
@@ -164,6 +165,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             [JsonProperty("position")]
             public Position position;
         }
+
         public class BuyTileRpcAsyncResponse
         {
             [JsonProperty("placedItemTileKey")]
@@ -174,7 +176,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             BuyTileRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "buy_tile", JsonConvert.SerializeObject(_params));
@@ -318,6 +320,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         #endregion
 
         #region FeedAnimalRpc
+
         public class FeedAnimalRpcAsyncParams
         {
             [JsonProperty("placedItemAnimalKey")]
@@ -331,14 +334,16 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             FeedAnimalRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             await client.RpcAsync(session, "feed_animal", JsonConvert.SerializeObject(_params));
         }
+
         #endregion
 
         #region UseFertilizerRpc
+
         public class UseFertilizerRpcAsyncParams
         {
             [JsonProperty("inventoryFertilizerKey")]
@@ -352,14 +357,16 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             UseFertilizerRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             await client.RpcAsync(session, "use_fertilizer", JsonConvert.SerializeObject(_params));
         }
+
         #endregion
 
         #region CollectAnimalProductRpc
+
         public class CollectAnimalProductRpcAsyncParams
         {
             [JsonProperty("placedItemAnimalKey")]
@@ -376,12 +383,13 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             CollectAnimalProductRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "collect_animal_product", JsonConvert.SerializeObject(_params));
             return JsonConvert.DeserializeObject<CollectAnimalProductRpcAsyncResponse>(result.Payload);
         }
+
         #endregion
 
         //Daily Rewards Rpcs
@@ -711,6 +719,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         #endregion
 
         #region HelpFeedAnimalRpc
+
         public class HelpFeedAnimalRpcAsyncParams
         {
             [JsonProperty("placedItemAnimalKey")]
@@ -727,14 +736,16 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             HelpFeedAnimalRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             await client.RpcAsync(session, "help_feed_animal", JsonConvert.SerializeObject(_params));
         }
+
         #endregion
 
         #region ThiefAnimalProductRpc
+
         public class ThiefAnimalProductRpcAsyncParams
         {
             [JsonProperty("userId")]
@@ -743,6 +754,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             [JsonProperty("placedItemAnimalKey")]
             public string placedItemAnimalKey;
         }
+
         public class ThiefAnimalProductRpcAsyncResponse
         {
             [JsonProperty("inventoryThiefCropKey")]
@@ -756,15 +768,17 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             ThiefAnimalProductRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "thief_animal_product", JsonConvert.SerializeObject(_params));
             return JsonConvert.DeserializeObject<ThiefAnimalProductRpcAsyncResponse>(result.Payload);
         }
+
         #endregion
 
         #region HelpUseFertilizerRpc
+
         public class HelpUseFertilizerRpcAsyncParams
         {
             [JsonProperty("inventoryFertilizerKey")]
@@ -781,11 +795,12 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             UseFertilizerRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             await client.RpcAsync(session, "help_use_fertilizer", JsonConvert.SerializeObject(_params));
         }
+
         #endregion
 
         //Nft Rpcs
@@ -813,7 +828,6 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
                 DLogger.LogError("NFT LOAD FAIL: " + e.Message, "Nakama - Inventories", LogColors.LimeGreen);
                 return null;
             }
-
         }
 
         #endregion
@@ -852,7 +866,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         public async Task<PlaceTileRpcAsyncResponse> PlaceTileRpcAsync(PlaceTileRpcAsyncParams _params)
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "place_tile", JsonConvert.SerializeObject(_params));
@@ -910,7 +924,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         public async Task<RecoverTileRpcAsyncResponse> RecoverTileRpcAsync(PlaceTileRpcAsyncParams _params)
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "recover_tile", JsonConvert.SerializeObject(_params));
@@ -931,10 +945,9 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             public Position position;
         }
 
-
         public async Task MoveRpcAsync(MoveRpcAsyncParams _params)
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var result = await client.RpcAsync(session, "move", JsonConvert.SerializeObject(_params));
@@ -945,6 +958,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         //Profiles Rpcs
 
         #region UpdateTutorialRpc
+
         public class UpdateTutorialRpcAsyncParams
         {
             [JsonProperty("tutorialIndex")]
@@ -958,11 +972,12 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             UpdateTutorialRpcAsyncParams _params
         )
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             await client.RpcAsync(session, "update_tutorial", JsonConvert.SerializeObject(_params));
         }
+
         #endregion
     }
 }

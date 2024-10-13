@@ -24,6 +24,8 @@ namespace Imba.UI
         FriendsPopup           = 10,
         RoadsideShopPopup      = 11,
         CharacterMessagePopup  = 12,
-        TutorActionPopup       = 13,
+        TutorActionPopup       = 13, 
+        StructuralDetailPopup   = 14, 
+        AnimalDetailPopup      = 15,
     }
 }

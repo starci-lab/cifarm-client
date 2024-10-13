@@ -252,8 +252,8 @@ namespace CiFarm.Scripts.UI.Popups
                     BuyToInventory(item);
                     break;
                 case ShopType.Animal:
-                    UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
-                    //BuyToInventory(item);
+                    // UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
+                    BuyAnimal(item);
                     break;
                 case ShopType.Building:
                     // UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
@@ -290,6 +290,20 @@ namespace CiFarm.Scripts.UI.Popups
                 isPremium    = false,
                 isUnique     = false,
                 type         = InventoryType.Building,
+                iconItem     = item.iconItem
+            });
+        }
+        private void BuyAnimal(ShopItemData item)
+        {
+            Hide(true);
+            GameController.Instance.EnterEditMode(new InvenItemData
+            {
+                key          = item.itemKey,
+                referenceKey = item.itemKey,
+                quantity     = 1,
+                isPremium    = false,
+                isUnique     = false,
+                type         = InventoryType.Animal,
                 iconItem     = item.iconItem
             });
         }

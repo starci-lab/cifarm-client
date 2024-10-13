@@ -1,4 +1,3 @@
-using System;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups;
@@ -147,6 +146,34 @@ namespace CiFarm.Scripts.SceneController.Game
             _isPause = false;
             GameController.Instance.ExitEditMode();
             UIManager.Instance.HideLoading();
+        }
+
+        public async void OnConfirmPlaceAnimal()
+        {
+            _isPause = true;
+            UIManager.Instance.ShowLoading();
+            _controllingItem.SetActive(false);
+            await NakamaEditFarmService.Instance.PlaceTileRpcAsync(_invenItemData.key, new Position
+            {
+                x = _currentPosition.x,
+                y = _currentPosition.y
+            });
+            _isPause = false;
+            GameController.Instance.ExitEditMode();
+            UIManager.Instance.HideLoading();
+        }
+        private void BuyAnimal(ShopItemData item)
+        {
+            GameController.Instance.EnterEditMode(new InvenItemData
+            {
+                key          = item.itemKey,
+                referenceKey = item.itemKey,
+                quantity     = 1,
+                isPremium    = false,
+                isUnique     = false,
+                type         = InventoryType.Animal,
+                iconItem     = item.iconItem
+            });
         }
     }
 }
