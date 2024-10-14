@@ -777,11 +777,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 64a59362-2ef2-4a9a-872c-5fb3a9961078
+  cloudProjectId: 02248890-81b4-4845-a1f0-f7dd95624169
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Ci Farm
-  organizationId: denkhotieu
+  projectName: cifarm-client
+  organizationId: cuongnvtse160875
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

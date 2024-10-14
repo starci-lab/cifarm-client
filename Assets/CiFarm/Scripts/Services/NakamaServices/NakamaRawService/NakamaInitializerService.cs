@@ -115,6 +115,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         {
             try
             {
+                DLogger.Log(JsonConvert.SerializeObject(credentials));
                 DLogger.Log("Authenticating...", "Nakama", LogColors.Gold);
                 session = await client.AuthenticateCustomAsync("starci", null, false, new Dictionary<string, string>
                 {
@@ -123,13 +124,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
                     { "signature", credentials.signature },
                     { "chainKey", credentials.chainKey },
                     { "network", credentials.network },
-#if UNITY_EDITOR
-                    { "telegramInitDataRaw", "tranminhthien" }
-#else
-                    { "telegramInitDataRaw", credentials.telegramInitDataRaw}
-
-#endif
-              
+                    { "telegramInitDataRaw", credentials.telegramInitDataRaw },
+                    { "botType", credentials.botType }
                 });
                 authenticated = true;
             }
@@ -186,14 +182,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
             if (response != null && response.Data != null)
             {
-                credentials = new Credentials
-                {
-                    message   = response.Data.Message,
-                    publicKey = response.Data.PublicKey,
-                    signature = response.Data.Signature,
-                    chainKey  = response.Data.ChainKey,
-                    network   = "testnet",
-                };
+                credentials = response.Data;
             }
             else
             {
@@ -208,23 +197,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             public string Message { get; set; }
 
             [JsonProperty("data")]
-            public TestAccountData Data { get; set; }
-        }
-
-        [Serializable]
-        public class TestAccountData
-        {
-            [JsonProperty("message")]
-            public string Message { get; set; }
-
-            [JsonProperty("publicKey")]
-            public string PublicKey { get; set; }
-
-            [JsonProperty("signature")]
-            public string Signature { get; set; }
-
-            [JsonProperty("chainKey")]
-            public string ChainKey { get; set; }
+            public Credentials Data { get; set; }
         }
 
         [Serializable]

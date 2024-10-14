@@ -18,8 +18,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("network")]
         public string network;
+
         [JsonProperty("telegramInitDataRaw")]
         public string telegramInitDataRaw;
+
+        [JsonProperty("botType")]
+        public string botType;
     }
 
 }
