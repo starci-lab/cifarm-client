@@ -659,6 +659,7 @@ Transform:
   - {fileID: 4890782171856348427}
   - {fileID: 915478131456272391}
   - {fileID: 2162324493426225420}
+  - {fileID: 595730067540373124}
   m_Father: {fileID: 4178011123730636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114456997557667434
@@ -2346,6 +2347,203 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopupName: 15
+  AfterHideBehaviour: 0
+  AlwaysOnTop: 1
+  DeactiveGameObjectWhenHide: 0
+  ShowOverlay: 1
+  CloseByClickOutside: 0
+  CloseByBackButton: 1
+  DestroyOnLoadScene: 1
+  FadeContent: 1
+  ShowBehavior:
+    InstantAnimation: 1
+    Animation:
+      Move:
+        AnimationType: 1
+        Enabled: 0
+        UseCustomFromAndTo: 0
+        From: {x: 0, y: 0, z: 0}
+        To: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: 0}
+        Vibrato: 10
+        Elasticity: 1
+        NumberOfLoops: -1
+        LoopType: 1
+        Direction: 2
+        CustomPosition: {x: 0, y: 0, z: 0}
+        Ease: 1
+        StartDelay: 0
+        Duration: 1
+      Rotate:
+        AnimationType: 1
+        Enabled: 0
+        From: {x: 60, y: 0, z: 0}
+        To: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: 0}
+        UseCustomFromAndTo: 0
+        Vibrato: 10
+        Elasticity: 1
+        NumberOfLoops: -1
+        LoopType: 1
+        RotateMode: 1
+        Ease: 1
+        StartDelay: 0
+        Duration: 1
+      Scale:
+        AnimationType: 1
+        Enabled: 1
+        From: {x: 1, y: 1, z: 1}
+        To: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: 0}
+        UseCustomFromAndTo: 0
+        Vibrato: 10
+        Elasticity: 1
+        NumberOfLoops: -1
+        LoopType: 1
+        Ease: 27
+        StartDelay: 0
+        Duration: 0.3
+      Fade:
+        AnimationType: 1
+        Enabled: 1
+        From: 0
+        To: 0
+        By: 0.5
+        UseCustomFromAndTo: 0
+        NumberOfLoops: -1
+        LoopType: 1
+        Ease: 1
+        StartDelay: 0
+        Duration: 0.3
+      AnimationType: 1
+    OnFinished:
+      Event:
+        m_PersistentCalls:
+          m_Calls: []
+      AudioName: -1
+    OnStart:
+      Event:
+        m_PersistentCalls:
+          m_Calls: []
+      AudioName: -1
+  HideBehavior:
+    InstantAnimation: 1
+    Animation:
+      Move:
+        AnimationType: 2
+        Enabled: 0
+        UseCustomFromAndTo: 0
+        From: {x: 0, y: 0, z: 0}
+        To: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: 0}
+        Vibrato: 10
+        Elasticity: 1
+        NumberOfLoops: -1
+        LoopType: 1
+        Direction: 3
+        CustomPosition: {x: 0, y: 0, z: 0}
+        Ease: 1
+        StartDelay: 0
+        Duration: 1
+      Rotate:
+        AnimationType: 2
+        Enabled: 0
+        From: {x: 0, y: 0, z: 0}
+        To: {x: 0, y: 0, z: 0}
+        By: {x: 0, y: 0, z: 0}
+        UseCustomFromAndTo: 0
+        Vibrato: 10
+        Elasticity: 1
+        NumberOfLoops: -1
+        LoopType: 1
+        RotateMode: 1
+        Ease: 1
+        StartDelay: 0
+        Duration: 1
+      Scale:
+        AnimationType: 2
+        Enabled: 1
+        From: {x: 0, y: 0, z: 0}
+        To: {x: 0.7, y: 0.7, z: 0.7}
+        By: {x: 0, y: 0, z: 0}
+        UseCustomFromAndTo: 0
+        Vibrato: 10
+        Elasticity: 1
+        NumberOfLoops: -1
+        LoopType: 1
+        Ease: 26
+        StartDelay: 0
+        Duration: 0.3
+      Fade:
+        AnimationType: 2
+        Enabled: 1
+        From: 0
+        To: 0
+        By: 0.5
+        UseCustomFromAndTo: 0
+        NumberOfLoops: -1
+        LoopType: 1
+        Ease: 1
+        StartDelay: 0
+        Duration: 0.3
+      AnimationType: 2
+    OnFinished:
+      Event:
+        m_PersistentCalls:
+          m_Calls: []
+      AudioName: -1
+    OnStart:
+      Event:
+        m_PersistentCalls:
+          m_Calls: []
+      AudioName: -1
+  CustomResourcesLocation: Assets/Cifarm/Resources/
+  _popupManager: {fileID: 0}
+--- !u!1 &3604333032301508036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 595730067540373124}
+  - component: {fileID: 726018549203858709}
+  m_Layer: 5
+  m_Name: BulletinPopup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &595730067540373124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3604333032301508036}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4692691571151420}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &726018549203858709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3604333032301508036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f8b55664818440d6b042ff3d1a87e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PopupName: 16
   AfterHideBehaviour: 0
   AlwaysOnTop: 1
   DeactiveGameObjectWhenHide: 0
@@ -5349,6 +5547,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -200
       objectReference: {fileID: 0}
+    - target: {fileID: 4434378281229118858, guid: acab63ba1cc667142b1d9e91b48ebe79, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -28.599976
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434378281229118858, guid: acab63ba1cc667142b1d9e91b48ebe79, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.399994
+      objectReference: {fileID: 0}
     - target: {fileID: 4635289591548037017, guid: acab63ba1cc667142b1d9e91b48ebe79, type: 3}
       propertyPath: m_SizeDelta.x
       value: 575
@@ -5614,6 +5820,14 @@ PrefabInstance:
     - target: {fileID: 4434378281229118858, guid: 96e8550833021d84db42417976fb93d3, type: 3}
       propertyPath: m_SizeDelta.y
       value: -148
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434378281229118858, guid: 96e8550833021d84db42417976fb93d3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -28.599976
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434378281229118858, guid: 96e8550833021d84db42417976fb93d3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.399994
       objectReference: {fileID: 0}
     - target: {fileID: 4635289591548037017, guid: 96e8550833021d84db42417976fb93d3, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6107,6 +6321,14 @@ PrefabInstance:
     - target: {fileID: 4434378281229118858, guid: c3f33c23e00d803469a930995f77a539, type: 3}
       propertyPath: m_SizeDelta.y
       value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434378281229118858, guid: c3f33c23e00d803469a930995f77a539, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -28.599976
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434378281229118858, guid: c3f33c23e00d803469a930995f77a539, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.399994
       objectReference: {fileID: 0}
     - target: {fileID: 4635289591548037017, guid: c3f33c23e00d803469a930995f77a539, type: 3}
       propertyPath: m_SizeDelta.x

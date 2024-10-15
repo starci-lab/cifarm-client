@@ -27,5 +27,6 @@ namespace Imba.UI
         TutorActionPopup       = 13, 
         StructuralDetailPopup   = 14, 
         AnimalDetailPopup      = 15,
+        BulletinPopup = 16
     }
 }

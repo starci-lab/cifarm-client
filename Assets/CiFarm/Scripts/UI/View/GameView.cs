@@ -132,6 +132,15 @@ namespace CiFarm.Scripts.UI.View
                 callBack = OnPopupClose
             });
         }
+        public void OnClickBulletin()
+        {
+            GameController.Instance.CameraController.LockCamera();
+            AudioManager.Instance.PlaySFX(AudioName.Click3);
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.BulletinPopup, new GameViewParam
+            {
+                callBack = OnPopupClose
+            });
+        }
 
         public void OnPopupClose()
         {
