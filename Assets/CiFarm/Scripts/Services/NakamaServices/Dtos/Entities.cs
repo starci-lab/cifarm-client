@@ -147,6 +147,18 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public int y;
     }
 
+    public class DailyReward
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("amount")]
+        public long amount;
+
+        [JsonProperty("days")]
+        public int days;
+    }
+
     [Serializable]
     public class SeedGrowthInfo
     {

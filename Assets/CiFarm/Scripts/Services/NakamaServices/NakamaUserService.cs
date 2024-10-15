@@ -91,8 +91,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 new()
                 {
-                    Collection = CollectionType.Config.GetStringValue(),
-                    Key        = ConfigKey.Metadata.GetStringValue(),
+                    Collection = CollectionType.Player.GetStringValue(),
+                    Key        = PlayerKey.Metadata.GetStringValue(),
                     UserId     = session.UserId,
                 }
             });
@@ -108,8 +108,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
             {
                 new()
                 {
-                    Collection = CollectionType.Config.GetStringValue(),
-                    Key        = ConfigKey.PlayerStats.GetStringValue(),
+                    Collection = CollectionType.Player.GetStringValue(),
+                    Key        = PlayerKey.PlayerStats.GetStringValue(),
                     UserId     = session.UserId,
                 }
             });

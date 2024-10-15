@@ -24,10 +24,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [EnumStringValue("Inventories")]
         Inventories,
 
-        [EnumStringValue("Config")]
-        Config
+        [EnumStringValue("Player")]
+        Player
     }
-    public enum ConfigKey
+    public enum PlayerKey
     {
         [EnumStringValue("visitState")]
         VisitState,
