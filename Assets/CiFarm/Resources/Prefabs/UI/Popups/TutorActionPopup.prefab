@@ -290,6 +290,7 @@ MonoBehaviour:
   fakeButtonContainer: {fileID: 4501309145886468930}
   holeRect: {fileID: 1799398197297240128}
   holeImage: {fileID: 5354998850883827015}
+  bgImage: {fileID: 0}
 --- !u!1 &993249171431571139
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,7 +950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 65a1aa6fa1993314ea9924c67edf4a3a, type: 2}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.59607846}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0

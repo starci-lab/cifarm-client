@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3106406513122789079, guid: 4c99cb9476df54549af3eca1e91bb5b7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e79373bf6fd603d4e9c5f0cb6a7b505a, type: 3}
     - target: {fileID: 3657477755054561378, guid: 4c99cb9476df54549af3eca1e91bb5b7, type: 3}
       propertyPath: m_Name
-      value: normal
+      value: watering
       objectReference: {fileID: 0}
     - target: {fileID: 8285032708019554546, guid: 4c99cb9476df54549af3eca1e91bb5b7, type: 3}
       propertyPath: m_Pivot.x

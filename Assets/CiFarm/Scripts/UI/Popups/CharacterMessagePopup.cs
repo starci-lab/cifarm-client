@@ -91,7 +91,15 @@ namespace CiFarm.Scripts.UI.Popups
                 Destroy(_characterObject);
             }
 
-            _characterObject = Instantiate(charModel, characterModelContainer);
+            if (charModel != null)
+            {
+                _characterObject = Instantiate(charModel, characterModelContainer);
+
+            }
+            else
+            {
+                DLogger.LogError("Get character failed for: "+ _characterMessageParam.CharacterId);
+            }
         }
     }
 

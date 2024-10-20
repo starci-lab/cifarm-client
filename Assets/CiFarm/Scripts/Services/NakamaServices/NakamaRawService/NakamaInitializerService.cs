@@ -160,7 +160,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         {
             var url = useLocal
                 ? "http://localhost:9999/api/v1/authenticator/fake-signature"
-                : "https://api.cifarm.starci.net/api/v1/authenticator/fake-signature";
+                : "https://cifarm.periphery.starci.net/api/v1/authenticator/fake-signature";
 
             using UnityWebRequest webRequest = UnityWebRequest.Post(url, new Dictionary<string, string>()
             {
