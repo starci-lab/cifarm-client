@@ -60,7 +60,7 @@ MonoBehaviour:
       smooth, creamy texture. Rich in carbohydrates and nutrients, potatoes are a
       staple in many cuisines, perfect for baking, mashing, frying, or adding heartiness
       to a variety of dishes.       '
-  - key: premium
+  - key: tileNft
     itemName: NFT crop
     type: 1
     itemDescription: NFT crop
