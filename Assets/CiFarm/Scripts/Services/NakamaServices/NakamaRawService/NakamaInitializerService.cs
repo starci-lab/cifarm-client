@@ -206,6 +206,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             avalanche,
             solana,
             aptos,
+            algorand 
         }
 
         #endregion
