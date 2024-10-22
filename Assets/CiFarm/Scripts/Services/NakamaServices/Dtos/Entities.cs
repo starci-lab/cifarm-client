@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 namespace CiFarm.Scripts.Services.NakamaServices
-{   
+{
     [Serializable]
     public class Crop
     {
@@ -119,11 +119,21 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("price")]
         public long price;
 
-        [JsonProperty("capacity")]
-        public int capacity;
-
         [JsonProperty("type")]
         public string type;
+
+        [JsonProperty("upgrades")]
+        public Dictionary<int, Upgrade> Upgrades;
+    }
+
+    [Serializable]
+    public class Upgrade
+    {
+        [JsonProperty("upgradePrice")]
+        public int key;
+
+        [JsonProperty("capacity")]
+        public int capacity;
     }
 
     [Serializable]
@@ -135,7 +145,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("timerMatchId")]
         public string timerMatchId;
     }
-
 
     [Serializable]
     public class Position
@@ -163,20 +172,20 @@ namespace CiFarm.Scripts.Services.NakamaServices
     public class SeedGrowthInfo
     {
         [JsonProperty("crop")]
-        public Crop crop; 
+        public Crop crop;
 
         [JsonProperty("currentStage")]
-        public int currentStage; 
+        public int currentStage;
 
         [JsonProperty("totalTimeElapsed")]
-        public float totalTimeElapsed; 
+        public float totalTimeElapsed;
 
         [JsonProperty("currentStageTimeElapsed")]
-        public float currentStageTimeElapsed; 
+        public float currentStageTimeElapsed;
 
         [JsonProperty("harvestQuantityRemaining")]
-        public int harvestQuantityRemaining; 
-        
+        public int harvestQuantityRemaining;
+
         [JsonProperty("currentState")]
         public CurrentState currentState;
 
@@ -244,7 +253,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         IsWeedy,
         IsInfested,
     }
-    
+
     public enum PlacedItemType
     {
         Tile,
@@ -290,14 +299,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public List<PlacedItem> placedItems;
     }
 
-
     [Serializable]
     public class NextDeliveryTime
     {
         [JsonProperty("time")]
         public long time;
     }
-
 
     [Serializable]
     public class DeliveringProduct
@@ -316,7 +323,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("isPremium")]
         public bool isPremium;
-        
+
         [JsonProperty("index")]
         public int index;
     }
@@ -430,6 +437,4 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("gameRandomness")]
         public GameRandomness gameRandomness;
     }
-
-
 }
