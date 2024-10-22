@@ -413,8 +413,11 @@ namespace CiFarm.Scripts.Services.NakamaServices
     }
 
     [Serializable]
-    public class GameRandomness
+    public class CropRandomness
     {
+        [JsonProperty("key")]
+        public string key;
+
         [JsonProperty("theif3")]
         public double theif3;
 
@@ -434,7 +437,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("key")]
         public string key;
 
-        [JsonProperty("gameRandomness")]
-        public GameRandomness gameRandomness;
+        [JsonProperty("cropRandomness ")]
+        public CropRandomness cropRandomness;
     }
 }

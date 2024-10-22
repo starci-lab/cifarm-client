@@ -46,6 +46,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [EnumStringValue("rewards")]
         Rewards,
         [EnumStringValue("globalConstants")]
-        GlobalConstants,
+        GlobalConstants,    
+        [EnumStringValue("cropRandomness")]
+        CropRandomness,
+        
+        
     }
 }

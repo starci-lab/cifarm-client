@@ -19,9 +19,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [ReadOnly]
         public Rewards rewards;
 
-        [Header("Global Constants")]
+        [Header("Crop Randomness")]
         [ReadOnly]
-        public GlobalConstants globalConstants;
+        public CropRandomness cropRandomness;
 
         public override void Awake()
         {
@@ -79,10 +79,10 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 new()
                 {
                     Collection = CollectionType.System.GetStringValue(),
-                    Key        = SystemKey.GlobalConstants.GetStringValue(),
+                    Key        = SystemKey.CropRandomness.GetStringValue(),
                 }
             });
-            globalConstants = JsonConvert.DeserializeObject<GlobalConstants>(objects.Objects.First().Value);
+            cropRandomness = JsonConvert.DeserializeObject<CropRandomness>(objects.Objects.First().Value);
         }
     }
 }

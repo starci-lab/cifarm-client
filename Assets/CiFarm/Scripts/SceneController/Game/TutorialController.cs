@@ -100,7 +100,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void ShowPopupMessage(TutorialDetailRecord tutorialDetail)
         {
-            DLogger.Log("Message tutor: " + tutorialDetail.Details, nameof(TutorialController));
+            // DLogger.Log("Message tutor: " + tutorialDetail.Details, nameof(TutorialController));
+
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.CharacterMessagePopup, new CharacterMessageParam
             {
                 Type          = tutorialDetail.TutorialsDetailType,
