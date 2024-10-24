@@ -26,7 +26,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         [SerializeField] private string serverKey = "defaultkey";
 
         [Header("Testing Config Editor")]
-        [SerializeField] private SupportChain testChainKey;
+        [SerializeField] private SupportedChain testChainKey;
 
         [SerializeField] private int testAccountNumber;
 
@@ -164,7 +164,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
             using UnityWebRequest webRequest = UnityWebRequest.Post(url, new Dictionary<string, string>()
             {
-                { "chainKey", testChainKey.ToString() },
+                { "chainKey", testChainKey.GetStringValue() },
                 { "accountNumber", testAccountNumber.ToString() }
             });
             DLogger.Log("FetchCredentialsFromApi For: " + testChainKey + " with account: " + testAccountNumber);
@@ -201,12 +201,18 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         }
 
         [Serializable]
-        public enum SupportChain
+        public enum SupportedChain
         {
-            avalanche,
-            solana,
-            aptos,
-            algorand 
+            [EnumStringValue("avalanche")]
+            Avalanche,
+            [EnumStringValue("solana")]
+            Solana,
+            [EnumStringValue("aptos")]
+            Aptos,
+            [EnumStringValue("algorand")]
+            Algorand,
+            [EnumStringValue("polkadot")]
+            Polkadot
         }
 
         #endregion

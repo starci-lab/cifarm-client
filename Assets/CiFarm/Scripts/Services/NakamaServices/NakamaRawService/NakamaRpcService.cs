@@ -778,23 +778,23 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         //Nft Rpcs
 
-        #region UpdatePremiumTileNftsRpc
+        #region UpdateFertileTileNftsRpc
 
-        public class UpdatePremiumTileNftsRpcAsyncResponse
+        public class UpdateFertileTileNftsRpcAsyncResponse
         {
             [JsonProperty("tokenIds")]
             public List<int> tokenIds;
         }
 
-        public async Task<UpdatePremiumTileNftsRpcAsyncResponse> UpdatePremiumTileNftsRpcAsync()
+        public async Task<UpdateFertileTileNftsRpcAsyncResponse> UpdateFertileTileNftsRpcAsync()
         {
             var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             try
             {
-                var result = await client.RpcAsync(session, "update_premium_tile_nfts");
-                return JsonConvert.DeserializeObject<UpdatePremiumTileNftsRpcAsyncResponse>(result.Payload);
+                var result = await client.RpcAsync(session, "update_fertile_tile_nfts");
+                return JsonConvert.DeserializeObject<UpdateFertileTileNftsRpcAsyncResponse>(result.Payload);
             }
             catch (Exception e)
             {

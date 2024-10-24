@@ -70,7 +70,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         private async void InitInventoriesAsync()
         {
-            await LoadPremiumTileNftInventoriesAsync();
+            await LoadFertileTileNftInventoriesAsync();
             LoadInventoriesAsync();
         }
 
@@ -142,14 +142,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
             DLogger.Log("Inventories loaded", "Nakama - Inventories", LogColors.LimeGreen);
         }
 
-        public async Task LoadPremiumTileNftInventoriesAsync()
+        public async Task LoadFertileTileNftInventoriesAsync()
         {
             try
             {
-                var updatePremiumTileNftsRpcResponse = await NakamaRpcService.Instance.UpdatePremiumTileNftsRpcAsync();
-                if (updatePremiumTileNftsRpcResponse != null && updatePremiumTileNftsRpcResponse.tokenIds != null)
+                var updateFertileTileNftsRpcResponse = await NakamaRpcService.Instance.UpdateFertileTileNftsRpcAsync();
+                if (updateFertileTileNftsRpcResponse != null && updateFertileTileNftsRpcResponse.tokenIds != null)
                 {
-                    DLogger.Log($"{updatePremiumTileNftsRpcResponse.tokenIds.Count} nfts loaded",
+                    DLogger.Log($"{updateFertileTileNftsRpcResponse.tokenIds.Count} nfts loaded",
                         "Nakama - Inventories", LogColors.LimeGreen);
                 }
             }
