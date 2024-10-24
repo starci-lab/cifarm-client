@@ -13,37 +13,37 @@ MonoBehaviour:
   m_Name: ModelGameConfig
   m_EditorClassIdentifier: 
   tileMapper:
-  - key: tileStarter
+  - key: starterTile
     itemName: 
     tileSize: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
-  - key: tileBasic1
+  - key: basicTile1
     itemName: 
     tileSize: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
-  - key: tileBasic2
+  - key: basicTile2
     itemName: 
     tileSize: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
-  - key: tilebasic3
+  - key: basicTile3
     itemName: 
     tileSize: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
-  - key: tileBasic4
+  - key: basicTile4
     itemName: 
     tileSize: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: fd40f427fcc3eea46b6b324a0f3d93ac, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 16decb3644ae78845afbf7244c2e39f0, type: 3}
     gameHarvestIcon: {fileID: 0}
-  - key: tileNft
+  - key: fertileTile
     itemName: 
     tileSize: {x: 1, y: 1}
     prefabModel: {fileID: 7360233726201006671, guid: b6de7067fa900f7408a20f7263a1a552, type: 3}
