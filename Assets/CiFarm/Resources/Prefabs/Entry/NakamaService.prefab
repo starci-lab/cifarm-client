@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 374563676962013783}
   - component: {fileID: 8306669354461030226}
   - component: {fileID: 4256745325057689916}
+  - component: {fileID: 4715894180058677029}
   m_Layer: 0
   m_Name: NakamaService
   m_TagString: Untagged
@@ -56,11 +57,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useLocal: 0
   useHttps: 1
-  host: api.cifarm-server.starci.net
+  host: cifarm.server.starci.net
   port: 443
   serverKey: defaultkey
   testChainKey: 0
-  testAccountNumber: 1
+  testAccountNumber: 18
   authenticated: 0
 --- !u!114 &1602844812581178767
 MonoBehaviour:
@@ -92,6 +93,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugPlacedItems: 1
   placedItems: []
+  playerStats:
+    key: 
+    levelInfo:
+      experiences: 0
+      experienceQuota: 0
+      level: 0
+    tutorialInfo:
+      tutorialIndex: 0
+      stepIndex: 0
+    energyInfo:
+      currentEnergy: 0
+      maxEnergy: 0
+      energyQuota: 0
+      recoveryTimeCount: 0
+    invites: 
   nextDeliveryTime: 0
 --- !u!114 &1483126429237669449
 MonoBehaviour:
@@ -130,15 +146,23 @@ MonoBehaviour:
       userId: 0
   playerStats:
     key: 
-    experiences: 0
-    experienceQuota: 0
-    level: 0
-    tutorialIndex: 0
-    stepIndex: 0
+    levelInfo:
+      experiences: 0
+      experienceQuota: 0
+      level: 0
+    tutorialInfo:
+      tutorialIndex: 0
+      stepIndex: 0
+    energyInfo:
+      currentEnergy: 0
+      maxEnergy: 0
+      energyQuota: 0
+      recoveryTimeCount: 0
     invites: 
   golds: 0
   inventoryPage: 0
   inventories: []
+  playerTools: []
 --- !u!114 &6693157797563031162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,3 +241,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccf3fd57063e2ce4996e3f24b3bc0718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activities:
+    key: 
+    water:
+      experiencesGain: 0
+      energyCost: 0
+    feedAnimal:
+      experiencesGain: 0
+      energyCost: 0
+    usePestiside:
+      experiencesGain: 0
+      energyCost: 0
+    useFertilizer:
+      experiencesGain: 0
+      energyCost: 0
+    useHerbicide:
+      experiencesGain: 0
+      energyCost: 0
+    helpUseHerbicide:
+      experiencesGain: 0
+      energyCost: 0
+    helpUsePestiside:
+      experiencesGain: 0
+      energyCost: 0
+    helpWater:
+      experiencesGain: 0
+      energyCost: 0
+    thiefCrop:
+      experiencesGain: 0
+      energyCost: 0
+    helpFeedAnimal:
+      experiencesGain: 0
+      energyCost: 0
+    thiefAnimalProduct:
+      experiencesGain: 0
+      energyCost: 0
+  rewards:
+    key: 
+    fromInvites:
+      key: 
+      metrics:
+        _serializedList: []
+    referred: 0
+  cropRandomness:
+    key: 
+    theif3: 0
+    theif2: 0
+    needWater: 0
+    isWeedyOrInfested: 0
+  tokenConfigure:
+    key: 
+    decimals: 0
+  starterConfigure:
+    key: 
+    goldAmount: 0
+  spinConfigure:
+    key: 
+    spinPrice: 0
+    freeSpinTime: 0
+--- !u!114 &4715894180058677029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328878227380581963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339d1d21c9deab847ba431c342e352b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dailyRewards: []
+  spins: []
