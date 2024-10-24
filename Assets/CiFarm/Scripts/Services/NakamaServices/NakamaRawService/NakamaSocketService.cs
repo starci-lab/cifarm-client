@@ -16,10 +16,6 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
     {
         public UnityAction OnFetchPlacedDataFromServer;
         public UnityAction OnFetchPlayerStats;
-        public override void Awake()
-        {
-            base.Awake();
-        }
 
         private IEnumerator Start()
         {

@@ -392,33 +392,6 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
 
         #endregion
 
-        //Daily Rewards Rpcs
-
-        #region ClaimDailyRewardRpc
-
-        public class ClaimDailyRewardRpcAsyncResponse
-        {
-            [JsonProperty("amount")]
-            public int amount;
-
-            [JsonProperty("days")]
-            public int days;
-        }
-
-        public async Task<ClaimDailyRewardRpcAsyncResponse> ClaimDailyRequestRpcAsync()
-        {
-            var client  = NakamaInitializerService.Instance.client;
-            var session = NakamaInitializerService.Instance.session;
-
-            var result = await client.RpcAsync(session, "claim_daily_reward");
-
-            NakamaUserService.Instance.LoadWalletAsync();
-
-            return JsonConvert.DeserializeObject<ClaimDailyRewardRpcAsyncResponse>(result.Payload);
-        }
-
-        #endregion
-
         //Assets Rpcs
 
         #region ListInventoriesRpc
@@ -976,6 +949,47 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
             var session = NakamaInitializerService.Instance.session;
 
             await client.RpcAsync(session, "update_tutorial", JsonConvert.SerializeObject(_params));
+        }
+
+        #endregion
+
+        #region SPINNING
+
+        [Serializable]
+        public class SpinRpcAsyncResponse
+        {
+            [JsonProperty("inventoryKey")]
+            public string inventoryKey;
+
+            [JsonProperty("spin")]
+            public Spin spin;
+        }
+
+        public async Task<SpinRpcAsyncResponse> SpinRpcAsync()
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+            var result  = await client.RpcAsync(session, "spin");
+            return JsonConvert.DeserializeObject<SpinRpcAsyncResponse>(result.Payload);
+        }
+
+        #endregion
+
+        #region ClaimDaily
+
+        [Serializable]
+        public class ClaimDailyRewardRpcAsyncResponse
+        {
+            [JsonProperty("lastDailyRewardPossibility")]
+            public LastDailyRewardPossibility lastDailyRewardPossibility;
+        }
+
+        public async Task<ClaimDailyRewardRpcAsyncResponse> ClaimDailyRewardRpcAsync()
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+            var result  = await client.RpcAsync(session, "claim_daily_reward");
+            return JsonConvert.DeserializeObject<ClaimDailyRewardRpcAsyncResponse>(result.Payload);
         }
 
         #endregion

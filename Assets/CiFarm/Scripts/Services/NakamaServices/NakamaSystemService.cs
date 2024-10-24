@@ -23,10 +23,17 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [ReadOnly]
         public CropRandomness cropRandomness;
 
-        public override void Awake()
-        {
-            base.Awake();
-        }
+        [Header("Token Configure")]
+        [ReadOnly]
+        public TokenConfigure tokenConfigure;
+
+        [Header("Starter Configure")]
+        [ReadOnly]
+        public StarterConfigure starterConfigure;
+
+        [Header("SpinConfigure")]
+        [ReadOnly]
+        public SpinConfigure spinConfigure;
 
         private IEnumerator Start()
         {
@@ -35,11 +42,15 @@ namespace CiFarm.Scripts.Services.NakamaServices
             //load
             LoadActivitiesAsync();
             LoadRewardsAsync();
-            LoadGlobalConstantsAsync();
+            LoadCropRandomnessAsync();
+            LoadTokenConfigureAsync();
+            LoadStarterConfigureAsync();
+            LoadSpinConfigureAsync();
         }
+
         public async void LoadActivitiesAsync()
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
@@ -55,7 +66,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         public async void LoadRewardsAsync()
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
@@ -69,9 +80,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             rewards = JsonConvert.DeserializeObject<Rewards>(objects.Objects.First().Value);
         }
 
-        public async void LoadGlobalConstantsAsync()
+        public async void LoadCropRandomnessAsync()
         {
-            var client = NakamaInitializerService.Instance.client;
+            var client  = NakamaInitializerService.Instance.client;
             var session = NakamaInitializerService.Instance.session;
 
             var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
@@ -83,6 +94,54 @@ namespace CiFarm.Scripts.Services.NakamaServices
                 }
             });
             cropRandomness = JsonConvert.DeserializeObject<CropRandomness>(objects.Objects.First().Value);
+        }
+
+        public async void LoadTokenConfigureAsync()
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
+            {
+                new()
+                {
+                    Collection = CollectionType.System.GetStringValue(),
+                    Key        = SystemKey.TokenConfigure.GetStringValue(),
+                }
+            });
+            tokenConfigure = JsonConvert.DeserializeObject<TokenConfigure>(objects.Objects.First().Value);
+        }
+
+        public async void LoadStarterConfigureAsync()
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
+            {
+                new()
+                {
+                    Collection = CollectionType.System.GetStringValue(),
+                    Key        = SystemKey.StarterConfigure.GetStringValue(),
+                }
+            });
+            starterConfigure = JsonConvert.DeserializeObject<StarterConfigure>(objects.Objects.First().Value);
+        }
+
+        public async void LoadSpinConfigureAsync()
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            var objects = await client.ReadStorageObjectsAsync(session, new StorageObjectId[]
+            {
+                new()
+                {
+                    Collection = CollectionType.System.GetStringValue(),
+                    Key        = SystemKey.SpinConfigure.GetStringValue(),
+                }
+            });
+            spinConfigure = JsonConvert.DeserializeObject<SpinConfigure>(objects.Objects.First().Value);
         }
     }
 }

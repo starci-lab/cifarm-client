@@ -156,18 +156,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public int y;
     }
 
-    public class DailyReward
-    {
-        [JsonProperty("key")]
-        public string key;
-
-        [JsonProperty("amount")]
-        public long amount;
-
-        [JsonProperty("days")]
-        public int days;
-    }
-
     [Serializable]
     public class SeedGrowthInfo
     {
@@ -432,12 +420,98 @@ namespace CiFarm.Scripts.Services.NakamaServices
     }
 
     [Serializable]
-    public class GlobalConstants
+    public class Spin
     {
         [JsonProperty("key")]
         public string key;
 
-        [JsonProperty("cropRandomness ")]
-        public CropRandomness cropRandomness;
+        [JsonProperty("goldAmount")]
+        public long goldAmount;
+
+        [JsonProperty("tokenAmount")]
+        public double tokenAmount;
+
+        [JsonProperty("quantity")]
+        public int quantity;
+
+        [JsonProperty("type")]
+        public int type;
+
+        [JsonProperty("thresholdMin")]
+        public double thresholdMin;
+
+        [JsonProperty("thresholdMax")]
+        public double thresholdMax;
     }
+
+    [Serializable]
+    public class DailyReward
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("amount")]
+        public int amount;
+
+        [JsonProperty("day")]
+        public int day;
+
+        [JsonProperty("isLastDay")]
+        public bool isLastDay;
+
+        [JsonProperty("dailyRewardPossibilities")]
+        public SerializedDictionary<int, LastDailyRewardPossibility> dailyRewardPossibilities;
+    }
+
+    [Serializable]
+    public class LastDailyRewardPossibility
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("goldAmount")]
+        public int goldAmount;
+
+        [JsonProperty("tokenAmount")]
+        public float tokenAmount;
+
+        [JsonProperty("thresholdMin")]
+        public float thresholdMin;
+
+        [JsonProperty("thresholdMax")]
+        public float thresholdMax;
+    }
+    [Serializable]
+    public class TokenConfigure
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("decimals")]
+        public int decimals;
+    }
+
+    [Serializable]
+    public class StarterConfigure
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("goldAmount")]
+        public long goldAmount;
+    }
+
+    [Serializable]
+    public class SpinConfigure
+    {
+        [JsonProperty("key")]
+        public string key;
+
+        [JsonProperty("spinPrice")]
+        public long spinPrice;
+
+        [JsonProperty("freeSpinTime")]
+        public long freeSpinTime;
+    }
+
 }

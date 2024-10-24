@@ -13,11 +13,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
     {
         public UnityAction OnDeliveringProductsUpdated;
 
-        public override void Awake()
-        {
-            base.Awake();
-        }
-
         private IEnumerator Start()
         {
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);

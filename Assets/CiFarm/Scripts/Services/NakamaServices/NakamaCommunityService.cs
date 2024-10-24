@@ -13,11 +13,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaCommunityService : ManualSingletonMono<NakamaCommunityService>
     {
-        public override void Awake()
-        {
-            base.Awake();
-        }
-
         public UnityAction       OnSearchUsersUpdate;
         public UnityAction<bool> OnVisitUser;
         public UnityAction<bool> OnReturn;

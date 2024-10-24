@@ -11,11 +11,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaAssetsDataService : ManualSingletonMono<NakamaAssetsDataService>
     {
-        public override void Awake()
-        {
-            base.Awake();
-        }
-
         private IEnumerator Start()
         {
             yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);

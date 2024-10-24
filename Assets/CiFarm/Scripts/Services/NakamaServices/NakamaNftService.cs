@@ -1,19 +1,20 @@
-using CiFarm.Scripts.Services.NakamaServices;
-using CiFarm.Scripts.Utilities;
-using Imba.Utils;
 using System.Collections;
 using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
+using Imba.Utils;
 using UnityEngine;
 
-public class NakamaNftService : ManualSingletonMono<NakamaNftService>
+namespace CiFarm.Scripts.Services.NakamaServices
 {
-    public override void Awake()
+    public class NakamaNftService : ManualSingletonMono<NakamaNftService>
     {
-        base.Awake();
-    }
+        public override void Awake()
+        {
+            base.Awake();
+        }
 
-    private IEnumerator Start()
-    {
-        yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
+        private IEnumerator Start()
+        {
+            yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
+        }
     }
 }
