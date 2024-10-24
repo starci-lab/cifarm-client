@@ -993,5 +993,40 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         }
 
         #endregion
+
+        #region ListTools
+
+        [Serializable]
+        public class PlayerTool
+        {
+            [JsonProperty("key")]
+            public string key;
+
+            [JsonProperty("fromInventory")]
+            public bool fromInventory;
+
+            [JsonProperty("inventory")]
+            public Inventory inventory;
+
+            [JsonProperty("type")]
+            public int type;
+        }
+
+        [Serializable]
+        public class ListToolsRpcAsyncResponse
+        {
+            [JsonProperty("tools")]
+            public List<PlayerTool> tools;
+        }
+
+        public async Task<ListToolsRpcAsyncResponse> ListToolsRpcAsync()
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+            var result  = await client.RpcAsync(session, "list_tools");
+            return JsonConvert.DeserializeObject<ListToolsRpcAsyncResponse>(result.Payload);
+        }
+
+        #endregion
     }
 }

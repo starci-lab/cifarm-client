@@ -18,27 +18,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public UnityAction OnGoldChange;
         public UnityAction OnPlayerStatsUpdate;
 
-        private IEnumerator Start()
-        {
-            yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
-
-            //load
-            LoadInfoAsync();
-            LoadMetadataAsync();
-            //Now load from both socket and api
-            LoadPlayerStatsAsync();
-            LoadWalletAsync();
-
-            //inventory
-            InitInventoriesAsync();
-        }
-
-        private async void InitInventoriesAsync()
-        {
-            await LoadPremiumTileNftInventoriesAsync();
-             LoadInventoriesAsync();
-        }
-
         [Header("Info")]
         [ReadOnly]
         public string userId;
@@ -69,6 +48,31 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [ReadOnly]
         public List<Inventory> inventories;
+
+        [ReadOnly]
+        public List<NakamaRpcService.PlayerTool> playerTools;
+
+        private IEnumerator Start()
+        {
+            yield return new WaitUntil(() => NakamaInitializerService.Instance.authenticated);
+
+            //load
+            LoadInfoAsync();
+            LoadMetadataAsync();
+            //Now load from both socket and api
+            LoadPlayerStatsAsync();
+            LoadWalletAsync();
+
+            //Inventory
+            InitInventoriesAsync();
+            LoadToolsAsync();
+        }
+
+        private async void InitInventoriesAsync()
+        {
+            await LoadPremiumTileNftInventoriesAsync();
+            LoadInventoriesAsync();
+        }
 
         public async void LoadInfoAsync()
         {
@@ -165,6 +169,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
             playerStats.tutorialInfo.tutorialIndex = tutorialIndex;
             playerStats.tutorialInfo.stepIndex     = stepIndex;
         }
-        
+
+        public async void LoadToolsAsync()
+        {
+            var objects = await NakamaRpcService.Instance.ListToolsRpcAsync();
+
+            playerTools = objects.tools;
+        }
     }
 }
