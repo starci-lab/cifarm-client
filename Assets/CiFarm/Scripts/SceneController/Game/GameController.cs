@@ -333,6 +333,12 @@ namespace CiFarm.Scripts.SceneController.Game
             var tileObject = SimplePool.Spawn(tileObjectModel.PrefabModel, Vector3.zero,
                 tileObjectModel.PrefabModel.transform.rotation);
 
+            var structural = tileObject.GetComponent<Structural>();
+            if (structural != null)
+            {
+                structural.structuralId = placedItem.referenceKey;
+            }
+
             tileMapController.SetAnyWithWithTilePos(
                 new Vector2Int(placedItem.position.x, placedItem.position.y)
                 , tileObject, tileObjectModel.TileSize);
