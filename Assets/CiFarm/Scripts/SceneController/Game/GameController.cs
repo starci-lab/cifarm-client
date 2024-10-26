@@ -4,7 +4,7 @@ using System.Linq;
 using CiFarm.Scripts.SceneController.Game.PlantCore;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
-using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
+using CiFarm.Scripts.Services.NakamaServices.BaseServices;
 using CiFarm.Scripts.UI.Popups;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.UI.View.GameViewComponent;

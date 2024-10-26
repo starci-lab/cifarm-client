@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
-using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
+using CiFarm.Scripts.Services.NakamaServices.BaseServices;
 using Imba.Utils;
 using UnityEngine;
 

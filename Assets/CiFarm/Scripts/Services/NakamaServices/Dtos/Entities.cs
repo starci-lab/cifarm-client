@@ -288,10 +288,20 @@ namespace CiFarm.Scripts.Services.NakamaServices
     }
 
     [Serializable]
-    public class NextDeliveryTime
+    public class UserCooldownTimers
     {
-        [JsonProperty("time")]
-        public long time;
+        [JsonProperty("nextFreeSpinCooldown")]
+        public int nextFreeSpinCooldown;
+
+        [JsonProperty("nextDailyRewardCooldown")]
+        public int nextDailyRewardCooldown;
+    }
+
+    [Serializable]
+    public class GlobalCooldownTimers
+    {
+        [JsonProperty("nextDeliveryCooldown")]
+        public int nextDeliveryCooldown;
     }
 
     [Serializable]

@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 
-namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
+namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 {
     public class NakamaInitializerService : ManualSingletonMono<NakamaInitializerService>
     {

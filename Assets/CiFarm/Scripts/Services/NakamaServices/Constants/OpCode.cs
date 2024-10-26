@@ -6,7 +6,8 @@ namespace CiFarm.Scripts.Services.NakamaServices
     public enum OpCode
     {
         PlacedItems = 1,
-        NextDeliveryTime = 2,
+        OpCodeGlobalCooldownTimers = 2,
         PlayerStats = 3,
+        OpCodeUserCooldownTimers = 4,
     }
 }

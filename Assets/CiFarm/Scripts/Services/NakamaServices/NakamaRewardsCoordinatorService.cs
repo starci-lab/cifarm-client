@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
+using CiFarm.Scripts.Services.NakamaServices.BaseServices;
 using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using Newtonsoft.Json;
@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace CiFarm.Scripts.Services.NakamaServices
 {
-    public class NakamaFortuneService : ManualSingletonMono<NakamaFortuneService>
+    public class NakamaRewardsCoordinatorService : ManualSingletonMono<NakamaRewardsCoordinatorService>
     {
 
         [ReadOnly]

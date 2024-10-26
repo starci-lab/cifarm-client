@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
+namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 {
     public class NakamaSocketService : ManualSingletonMono<NakamaSocketService>
     {
@@ -47,9 +47,14 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
                 var opCode = (OpCode)matchState.OpCode;
                 switch (opCode)
                 {
-                    case OpCode.NextDeliveryTime:
+                    case OpCode.OpCodeGlobalCooldownTimers:
                         {
-                            OnNextDeliveryTimeStateReceived(matchState);
+                            OnGlobalCooldownTimersStateReceived(matchState);
+                            break;
+                        }
+                    case OpCode.OpCodeUserCooldownTimers:
+                        {
+                            OnUserCooldownTimersStateReceived(matchState);
                             break;
                         }
                 }
@@ -72,17 +77,16 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         public PlayerStats playerStats;
 
         [ReadOnly]
-        public long nextDeliveryTime;
+        public GlobalCooldownTimers globalCooldownTimers;
+
+        [ReadOnly]
+        public UserCooldownTimers userCooldownTimers;
 
         private void OnPlacedItemsStateReceived(IMatchState matchState)
         {
             var content = Encoding.UTF8.GetString(matchState.State);
             placedItems = JsonConvert.DeserializeObject<PlacedItems>(content).placedItems;
-            if (debugPlacedItems)
-            {
-//                DLogger.Log($"{placedItems.Count} placed items loaded. See the inspector for details.", "Nakama - Placed Items State", LogColors.Aquamarine);
-            }
-
+            //register publisher
             OnFetchPlacedDataFromServer?.Invoke();
         }
 
@@ -90,21 +94,19 @@ namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
         {
             var content = Encoding.UTF8.GetString(matchState.State);
             playerStats = JsonConvert.DeserializeObject<PlayerStats>(content);
-            if (debugPlacedItems)
-            {
-                //DLogger.Log($"Player stats loaded.", "Nakama - Player Stats", LogColors.Aquamarine);
-            }
+            //register publisher
             OnFetchPlayerStats?.Invoke();
         }
 
-        private void OnNextDeliveryTimeStateReceived(IMatchState matchState)
+        private void OnGlobalCooldownTimersStateReceived(IMatchState matchState)
         {
             var content = Encoding.UTF8.GetString(matchState.State);
-            nextDeliveryTime = JsonConvert.DeserializeObject<NextDeliveryTime>(content).time;
-            if (debugPlacedItems)
-            {
-//                DLogger.Log($"Next delivery time loaded. See the inspector for details.", "Nakama - Next Delivery Time State", LogColors.Aquamarine);
-            }
+            globalCooldownTimers = JsonConvert.DeserializeObject<GlobalCooldownTimers>(content);
+        }
+        private void OnUserCooldownTimersStateReceived(IMatchState matchState)
+        {
+            var content = Encoding.UTF8.GetString(matchState.State);
+            userCooldownTimers = JsonConvert.DeserializeObject<UserCooldownTimers>(content);
         }
 
         [HideInInspector]

@@ -1,4 +1,4 @@
-using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
+using CiFarm.Scripts.Services.NakamaServices.BaseServices;
 using CiFarm.Scripts.Utilities;
 using Imba.Utils;
 using Nakama;

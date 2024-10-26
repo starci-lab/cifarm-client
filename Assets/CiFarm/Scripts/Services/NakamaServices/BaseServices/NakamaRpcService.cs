@@ -7,7 +7,7 @@ using Imba.Utils;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace CiFarm.Scripts.Services.NakamaServices.NakamaRawService
+namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 {
     public class NakamaRpcService : ManualSingletonMono<NakamaRpcService>
     {

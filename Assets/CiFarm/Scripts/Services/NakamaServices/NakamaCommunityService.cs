@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
+using CiFarm.Scripts.Services.NakamaServices.BaseServices;
 using UnityEngine;
 using UnityEngine.Events;
 

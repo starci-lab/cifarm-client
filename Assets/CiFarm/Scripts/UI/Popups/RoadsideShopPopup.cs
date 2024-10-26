@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CiFarm.Scripts.Services;
 using CiFarm.Scripts.Services.NakamaServices;
-using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
+using CiFarm.Scripts.Services.NakamaServices.BaseServices;
 using CiFarm.Scripts.UI.Popups.Roadside;
 using CiFarm.Scripts.UI.View;
 using CiFarm.Scripts.Utilities;
@@ -93,7 +93,7 @@ namespace CiFarm.Scripts.UI.Popups
             }
 
 
-            var remain = NakamaSocketService.Instance.nextDeliveryTime;
+            var remain = NakamaSocketService.Instance.globalCooldownTimers.nextDeliveryCooldown;
 
             if (timerClock != null)
             {

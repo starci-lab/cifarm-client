@@ -1,5 +1,5 @@
 using System.Collections;
-using CiFarm.Scripts.Services.NakamaServices.NakamaRawService;
+using CiFarm.Scripts.Services.NakamaServices.BaseServices;
 using DG.Tweening;
 using Imba.Audio;
 using Imba.UI;
