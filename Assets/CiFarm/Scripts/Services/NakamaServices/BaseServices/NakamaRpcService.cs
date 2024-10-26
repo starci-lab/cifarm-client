@@ -1010,6 +1010,9 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 
             [JsonProperty("type")]
             public int type;
+
+            [JsonProperty("index")]
+            public int index;
         }
 
         [Serializable]
