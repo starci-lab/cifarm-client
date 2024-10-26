@@ -293,8 +293,14 @@ namespace CiFarm.Scripts.Services.NakamaServices
         [JsonProperty("nextFreeSpinCooldown")]
         public int nextFreeSpinCooldown;
 
+        [JsonProperty("isSpinFree")]
+        public bool isSpinFree;
+
         [JsonProperty("nextDailyRewardCooldown")]
         public int nextDailyRewardCooldown;
+
+        [JsonProperty("unclaimedToday")]
+        public bool unclaimedToday;
     }
 
     [Serializable]
