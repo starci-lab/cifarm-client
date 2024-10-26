@@ -2,7 +2,7 @@
 CiFarm is a Farm-To-Earn game built on the Telegram platform, taking advantage of blockchain technology for unique and engaging gameplay. Initially launching on the TON Telegram blockchain, CiFarm also aims to expand to Polkadot with NFT integration through the Unique Network.
 
 # Overview
-As gaming on the TON Telegram blockchain gains traction with popular titles like Hamster Combat, CiFarm brings the farming genre to life on Telegram in a play-to-earn format. Here, players can interact with each other in various ways:
+As gaming on the Telegram gains traction with popular titles like Hamster Combat, CiFarm brings the farming genre to life on Telegram in a play-to-earn format. Here, players can interact with each other in various ways:
 
 - Farm: Grow crops and manage resources to build your farm.
 - Help: Support friends or allies in managing their farms.
@@ -10,7 +10,6 @@ As gaming on the TON Telegram blockchain gains traction with popular titles like
 - With simple, appealing gameplay and direct user incentives planned for the Polkadot mainnet launch, CiFarm is designed to make blockchain gaming accessible, fun, and rewarding on Telegram.
 
 # Key Features
-- Blockchain Integration: Built initially for TON, with plans to expand to Polkadot and Unique Network for NFT support.
 - Community Interaction: A range of social features, from helping friends to playful stealing, fostering a community-driven experience.
 - Farm-To-Earn Mechanics: Play to earn through farming, resource management, and interactions with other players.
 # Current Status
