@@ -64,6 +64,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public bool availableInShop;
     }
 
+    public enum AnimalType
+    {
+        Poultry = 0,
+        Livestock = 1,
+    }
+
     [Serializable]
     public class Animal
     {
@@ -101,7 +107,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public long premiumHarvestExperiences;
 
         [JsonProperty("type")]
-        public string type;
+        public AnimalType type;
     }
 
     [Serializable]
@@ -120,7 +126,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public long price;
 
         [JsonProperty("type")]
-        public string type;
+        public AnimalType type;
 
         [JsonProperty("upgrades")]
         public Dictionary<int, Upgrade> Upgrades;
