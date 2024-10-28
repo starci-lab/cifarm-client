@@ -2179,6 +2179,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3862070182394235495, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: ShowBehavior.InstantAnimation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862070182394235495, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: ShowBehavior.Animation.Fade.Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862070182394235495, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: ShowBehavior.Animation.Move.Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862070182394235495, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: ShowBehavior.Animation.Scale.From.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862070182394235495, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: ShowBehavior.Animation.Scale.From.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862070182394235495, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: ShowBehavior.Animation.Scale.From.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3862070182394235495, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
+      propertyPath: ShowBehavior.Animation.Rotate.Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4092463047004656250, guid: d03cb721bf08e4a04a35396b1ad79923, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

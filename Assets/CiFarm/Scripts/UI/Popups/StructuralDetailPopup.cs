@@ -8,11 +8,13 @@ namespace CiFarm.Scripts.UI.Popups
     public class StructuralDetailParam
     {
         public string StructuralId;
+        public string ReferenceId;
     }
 
     public class StructuralDetailPopup : UIPopup
     {
         public string structuralId;
+        public string referenceId;
 
         [SerializeField] private TextMeshProUGUI structuralName;
 
@@ -23,10 +25,11 @@ namespace CiFarm.Scripts.UI.Popups
             {
                 var param = (StructuralDetailParam)Parameter;
                 structuralId = param.StructuralId;
+                referenceId  = param.ReferenceId;
             }
-            
-            var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(structuralId);
-            var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(structuralId);
+
+            var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(referenceId);
+            var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(referenceId);
 
             structuralName.text = detail!.ItemName;
         }

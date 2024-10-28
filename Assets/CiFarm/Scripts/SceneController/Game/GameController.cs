@@ -38,6 +38,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
+        public bool lockInteractObject;
+
         public override void Awake()
         {
             base.Awake();
@@ -82,6 +84,11 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void OnClickGround(BaseGround clickedGround)
         {
+            if (lockInteractObject)
+            {
+                return;
+            }
+
             if (_friendItemData == null)
             {
                 HandleClickMyGround(clickedGround);
@@ -90,6 +97,20 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 HandleClickOtherGround(clickedGround);
             }
+        }
+
+        public void OnClickStructural(Structural structural)
+        {
+            if (lockInteractObject)
+            {
+                return;
+            }
+
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.StructuralDetailPopup, new StructuralDetailParam
+            {
+                StructuralId = structural.structuralId,
+                ReferenceId  = structural.referenceId
+            });
         }
 
         private void HandleClickMyGround(BaseGround clickedGround)
@@ -202,6 +223,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void EnterEditMode(InvenItemData data)
         {
+            lockInteractObject = true;
             // Stop Realtime
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = null;
 
@@ -216,6 +238,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
         public void ExitEditMode()
         {
+            lockInteractObject = false;
+            // realtime fecth
             NakamaSocketService.Instance.OnFetchPlacedDataFromServer = OnFetchPlacedDataFromServer;
             _gameView.Show();
             _editView.Hide();
@@ -336,7 +360,8 @@ namespace CiFarm.Scripts.SceneController.Game
             var structural = tileObject.GetComponent<Structural>();
             if (structural != null)
             {
-                structural.structuralId = placedItem.referenceKey;
+                structural.structuralId = placedItem.key;
+                structural.referenceId  = placedItem.referenceKey;
             }
 
             tileMapController.SetAnyWithWithTilePos(
@@ -646,7 +671,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
-        #region EF
+        #region Effect
 
         private void PlayHarvestEf(Vector3 positionSpawn, string itemRefId, int quantity)
         {

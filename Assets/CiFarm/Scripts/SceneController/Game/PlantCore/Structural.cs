@@ -1,3 +1,4 @@
+using CiFarm.Scripts.UI.Popups;
 using Imba.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,6 +8,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
     public class Structural : MonoBehaviour
     {
         public string structuralId = "";
+        public string referenceId  = "";
 
         private void OnMouseDown()
         {
@@ -14,9 +16,8 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             {
                 return;
             }
-
-            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.StructuralDetailPopup);
-            
+            GameController.Instance.OnClickStructural(this);
+      
         }
     }
 }
