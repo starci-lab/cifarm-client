@@ -25,6 +25,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private List<BaseGround> _baseGrounds;
         private List<GameObject> _constructor;
+        private List<GameObject> _animals;
         private GameView         _gameView;
         private VisitView        _visitView;
         private EditView         _editView;
@@ -45,6 +46,7 @@ namespace CiFarm.Scripts.SceneController.Game
             base.Awake();
             _baseGrounds = new();
             _constructor = new();
+            _animals     = new();
             _gameView    = UIManager.Instance.ViewManager.GetViewByName<GameView>(UIViewName.GameView);
             _visitView   = UIManager.Instance.ViewManager.GetViewByName<VisitView>(UIViewName.VisitView);
             _editView    = UIManager.Instance.ViewManager.GetViewByName<EditView>(UIViewName.EditView);
@@ -221,7 +223,7 @@ namespace CiFarm.Scripts.SceneController.Game
             LoadHomeWithAnimation();
         }
 
-        public void EnterEditMode(InvenItemData data,  string structuralId = "")
+        public void EnterEditMode(InvenItemData data, string structuralId = "")
         {
             lockInteractObject = true;
             // Stop Realtime
@@ -233,7 +235,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 InventoryId = data.referenceKey
             });
 
-            editModeController.EnterEditMode(data,  structuralId);
+            editModeController.EnterEditMode(data, structuralId);
         }
 
         public void ExitEditMode()
@@ -312,6 +314,11 @@ namespace CiFarm.Scripts.SceneController.Game
                     case PlacedItemType.Building:
                         PlacedBuilding(placed);
                         break;
+                    case PlacedItemType.Animal:
+                    {
+                        PlacedAnimal(placed);
+                        break;
+                    }
                 }
             }
 
@@ -371,6 +378,27 @@ namespace CiFarm.Scripts.SceneController.Game
             _constructor.Add(tileObject);
         }
 
+        private void PlacedAnimal(PlacedItem placedItem)
+        {
+            var tileObjectModel =
+                ResourceService.Instance.ModelGameObjectConfig.GetTile(placedItem.referenceKey);
+            var tileObject = SimplePool.Spawn(tileObjectModel.PrefabModel, Vector3.zero,
+                tileObjectModel.PrefabModel.transform.rotation);
+
+            // var structural = tileObject.GetComponent<Structural>();
+            // if (structural != null)
+            // {
+            //     structural.structuralId = placedItem.key;
+            //     structural.referenceId  = placedItem.referenceKey;
+            // }
+
+            tileMapController.SetAnyWithWithTilePos(
+                new Vector2Int(placedItem.position.x, placedItem.position.y)
+                , tileObject, tileObjectModel.TileSize);
+
+            _constructor.Add(tileObject);
+        }
+
         private void OnFetchPlacedDataFromServer()
         {
             // DLogger.Log("REALTIME FETCH", "GAME TILE");
@@ -386,8 +414,14 @@ namespace CiFarm.Scripts.SceneController.Game
                 SimplePool.Despawn(construct);
             }
 
+            foreach (var animal in _animals)
+            {
+                SimplePool.Despawn(animal);
+            }
+
             _baseGrounds.Clear();
             _constructor.Clear();
+            _animals.Clear();
 
             LoadUserTileMap();
         }
