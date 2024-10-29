@@ -67,6 +67,18 @@ MonoBehaviour:
     prefabModel: {fileID: 5646978862015493990, guid: 4b4acc9cacd6c1741b99fe285f0a0c0c, type: 3}
     gameShopIcon: {fileID: 21300000, guid: ec05577267483ce46a452633f05293ca, type: 3}
     gameHarvestIcon: {fileID: 0}
+  - key: chicken
+    itemName: Chicken
+    tileSize: {x: 1, y: 1}
+    prefabModel: {fileID: 7879896179682794598, guid: 386ae8323a83a464c82035772358bd27, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: a671fcdeba72240479f8de87fc4d0fd1, type: 3}
+    gameHarvestIcon: {fileID: 21300000, guid: e82c884b96bfa914da158b129a65f577, type: 3}
+  - key: cow
+    itemName: Cow
+    tileSize: {x: 1, y: 1}
+    prefabModel: {fileID: 7879896179682794598, guid: 47539b716c51751479195c14211f8bfd, type: 3}
+    gameShopIcon: {fileID: 21300000, guid: 37cf82a619392d745895ae7edccac69b, type: 3}
+    gameHarvestIcon: {fileID: 21300000, guid: 6edea0754bc50e44b98ebe2be19e67d3, type: 3}
   plantMapper:
   - key: cauliflower
     itemName: Cauliflower
