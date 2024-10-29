@@ -40,6 +40,7 @@ namespace CiFarm.Scripts.UI.Popups
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ShopPopup, new ShopPopupParam
             {
                 TabToOpen = ShopType.Animal,
+                BuildingId = structuralId,
                 HideOther = true,
             });
         }

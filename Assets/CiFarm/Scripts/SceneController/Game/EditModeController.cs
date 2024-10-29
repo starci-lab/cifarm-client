@@ -22,6 +22,7 @@ namespace CiFarm.Scripts.SceneController.Game
         private Vector2Int _currentPosition;
         private Vector2Int _currentItemSize;
 
+        private string _structuralId;
         private bool _isInit;
         private bool _isPause;
 
@@ -59,13 +60,12 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public void EnterEditMode(InvenItemData data)
+        public void EnterEditMode(InvenItemData data,  string structuralId = "")
         {
             _invenItemData = data;
             var configData = ResourceService.Instance.ModelGameObjectConfig.GetTile(_invenItemData.referenceKey);
-
             var prefabDirtData = configData.PrefabModel;
-
+            _structuralId    = structuralId;
             _currentItemSize = configData.TileSize;
             _controllingItem = SimplePool.Spawn(prefabDirtData, Vector3.zero, prefabDirtData.transform.rotation);
             _controllingItem.SetActive(false);
@@ -99,6 +99,7 @@ namespace CiFarm.Scripts.SceneController.Game
                                 OnConfirmPlaceDirt();
                                 break;
                             case InventoryType.Animal:
+                                OnConfirmPlaceAnimal();
                                 break;
                             case InventoryType.PlantHarvested:
                                 break;
@@ -123,7 +124,7 @@ namespace CiFarm.Scripts.SceneController.Game
             _isPause = true;
             UIManager.Instance.ShowLoading();
             _controllingItem.SetActive(false);
-            await NakamaEditFarmService.Instance.ConstructBuildingRpcAsync(_invenItemData.key, new Position
+            await NakamaEditFarmService.Instance.ConstructBuildingAsync(_invenItemData.key, new Position
             {
                 x = _currentPosition.x,
                 y = _currentPosition.y
@@ -138,7 +139,7 @@ namespace CiFarm.Scripts.SceneController.Game
             _isPause = true;
             UIManager.Instance.ShowLoading();
             _controllingItem.SetActive(false);
-            await NakamaEditFarmService.Instance.PlaceTileRpcAsync(_invenItemData.key, new Position
+            await NakamaEditFarmService.Instance.PlaceTileAsync(_invenItemData.key, new Position
             {
                 x = _currentPosition.x,
                 y = _currentPosition.y
@@ -153,27 +154,16 @@ namespace CiFarm.Scripts.SceneController.Game
             _isPause = true;
             UIManager.Instance.ShowLoading();
             _controllingItem.SetActive(false);
-            await NakamaEditFarmService.Instance.PlaceTileRpcAsync(_invenItemData.key, new Position
-            {
-                x = _currentPosition.x,
-                y = _currentPosition.y
-            });
+            // await NakamaEditFarmService.Instance.PlaceTileAsync(_invenItemData.key, new Position
+            // {
+            //     x = _currentPosition.x,
+            //     y = _currentPosition.y
+            // });
+            //
+            await NakamaEditFarmService.Instance.PlaceAnimalAsync(_invenItemData.key, _structuralId);
             _isPause = false;
             GameController.Instance.ExitEditMode();
             UIManager.Instance.HideLoading();
-        }
-        private void BuyAnimal(ShopItemData item)
-        {
-            GameController.Instance.EnterEditMode(new InvenItemData
-            {
-                key          = item.itemKey,
-                referenceKey = item.itemKey,
-                quantity     = 1,
-                isPremium    = false,
-                isUnique     = false,
-                type         = InventoryType.Animal,
-                iconItem     = item.iconItem
-            });
         }
     }
 }

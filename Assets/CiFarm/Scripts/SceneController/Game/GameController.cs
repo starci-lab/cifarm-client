@@ -221,7 +221,7 @@ namespace CiFarm.Scripts.SceneController.Game
             LoadHomeWithAnimation();
         }
 
-        public void EnterEditMode(InvenItemData data)
+        public void EnterEditMode(InvenItemData data,  string structuralId = "")
         {
             lockInteractObject = true;
             // Stop Realtime
@@ -233,7 +233,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 InventoryId = data.referenceKey
             });
 
-            editModeController.EnterEditMode(data);
+            editModeController.EnterEditMode(data,  structuralId);
         }
 
         public void ExitEditMode()

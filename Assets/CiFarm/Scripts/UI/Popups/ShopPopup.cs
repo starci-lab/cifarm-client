@@ -27,6 +27,8 @@ namespace CiFarm.Scripts.UI.Popups
         private UnityAction        _onClose;
         public  List<ShopItemData> shopItemsData;
 
+        private string _buildingId;
+
         public int _currentCoin = 0;
 
         protected override void OnInit()
@@ -41,16 +43,25 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnShowing();
             ClearSelectedShop();
+
             if (Parameter != null)
             {
                 var param = (ShopPopupParam)Parameter;
-                _onClose = param.CloseCallBack;
+                _onClose    = param.CloseCallBack;
+                _buildingId = param.BuildingId;
+
                 if (param.HideOther)
                 {
                     seedTab.SetActive(false);
                     animaTab.SetActive(false);
                     buildingTab.SetActive(false);
                     treeTab.SetActive(false);
+                }
+                else // DEFAULT
+                {
+                    seedTab.SetActive(true);
+                    buildingTab.SetActive(true);
+                    // treeTab.SetActive(true);
                 }
 
                 switch (param.TabToOpen)
@@ -265,7 +276,7 @@ namespace CiFarm.Scripts.UI.Popups
                     BuyToInventory(item);
                     break;
                 case ShopType.Animal:
-                   
+
                     BuyAnimal(item);
                     break;
                 case ShopType.Building:
@@ -318,7 +329,7 @@ namespace CiFarm.Scripts.UI.Popups
                 isUnique     = false,
                 type         = InventoryType.Animal,
                 iconItem     = item.iconItem
-            });
+            }, _buildingId);
         }
 
         #endregion
@@ -348,6 +359,7 @@ namespace CiFarm.Scripts.UI.Popups
     {
         public ShopType    TabToOpen;
         public bool        HideOther = false;
+        public string      BuildingId;
         public UnityAction CloseCallBack;
     }
 }
