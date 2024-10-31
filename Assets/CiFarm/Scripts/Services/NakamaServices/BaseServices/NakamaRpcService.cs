@@ -968,7 +968,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 
         #endregion
 
-        #region SPINNING
+        #region Spin
 
         [Serializable]
         public class SpinRpcAsyncResponse
@@ -976,8 +976,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
             [JsonProperty("inventoryKey")]
             public string inventoryKey;
 
-            [JsonProperty("spin")]
-            public Spin spin;
+            [JsonProperty("spinKey")]
+            public string spinKey;
         }
 
         public async Task<SpinRpcAsyncResponse> SpinRpcAsync()
@@ -995,8 +995,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
         [Serializable]
         public class ClaimDailyRewardRpcAsyncResponse
         {
-            [JsonProperty("lastDailyRewardPossibility")]
-            public LastDailyRewardPossibility lastDailyRewardPossibility;
+            [JsonProperty("lastDailyRewardPossibilityKey")]
+            public string lastDailyRewardPossibilityKey;
         }
 
         public async Task<ClaimDailyRewardRpcAsyncResponse> ClaimDailyRewardRpcAsync()
