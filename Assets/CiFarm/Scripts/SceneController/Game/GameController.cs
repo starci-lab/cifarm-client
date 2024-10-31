@@ -261,17 +261,44 @@ namespace CiFarm.Scripts.SceneController.Game
             switch (clickedAnimal.tileData.animalInfo.currentState)
             {
                 case AnimalCurrentState.Normal:
+                    //  everything normal
+                    var bubbleNormal = TileBubbleController.Instance.SpawnBubble(clickedAnimal.transform.position);
+                    if (clickedAnimal.tileData.animalInfo.isAdult)
+                    {
+                        bubbleNormal.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
+                            (int)clickedAnimal.tileData.animalInfo.animal.yieldTime -
+                            (int)clickedAnimal.tileData.animalInfo.currentYieldTime);
+                    }
+                    else
+                    {
+                        bubbleNormal.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
+                            (int)clickedAnimal.tileData.animalInfo.animal.growthTime -
+                            (int)clickedAnimal.tileData.animalInfo.currentGrowthTime);
+                    }
+
                     break;
                 case AnimalCurrentState.Hungry:
+                    OnFeedAnimal(clickedAnimal);
                     break;
                 case AnimalCurrentState.Sick:
+                    OnCuredAnimal(clickedAnimal);
                     break;
                 default:
                     //  everything normal
                     var bubble = TileBubbleController.Instance.SpawnBubble(clickedAnimal.transform.position);
-                    bubble.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
-                        (int)clickedAnimal.tileData.animalInfo.animal.growthTime -
-                        (int)clickedAnimal.tileData.animalInfo.animal.offspringPrice);
+                    if (clickedAnimal.tileData.animalInfo.isAdult)
+                    {
+                        bubble.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
+                            (int)clickedAnimal.tileData.animalInfo.animal.yieldTime -
+                            (int)clickedAnimal.tileData.animalInfo.currentYieldTime);
+                    }
+                    else
+                    {
+                        bubble.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
+                            (int)clickedAnimal.tileData.animalInfo.animal.growthTime -
+                            (int)clickedAnimal.tileData.animalInfo.currentGrowthTime);
+                    }
+
                     break;
             }
         }
@@ -657,6 +684,23 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
                 await NakamaFarmingService.Instance.FeedAnimalAsync(animal.tileData.key, "NOT FOUND");
+
+                var position = animal.transform.position;
+                PlayExperiencesEf(position, 1);
+                TileBubbleController.Instance.HideBubble(animal.tileData.key);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("OnCollectProductsAnimal error: " + e.Message, "Animal");
+            }
+        }
+
+        private async void OnCuredAnimal(BaseAnimal animal)
+        {
+            try
+            {
+                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+                await NakamaFarmingService.Instance.CureAnimalAsync(animal.tileData.key);
 
                 var position = animal.transform.position;
                 PlayExperiencesEf(position, 1);

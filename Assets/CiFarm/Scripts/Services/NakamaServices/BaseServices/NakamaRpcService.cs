@@ -343,7 +343,25 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
         }
 
         #endregion
+        #region CureAnimalRpc
 
+        public class CureAnimalRpcAsyncParams
+        {
+            [JsonProperty("placedItemAnimalKey")]
+            public string placedItemAnimalKey;
+        }
+
+        public async Task CureAnimalRpcAsync(
+            CureAnimalRpcAsyncParams _params
+        )
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            await client.RpcAsync(session, "cure_animal", JsonConvert.SerializeObject(_params));
+        }
+
+        #endregion
         #region UseFertilizerRpc
 
         public class UseFertilizerRpcAsyncParams
@@ -749,7 +767,28 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 
             await client.RpcAsync(session, "help_use_fertilizer", JsonConvert.SerializeObject(_params));
         }
+        #region HelpCureAnimalRpc
 
+        public class HelpCureAnimalRpcAsyncParams
+        {
+            [JsonProperty("placedItemAnimalKey")]
+            public string placedItemAnimalKey;
+            
+            [JsonProperty("userId")]
+            public string userId;
+        }
+
+        public async Task HelpCureAnimalRpcAsync(
+            HelpCureAnimalRpcAsyncParams _params
+        )
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            await client.RpcAsync(session, "help_cure_animal", JsonConvert.SerializeObject(_params));
+        }
+    
+        #endregion
         #endregion
 
         //Nft Rpcs

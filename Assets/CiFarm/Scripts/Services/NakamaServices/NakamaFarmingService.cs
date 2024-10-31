@@ -127,6 +127,20 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         /// <summary>
+        /// CureAnimalAsync
+        /// </summary>
+        /// <param name="placedItemTileKey">The tile key where herbicide is applied.</param>
+        public async Task CureAnimalAsync(string placedItemTileKey)
+        {
+            await NakamaRpcService.Instance.CureAnimalRpcAsync(new()
+            {
+                placedItemAnimalKey = placedItemTileKey,
+            });
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+            // Additional logic can be added here if needed
+        }
+
+        /// <summary>
         /// Collect Animal product
         /// </summary>
         /// <param name="placedItemTileKey">The tile key where herbicide is applied.</param>
