@@ -693,32 +693,6 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 
         #endregion
 
-        #region HelpFeedAnimalRpc
-
-        public class HelpFeedAnimalRpcAsyncParams
-        {
-            [JsonProperty("placedItemAnimalKey")]
-            public string placedItemAnimalKey;
-
-            [JsonProperty("inventoryAnimalFeedKey")]
-            public string inventoryAnimalFeedKey;
-
-            [JsonProperty("userId")]
-            public string userId;
-        }
-
-        public async Task HelpFeedAnimalRpcAsync(
-            HelpFeedAnimalRpcAsyncParams _params
-        )
-        {
-            var client  = NakamaInitializerService.Instance.client;
-            var session = NakamaInitializerService.Instance.session;
-
-            await client.RpcAsync(session, "help_feed_animal", JsonConvert.SerializeObject(_params));
-        }
-
-        #endregion
-
         #region ThiefAnimalProductRpc
 
         public class ThiefAnimalProductRpcAsyncParams

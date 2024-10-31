@@ -18,12 +18,13 @@ namespace CiFarm.Scripts.Services.NakamaServices
             await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
         }
 
-        public async Task PlaceAnimalAsync(string animalKey, string constructKey)
+        public async Task PlaceAnimalAsync(string animalKey, string constructKey, Position position)
         {
             await NakamaRpcService.Instance.BuyAnimalRpcAsync(new()
             {
                 key                   = animalKey,
-                placedItemBuildingKey = constructKey
+                placedItemBuildingKey = constructKey,
+                Position              = position
             });
 
             NakamaUserService.Instance.LoadInventoriesAsync();
