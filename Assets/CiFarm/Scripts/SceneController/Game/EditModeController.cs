@@ -23,8 +23,8 @@ namespace CiFarm.Scripts.SceneController.Game
         private Vector2Int _currentItemSize;
 
         private string _structuralId;
-        private bool _isInit;
-        private bool _isPause;
+        private bool   _isInit;
+        private bool   _isPause;
 
         private void Awake()
         {
@@ -60,10 +60,10 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        public void EnterEditMode(InvenItemData data,  string structuralId = "")
+        public void EnterEditMode(InvenItemData data, string structuralId = "")
         {
             _invenItemData = data;
-            var configData = ResourceService.Instance.ModelGameObjectConfig.GetTile(_invenItemData.referenceKey);
+            var configData     = ResourceService.Instance.ModelGameObjectConfig.GetTile(_invenItemData.referenceKey);
             var prefabDirtData = configData.PrefabModel;
             _structuralId    = structuralId;
             _currentItemSize = configData.TileSize;
@@ -154,13 +154,11 @@ namespace CiFarm.Scripts.SceneController.Game
             _isPause = true;
             UIManager.Instance.ShowLoading();
             _controllingItem.SetActive(false);
-            // await NakamaEditFarmService.Instance.PlaceTileAsync(_invenItemData.key, new Position
-            // {
-            //     x = _currentPosition.x,
-            //     y = _currentPosition.y
-            // });
-            //
-            await NakamaEditFarmService.Instance.PlaceAnimalAsync(_invenItemData.key, _structuralId);
+            await NakamaEditFarmService.Instance.PlaceAnimalAsync(_invenItemData.key, _structuralId, new Position()
+            {
+                x = _currentPosition.x,
+                y = _currentPosition.y
+            });
             _isPause = false;
             GameController.Instance.ExitEditMode();
             UIManager.Instance.HideLoading();

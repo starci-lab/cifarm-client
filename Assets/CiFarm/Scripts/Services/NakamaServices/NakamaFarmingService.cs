@@ -8,8 +8,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
 {
     public class NakamaFarmingService : ManualSingletonMono<NakamaFarmingService>
     {
-        #region Planting
-
         /// <summary>
         /// Plants a seed using the provided parameters.
         /// </summary>
@@ -41,13 +39,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             }
 
             await NakamaRpcService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
-             NakamaUserService.Instance.LoadInventoriesAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
             // Additional logic can be added here if needed
         }
-
-        #endregion
-
-        #region Harvesting
 
         /// <summary>
         /// Harvests a crop from the specified tile.
@@ -62,13 +56,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
             };
 
             await NakamaRpcService.Instance.HarvestCropRpcAsync(paramsObj);
-             NakamaUserService.Instance.LoadInventoriesAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
             // Additional logic can be added here if needed
         }
-
-        #endregion
-
-        #region Watering
 
         /// <summary>
         /// Waters a planted seed on the specified tile.
@@ -86,10 +76,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
         }
 
-        #endregion
-
-        #region Using Pesticide
-
         /// <summary>
         /// Uses pesticide on the specified tile.
         /// </summary>
@@ -105,10 +91,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             await NakamaRpcService.Instance.UsePestisideRpcAsync(paramsObj);
             await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
         }
-
-        #endregion
-
-        #region Using Herbicide
 
         /// <summary>
         /// Uses herbicide on the specified tile.
@@ -127,9 +109,36 @@ namespace CiFarm.Scripts.Services.NakamaServices
             // Additional logic can be added here if needed
         }
 
-        #endregion
+        /// <summary>
+        /// Feed user  Animal 
+        /// </summary>
+        /// <param name="placedItemTileKey">The tile key where herbicide is applied.</param>
+        /// <param name="foodInventoryKey">the food key inside the inventory</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public async Task FeedAnimalAsync(string placedItemTileKey, string foodInventoryKey)
+        {
+            await NakamaRpcService.Instance.FeedAnimalRpcAsync(new()
+            {
+                placedItemAnimalKey    = placedItemTileKey,
+                inventoryAnimalFeedKey = foodInventoryKey
+            });
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+            // Additional logic can be added here if needed
+        }
 
-        #region Thieving Crops
+        /// <summary>
+        /// Collect Animal product
+        /// </summary>
+        /// <param name="placedItemTileKey">The tile key where herbicide is applied.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public async Task CollectAnimalProductAsync(string placedItemTileKey)
+        {
+            await NakamaRpcService.Instance.CollectAnimalProductAsync(new()
+            {
+                placedItemAnimalKey = placedItemTileKey
+            });
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+        }
 
         /// <summary>
         /// Thieves crops from another user.
@@ -146,14 +155,25 @@ namespace CiFarm.Scripts.Services.NakamaServices
             };
 
             await NakamaRpcService.Instance.ThiefCropRpcAsync(paramsObj);
-             NakamaUserService.Instance.LoadInventoriesAsync();
+            NakamaUserService.Instance.LoadInventoriesAsync();
             await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
-            // Handle response if necessary
         }
 
-        #endregion
-
-        #region Helping Others
+        /// <summary>
+        /// Collect Animal product of orther user
+        /// </summary>
+        /// <param name="userId">The ID of the user from whom to thief crops.</param>
+        /// <param name="placedItemTileKey">The tile key where animal is applied.</param>
+        /// <returns>A task representing the asynchronous operation.</returns>
+        public async Task ThiefAnimalProductAsync(string userId, string placedItemTileKey)
+        {
+            await NakamaRpcService.Instance.ThiefAnimalProductRpcAsync(new()
+            {
+                userId              = userId,
+                placedItemAnimalKey = placedItemTileKey,
+            });
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+        }
 
         /// <summary>
         /// Helps another user by watering their crops.
@@ -214,8 +234,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
             // Additional logic can be added here if needed
         }
 
-        #endregion
-
         public async Task BuySeed(string itemKey, int quantity = 1)
         {
             await NakamaRpcService.Instance.BuySeedsRpcAsync(
@@ -224,50 +242,6 @@ namespace CiFarm.Scripts.Services.NakamaServices
                     key      = itemKey,
                     quantity = quantity
                 });
-            NakamaUserService.Instance.LoadWalletAsync();
-             NakamaUserService.Instance.LoadInventoriesAsync();
-        }
-
-        public async Task BuyTile(Vector2Int placedPosition, int quantity = 1)
-        {
-            var resultData = await NakamaRpcService.Instance.BuyTileRpcAsync(
-                new NakamaRpcService.BuyTileRpcAsyncParams
-                {
-                    position = new Position
-                    {
-                        x = placedPosition.x,
-                        y = placedPosition.y
-                    }
-                });
-            NakamaUserService.Instance.LoadWalletAsync();
-            NakamaUserService.Instance.LoadInventoriesAsync();
-        }
-
-        public async Task BuyAnimal(string itemKey, string coopKey)
-        {
-            var resultData = await NakamaRpcService.Instance.BuyAnimalRpcAsync(
-                new NakamaRpcService.BuyAnimalRpcAsyncParams()
-                {
-                    key                   = itemKey,
-                    placedItemBuildingKey = coopKey
-                });
-            NakamaUserService.Instance.LoadWalletAsync();
-             NakamaUserService.Instance.LoadInventoriesAsync();
-        }
-
-        public async Task ConstructCoop(string itemKey, Vector2Int placedPosition)
-        {
-            var resultData = await NakamaRpcService.Instance.ConstructBuildingRpcAsync(
-                new NakamaRpcService.ConstructBuildingRpcParams
-                {
-                    Key = itemKey,
-                    Position = new Position
-                    {
-                        x = placedPosition.x,
-                        y = placedPosition.y
-                    }
-                }
-            );
             NakamaUserService.Instance.LoadWalletAsync();
             NakamaUserService.Instance.LoadInventoriesAsync();
         }

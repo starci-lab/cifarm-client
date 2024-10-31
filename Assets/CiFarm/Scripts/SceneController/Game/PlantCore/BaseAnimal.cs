@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Tutorial;
@@ -36,8 +37,14 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             }
             else
             {
-                switch (placedItem.seedGrowthInfo.currentState)
+                switch (placedItem.animalInfo.currentState)
                 {
+                    case AnimalCurrentState.Normal:
+                        break;
+                    case AnimalCurrentState.Hungry:
+                        break;
+                    case AnimalCurrentState.Sick:
+                        break;
                     default:
                         TileBubbleController.Instance.HideBubble(tileData.key);
                         break;
