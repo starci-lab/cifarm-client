@@ -190,6 +190,20 @@ namespace CiFarm.Scripts.Services.NakamaServices
         }
 
         /// <summary>
+        /// CureAnimalAsync
+        /// </summary>
+        /// <param name="userId">The ID of the user from whom to thief crops.</param>
+        /// <param name="placedItemTileKey">The tile key where animal is applied.</param>
+        public async Task HelpCureAnimalAsync(string userId, string placedItemTileKey)
+        {
+            await NakamaRpcService.Instance.HelpCureAnimalRpcAsync(new()
+            {
+                userId = userId,
+                placedItemAnimalKey = placedItemTileKey,
+            });
+            await NakamaSocketService.Instance.ForceCentralBroadcastInstantlyRpcAsync();
+        }
+        /// <summary>
         /// Helps another user by watering their crops.
         /// </summary>
         /// <param name="userId">The ID of the user to help.</param>

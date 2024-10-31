@@ -240,6 +240,60 @@ namespace CiFarm.Scripts.SceneController.Game
 
         private void HandleClickOtherAnimal(BaseAnimal clickedAnimal)
         {
+            // Not init ground
+            if (string.IsNullOrEmpty(clickedAnimal.tileData.key))
+            {
+                return;
+            }
+
+            // Steal
+            if (clickedAnimal.tileData.animalInfo.hasYielded)
+            {
+                OnHandOfMidasAnimal(clickedAnimal);
+                return;
+            }
+
+            // REQUIRED SOMETHING
+               switch (clickedAnimal.tileData.animalInfo.currentState)
+            {
+                case AnimalCurrentState.Normal:
+                    //  everything normal
+                    var bubbleNormal = TileBubbleController.Instance.SpawnBubble(clickedAnimal.transform.position);
+                    if (clickedAnimal.tileData.animalInfo.isAdult)
+                    {
+                        bubbleNormal.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
+                            (int)clickedAnimal.tileData.animalInfo.animal.yieldTime -
+                            (int)clickedAnimal.tileData.animalInfo.currentYieldTime);
+                    }
+                    else
+                    {
+                        bubbleNormal.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
+                            (int)clickedAnimal.tileData.animalInfo.animal.growthTime -
+                            (int)clickedAnimal.tileData.animalInfo.currentGrowthTime);
+                    }
+
+                    break;
+                case AnimalCurrentState.Sick:
+                    OnHelpCuredAnimal(clickedAnimal);
+                    break;
+                default:
+                    //  everything normal
+                    var bubble = TileBubbleController.Instance.SpawnBubble(clickedAnimal.transform.position);
+                    if (clickedAnimal.tileData.animalInfo.isAdult)
+                    {
+                        bubble.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
+                            (int)clickedAnimal.tileData.animalInfo.animal.yieldTime -
+                            (int)clickedAnimal.tileData.animalInfo.currentYieldTime);
+                    }
+                    else
+                    {
+                        bubble.SetBubble(clickedAnimal.tileData.key, InjectionType.Timer,
+                            (int)clickedAnimal.tileData.animalInfo.animal.growthTime -
+                            (int)clickedAnimal.tileData.animalInfo.currentGrowthTime);
+                    }
+
+                    break;
+            }
         }
 
         private void HandleClickMyAnimal(BaseAnimal clickedAnimal)
@@ -798,7 +852,8 @@ namespace CiFarm.Scripts.SceneController.Game
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                await NakamaFarmingService.Instance.ThiefCropAsync(_friendItemData.userId, animal.tileData.key);
+                await NakamaFarmingService.Instance.ThiefAnimalProductAsync(_friendItemData.userId,
+                    animal.tileData.key);
                 var position = animal.transform.position;
                 PlayHarvestEf(position, animal.tileData.animalInfo.animal.key, 1);
                 PlayExperiencesEf(position, NakamaSystemService.Instance.activities.thiefCrop.experiencesGain);
@@ -807,6 +862,23 @@ namespace CiFarm.Scripts.SceneController.Game
             catch (Exception e)
             {
                 DLogger.LogError("Steal Item error: " + e.Message, "Ground");
+            }
+        }
+
+        private async void OnHelpCuredAnimal(BaseAnimal animal)
+        {
+            try
+            {
+                AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
+                await NakamaFarmingService.Instance.HelpCureAnimalAsync(_friendItemData.userId, animal.tileData.key);
+
+                var position = animal.transform.position;
+                PlayExperiencesEf(position, 1);
+                TileBubbleController.Instance.HideBubble(animal.tileData.key);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("OnCollectProductsAnimal error: " + e.Message, "Animal");
             }
         }
 
