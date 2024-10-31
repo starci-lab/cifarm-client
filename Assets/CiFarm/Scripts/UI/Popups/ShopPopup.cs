@@ -27,6 +27,8 @@ namespace CiFarm.Scripts.UI.Popups
         private UnityAction        _onClose;
         public  List<ShopItemData> shopItemsData;
 
+        private string _buildingId;
+
         public int _currentCoin = 0;
 
         protected override void OnInit()
@@ -41,30 +43,47 @@ namespace CiFarm.Scripts.UI.Popups
         {
             base.OnShowing();
             ClearSelectedShop();
+
             if (Parameter != null)
             {
                 var param = (ShopPopupParam)Parameter;
-                _onClose = param.callBack;
+                _onClose    = param.CloseCallBack;
+                _buildingId = param.BuildingId;
+
+                if (param.HideOther)
+                {
+                    seedTab.SetActive(false);
+                    animaTab.SetActive(false);
+                    buildingTab.SetActive(false);
+                    treeTab.SetActive(false);
+                }
+                else // DEFAULT
+                {
+                    seedTab.SetActive(true);
+                    buildingTab.SetActive(true);
+                    // treeTab.SetActive(true);
+                }
+
                 switch (param.TabToOpen)
                 {
                     case ShopType.Seed:
-                        seedTab.SetSelect(true);
+                        seedTab.SetActive(true);
                         LoadItemShopSeed();
                         break;
                     case ShopType.Animal:
-                        animaTab.SetSelect(true);
+                        animaTab.SetActive(true);
                         LoadItemShopByAnimal();
                         break;
                     case ShopType.Building:
-                        buildingTab.SetSelect(true);
+                        buildingTab.SetActive(true);
                         LoadItemShopByBuilding();
                         break;
                     case ShopType.Tree:
-                        treeTab.SetSelect(true);
+                        treeTab.SetActive(true);
                         LoadItemShopByTree();
                         break;
                     default:
-                        seedTab.SetSelect(true);
+                        seedTab.SetActive(true);
                         LoadItemShopSeed();
                         break;
                 }
@@ -87,10 +106,10 @@ namespace CiFarm.Scripts.UI.Popups
 
         public void ClearSelectedShop()
         {
-            seedTab.SetSelect();
-            animaTab.SetSelect();
-            treeTab.SetSelect();
-            buildingTab.SetSelect();
+            seedTab.SetSelect(false);
+            animaTab.SetSelect(false);
+            treeTab.SetSelect(false);
+            buildingTab.SetSelect(false);
         }
 
         private LoopListViewItem2 OnGetItemByIndex(LoopListView2 listView, int index)
@@ -121,11 +140,6 @@ namespace CiFarm.Scripts.UI.Popups
             _onClose?.Invoke();
         }
 
-        protected override void OnHidden()
-        {
-            base.OnHidden();
-        }
-
         public void FetchUserCoin()
         {
             var targetCoin = NakamaUserService.Instance.golds;
@@ -143,6 +157,11 @@ namespace CiFarm.Scripts.UI.Popups
             shopItemsData.Clear();
             foreach (var data in rawData)
             {
+                if (!data.availableInShop)
+                {
+                    continue;
+                }
+
                 var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
 
                 shopItemsData.Add(new ShopItemData
@@ -171,6 +190,11 @@ namespace CiFarm.Scripts.UI.Popups
             shopItemsData.Clear();
             foreach (var data in rawData)
             {
+                if (!data.availableInShop)
+                {
+                    continue;
+                }
+
                 var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetPlant(data.key);
                 shopItemsData.Add(new ShopItemData
                 {
@@ -252,11 +276,10 @@ namespace CiFarm.Scripts.UI.Popups
                     BuyToInventory(item);
                     break;
                 case ShopType.Animal:
-                    // UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
+
                     BuyAnimal(item);
                     break;
                 case ShopType.Building:
-                    // UIManager.Instance.AlertManager.ShowAlertMessage("Coming soon", AlertType.Normal);
                     ConstructionBuilding(item);
                     break;
                 case ShopType.Tree:
@@ -293,6 +316,7 @@ namespace CiFarm.Scripts.UI.Popups
                 iconItem     = item.iconItem
             });
         }
+
         private void BuyAnimal(ShopItemData item)
         {
             Hide(true);
@@ -305,7 +329,7 @@ namespace CiFarm.Scripts.UI.Popups
                 isUnique     = false,
                 type         = InventoryType.Animal,
                 iconItem     = item.iconItem
-            });
+            }, _buildingId);
         }
 
         #endregion
@@ -334,6 +358,8 @@ namespace CiFarm.Scripts.UI.Popups
     public class ShopPopupParam
     {
         public ShopType    TabToOpen;
-        public UnityAction callBack;
+        public bool        HideOther = false;
+        public string      BuildingId;
+        public UnityAction CloseCallBack;
     }
 }

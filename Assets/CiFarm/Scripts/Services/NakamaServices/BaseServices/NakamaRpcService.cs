@@ -106,6 +106,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 
             [JsonProperty("placedItemBuildingKey")]
             public string placedItemBuildingKey;
+            [JsonProperty("position")]
+            public Position Position;
         }
 
         public class BuyAnimalRpcAsyncResponse

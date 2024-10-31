@@ -1252,7 +1252,7 @@ MonoBehaviour:
       Event:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 0}
+          - m_Target: {fileID: 2781435258073123903}
             m_TargetAssemblyTypeName: Imba.UI.UIPopup, IPlugin
             m_MethodName: Hide
             m_Mode: 6
@@ -1785,7 +1785,7 @@ GameObject:
   - component: {fileID: 8438361480488300873}
   - component: {fileID: 2781435258073123903}
   m_Layer: 5
-  m_Name: StructualDetailPopup
+  m_Name: StructuralDetailPopup
   m_TagString: StrangerProfile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1896,7 +1896,7 @@ MonoBehaviour:
     DisableGraphicRaycaster: 1
     Enabled: 1
     GraphicRaycaster: {fileID: 0}
-    RectTransform: {fileID: 0}
+    RectTransform: {fileID: 638804008921671005}
     StartAlpha: 1
     StartPosition: {x: 0, y: 0, z: 0}
     StartRotation: {x: 0, y: 0, z: 0}
@@ -1914,6 +1914,8 @@ MonoBehaviour:
     StartPosition: {x: 0, y: 0, z: 0}
     StartRotation: {x: 0, y: 0, z: 0}
     StartScale: {x: 1, y: 1, z: 1}
+  structuralId: 
+  structuralName: {fileID: 7864828422717057934}
 --- !u!1 &5282117063773050343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,6 +2208,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3918421000458988375}
     m_Modifications:
+    - target: {fileID: 404343399837881803, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
+      propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2781435258073123903}
+    - target: {fileID: 404343399837881803, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
+      propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickAddAnimal
+      objectReference: {fileID: 0}
     - target: {fileID: 3763264673444526902, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2395,13 +2405,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7360466785817214098, guid: 2d9a4a7b6494e794ab535d9588b8c4d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6340252928124922216}
   m_SourcePrefab: {fileID: 100100000, guid: 2d9a4a7b6494e794ab535d9588b8c4d6, type: 3}
 --- !u!224 &1201763000625356582 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1776993582842061581, guid: 2d9a4a7b6494e794ab535d9588b8c4d6, type: 3}
   m_PrefabInstance: {fileID: 577766058850024491}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7935626904767971513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7360466785817214098, guid: 2d9a4a7b6494e794ab535d9588b8c4d6, type: 3}
+  m_PrefabInstance: {fileID: 577766058850024491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6340252928124922216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7935626904767971513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e36ab61f1f1e244a96664b0d02288e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  labelText: {fileID: 0}
+  detailText: {fileID: 0}
 --- !u!1001 &1765471105856110219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2410,6 +2442,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3918421000458988375}
     m_Modifications:
+    - target: {fileID: 404343399837881803, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
+      propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2781435258073123903}
+    - target: {fileID: 404343399837881803, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
+      propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickAddAnimal
+      objectReference: {fileID: 0}
     - target: {fileID: 3763264673444526902, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2512,6 +2552,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3918421000458988375}
     m_Modifications:
+    - target: {fileID: 404343399837881803, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
+      propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2781435258073123903}
+    - target: {fileID: 404343399837881803, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
+      propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickAddAnimal
+      objectReference: {fileID: 0}
     - target: {fileID: 3763264673444526902, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2614,6 +2662,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3918421000458988375}
     m_Modifications:
+    - target: {fileID: 404343399837881803, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
+      propertyPath: OnClick.OnTrigger.Event.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2781435258073123903}
     - target: {fileID: 3763264673444526902, guid: 37295f2ba2ebebb4893bd06250f3e954, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

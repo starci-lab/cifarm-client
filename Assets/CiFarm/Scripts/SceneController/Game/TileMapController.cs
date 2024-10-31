@@ -80,7 +80,10 @@ namespace CiFarm.Scripts.SceneController.Game
             var worldPosition = Camera.main.ScreenToWorldPoint(position);
             worldPosition.z = 0;
 
-            var cellPosition       = interactableMap.WorldToCell(worldPosition);
+            var cellPosition = interactableMap.WorldToCell(worldPosition);
+
+            cellPosition.x++; // OFFSET
+
             var tileCenterPosition = interactableMap.CellToWorld(cellPosition);
 
             var isValid = true;

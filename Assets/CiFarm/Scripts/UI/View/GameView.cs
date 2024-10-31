@@ -71,7 +71,7 @@ namespace CiFarm.Scripts.UI.View
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ShopPopup, new ShopPopupParam
             {
                 TabToOpen = 0,
-                callBack = () =>
+                CloseCallBack = () =>
                 {
                     OnPopupClose();
                     FetchUserCoin();

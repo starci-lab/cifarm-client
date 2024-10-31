@@ -91,7 +91,7 @@ namespace CiFarm.Scripts.SceneController.Entry
             UpdateFillAmount();
         }
 
-        public void OnLoginError()
+        public void OnLoginError()  
         {
             UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Login error",
                 UIMessageBox.MessageBoxType.Retry, action =>
