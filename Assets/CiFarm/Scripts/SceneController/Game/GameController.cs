@@ -84,6 +84,8 @@ namespace CiFarm.Scripts.SceneController.Game
 #endif
         }
 
+        #region Ground Touch
+
         public void OnClickGround(BaseGround clickedGround)
         {
             if (lockInteractObject)
@@ -99,20 +101,6 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 HandleClickOtherGround(clickedGround);
             }
-        }
-
-        public void OnClickStructural(Structural structural)
-        {
-            if (lockInteractObject)
-            {
-                return;
-            }
-
-            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.StructuralDetailPopup, new StructuralDetailParam
-            {
-                StructuralId = structural.structuralId,
-                ReferenceId  = structural.referenceId
-            });
         }
 
         private void HandleClickMyGround(BaseGround clickedGround)
@@ -211,6 +199,57 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
+        #endregion
+
+        #region Structural
+
+        public void OnClickStructural(Structural structural)
+        {
+            if (lockInteractObject)
+            {
+                return;
+            }
+
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.StructuralDetailPopup, new StructuralDetailParam
+            {
+                StructuralId = structural.structuralId,
+                ReferenceId  = structural.referenceId
+            });
+        }
+
+        #endregion
+
+        #region Animal
+
+        public void OnClickAnimal(BaseAnimal clickedAnimal)
+        {
+            if (lockInteractObject)
+            {
+                return;
+            }
+
+            if (_friendItemData == null)
+            {
+                HandleClickMyAnimal(clickedAnimal);
+            }
+            else
+            {
+                HandleClickOtherAnimal(clickedAnimal);
+            }
+        }
+
+        private void HandleClickOtherAnimal(BaseAnimal clickedAnimal)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void HandleClickMyAnimal(BaseAnimal clickedAnimal)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
         public void LoadFriendHouse(FriendItemData friendData)
         {
             _friendItemData = friendData;
@@ -292,8 +331,6 @@ namespace CiFarm.Scripts.SceneController.Game
                 }
             });
         }
-
-        #region Nakama Communicated
 
         #region Loader Init
 
@@ -428,7 +465,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
-        #region My Ground Manage
+        #region My Map Manage
 
         /// <summary>
         /// Plants a seed asynchronously using NakamaFarmingService.
@@ -566,7 +603,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
-        #region FriendZone
+        #region Friend Map Manage
 
         private void LoadFriendWithAnimation(string friendId)
         {
@@ -703,9 +740,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
-        #endregion
-
-        #region Effect
+        #region Local Effect
 
         private void PlayHarvestEf(Vector3 positionSpawn, string itemRefId, int quantity)
         {

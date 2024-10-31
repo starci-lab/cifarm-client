@@ -3529,11 +3529,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: testChainKey
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7447802685226811611, guid: cc870af9161c7054fa507f8c9e15f998, type: 3}
       propertyPath: testAccountNumber
-      value: 99
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

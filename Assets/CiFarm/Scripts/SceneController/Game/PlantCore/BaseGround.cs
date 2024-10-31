@@ -1,4 +1,3 @@
-using System;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;

@@ -62,7 +62,16 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
                     break;
                 case InjectionType.TextQuantity:
                     timerText.SetActive(true);
-                    timerText.text = currentQuantity + "/" + maxQuantity;
+                    if (maxQuantity == 0)
+                    {
+                        timerText.text = currentQuantity.ToString();
+
+                    }
+                    else
+                    {
+                        timerText.text = currentQuantity + "/" + maxQuantity;
+
+                    }
                     break;
             }
         }
