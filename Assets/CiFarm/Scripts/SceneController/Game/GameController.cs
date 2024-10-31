@@ -254,7 +254,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
 
             // REQUIRED SOMETHING
-               switch (clickedAnimal.tileData.animalInfo.currentState)
+            switch (clickedAnimal.tileData.animalInfo.currentState)
             {
                 case AnimalCurrentState.Normal:
                     //  everything normal
@@ -303,7 +303,6 @@ namespace CiFarm.Scripts.SceneController.Game
             {
                 return;
             }
-
 
             // Harvest
             if (clickedAnimal.tileData.animalInfo.hasYielded)
