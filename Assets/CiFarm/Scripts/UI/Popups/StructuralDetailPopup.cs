@@ -57,13 +57,24 @@ namespace CiFarm.Scripts.UI.Popups
                     listAnimalItem[i].SetAnimal(false,
                         spineModel: animal.animalInfo.isAdult
                             ? sprite.AnimalBigSpineUIModel
-                            : sprite.AnimalMiniSpineUIModel);
+                            : sprite.AnimalMiniSpineUIModel,
+                        onClickAnimalAction: () => { OnClickAnimalDetail(animal.key); }
+                    );
                 }
                 else
                 {
                     listAnimalItem[i].SetEmpty();
                 }
             }
+        }
+
+        private void OnClickAnimalDetail(string placedItemsId)
+        {
+            Hide(true);
+            UIManager.Instance.PopupManager.ShowPopup(UIPopupName.AnimalDetailPopup, new AnimalDetailPopupParam
+            {
+                tileId = placedItemsId,
+            });
         }
 
         public void OnClickAddAnimal()

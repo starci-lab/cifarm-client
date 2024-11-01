@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace CiFarm.Scripts.UI.Popups.Structural
@@ -13,10 +14,13 @@ namespace CiFarm.Scripts.UI.Popups.Structural
         [SerializeField] private GameObject animalGroup;
         [SerializeField] private GameObject addButton;
 
-        private GameObject spineAnimal;
+        private GameObject  spineAnimal;
+        private UnityAction onClickAnimal;
 
-        public void SetAnimal(bool isNft, Sprite animalSpriteIcon = null, GameObject spineModel = null)
+        public void SetAnimal(bool isNft, Sprite animalSpriteIcon = null, GameObject spineModel = null,
+            UnityAction onClickAnimalAction = null)
         {
+            onClickAnimal = onClickAnimalAction;
             animalGroup.SetActive(true);
             addButton.SetActive(false);
             nftIc.SetActive(isNft);
@@ -42,6 +46,11 @@ namespace CiFarm.Scripts.UI.Popups.Structural
                 spineAnimal.transform.position   = animalIcon.transform.position;
                 spineAnimal.transform.localScale = Vector3.one;
             }
+        }
+
+        public void OnClickAnimal()
+        {
+            onClickAnimal?.Invoke();
         }
 
         public void SetEmpty()
