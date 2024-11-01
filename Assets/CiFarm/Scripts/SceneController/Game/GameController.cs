@@ -490,8 +490,8 @@ namespace CiFarm.Scripts.SceneController.Game
             if (placedItem.seedGrowthInfo.isPlanted)
             {
                 var prefabPlantData =
-                    ResourceService.Instance.ModelGameObjectConfig.GetPlantObjectModel(placedItem.seedGrowthInfo.crop
-                        .key);
+                    ResourceService.Instance.ModelGameObjectConfig.GetPlant(placedItem.seedGrowthInfo.crop
+                        .key).PrefabModel;
                 // var plantObj = Instantiate(prefabPlantData);
                 var plantObj = SimplePool.Spawn(prefabPlantData, Vector3.zero, Quaternion.identity);
                 var plant    = plantObj.GetComponent<BasePlant>();

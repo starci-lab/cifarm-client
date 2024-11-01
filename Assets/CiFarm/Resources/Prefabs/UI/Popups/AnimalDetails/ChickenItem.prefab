@@ -1144,7 +1144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7020753814421830212
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1595,6 +1595,7 @@ GameObject:
   - component: {fileID: 3763264673444526902}
   - component: {fileID: 6177651644069848551}
   - component: {fileID: 8383062634647004556}
+  - component: {fileID: 6987207837167798771}
   m_Layer: 5
   m_Name: ChickenItem
   m_TagString: Untagged
@@ -1661,3 +1662,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6987207837167798771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8111462779959796770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 400309428a0a3714f84b91cf84a4aa0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerGrow: {fileID: 3929444113357023957}
+  animalIcon: {fileID: 654978355221590855}
+  nftIc: {fileID: 4538999799390624619}
+  animalGroup: {fileID: 7088397093065208929}
+  addButton: {fileID: 506466330121259980}

@@ -1,4 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using CiFarm.Scripts.Services;
+using CiFarm.Scripts.Services.NakamaServices;
+using CiFarm.Scripts.Services.NakamaServices.BaseServices;
+using CiFarm.Scripts.UI.Popups.Structural;
+using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using TMPro;
 using UnityEngine;
@@ -18,6 +24,8 @@ namespace CiFarm.Scripts.UI.Popups
 
         [SerializeField] private TextMeshProUGUI structuralName;
 
+        [SerializeField] private List<AnimalItem> listAnimalItem;
+
         protected override void OnShowing()
         {
             base.OnShowing();
@@ -32,6 +40,30 @@ namespace CiFarm.Scripts.UI.Popups
             var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(referenceId);
 
             structuralName.text = detail!.ItemName;
+            LoadAnimal();
+        }
+
+        public void LoadAnimal()
+        {
+            var animalInThisStructural = NakamaSocketService.Instance.placedItems.Where(o =>
+                o.type == PlacedItemType.Animal &&
+                o.parentPlacedItemKey == structuralId).ToList();
+            for (int i = 0; i < listAnimalItem.Count; i++)
+            {
+                if (i < animalInThisStructural.Count)
+                {
+                    var animal = animalInThisStructural[i];
+                    var sprite = ResourceService.Instance.ModelGameObjectConfig.GetAnimal(animal.referenceKey);
+                    listAnimalItem[i].SetAnimal(false,
+                        spineModel: animal.animalInfo.isAdult
+                            ? sprite.AnimalBigSpineUIModel
+                            : sprite.AnimalMiniSpineUIModel);
+                }
+                else
+                {
+                    listAnimalItem[i].SetEmpty();
+                }
+            }
         }
 
         public void OnClickAddAnimal()
@@ -39,9 +71,9 @@ namespace CiFarm.Scripts.UI.Popups
             Hide(true);
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.ShopPopup, new ShopPopupParam
             {
-                TabToOpen = ShopType.Animal,
+                TabToOpen  = ShopType.Animal,
                 BuildingId = structuralId,
-                HideOther = true,
+                HideOther  = true,
             });
         }
     }
