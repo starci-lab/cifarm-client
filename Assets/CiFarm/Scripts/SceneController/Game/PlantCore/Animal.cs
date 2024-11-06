@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Tutorial;

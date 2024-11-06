@@ -531,18 +531,14 @@ namespace CiFarm.Scripts.SceneController.Game
             var tileObject = SimplePool.Spawn(tileObjectModel.PrefabModel, Vector3.zero,
                 tileObjectModel.PrefabModel.transform.rotation);
 
-            // var structural = tileObject.GetComponent<Structural>();
-            // if (structural != null)
-            // {
-            //     structural.structuralId = placedItem.key;
-            //     structural.referenceId  = placedItem.referenceKey;
-            // }
+            var animal = tileObject.GetComponent<Animal>();
+            animal.Init(placedItem);
 
             tileMapController.SetAnyWithWithTilePos(
                 new Vector2Int(placedItem.position.x, placedItem.position.y)
                 , tileObject, tileObjectModel.TileSize);
 
-            _constructor.Add(tileObject);
+            _animals.Add(tileObject);
         }
 
         private void OnFetchPlacedDataFromServer()
