@@ -62,6 +62,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5781724226347441455, guid: 446dbacf963c2e748928871b8f470d35, type: 3}
   m_PrefabInstance: {fileID: 4172773658809444549}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7950014079586818625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6322126060684178052, guid: 446dbacf963c2e748928871b8f470d35, type: 3}
+  m_PrefabInstance: {fileID: 4172773658809444549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4291746781858007420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +124,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4d57cf3d9db98b4c9c96856a5eb800d, type: 3}
+--- !u!1 &3078344747580745667 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1240498470812380863, guid: f4d57cf3d9db98b4c9c96856a5eb800d, type: 3}
+  m_PrefabInstance: {fileID: 4291746781858007420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7565069685957084382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6013394267523698082, guid: f4d57cf3d9db98b4c9c96856a5eb800d, type: 3}
@@ -132,6 +142,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1070947986124936292, guid: 43fea96122f821a459017efcbe59d773, type: 3}
+      propertyPath: animalStateSpine.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1070947986124936292, guid: 43fea96122f821a459017efcbe59d773, type: 3}
+      propertyPath: animalStateSpine.Array.data[0]
+      value: 
+      objectReference: {fileID: 3078344747580745667}
+    - target: {fileID: 1070947986124936292, guid: 43fea96122f821a459017efcbe59d773, type: 3}
+      propertyPath: animalStateSpine.Array.data[1]
+      value: 
+      objectReference: {fileID: 7950014079586818625}
     - target: {fileID: 2888702460977439517, guid: 43fea96122f821a459017efcbe59d773, type: 3}
       propertyPath: m_Name
       value: Chicken

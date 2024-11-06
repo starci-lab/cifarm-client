@@ -144,9 +144,74 @@ MonoBehaviour:
   m_GameObject: {fileID: 2888702460977439517}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c893d4a2117a4914b9819dfce3b83f06, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d6f577b616e4e16b5ff1521866d3c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animalPosition: {fileID: 6562247940448291164}
+  animalStateSpine: []
+  tileData:
+    key: 
+    referenceKey: 
+    inventoryKey: 
+    position:
+      x: 0
+      y: 0
+    type: 0
+    seedGrowthInfo:
+      crop:
+        key: 
+        growthStageDuration: 0
+        growthStages: 0
+        price: 0
+        premium: 0
+        perennial: 0
+        nextGrowthStageAfterHarvest: 0
+        minHarvestQuantity: 0
+        maxHarvestQuantity: 0
+        basicHarvestExperiences: 0
+        premiumHarvestExperiences: 0
+        availableInShop: 0
+      currentStage: 0
+      totalTimeElapsed: 0
+      currentStageTimeElapsed: 0
+      harvestQuantityRemaining: 0
+      currentState: 0
+      isPlanted: 0
+      fullyMatured: 0
+      thiefedBy: []
+      isFertilized: 0
+    buildingInfo:
+      currentUpgrade: 0
+      occupancy: 0
+      building:
+        key: 
+        availableInShop: 0
+        maxUpgrade: 0
+        price: 0
+        type: 0
+    animalInfo:
+      currentGrowthTime: 0
+      currentHungryTime: 0
+      currentYieldTime: 0
+      hasYielded: 0
+      isAdult: 0
+      animal:
+        key: 
+        yieldTime: 0
+        offspringPrice: 0
+        isNFT: 0
+        growthTime: 0
+        availableInShop: 0
+        hungerTime: 0
+        minHarvestQuantity: 0
+        maxHarvestQuantity: 0
+        basicHarvestExperiences: 0
+        premiumHarvestExperiences: 0
+        type: 0
+      currentState: 0
+      harvestQuantityRemaining: 0
+      thiefedBy: []
+    parentPlacedItemKey: 
 --- !u!1 &6071891112044017981
 GameObject:
   m_ObjectHideFlags: 0

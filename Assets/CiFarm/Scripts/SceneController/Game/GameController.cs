@@ -14,6 +14,7 @@ using Imba.Audio;
 using Imba.UI;
 using Imba.Utils;
 using UnityEngine;
+using Animal = CiFarm.Scripts.SceneController.Game.PlantCore.Animal;
 
 namespace CiFarm.Scripts.SceneController.Game
 {
@@ -221,7 +222,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #region Animal
 
-        public void OnClickAnimal(BaseAnimal clickedAnimal)
+        public void OnClickAnimal(Animal clickedAnimal)
         {
             if (lockInteractObject)
             {
@@ -238,7 +239,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private void HandleClickOtherAnimal(BaseAnimal clickedAnimal)
+        private void HandleClickOtherAnimal(Animal clickedAnimal)
         {
             // Not init ground
             if (string.IsNullOrEmpty(clickedAnimal.tileData.key))
@@ -296,7 +297,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private void HandleClickMyAnimal(BaseAnimal clickedAnimal)
+        private void HandleClickMyAnimal(Animal clickedAnimal)
         {
             // Not init ground
             if (string.IsNullOrEmpty(clickedAnimal.tileData.key))
@@ -709,7 +710,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private async void OnCollectProductAnimal(BaseAnimal animal)
+        private async void OnCollectProductAnimal(Animal animal)
         {
             try
             {
@@ -731,7 +732,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private async void OnFeedAnimal(BaseAnimal animal)
+        private async void OnFeedAnimal(Animal animal)
         {
             try
             {
@@ -748,7 +749,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private async void OnCuredAnimal(BaseAnimal animal)
+        private async void OnCuredAnimal(Animal animal)
         {
             try
             {
@@ -825,7 +826,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// Steal
         /// </summary>
         /// <param name="animal"></param>
-        private async void OnHandOfMidasAnimal(BaseAnimal animal)
+        private async void OnHandOfMidasAnimal(Animal animal)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Steal)
             {
@@ -864,7 +865,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private async void OnHelpCuredAnimal(BaseAnimal animal)
+        private async void OnHelpCuredAnimal(Animal animal)
         {
             try
             {

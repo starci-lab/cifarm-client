@@ -8,6 +8,7 @@ using CiFarm.Scripts.Utilities;
 using Imba.UI;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CiFarm.Scripts.UI.Popups
 {
@@ -23,6 +24,7 @@ namespace CiFarm.Scripts.UI.Popups
         public string referenceId;
 
         [SerializeField] private TextMeshProUGUI structuralName;
+        [SerializeField] private Image structuralImage;
 
         [SerializeField] private List<AnimalItem> listAnimalItem;
 
@@ -38,8 +40,8 @@ namespace CiFarm.Scripts.UI.Popups
 
             var gameConfig = ResourceService.Instance.ModelGameObjectConfig.GetTile(referenceId);
             var detail     = ResourceService.Instance.ItemDetailConfig.GetItemDetail(referenceId);
-
-            structuralName.text = detail!.ItemName;
+            structuralImage.sprite = gameConfig!.GameShopIcon;
+            structuralName.text    = detail!.ItemName;
             LoadAnimal();
         }
 

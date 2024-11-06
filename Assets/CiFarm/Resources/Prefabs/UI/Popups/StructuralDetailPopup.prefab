@@ -1917,6 +1917,7 @@ MonoBehaviour:
   structuralId: 
   referenceId: 
   structuralName: {fileID: 7864828422717057934}
+  structuralImage: {fileID: 2274746529773135484}
   listAnimalItem:
   - {fileID: 692110790325954276}
   - {fileID: 7041150654243321167}
