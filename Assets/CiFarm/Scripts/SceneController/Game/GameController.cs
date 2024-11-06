@@ -23,7 +23,7 @@ namespace CiFarm.Scripts.SceneController.Game
         [SerializeField] private CameraController   cameraController;
         [SerializeField] private EditModeController editModeController;
 
-        private List<BaseGround> _baseGrounds;
+        private List<GroundTile> _baseGrounds;
         private List<GameObject> _constructor;
         private List<GameObject> _animals;
         private GameView         _gameView;
@@ -86,7 +86,7 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #region Ground Touch
 
-        public void OnClickGround(BaseGround clickedGround)
+        public void OnClickGround(GroundTile clickedGround)
         {
             if (lockInteractObject)
             {
@@ -103,7 +103,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private void HandleClickMyGround(BaseGround clickedGround)
+        private void HandleClickMyGround(GroundTile clickedGround)
         {
             // Not init ground
             if (string.IsNullOrEmpty(clickedGround.tileData.key))
@@ -160,7 +160,7 @@ namespace CiFarm.Scripts.SceneController.Game
             }
         }
 
-        private void HandleClickOtherGround(BaseGround clickedGround)
+        private void HandleClickOtherGround(GroundTile clickedGround)
         {
             // Steal
             if (clickedGround.tileData.seedGrowthInfo.isPlanted && clickedGround.tileData.seedGrowthInfo.fullyMatured)
@@ -485,7 +485,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 new Vector2Int(placedItem.position.x, placedItem.position.y)
                 , dirtObj, prefabDirtData.TileSize);
 
-            var dirtScript = dirtObj.GetComponent<BaseGround>();
+            var dirtScript = dirtObj.GetComponent<GroundTile>();
             dirtScript.Init(placedItem);
             if (placedItem.seedGrowthInfo.isPlanted)
             {
@@ -580,7 +580,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// </summary>
         /// <param name="ground"></param>
         /// <param name="plantData"></param>
-        private async void OnPlantSeed(BaseGround ground, InvenItemData plantData)
+        private async void OnPlantSeed(GroundTile ground, InvenItemData plantData)
         {
             try
             {
@@ -597,7 +597,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// Thu hoach
         /// </summary>
         /// <param name="ground"></param>
-        private async void OnHarvestPlant(BaseGround ground)
+        private async void OnHarvestPlant(GroundTile ground)
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Scythe)
             {
@@ -630,7 +630,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// water plant
         /// </summary>
         /// <param name="ground"></param>
-        private async void OnWaterPlant(BaseGround ground)
+        private async void OnWaterPlant(GroundTile ground)
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.WaterCan)
             {
@@ -657,7 +657,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// Phun thuoc tru sau
         /// </summary>
         /// <param name="ground"></param>
-        private async void OnPesticidePlant(BaseGround ground)
+        private async void OnPesticidePlant(GroundTile ground)
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Pesticide)
             {
@@ -684,7 +684,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// Phun thuoc diet co
         /// </summary>
         /// <param name="ground"></param>
-        private async void OnHerbicidePlant(BaseGround ground)
+        private async void OnHerbicidePlant(GroundTile ground)
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Herbicide)
             {
@@ -784,7 +784,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// Steal
         /// </summary>
         /// <param name="ground"></param>
-        private async void OnHandOfMidasPlant(BaseGround ground)
+        private async void OnHandOfMidasPlant(GroundTile ground)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Steal)
             {
@@ -885,7 +885,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// Watering
         /// </summary>
         /// <param name="ground"></param>
-        private async void OnHelpWaterPlant(BaseGround ground)
+        private async void OnHelpWaterPlant(GroundTile ground)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.WaterCan)
             {
@@ -912,7 +912,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// Phun thuoc tru sau
         /// </summary>
         /// <param name="ground"></param>
-        private async void OnHelpPesticidePlant(BaseGround ground)
+        private async void OnHelpPesticidePlant(GroundTile ground)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Pesticide)
             {
@@ -939,7 +939,7 @@ namespace CiFarm.Scripts.SceneController.Game
         /// Phun thuoc diet co
         /// </summary>
         /// <param name="ground"></param>
-        private async void OnHelpHerbicidePlant(BaseGround ground)
+        private async void OnHelpHerbicidePlant(GroundTile ground)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Herbicide)
             {
