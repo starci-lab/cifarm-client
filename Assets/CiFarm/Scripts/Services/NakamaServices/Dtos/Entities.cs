@@ -64,6 +64,12 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public bool availableInShop;
     }
 
+    public enum AnimalType
+    {
+        Poultry = 0,
+        Livestock = 1,
+    }
+
     [Serializable]
     public class Animal
     {
@@ -101,7 +107,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public long premiumHarvestExperiences;
 
         [JsonProperty("type")]
-        public string type;
+        public AnimalType type;
     }
 
     [Serializable]
@@ -120,7 +126,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public long price;
 
         [JsonProperty("type")]
-        public string type;
+        public AnimalType type;
 
         [JsonProperty("upgrades")]
         public Dictionary<int, Upgrade> Upgrades;
@@ -175,7 +181,7 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public int harvestQuantityRemaining;
 
         [JsonProperty("currentState")]
-        public CurrentState currentState;
+        public PlantCurrentState currentState;
 
         [JsonProperty("isPlanted")]
         public bool isPlanted;
@@ -210,9 +216,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("animal")]
         public Animal animal;
-
-        [JsonProperty("needFed")]
-        public bool needFed;
+        
+        [JsonProperty("currentState")]
+        public AnimalCurrentState currentState;
 
         [JsonProperty("harvestQuantityRemaining")]
         public int harvestQuantityRemaining;
@@ -234,12 +240,18 @@ namespace CiFarm.Scripts.Services.NakamaServices
         public Building building;
     }
 
-    public enum CurrentState
+    public enum PlantCurrentState
     {
         Normal,
         NeedWater,
         IsWeedy,
         IsInfested,
+    }
+    public enum AnimalCurrentState
+    {
+        Normal,
+        Hungry = 1,
+        Sick =2,
     }
 
     public enum PlacedItemType

@@ -24,6 +24,9 @@ namespace CiFarm.Scripts.Services.NakamaServices
 
         [JsonProperty("botType")]
         public string botType;
+
+        [JsonProperty("accountAddress")]
+        public string accountAddress;
     }
 
 }

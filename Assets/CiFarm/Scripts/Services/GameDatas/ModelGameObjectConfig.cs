@@ -11,33 +11,11 @@ namespace CiFarm.Scripts.Services.GameDatas
     {
         [SerializeField] private List<ModelConfigEntity> tileMapper;
         [SerializeField] private List<ModelConfigEntity> plantMapper;
+        [SerializeField] private List<ModelAnimalEntity> animalMapper;
 
-        public List<ModelConfigEntity> TileMapper    => tileMapper;
-        public List<ModelConfigEntity> PlantMapper   => plantMapper;
-
-        public GameObject GetTileObjectModel(string keyToFind)
-        {
-            var result = TileMapper.FirstOrDefault(o => o.Key == keyToFind);
-            if (result == null)
-            {
-                DLogger.LogError("GetTile not found for: " + keyToFind, "ModelGameObjectConfig");
-                return TileMapper[0].PrefabModel;
-            }
-
-            return result.PrefabModel;
-        }
-
-        public GameObject GetPlantObjectModel(string keyToFind)
-        {
-            var result = PlantMapper.FirstOrDefault(o => o.Key == keyToFind);
-            if (result == null)
-            {
-                DLogger.LogError("GetPlant not found for: " + keyToFind, "ModelGameObjectConfig");
-                return PlantMapper[0].PrefabModel;
-            }
-
-            return result.PrefabModel;
-        }
+        public List<ModelConfigEntity> TileMapper   => tileMapper;
+        public List<ModelConfigEntity> PlantMapper  => plantMapper;
+        public List<ModelAnimalEntity> AnimalMapper => animalMapper;
 
         public ModelConfigEntity GetPlant(string keyToFind)
         {
@@ -45,7 +23,7 @@ namespace CiFarm.Scripts.Services.GameDatas
             if (result == null)
             {
                 DLogger.LogError("GetPlant not found for: " + keyToFind, "ModelGameObjectConfig");
-                return PlantMapper[0];
+                return null;
             }
 
             return result;
@@ -63,6 +41,17 @@ namespace CiFarm.Scripts.Services.GameDatas
             return result;
         }
 
+        public ModelAnimalEntity GetAnimal(string keyToFind)
+        {
+            var result = animalMapper.FirstOrDefault(o => o.Key == keyToFind);
+            if (result == null)
+            {
+                DLogger.LogError("GetAnimal not found for: " + keyToFind, "ModelGameObjectConfig");
+                return null;
+            }
+
+            return result;
+        }
     }
 
     [Serializable]
@@ -75,8 +64,8 @@ namespace CiFarm.Scripts.Services.GameDatas
         [SerializeField] private Sprite     gameShopIcon;
         [SerializeField] private Sprite     gameHarvestIcon;
 
-        public string Key      => key;
-        public string ItemName => itemName;
+        public string     Key      => key;
+        public string     ItemName => itemName;
         public Vector2Int TileSize => tileSize;
 
         public GameObject PrefabModel => prefabModel;
@@ -84,5 +73,31 @@ namespace CiFarm.Scripts.Services.GameDatas
         public Sprite GameShopIcon => gameShopIcon;
 
         public Sprite GameHarvestIcon => gameHarvestIcon;
+    }
+
+    [Serializable]
+    public class ModelAnimalEntity
+    {
+        [SerializeField] private string     key;
+        [SerializeField] private Sprite     miniSpriteUI;
+        [SerializeField] private Sprite     bigSpriteUI;
+        [SerializeField] private GameObject animalMiniSpineUIModel;
+        [SerializeField] private GameObject animalBigSpineUIModel;
+        [SerializeField] private GameObject animalMiniSpineGameObjectModel;
+        [SerializeField] private GameObject animalBigSpineGameObjectModel;
+
+        public string Key => key;
+
+        public Sprite MiniSpriteUI => miniSpriteUI;
+
+        public Sprite BigSpriteUI => bigSpriteUI;
+
+        public GameObject AnimalMiniSpineUIModel => animalMiniSpineUIModel;
+
+        public GameObject AnimalBigSpineUIModel => animalBigSpineUIModel;
+
+        public GameObject AnimalMiniSpineGameObjectModel => animalMiniSpineGameObjectModel;
+
+        public GameObject AnimalBigSpineGameObjectModel => animalBigSpineGameObjectModel;
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using CiFarm.Scripts.Services.NakamaServices;
 using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;
@@ -15,11 +14,11 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         public BasePlant plant;
 
         [ReadOnly]
-        public PlacedItem dirtData;
+        public PlacedItem tileData;
 
         public void Init(PlacedItem placedItem)
         {
-            dirtData = placedItem;
+            tileData = placedItem;
             DirtBubble bubble;
 
             if (!placedItem.seedGrowthInfo.isPlanted)
@@ -32,31 +31,31 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             }
 
             // show the fully grow
-            if (dirtData.seedGrowthInfo.fullyMatured)
+            if (tileData.seedGrowthInfo.fullyMatured)
             {
                 bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
-                bubble.SetBubble(dirtData.key, InjectionType.TextQuantity,
-                    currentQuantity: dirtData.seedGrowthInfo.harvestQuantityRemaining,
-                    maxQuantity: dirtData.seedGrowthInfo.crop.maxHarvestQuantity);
+                bubble.SetBubble(tileData.key, InjectionType.TextQuantity,
+                    currentQuantity: tileData.seedGrowthInfo.harvestQuantityRemaining,
+                    maxQuantity: tileData.seedGrowthInfo.crop.maxHarvestQuantity);
             }
             else
             {
                 switch (placedItem.seedGrowthInfo.currentState)
                 {
-                    case CurrentState.NeedWater:
+                    case PlantCurrentState.NeedWater:
                         bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
-                        bubble.SetBubble(dirtData.key, InjectionType.Water);
+                        bubble.SetBubble(tileData.key, InjectionType.Water);
                         break;
-                    case CurrentState.IsWeedy:
+                    case PlantCurrentState.IsWeedy:
                         bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
-                        bubble.SetBubble(dirtData.key, InjectionType.Grass);
+                        bubble.SetBubble(tileData.key, InjectionType.Grass);
                         break;
-                    case CurrentState.IsInfested:
+                    case PlantCurrentState.IsInfested:
                         bubble = TileBubbleController.Instance.SpawnBubble(positionPlant.position);
-                        bubble.SetBubble(dirtData.key, InjectionType.Worm);
+                        bubble.SetBubble(tileData.key, InjectionType.Worm);
                         break;
                     default:
-                        TileBubbleController.Instance.HideBubble(dirtData.key);
+                        TileBubbleController.Instance.HideBubble(tileData.key);
                         break;
                 }
             }
@@ -72,7 +71,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
         public void RemovePlant()
         {
             SimplePool.Despawn(plant.gameObject);
-            dirtData = null;
+            tileData = null;
         }
 
         private void OnMouseDown()
@@ -103,7 +102,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
             }
 
             plant    = null;
-            dirtData = null;
+            tileData = null;
         }
     }
 }

@@ -134,3 +134,18 @@ MonoBehaviour:
     prefabModel: {fileID: 1158725481770596654, guid: 5c81c55820bd8444fadb58a75c97adf6, type: 3}
     gameShopIcon: {fileID: 21300000, guid: 37cf82a619392d745895ae7edccac69b, type: 3}
     gameHarvestIcon: {fileID: 21300000, guid: 95c92aeaac365274289ae1a3daec8c93, type: 3}
+  animalMapper:
+  - key: chicken
+    miniSpriteUI: {fileID: 21300000, guid: a671fcdeba72240479f8de87fc4d0fd1, type: 3}
+    bigSpriteUI: {fileID: 21300000, guid: 82174009f480b6248ae366f4ac8ba911, type: 3}
+    animalMiniSpineUIModel: {fileID: 2948365193124987784, guid: d8c0d16cfc014b847b7387bbd248f6f1, type: 3}
+    animalBigSpineUIModel: {fileID: 8116995581377953622, guid: 6c2ec4dc20ee88140a372a676a5383f4, type: 3}
+    animalMiniSpineGameObjectModel: {fileID: 6322126060684178052, guid: 446dbacf963c2e748928871b8f470d35, type: 3}
+    animalBigSpineGameObjectModel: {fileID: 1240498470812380863, guid: f4d57cf3d9db98b4c9c96856a5eb800d, type: 3}
+  - key: cow
+    miniSpriteUI: {fileID: 21300000, guid: 37cf82a619392d745895ae7edccac69b, type: 3}
+    bigSpriteUI: {fileID: 21300000, guid: 381337836ca3f4644a308838a5c6d90d, type: 3}
+    animalMiniSpineUIModel: {fileID: 6260915685926025175, guid: aa94bd5be29ef4142af3b3b41e89d35d, type: 3}
+    animalBigSpineUIModel: {fileID: 5454676486098151243, guid: fce5aad412c1d5744b3a36ca82154d32, type: 3}
+    animalMiniSpineGameObjectModel: {fileID: 7249611285702626037, guid: dd3c2ab0e1b5f934fb285406a7cc35f7, type: 3}
+    animalBigSpineGameObjectModel: {fileID: 2145561286402765264, guid: 724cda4356656fc449575a74bc7cad4a, type: 3}

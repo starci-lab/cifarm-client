@@ -343,7 +343,25 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
         }
 
         #endregion
+        #region CureAnimalRpc
 
+        public class CureAnimalRpcAsyncParams
+        {
+            [JsonProperty("placedItemAnimalKey")]
+            public string placedItemAnimalKey;
+        }
+
+        public async Task CureAnimalRpcAsync(
+            CureAnimalRpcAsyncParams _params
+        )
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            await client.RpcAsync(session, "cure_animal", JsonConvert.SerializeObject(_params));
+        }
+
+        #endregion
         #region UseFertilizerRpc
 
         public class UseFertilizerRpcAsyncParams
@@ -693,32 +711,6 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 
         #endregion
 
-        #region HelpFeedAnimalRpc
-
-        public class HelpFeedAnimalRpcAsyncParams
-        {
-            [JsonProperty("placedItemAnimalKey")]
-            public string placedItemAnimalKey;
-
-            [JsonProperty("inventoryAnimalFeedKey")]
-            public string inventoryAnimalFeedKey;
-
-            [JsonProperty("userId")]
-            public string userId;
-        }
-
-        public async Task HelpFeedAnimalRpcAsync(
-            HelpFeedAnimalRpcAsyncParams _params
-        )
-        {
-            var client  = NakamaInitializerService.Instance.client;
-            var session = NakamaInitializerService.Instance.session;
-
-            await client.RpcAsync(session, "help_feed_animal", JsonConvert.SerializeObject(_params));
-        }
-
-        #endregion
-
         #region ThiefAnimalProductRpc
 
         public class ThiefAnimalProductRpcAsyncParams
@@ -775,7 +767,28 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 
             await client.RpcAsync(session, "help_use_fertilizer", JsonConvert.SerializeObject(_params));
         }
+        #region HelpCureAnimalRpc
 
+        public class HelpCureAnimalRpcAsyncParams
+        {
+            [JsonProperty("placedItemAnimalKey")]
+            public string placedItemAnimalKey;
+            
+            [JsonProperty("userId")]
+            public string userId;
+        }
+
+        public async Task HelpCureAnimalRpcAsync(
+            HelpCureAnimalRpcAsyncParams _params
+        )
+        {
+            var client  = NakamaInitializerService.Instance.client;
+            var session = NakamaInitializerService.Instance.session;
+
+            await client.RpcAsync(session, "help_cure_animal", JsonConvert.SerializeObject(_params));
+        }
+    
+        #endregion
         #endregion
 
         //Nft Rpcs
@@ -955,7 +968,7 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
 
         #endregion
 
-        #region SPINNING
+        #region Spin
 
         [Serializable]
         public class SpinRpcAsyncResponse
@@ -963,8 +976,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
             [JsonProperty("inventoryKey")]
             public string inventoryKey;
 
-            [JsonProperty("spin")]
-            public Spin spin;
+            [JsonProperty("spinKey")]
+            public string spinKey;
         }
 
         public async Task<SpinRpcAsyncResponse> SpinRpcAsync()
@@ -982,8 +995,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
         [Serializable]
         public class ClaimDailyRewardRpcAsyncResponse
         {
-            [JsonProperty("lastDailyRewardPossibility")]
-            public LastDailyRewardPossibility lastDailyRewardPossibility;
+            [JsonProperty("lastDailyRewardPossibilityKey")]
+            public string lastDailyRewardPossibilityKey;
         }
 
         public async Task<ClaimDailyRewardRpcAsyncResponse> ClaimDailyRewardRpcAsync()

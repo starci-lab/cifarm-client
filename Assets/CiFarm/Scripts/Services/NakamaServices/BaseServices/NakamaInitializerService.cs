@@ -125,7 +125,8 @@ namespace CiFarm.Scripts.Services.NakamaServices.BaseServices
                     { "chainKey", credentials.chainKey },
                     { "network", credentials.network },
                     { "telegramInitDataRaw", credentials.telegramInitDataRaw },
-                    { "botType", credentials.botType }
+                    { "botType", credentials.botType },
+                    { "accountAddress", credentials.accountAddress }
                 });
                 authenticated = true;
             }
