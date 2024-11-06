@@ -1,6 +1,7 @@
 using CiFarm.Scripts.Configs.DataClass;
 using CiFarm.Scripts.UI.Popups.Tutorial;
 using CiFarm.Scripts.Utilities;
+using DG.Tweening;
 using Imba.Audio;
 using Imba.UI;
 using TMPro;
@@ -59,6 +60,8 @@ namespace CiFarm.Scripts.UI.Popups
                     _fakeTargetButton = SetUpButton().gameObject;
                     break;
             }
+
+            _fakeTargetButton.transform.DOScale(1.15f, 0.5f).SetLoops(-1,LoopType.Yoyo).SetEase(Ease.Linear);
         }
 
         private GameObject SetUpGameObject()
