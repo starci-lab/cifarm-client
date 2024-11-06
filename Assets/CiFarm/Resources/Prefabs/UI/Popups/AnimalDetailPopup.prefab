@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b71fe371ab24643cabecc9fed3e20594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPosition: {x: -189, y: -92, z: 0}
+  StartPosition: {x: 79, y: -138.15784, z: 0}
   StartRotation: {x: -0, y: 0, z: 0}
   StartScale: {x: 1, y: 1, z: 1}
   StartAlpha: 1
@@ -2097,7 +2097,7 @@ MonoBehaviour:
       Event:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 0}
+          - m_Target: {fileID: 208850622647876436}
             m_TargetAssemblyTypeName: Imba.UI.UIPopup, IPlugin
             m_MethodName: Hide
             m_Mode: 6
