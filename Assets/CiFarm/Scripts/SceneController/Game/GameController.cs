@@ -14,6 +14,7 @@ using Imba.Audio;
 using Imba.UI;
 using Imba.Utils;
 using UnityEngine;
+using Animal = CiFarm.Scripts.SceneController.Game.PlantCore.Animal;
 
 namespace CiFarm.Scripts.SceneController.Game
 {
@@ -23,7 +24,7 @@ namespace CiFarm.Scripts.SceneController.Game
         [SerializeField] private CameraController   cameraController;
         [SerializeField] private EditModeController editModeController;
 
-        private List<BaseGround> _baseGrounds;
+        private List<GroundTile> _baseGrounds;
         private List<GameObject> _constructor;
         private List<GameObject> _animals;
         private GameView         _gameView;
@@ -84,7 +85,7 @@ namespace CiFarm.Scripts.SceneController.Game
 #endif
         }
 
-        public void OnClickGround(BaseGround clickedGround)
+        public void OnClickGround(GroundTile clickedGroundTile)
         {
             if (lockInteractObject)
             {
@@ -93,14 +94,109 @@ namespace CiFarm.Scripts.SceneController.Game
 
             if (_friendItemData == null)
             {
-                HandleClickMyGround(clickedGround);
+                HandleClickMyGround(clickedGroundTile);
             }
             else
             {
-                HandleClickOtherGround(clickedGround);
+                HandleClickOtherGround(clickedGroundTile);
             }
         }
 
+        private void HandleClickMyGround(GroundTile clickedGroundTile)
+        {
+            // Not init ground
+            if (string.IsNullOrEmpty(clickedGroundTile.dirtData.key))
+            {
+                return;
+            }
+
+            // Planting
+            if (!clickedGroundTile.dirtData.seedGrowthInfo.isPlanted)
+            {
+                UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new CustomInventoryPopupParam
+                {
+                    PlantingPopupType = PlantingPopupType.Planting,
+                    CloseAction       = null,
+                    PlantAction       = data => { OnPlantSeed(clickedGroundTile, data); }
+                });
+                return;
+            }
+
+            // Harvest
+            if (clickedGroundTile.dirtData.seedGrowthInfo.isPlanted && clickedGroundTile.dirtData.seedGrowthInfo.fullyMatured)
+            {
+                OnHarvestPlant(clickedGroundTile);
+                return;
+            }
+
+            // Planted and everything normal
+            if (clickedGroundTile.dirtData.seedGrowthInfo.isPlanted &&
+                clickedGroundTile.dirtData.seedGrowthInfo.currentState == CurrentState.Normal)
+            {
+                var bubble = TileBubbleController.Instance.SpawnBubble(clickedGroundTile.transform.position);
+                bubble.SetBubble(clickedGroundTile.dirtData.key, InjectionType.Timer,
+                    (int)clickedGroundTile.dirtData.seedGrowthInfo.crop.growthStageDuration -
+                    (int)clickedGroundTile.dirtData.seedGrowthInfo.currentStageTimeElapsed);
+                return;
+            }
+
+            // REQUIRED SOME THING
+            if (clickedGroundTile.dirtData.seedGrowthInfo.isPlanted &&
+                clickedGroundTile.dirtData.seedGrowthInfo.currentState != CurrentState.Normal)
+            {
+                switch (clickedGroundTile.dirtData.seedGrowthInfo.currentState)
+                {
+                    case CurrentState.NeedWater:
+                        OnWaterPlant(clickedGroundTile);
+                        break;
+                    case CurrentState.IsWeedy:
+                        OnHerbicidePlant(clickedGroundTile);
+                        break;
+                    case CurrentState.IsInfested:
+                        OnPesticidePlant(clickedGroundTile);
+                        break;
+                }
+            }
+        }
+
+        private void HandleClickOtherGround(GroundTile clickedGroundTile)
+        {
+            // Steal
+            if (clickedGroundTile.dirtData.seedGrowthInfo.isPlanted && clickedGroundTile.dirtData.seedGrowthInfo.fullyMatured)
+            {
+                OnHandOfMidasPlant(clickedGroundTile);
+                return;
+            }
+
+            // Planted and everything normal
+            if (clickedGroundTile.dirtData.seedGrowthInfo.isPlanted &&
+                clickedGroundTile.dirtData.seedGrowthInfo.currentState == CurrentState.Normal)
+            {
+                var bubble = TileBubbleController.Instance.SpawnBubble(clickedGroundTile.transform.position);
+                bubble.SetBubble(clickedGroundTile.dirtData.key, InjectionType.Timer,
+                    (int)clickedGroundTile.dirtData.seedGrowthInfo.crop.growthStageDuration -
+                    (int)clickedGroundTile.dirtData.seedGrowthInfo.currentStageTimeElapsed);
+                return;
+            }
+
+            // REQUIRED SOMETHING
+            if (clickedGroundTile.dirtData.seedGrowthInfo.isPlanted &&
+                clickedGroundTile.dirtData.seedGrowthInfo.currentState != CurrentState.Normal)
+            {
+                switch (clickedGroundTile.dirtData.seedGrowthInfo.currentState)
+                {
+                    case CurrentState.NeedWater:
+                        Instance.OnHelpWaterPlant(clickedGroundTile);
+                        break;
+                    case CurrentState.IsWeedy:
+                        Instance.OnHelpHerbicidePlant(clickedGroundTile);
+                        break;
+                    case CurrentState.IsInfested:
+                        Instance.OnHelpPesticidePlant(clickedGroundTile);
+                        break;
+                }
+            }
+        }
         public void OnClickStructural(Structural structural)
         {
             if (lockInteractObject)
@@ -113,102 +209,6 @@ namespace CiFarm.Scripts.SceneController.Game
                 StructuralId = structural.structuralId,
                 ReferenceId  = structural.referenceId
             });
-        }
-
-        private void HandleClickMyGround(BaseGround clickedGround)
-        {
-            // Not init ground
-            if (string.IsNullOrEmpty(clickedGround.dirtData.key))
-            {
-                return;
-            }
-
-            // Planting
-            if (!clickedGround.dirtData.seedGrowthInfo.isPlanted)
-            {
-                UIManager.Instance.PopupManager.ShowPopup(UIPopupName.PlantingPopup, new CustomInventoryPopupParam
-                {
-                    PlantingPopupType = PlantingPopupType.Planting,
-                    CloseAction       = null,
-                    PlantAction       = data => { OnPlantSeed(clickedGround, data); }
-                });
-                return;
-            }
-
-            // Harvest
-            if (clickedGround.dirtData.seedGrowthInfo.isPlanted && clickedGround.dirtData.seedGrowthInfo.fullyMatured)
-            {
-                OnHarvestPlant(clickedGround);
-                return;
-            }
-
-            // Planted and everything normal
-            if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
-                clickedGround.dirtData.seedGrowthInfo.currentState == CurrentState.Normal)
-            {
-                var bubble = TileBubbleController.Instance.SpawnBubble(clickedGround.transform.position);
-                bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
-                    (int)clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
-                    (int)clickedGround.dirtData.seedGrowthInfo.currentStageTimeElapsed);
-                return;
-            }
-
-            // REQUIRED SOME THING
-            if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
-                clickedGround.dirtData.seedGrowthInfo.currentState != CurrentState.Normal)
-            {
-                switch (clickedGround.dirtData.seedGrowthInfo.currentState)
-                {
-                    case CurrentState.NeedWater:
-                        OnWaterPlant(clickedGround);
-                        break;
-                    case CurrentState.IsWeedy:
-                        OnHerbicidePlant(clickedGround);
-                        break;
-                    case CurrentState.IsInfested:
-                        OnPesticidePlant(clickedGround);
-                        break;
-                }
-            }
-        }
-
-        private void HandleClickOtherGround(BaseGround clickedGround)
-        {
-            // Steal
-            if (clickedGround.dirtData.seedGrowthInfo.isPlanted && clickedGround.dirtData.seedGrowthInfo.fullyMatured)
-            {
-                OnHandOfMidasPlant(clickedGround);
-                return;
-            }
-
-            // Planted and everything normal
-            if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
-                clickedGround.dirtData.seedGrowthInfo.currentState == CurrentState.Normal)
-            {
-                var bubble = TileBubbleController.Instance.SpawnBubble(clickedGround.transform.position);
-                bubble.SetBubble(clickedGround.dirtData.key, InjectionType.Timer,
-                    (int)clickedGround.dirtData.seedGrowthInfo.crop.growthStageDuration -
-                    (int)clickedGround.dirtData.seedGrowthInfo.currentStageTimeElapsed);
-                return;
-            }
-
-            // REQUIRED SOMETHING
-            if (clickedGround.dirtData.seedGrowthInfo.isPlanted &&
-                clickedGround.dirtData.seedGrowthInfo.currentState != CurrentState.Normal)
-            {
-                switch (clickedGround.dirtData.seedGrowthInfo.currentState)
-                {
-                    case CurrentState.NeedWater:
-                        Instance.OnHelpWaterPlant(clickedGround);
-                        break;
-                    case CurrentState.IsWeedy:
-                        Instance.OnHelpHerbicidePlant(clickedGround);
-                        break;
-                    case CurrentState.IsInfested:
-                        Instance.OnHelpPesticidePlant(clickedGround);
-                        break;
-                }
-            }
         }
 
         public void LoadFriendHouse(FriendItemData friendData)
@@ -293,8 +293,7 @@ namespace CiFarm.Scripts.SceneController.Game
             });
         }
 
-        #region Nakama Communicated
-
+        
         #region Loader Init
 
         /// <summary>
@@ -340,7 +339,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 new Vector2Int(placedItem.position.x, placedItem.position.y)
                 , dirtObj, prefabDirtData.TileSize);
 
-            var dirtScript = dirtObj.GetComponent<BaseGround>();
+            var dirtScript = dirtObj.GetComponent<GroundTile>();
             dirtScript.Init(placedItem);
             if (placedItem.seedGrowthInfo.isPlanted)
             {
@@ -396,7 +395,7 @@ namespace CiFarm.Scripts.SceneController.Game
                 new Vector2Int(placedItem.position.x, placedItem.position.y)
                 , tileObject, tileObjectModel.TileSize);
 
-            _constructor.Add(tileObject);
+            _animals.Add(tileObject);
         }
 
         private void OnFetchPlacedDataFromServer()
@@ -433,13 +432,13 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// Plants a seed asynchronously using NakamaFarmingService.
         /// </summary>
-        /// <param name="ground"></param>
+        /// <param name="groundTile"></param>
         /// <param name="plantData"></param>
-        private async void OnPlantSeed(BaseGround ground, InvenItemData plantData)
+        private async void OnPlantSeed(GroundTile groundTile, InvenItemData plantData)
         {
             try
             {
-                await NakamaFarmingService.Instance.PlantSeedAsync(plantData.key, ground.dirtData.key);
+                await NakamaFarmingService.Instance.PlantSeedAsync(plantData.key, groundTile.dirtData.key);
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
             }
             catch (Exception e)
@@ -451,8 +450,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// Thu hoach
         /// </summary>
-        /// <param name="ground"></param>
-        private async void OnHarvestPlant(BaseGround ground)
+        /// <param name="groundTile"></param>
+        private async void OnHarvestPlant(GroundTile groundTile)
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Scythe)
             {
@@ -463,17 +462,17 @@ namespace CiFarm.Scripts.SceneController.Game
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                await NakamaFarmingService.Instance.HarvestCropAsync(ground.dirtData.key);
+                await NakamaFarmingService.Instance.HarvestCropAsync(groundTile.dirtData.key);
 
-                var position = ground.transform.position;
-                PlayHarvestEf(position, ground.dirtData.seedGrowthInfo.crop.key, ground.dirtData
+                var position = groundTile.transform.position;
+                PlayHarvestEf(position, groundTile.dirtData.seedGrowthInfo.crop.key, groundTile.dirtData
                     .seedGrowthInfo
                     .harvestQuantityRemaining);
                 PlayExperiencesEf(position,
-                    ground.dirtData.seedGrowthInfo.crop.basicHarvestExperiences);
+                    groundTile.dirtData.seedGrowthInfo.crop.basicHarvestExperiences);
 
-                ground.RemovePlant();
-                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
+                groundTile.RemovePlant();
+                TileBubbleController.Instance.HideBubble(groundTile.dirtData.key);
             }
             catch (Exception e)
             {
@@ -484,8 +483,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// water plant
         /// </summary>
-        /// <param name="ground"></param>
-        private async void OnWaterPlant(BaseGround ground)
+        /// <param name="groundTile"></param>
+        private async void OnWaterPlant(GroundTile groundTile)
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.WaterCan)
             {
@@ -495,12 +494,12 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                await NakamaFarmingService.Instance.WaterAsync(ground.dirtData.key);
-                var position = ground.transform.position;
+                await NakamaFarmingService.Instance.WaterAsync(groundTile.dirtData.key);
+                var position = groundTile.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.WaterCan, position, 1f);
                 PlayExperiencesEf(position, NakamaSystemService.Instance.activities.water.experiencesGain);
                 AudioManager.Instance.PlaySFX(AudioName.Watering);
-                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
+                TileBubbleController.Instance.HideBubble(groundTile.dirtData.key);
             }
             catch (Exception e)
             {
@@ -511,8 +510,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// Phun thuoc tru sau
         /// </summary>
-        /// <param name="ground"></param>
-        private async void OnPesticidePlant(BaseGround ground)
+        /// <param name="groundTile"></param>
+        private async void OnPesticidePlant(GroundTile groundTile)
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Pesticide)
             {
@@ -522,12 +521,12 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                await NakamaFarmingService.Instance.UsePesticideAsync(ground.dirtData.key);
-                var position = ground.transform.position;
+                await NakamaFarmingService.Instance.UsePesticideAsync(groundTile.dirtData.key);
+                var position = groundTile.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.Pesticide, position, 1f);
                 PlayExperiencesEf(position, NakamaSystemService.Instance.activities.usePestiside.experiencesGain);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
-                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
+                TileBubbleController.Instance.HideBubble(groundTile.dirtData.key);
             }
             catch (Exception e)
             {
@@ -538,8 +537,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// Phun thuoc diet co
         /// </summary>
-        /// <param name="ground"></param>
-        private async void OnHerbicidePlant(BaseGround ground)
+        /// <param name="groundTile"></param>
+        private async void OnHerbicidePlant(GroundTile groundTile)
         {
             if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Herbicide)
             {
@@ -549,21 +548,48 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                await NakamaFarmingService.Instance.UseHerbicideAsync(ground.dirtData.key);
-                var position = ground.transform.position;
+                await NakamaFarmingService.Instance.UseHerbicideAsync(groundTile.dirtData.key);
+                var position = groundTile.transform.position;
 
                 PlayExperiencesEf(position, NakamaSystemService.Instance.activities.useHerbicide.experiencesGain);
                 EffectService.Instance.PlayVFX(VFXType.Herbicide, position, 1f);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
 
-                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
+                TileBubbleController.Instance.HideBubble(groundTile.dirtData.key);
             }
             catch (Exception e)
             {
                 DLogger.LogError("OnHerbicidePlantAsync error: " + e.Message, "Ground");
             }
         }
+        /// <summary>
+        /// Feed Animal
+        /// </summary>
+        /// <param name="groundTile"></param>
+        private async void OnFeedAnimal(Animal groundTile)
+        {
+            // if (_gameView.ToolManager.CurrentTool.toolType != ToolType.Herbicide)
+            // {
+            //     DLogger.Log("Current tool is not Herbicide.");
+            //     return;
+            // }
 
+            try
+            {
+                await NakamaFarmingService.Instance.UseHerbicideAsync(groundTile.placedData.key);
+                var position = groundTile.transform.position;
+
+                PlayExperiencesEf(position, NakamaSystemService.Instance.activities.useHerbicide.experiencesGain);
+                EffectService.Instance.PlayVFX(VFXType.Herbicide, position, 1f);
+                AudioManager.Instance.PlaySFX(AudioName.Spray);
+
+                TileBubbleController.Instance.HideBubble(groundTile.placedData.key);
+            }
+            catch (Exception e)
+            {
+                DLogger.LogError("OnHerbicidePlantAsync error: " + e.Message, "Ground");
+            }
+        }
         #endregion
 
         #region FriendZone
@@ -582,8 +608,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// Steal
         /// </summary>
-        /// <param name="ground"></param>
-        private async void OnHandOfMidasPlant(BaseGround ground)
+        /// <param name="groundTile"></param>
+        private async void OnHandOfMidasPlant(GroundTile groundTile)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Steal)
             {
@@ -591,15 +617,15 @@ namespace CiFarm.Scripts.SceneController.Game
                 return;
             }
 
-            if (ground.dirtData.seedGrowthInfo.thiefedBy != null &&
-                ground.dirtData.seedGrowthInfo.thiefedBy.Contains(NakamaUserService.Instance.userId))
+            if (groundTile.dirtData.seedGrowthInfo.thiefedBy != null &&
+                groundTile.dirtData.seedGrowthInfo.thiefedBy.Contains(NakamaUserService.Instance.userId))
             {
                 UIManager.Instance.AlertManager.ShowAlertMessage("You have already stolen this crop.");
                 return;
             }
 
-            if (ground.dirtData.seedGrowthInfo.harvestQuantityRemaining ==
-                ground.dirtData.seedGrowthInfo.crop.minHarvestQuantity)
+            if (groundTile.dirtData.seedGrowthInfo.harvestQuantityRemaining ==
+                groundTile.dirtData.seedGrowthInfo.crop.minHarvestQuantity)
             {
                 UIManager.Instance.AlertManager.ShowAlertMessage("This crop has reached the minimum harvest quantity");
                 return;
@@ -608,11 +634,11 @@ namespace CiFarm.Scripts.SceneController.Game
             try
             {
                 AudioManager.Instance.PlaySFX(AudioName.PowerUpBright);
-                await NakamaFarmingService.Instance.ThiefCropAsync(_friendItemData.userId, ground.dirtData.key);
-                var position = ground.transform.position;
-                PlayHarvestEf(position, ground.dirtData.seedGrowthInfo.crop.key, 1);
+                await NakamaFarmingService.Instance.ThiefCropAsync(_friendItemData.userId, groundTile.dirtData.key);
+                var position = groundTile.transform.position;
+                PlayHarvestEf(position, groundTile.dirtData.seedGrowthInfo.crop.key, 1);
                 PlayExperiencesEf(position, NakamaSystemService.Instance.activities.thiefCrop.experiencesGain);
-                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
+                TileBubbleController.Instance.HideBubble(groundTile.dirtData.key);
             }
             catch (Exception e)
             {
@@ -623,8 +649,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// Watering
         /// </summary>
-        /// <param name="ground"></param>
-        private async void OnHelpWaterPlant(BaseGround ground)
+        /// <param name="groundTile"></param>
+        private async void OnHelpWaterPlant(GroundTile groundTile)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.WaterCan)
             {
@@ -634,12 +660,12 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                await NakamaFarmingService.Instance.HelpWaterAsync(_friendItemData.userId, ground.dirtData.key);
-                var position = ground.transform.position;
+                await NakamaFarmingService.Instance.HelpWaterAsync(_friendItemData.userId, groundTile.dirtData.key);
+                var position = groundTile.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.WaterCan, position, 1f);
                 PlayExperiencesEf(position, NakamaSystemService.Instance.activities.helpWater.experiencesGain);
                 AudioManager.Instance.PlaySFX(AudioName.Watering);
-                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
+                TileBubbleController.Instance.HideBubble(groundTile.dirtData.key);
             }
             catch (Exception e)
             {
@@ -650,8 +676,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// Phun thuoc tru sau
         /// </summary>
-        /// <param name="ground"></param>
-        private async void OnHelpPesticidePlant(BaseGround ground)
+        /// <param name="groundTile"></param>
+        private async void OnHelpPesticidePlant(GroundTile groundTile)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Pesticide)
             {
@@ -661,12 +687,12 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                await NakamaFarmingService.Instance.HelpUsePesticideAsync(_friendItemData.userId, ground.dirtData.key);
-                var position = ground.transform.position;
+                await NakamaFarmingService.Instance.HelpUsePesticideAsync(_friendItemData.userId, groundTile.dirtData.key);
+                var position = groundTile.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.Pesticide, position, 1f);
                 PlayExperiencesEf(position, NakamaSystemService.Instance.activities.helpUsePestiside.experiencesGain);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
-                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
+                TileBubbleController.Instance.HideBubble(groundTile.dirtData.key);
             }
             catch (Exception e)
             {
@@ -677,8 +703,8 @@ namespace CiFarm.Scripts.SceneController.Game
         /// <summary>
         /// Phun thuoc diet co
         /// </summary>
-        /// <param name="ground"></param>
-        private async void OnHelpHerbicidePlant(BaseGround ground)
+        /// <param name="groundTile"></param>
+        private async void OnHelpHerbicidePlant(GroundTile groundTile)
         {
             if (_visitView.ToolManager.CurrentTool.toolType != ToolType.Herbicide)
             {
@@ -688,12 +714,12 @@ namespace CiFarm.Scripts.SceneController.Game
 
             try
             {
-                await NakamaFarmingService.Instance.HelpUseHerbicideAsync(_friendItemData.userId, ground.dirtData.key);
-                var position = ground.transform.position;
+                await NakamaFarmingService.Instance.HelpUseHerbicideAsync(_friendItemData.userId, groundTile.dirtData.key);
+                var position = groundTile.transform.position;
                 EffectService.Instance.PlayVFX(VFXType.Herbicide, position, 1f);
                 PlayExperiencesEf(position, NakamaSystemService.Instance.activities.helpUseHerbicide.experiencesGain);
                 AudioManager.Instance.PlaySFX(AudioName.Spray);
-                TileBubbleController.Instance.HideBubble(ground.dirtData.key);
+                TileBubbleController.Instance.HideBubble(groundTile.dirtData.key);
             }
             catch (Exception e)
             {
@@ -703,9 +729,8 @@ namespace CiFarm.Scripts.SceneController.Game
 
         #endregion
 
-        #endregion
 
-        #region Effect
+        #region Effect Manager
 
         private void PlayHarvestEf(Vector3 positionSpawn, string itemRefId, int quantity)
         {

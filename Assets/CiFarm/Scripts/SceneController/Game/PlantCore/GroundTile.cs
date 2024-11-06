@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace CiFarm.Scripts.SceneController.Game.PlantCore
 {
-    public class BaseGround : MonoBehaviour, ITutorialItem
+    public class GroundTile : MonoBehaviour, ITutorialItem
     {
         [SerializeField] private Transform positionPlant;
 
@@ -92,7 +92,7 @@ namespace CiFarm.Scripts.SceneController.Game.PlantCore
 
         public void HandleClickInTutorial(GameObject baseObj)
         {
-            GameController.Instance.OnClickGround(baseObj.GetComponent<BaseGround>());
+            GameController.Instance.OnClickGround(baseObj.GetComponent<GroundTile>());
         }
 
         private void OnDisable()
