@@ -75,7 +75,8 @@ namespace CiFarm.Scripts.UI.Popups
             Hide(true);
             UIManager.Instance.PopupManager.ShowPopup(UIPopupName.AnimalDetailPopup, new AnimalDetailPopupParam
             {
-                tileId = placedItemsId,
+                tileId      = placedItemsId,
+
             });
         }
 
