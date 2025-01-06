@@ -1,6 +1,7 @@
 # CiFarm - Farm-to-Earn Game on Telegram  
 
-**CiFarm** is a Farm-to-Earn game built on the Telegram platform, leveraging blockchain technology for unique and engaging gameplay. Initially launching on the **TON Telegram blockchain**, CiFarm also aims to expand to **Polkadot** with NFT integration through the Unique Network.  
+**CiFarm** is a Farm-to-Earn game built on the Telegram platform, combining both off-chain and on-chain elements to offer a unique and engaging experience. The game leverages blockchain technology for critical features like NFTs and asset management, while also offering off-chain gameplay for a more accessible and seamless user experience. 
+
 
 ## Related Repositories  
 Here are the related repositories for different components of CiFarm:  
