@@ -37,11 +37,14 @@ CiFarm is built with **Unity C#** and optimized for integration with Telegram. F
 
 Here are some demo images showcasing the game:
 
-- **Daily View**:  
-  ![Daily View](https://github.com/starci-lab/cifarm-client/blob/main/DemoPic/daily.png)
+- **Game Logo**:  
+  ![Logo](https://github.com/starci-lab/cifarm-client/blob/main/DemoPic/demo.png)
 
 - **Main Game View**:  
   ![Main Game](https://github.com/starci-lab/cifarm-client/blob/main/DemoPic/maingame.png)
+
+- **Daily View**:  
+  ![Daily View](https://github.com/starci-lab/cifarm-client/blob/main/DemoPic/daily.png)
 
 - **Shop View**:  
   ![Shop](https://github.com/starci-lab/cifarm-client/blob/main/DemoPic/shop.png)
