@@ -4,7 +4,7 @@
 
 ## Related Repositories  
 Here are the related repositories for different components of CiFarm:  
-- **Game (Client - Unity)**: [CiFarm Client](https://github.com/starci-lab/cifarm-client)  
+- **Game (Client - Unity - Game)**: [CiFarm Client](https://github.com/starci-lab/cifarm-client)  
 - **Game Server (Backend)**: [CiFarm Server](https://github.com/starci-lab/cifarm-server)  
 - **Wallet Integration for Game**: [CiWallet](https://github.com/starci-lab/ciwallet)  
 - **Telegram Bot**: [CiWallet Bots](https://github.com/starci-lab/ciwallet-bots)  
