@@ -2,6 +2,14 @@
 
 **CiFarm** is a Farm-to-Earn game built on the Telegram platform, leveraging blockchain technology for unique and engaging gameplay. Initially launching on the **TON Telegram blockchain**, CiFarm also aims to expand to **Polkadot** with NFT integration through the Unique Network.  
 
+## Related Repositories  
+Here are the related repositories for different components of CiFarm:  
+- **Game (Client - Unity)**: [CiFarm Client](https://github.com/starci-lab/cifarm-client)  
+- **Game Server (Backend)**: [CiFarm Server](https://github.com/starci-lab/cifarm-server)  
+- **Wallet Integration for Game**: [CiWallet](https://github.com/starci-lab/ciwallet)  
+- **Telegram Bot**: [CiWallet Bots](https://github.com/starci-lab/ciwallet-bots)  
+- **Blockchain Backend**: [CiFarm Periphery](https://github.com/starci-lab/cifarm-periphery)  
+
 ## Overview  
 As gaming on Telegram gains traction with popular titles like Hamster Combat, CiFarm brings the farming genre to life in a play-to-earn format. Players can interact with each other in various ways:  
 
