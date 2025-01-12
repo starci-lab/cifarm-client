@@ -14,8 +14,7 @@ namespace CiFarm.Scripts.UI.Popups
             if (Parameter != null)
             {
                 var param = (StructuralDetailParam)Parameter;
-                structuralId = param.StructuralId;
-            
+  
             }
 
         }
