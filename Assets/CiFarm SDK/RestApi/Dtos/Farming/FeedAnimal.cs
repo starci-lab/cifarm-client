@@ -1,21 +1,14 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     [Serializable]
     public class FeedAnimalRequest
     {
-        [SerializeField]
-        private string _placedItemAnimalId;
-
+        // Auto-property with JSON serialization
         [JsonProperty("placedItemAnimalId")]
-        public string PlacedItemAnimalId
-        {
-            get => _placedItemAnimalId;
-            set => _placedItemAnimalId = value;
-        }
+        public string PlacedItemAnimalId { get; set; }
     }
 
     [Serializable]

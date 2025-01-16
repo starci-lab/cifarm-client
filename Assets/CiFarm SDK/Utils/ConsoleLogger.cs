@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace CiFarm.Utils
@@ -49,7 +50,7 @@ namespace CiFarm.Utils
         };
 
         // Main method to log messages with color
-        private static void LogMessage(string message, LogColor logColor)
+        private static void LogMessage<TMessage>(TMessage message, LogColor logColor)
         {
             // If logging scope is None, do nothing
             if (LogScope == LogScope.None)
@@ -63,8 +64,17 @@ namespace CiFarm.Utils
                 return;
 
             // Log the message if scope allows
+            string _message;
+            if (typeof(TMessage) == typeof(string))
+            {
+                _message = message.ToString();
+            }
+            else
+            {
+                _message = JsonConvert.SerializeObject(message);
+            }
             Debug.Log(
-                $"<b><color={logColor.GetStringValue()}>{_logColorMap[logColor]}:</color></b> {message}"
+                $"<b><color={logColor.GetStringValue()}>{_logColorMap[logColor]}:</color></b> {_message}"
             );
         }
 
@@ -88,32 +98,32 @@ namespace CiFarm.Utils
 #endif
         }
 
-        public static void LogSuccess(string message)
+        public static void LogSuccess<TMessage>(TMessage message)
         {
             LogMessage(message, LogColor.Success);
         }
 
-        public static void LogWarning(string message)
+        public static void LogWarning<TMessage>(TMessage message)
         {
             LogMessage(message, LogColor.Warning);
         }
 
-        public static void LogError(string message)
+        public static void LogError<TMessage>(TMessage message)
         {
             LogMessage(message, LogColor.Error);
         }
 
-        public static void LogVerbose(string message)
+        public static void LogVerbose<TMessage>(TMessage message)
         {
             LogMessage(message, LogColor.Verbose);
         }
 
-        public static void LogDebug(string message)
+        public static void LogDebug<TMessage>(TMessage message)
         {
             LogMessage(message, LogColor.Debug);
         }
 
-        public static void LogFatal(string message)
+        public static void LogFatal<TMessage>(TMessage message)
         {
             LogMessage(message, LogColor.Fatal);
         }

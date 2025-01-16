@@ -7,97 +7,40 @@ namespace CiFarm.RestApi
     [Serializable]
     public class VerifySignatureRequest
     {
-        // Backing field for the Message property
-        [UnityEngine.SerializeField]
-        private string _message;
-
+        // Public property with automatic getter and setter
         [JsonProperty("message")]
-        public string Message
-        {
-            get => _message;
-            set => _message = value;
-        }
+        public string Message { get; set; }
 
-        // Backing field for the PublicKey property
-        [UnityEngine.SerializeField]
-        private string _publicKey;
-
+        // Public property with automatic getter and setter
         [JsonProperty("publicKey")]
-        public string PublicKey
-        {
-            get => _publicKey;
-            set => _publicKey = value;
-        }
+        public string PublicKey { get; set; }
 
-        // Backing field for the Signature property
-        [UnityEngine.SerializeField]
-        private string _signature;
-
+        // Public property with automatic getter and setter
         [JsonProperty("signature")]
-        public string Signature
-        {
-            get => _signature;
-            set => _signature = value;
-        }
+        public string Signature { get; set; }
 
-        // Backing field for the ChainKey property
-        [UnityEngine.SerializeField]
-        private SupportedChainKey? _chainKey;
-
+        // Nullable SupportedChainKey property
         [JsonProperty("chainKey")]
-        public SupportedChainKey? ChainKey
-        {
-            get => _chainKey;
-            set => _chainKey = value;
-        }
+        public SupportedChainKey? ChainKey { get; set; }
 
-        // Backing field for the Network property
-        [UnityEngine.SerializeField]
-        private Network? _network;
-
+        // Nullable Network property
         [JsonProperty("network")]
-        public Network? Network
-        {
-            get => _network;
-            set => _network = value;
-        }
+        public Network? Network { get; set; }
 
-        // Backing field for the AccountAddress property
-        [UnityEngine.SerializeField]
-        private string _accountAddress;
-
+        // Public property with automatic getter and setter
         [JsonProperty("accountAddress")]
-        public string AccountAddress
-        {
-            get => _accountAddress;
-            set => _accountAddress = value;
-        }
+        public string AccountAddress { get; set; }
     }
 
-    // Model to represent the VerifySignatureResponse
     [Serializable]
     public class VerifySignatureResponse
     {
-        // Backing field for the AccessToken property
-        [UnityEngine.SerializeField]
-        private string _accessToken;
-
+        // Public property with automatic getter and setter
         [JsonProperty("accessToken")]
-        public string AccessToken
-        {
-            get => _accessToken;
-            set => _accessToken = value;
-        }
+        public string AccessToken { get; set; }
 
-        // Backing field for the RefreshToken property
-        [UnityEngine.SerializeField]
-        private string _refreshToken;
-
+        // Public property with automatic getter and setter
         [JsonProperty("refreshToken")]
-        public string RefreshToken
-        {
-            get => _refreshToken;
-            set => _refreshToken = value;
-        }
+        public string RefreshToken { get; set; }
     }
 }

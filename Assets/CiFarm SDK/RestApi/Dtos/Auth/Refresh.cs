@@ -7,38 +7,19 @@ namespace CiFarm.RestApi
     [Serializable]
     public class RefreshRequest
     {
-        [SerializeField]
-        private string _refreshToken;
-
+        // Public property with automatic getter and setter
         [JsonProperty("refreshToken")]
-        public string RefreshToken
-        {
-            get => _refreshToken;
-            set => _refreshToken = value;
-        }
+        public string RefreshToken { get; set; }
     }
 
     [Serializable]
     public class RefreshResponse
     {
-        [SerializeField]
-        private string _accessToken;
-
+        // Public property with automatic getter and setter
         [JsonProperty("accessToken")]
-        public string AccessToken
-        {
-            get => _accessToken;
-            set => _accessToken = value;
-        }
-
-        [SerializeField]
-        private string _refreshToken;
+        public string AccessToken { get; set; }
 
         [JsonProperty("refreshToken")]
-        public string RefreshToken
-        {
-            get => _refreshToken;
-            set => _refreshToken = value;
-        }
+        public string RefreshToken { get; set; }
     }
 }

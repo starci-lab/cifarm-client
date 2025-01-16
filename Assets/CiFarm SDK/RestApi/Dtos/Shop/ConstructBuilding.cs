@@ -1,31 +1,17 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     [Serializable]
     public class ConstructBuildingRequest
     {
-        [SerializeField]
-        private string _buildingId;
-
+        // Auto-properties with JSON serialization
         [JsonProperty("buildingId")]
-        public string BuildingId
-        {
-            get => _buildingId;
-            set => _buildingId = value;
-        }
-
-        [SerializeField]
-        private Position _position;
+        public string BuildingId { get; set; }
 
         [JsonProperty("position")]
-        public Position Position
-        {
-            get => _position;
-            set => _position = value;
-        }
+        public Position Position { get; set; }
     }
 
     [Serializable]

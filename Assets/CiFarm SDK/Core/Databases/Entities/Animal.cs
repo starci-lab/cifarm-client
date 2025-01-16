@@ -1,162 +1,67 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable]
     public class AnimalEntity : StringAbstractEntity
     {
-        // Private fields for AnimalEntity properties
-        [SerializeField]
-        private int _yieldTime;
-
+        // Public property for YieldTime
         [JsonProperty("yieldTime")]
-        public int YieldTime
-        {
-            get => _yieldTime;
-            set => _yieldTime = value;
-        }
+        public int YieldTime { get; set; }
 
-        [SerializeField]
-        private int _offspringPrice;
-
+        // Public property for OffspringPrice
         [JsonProperty("offspringPrice")]
-        public int OffspringPrice
-        {
-            get => _offspringPrice;
-            set => _offspringPrice = value;
-        }
+        public int OffspringPrice { get; set; }
 
-        [SerializeField]
-        private bool _isNFT;
-
+        // Public property for IsNFT
         [JsonProperty("isNFT")]
-        public bool IsNFT
-        {
-            get => _isNFT;
-            set => _isNFT = value;
-        }
+        public bool IsNFT { get; set; }
 
-        [SerializeField]
-        private int? _price;
-
+        // Public property for Price (nullable)
         [JsonProperty("price")]
-        public int? Price
-        {
-            get => _price;
-            set => _price = value;
-        }
+        public int? Price { get; set; }
 
-        [SerializeField]
-        private int _growthTime;
-
+        // Public property for GrowthTime
         [JsonProperty("growthTime")]
-        public int GrowthTime
-        {
-            get => _growthTime;
-            set => _growthTime = value;
-        }
+        public int GrowthTime { get; set; }
 
-        [SerializeField]
-        private bool _availableInShop;
-
+        // Public property for AvailableInShop
         [JsonProperty("availableInShop")]
-        public bool AvailableInShop
-        {
-            get => _availableInShop;
-            set => _availableInShop = value;
-        }
+        public bool AvailableInShop { get; set; }
 
-        [SerializeField]
-        private int _hungerTime;
-
+        // Public property for HungerTime
         [JsonProperty("hungerTime")]
-        public int HungerTime
-        {
-            get => _hungerTime;
-            set => _hungerTime = value;
-        }
+        public int HungerTime { get; set; }
 
-        [SerializeField]
-        private int _minHarvestQuantity;
-
+        // Public property for MinHarvestQuantity
         [JsonProperty("minHarvestQuantity")]
-        public int MinHarvestQuantity
-        {
-            get => _minHarvestQuantity;
-            set => _minHarvestQuantity = value;
-        }
+        public int MinHarvestQuantity { get; set; }
 
-        [SerializeField]
-        private int _maxHarvestQuantity;
-
+        // Public property for MaxHarvestQuantity
         [JsonProperty("maxHarvestQuantity")]
-        public int MaxHarvestQuantity
-        {
-            get => _maxHarvestQuantity;
-            set => _maxHarvestQuantity = value;
-        }
+        public int MaxHarvestQuantity { get; set; }
 
-        [SerializeField]
-        private int _basicHarvestExperiences;
-
+        // Public property for BasicHarvestExperiences
         [JsonProperty("basicHarvestExperiences")]
-        public int BasicHarvestExperiences
-        {
-            get => _basicHarvestExperiences;
-            set => _basicHarvestExperiences = value;
-        }
+        public int BasicHarvestExperiences { get; set; }
 
-        [SerializeField]
-        private int _premiumHarvestExperiences;
-
+        // Public property for PremiumHarvestExperiences
         [JsonProperty("premiumHarvestExperiences")]
-        public int PremiumHarvestExperiences
-        {
-            get => _premiumHarvestExperiences;
-            set => _premiumHarvestExperiences = value;
-        }
+        public int PremiumHarvestExperiences { get; set; }
 
-        [SerializeField]
-        private string _type;
-
+        // Public property for Type
         [JsonProperty("type")]
-        public string Type
-        {
-            get => _type;
-            set => _type = value;
-        }
+        public AnimalType Type { get; set; }
 
         // Navigation properties (One-to-One relationships)
-        [SerializeField]
-        private ProductEntity _product;
-
         [JsonProperty("product")]
-        public ProductEntity Product
-        {
-            get => _product;
-            set => _product = value;
-        }
-
-        [SerializeField]
-        private InventoryTypeEntity _inventoryType;
+        public ProductEntity Product { get; set; }
 
         [JsonProperty("inventoryType")]
-        public InventoryTypeEntity InventoryType
-        {
-            get => _inventoryType;
-            set => _inventoryType = value;
-        }
-
-        [SerializeField]
-        private PlacedItemTypeEntity _placedItemType;
+        public InventoryTypeEntity InventoryType { get; set; }
 
         [JsonProperty("placedItemType")]
-        public PlacedItemTypeEntity PlacedItemType
-        {
-            get => _placedItemType;
-            set => _placedItemType = value;
-        }
+        public PlacedItemTypeEntity PlacedItemType { get; set; }
     }
 }

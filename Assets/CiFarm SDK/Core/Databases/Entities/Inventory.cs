@@ -7,81 +7,29 @@ namespace CiFarm.Core.Databases
     [Serializable] // Makes the class serializable for Unity
     public class InventoryEntity : UuidAbstractEntity
     {
-        // Private backing field for quantity
-        [SerializeField] // Expose this field for Unity serialization
-        private int _quantity = 1;
+        // Public properties with auto-implemented getters and setters
 
-        // Public property for quantity
         [JsonProperty("quantity")] // Custom JSON property name in camelCase
-        public int Quantity
-        {
-            get => _quantity;
-            set => _quantity = value;
-        }
+        public int Quantity { get; set; } = 1;
 
-        // Private backing field for tokenId (nullable)
-        [SerializeField] // Expose this field for Unity serialization
-        private string _tokenId;
-
-        // Public property for tokenId (nullable)
         [JsonProperty("tokenId")] // Custom JSON property name in camelCase
-        public string TokenId
-        {
-            get => _tokenId;
-            set => _tokenId = value;
-        }
+        public string TokenId { get; set; }
 
-        // Private backing field for premium
-        [SerializeField] // Expose this field for Unity serialization
-        private bool _premium = false;
-
-        // Public property for premium
         [JsonProperty("premium")] // Custom JSON property name in camelCase
-        public bool Premium
-        {
-            get => _premium;
-            set => _premium = value;
-        }
+        public bool Premium { get; set; } = false;
 
-        // Private backing field for isPlaced
-        [SerializeField] // Expose this field for Unity serialization
-        private bool _isPlaced = false;
-
-        // Public property for isPlaced
         [JsonProperty("isPlaced")] // Custom JSON property name in camelCase
-        public bool IsPlaced
-        {
-            get => _isPlaced;
-            set => _isPlaced = value;
-        }
+        public bool IsPlaced { get; set; } = false;
 
-        // Private backing field for userId (nullable)
-        [SerializeField] // Expose this field for Unity serialization
-        private string _userId;
-
-        // Public property for userId (nullable)
         [JsonProperty("userId")] // Custom JSON property name in camelCase
-        public string UserId
-        {
-            get => _userId;
-            set => _userId = value;
-        }
+        public string UserId { get; set; }
 
         // Navigation property for UserEntity (many-to-one relationship)
         [JsonProperty("user")] // Custom JSON property name in camelCase
         public UserEntity User { get; set; }
 
-        // Private backing field for inventoryTypeId (nullable)
-        [SerializeField] // Expose this field for Unity serialization
-        private string _inventoryTypeId;
-
-        // Public property for inventoryTypeId (nullable)
         [JsonProperty("inventoryTypeId")] // Custom JSON property name in camelCase
-        public string InventoryTypeId
-        {
-            get => _inventoryTypeId;
-            set => _inventoryTypeId = value;
-        }
+        public string InventoryTypeId { get; set; }
 
         // Navigation property for InventoryTypeEntity (many-to-one relationship)
         [JsonProperty("inventoryType")] // Custom JSON property name in camelCase

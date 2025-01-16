@@ -1,31 +1,18 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     [Serializable]
     public class UpdateTutorialRequest
     {
-        [SerializeField]
-        private int _tutorialIndex;
-
+        // Auto-property with JSON serialization
         [JsonProperty("tutorialIndex")]
-        public int TutorialIndex
-        {
-            get => _tutorialIndex;
-            set => _tutorialIndex = value;
-        }
+        public int TutorialIndex { get; set; }
 
-        [SerializeField]
-        private int _stepIndex;
-
+        // Auto-property with JSON serialization
         [JsonProperty("stepIndex")]
-        public int StepIndex
-        {
-            get => _stepIndex;
-            set => _stepIndex = value;
-        }
+        public int StepIndex { get; set; }
     }
 
     [Serializable]

@@ -8,160 +8,51 @@ namespace CiFarm.Core.Databases
     [Serializable] // Makes the class serializable for Unity
     public class CropEntity : UuidAbstractEntity
     {
-        // Private backing field for growthStageDuration
-        [SerializeField] // Serialize this private field in Unity
-        private int _growthStageDuration;
+        // Auto-implemented properties
+        [JsonProperty("growthStageDuration")]
+        public int GrowthStageDuration { get; set; }
 
-        // Public property for growthStageDuration
-        [JsonProperty("growthStageDuration")] // Custom JSON property name in camelCase
-        public int GrowthStageDuration
-        {
-            get => _growthStageDuration;
-            set => _growthStageDuration = value;
-        }
+        [JsonProperty("growthStages")]
+        public int GrowthStages { get; set; }
 
-        // Private backing field for growthStages
-        [SerializeField] // Serialize this private field in Unity
-        private int _growthStages;
+        [JsonProperty("price")]
+        public int Price { get; set; }
 
-        // Public property for growthStages
-        [JsonProperty("growthStages")] // Custom JSON property name in camelCase
-        public int GrowthStages
-        {
-            get => _growthStages;
-            set => _growthStages = value;
-        }
+        [JsonProperty("premium")]
+        public bool Premium { get; set; }
 
-        // Private backing field for price
-        [SerializeField] // Serialize this private field in Unity
-        private int _price;
+        [JsonProperty("perennialCount")]
+        public int PerennialCount { get; set; }
 
-        // Public property for price
-        [JsonProperty("price")] // Custom JSON property name in camelCase
-        public int Price
-        {
-            get => _price;
-            set => _price = value;
-        }
+        [JsonProperty("nextGrowthStageAfterHarvest")]
+        public int NextGrowthStageAfterHarvest { get; set; }
 
-        // Private backing field for premium
-        [SerializeField] // Serialize this private field in Unity
-        private bool _premium;
+        [JsonProperty("minHarvestQuantity")]
+        public int MinHarvestQuantity { get; set; }
 
-        // Public property for premium
-        [JsonProperty("premium")] // Custom JSON property name in camelCase
-        public bool Premium
-        {
-            get => _premium;
-            set => _premium = value;
-        }
+        [JsonProperty("maxHarvestQuantity")]
+        public int MaxHarvestQuantity { get; set; }
 
-        // Private backing field for perennialCount
-        [SerializeField] // Serialize this private field in Unity
-        private int _perennialCount = 1;
+        [JsonProperty("basicHarvestExperiences")]
+        public int BasicHarvestExperiences { get; set; }
 
-        // Public property for perennialCount
-        [JsonProperty("perennialCount")] // Custom JSON property name in camelCase
-        public int PerennialCount
-        {
-            get => _perennialCount;
-            set => _perennialCount = value;
-        }
+        [JsonProperty("premiumHarvestExperiences")]
+        public int PremiumHarvestExperiences { get; set; }
 
-        // Private backing field for nextGrowthStageAfterHarvest
-        [SerializeField] // Serialize this private field in Unity
-        private int _nextGrowthStageAfterHarvest;
+        [JsonProperty("availableInShop")]
+        public bool AvailableInShop { get; set; }
 
-        // Public property for nextGrowthStageAfterHarvest
-        [JsonProperty("nextGrowthStageAfterHarvest")] // Custom JSON property name in camelCase
-        public int NextGrowthStageAfterHarvest
-        {
-            get => _nextGrowthStageAfterHarvest;
-            set => _nextGrowthStageAfterHarvest = value;
-        }
+        [JsonProperty("maxStack")]
+        public int MaxStack { get; set; }
 
-        // Private backing field for minHarvestQuantity
-        [SerializeField] // Serialize this private field in Unity
-        private int _minHarvestQuantity;
-
-        // Public property for minHarvestQuantity
-        [JsonProperty("minHarvestQuantity")] // Custom JSON property name in camelCase
-        public int MinHarvestQuantity
-        {
-            get => _minHarvestQuantity;
-            set => _minHarvestQuantity = value;
-        }
-
-        // Private backing field for maxHarvestQuantity
-        [SerializeField] // Serialize this private field in Unity
-        private int _maxHarvestQuantity;
-
-        // Public property for maxHarvestQuantity
-        [JsonProperty("maxHarvestQuantity")] // Custom JSON property name in camelCase
-        public int MaxHarvestQuantity
-        {
-            get => _maxHarvestQuantity;
-            set => _maxHarvestQuantity = value;
-        }
-
-        // Private backing field for basicHarvestExperiences
-        [SerializeField] // Serialize this private field in Unity
-        private int _basicHarvestExperiences;
-
-        // Public property for basicHarvestExperiences
-        [JsonProperty("basicHarvestExperiences")] // Custom JSON property name in camelCase
-        public int BasicHarvestExperiences
-        {
-            get => _basicHarvestExperiences;
-            set => _basicHarvestExperiences = value;
-        }
-
-        // Private backing field for premiumHarvestExperiences
-        [SerializeField] // Serialize this private field in Unity
-        private int _premiumHarvestExperiences;
-
-        // Public property for premiumHarvestExperiences
-        [JsonProperty("premiumHarvestExperiences")] // Custom JSON property name in camelCase
-        public int PremiumHarvestExperiences
-        {
-            get => _premiumHarvestExperiences;
-            set => _premiumHarvestExperiences = value;
-        }
-
-        // Private backing field for availableInShop
-        [SerializeField] // Serialize this private field in Unity
-        private bool _availableInShop;
-
-        // Public property for availableInShop
-        [JsonProperty("availableInShop")] // Custom JSON property name in camelCase
-        public bool AvailableInShop
-        {
-            get => _availableInShop;
-            set => _availableInShop = value;
-        }
-
-        // Private backing field for maxStack
-        [SerializeField] // Serialize this private field in Unity
-        private int _maxStack = 16;
-
-        // Public property for maxStack
-        [JsonProperty("maxStack")] // Custom JSON property name in camelCase
-        public int MaxStack
-        {
-            get => _maxStack;
-            set => _maxStack = value;
-        }
-
-        // Navigation property for ProductEntity (one-to-one relationship)
-        [JsonProperty("product")] // Custom JSON property name in camelCase
+        // Navigation properties (still use regular fields with Unity's [SerializeField] for object references)
+        [JsonProperty("product")]
         public ProductEntity Product { get; set; }
 
-        // Navigation property for InventoryTypeEntity (one-to-one relationship)
-        [JsonProperty("inventoryType")] // Custom JSON property name in camelCase
+        [JsonProperty("inventoryType")]
         public InventoryTypeEntity InventoryType { get; set; }
 
-        // Navigation property for SpinPrizeEntity (one-to-many relationship)
-        [JsonProperty("spinPrizes")] // Custom JSON property name in camelCase
-        public List<SpinPrizeEntity> SpinPrizes { get; set; } = new List<SpinPrizeEntity>();
+        [JsonProperty("spinPrizes")]
+        public List<SpinPrizeEntity> SpinPrizes { get; set; }
     }
 }

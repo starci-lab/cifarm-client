@@ -1,20 +1,13 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     public class FollowRequest
     {
-        [SerializeField]
-        private string _followedUserId;
-
+        // Public auto-property with getter and setter
         [JsonProperty("followedUserId")]
-        public string FollowedUserId
-        {
-            get => _followedUserId;
-            set => _followedUserId = value;
-        }
+        public string FollowedUserId { get; set; }
     }
 
     [Serializable]

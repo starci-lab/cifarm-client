@@ -1,34 +1,21 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     [Serializable]
     public class RecoverTileRequest
     {
-        [SerializeField]
-        private string _placedItemTileId;
-
+        // Auto-property with JSON serialization
         [JsonProperty("placedItemTileId")]
-        public string PlacedItemTileId
-        {
-            get => _placedItemTileId;
-            set => _placedItemTileId = value;
-        }
+        public string PlacedItemTileId { get; set; }
     }
 
     [Serializable]
     public class RecoverTileResponse
     {
-        [SerializeField]
-        private string _inventoryTileId;
-
+        // Auto-property with JSON serialization
         [JsonProperty("inventoryTileId")]
-        public string InventoryTileId
-        {
-            get => _inventoryTileId;
-            set => _inventoryTileId = value;
-        }
+        public string InventoryTileId { get; set; }
     }
 }

@@ -33,6 +33,6 @@ namespace CiFarm.Core.Databases
 
         // Spin prizes (One-to-many relationship to SpinPrizeEntity)
         [JsonProperty("spinPrizes")] // JSON property in camelCase
-        public List<SpinPrizeEntity> SpinPrizes { get; set; } = new List<SpinPrizeEntity>();
+        public List<SpinPrizeEntity> SpinPrizes { get; set; }
     }
 }

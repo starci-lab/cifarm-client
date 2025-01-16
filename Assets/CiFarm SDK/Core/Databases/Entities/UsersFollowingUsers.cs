@@ -8,46 +8,18 @@ namespace CiFarm.Core.Databases
     [Serializable]
     public class UsersFollowingUsersEntity : UuidAbstractEntity
     {
-        // Private backing fields for follower and followee IDs
-        [SerializeField] // Unity serialization
-        private Guid _followerId;
+        // Public properties for UsersFollowingUsersEntity without SerializeField attributes
 
         [JsonProperty("followerId")]
-        public Guid FollowerId
-        {
-            get => _followerId;
-            set => _followerId = value;
-        }
-
-        [SerializeField] // Unity serialization
-        private Guid _followeeId;
+        public Guid FollowerId { get; set; }
 
         [JsonProperty("followeeId")]
-        public Guid FolloweeId
-        {
-            get => _followeeId;
-            set => _followeeId = value;
-        }
-
-        // Navigation properties for follower and followee users
-        [SerializeField] // Unity serialization
-        private UserEntity _follower;
+        public Guid FolloweeId { get; set; }
 
         [JsonProperty("follower")]
-        public UserEntity Follower
-        {
-            get => _follower;
-            set => _follower = value;
-        }
-
-        [SerializeField] // Unity serialization
-        private UserEntity _followee;
+        public UserEntity Follower { get; set; }
 
         [JsonProperty("followee")]
-        public UserEntity Followee
-        {
-            get => _followee;
-            set => _followee = value;
-        }
+        public UserEntity Followee { get; set; }
     }
 }

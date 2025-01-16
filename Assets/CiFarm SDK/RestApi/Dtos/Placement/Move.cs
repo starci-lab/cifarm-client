@@ -1,31 +1,18 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     [Serializable]
     public class MoveRequest
     {
-        [SerializeField]
-        private string _placedItemId;
-
+        // Auto-property with JSON serialization
         [JsonProperty("placedItemId")]
-        public string PlacedItemId
-        {
-            get => _placedItemId;
-            set => _placedItemId = value;
-        }
+        public string PlacedItemId { get; set; }
 
-        [SerializeField]
-        private Position _position;
-
+        // Auto-property with JSON serialization
         [JsonProperty("position")]
-        public Position Position
-        {
-            get => _position;
-            set => _position = value;
-        }
+        public Position Position { get; set; }
     }
 
     [Serializable]

@@ -1,274 +1,82 @@
 using System;
 using System.Collections.Generic;
+using CiFarm.Core.Credentials;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable]
     public class UserEntity : UuidAbstractEntity
     {
-        // Private fields for UserEntity properties
-
-        [SerializeField]
-        private string _username;
+        // Public properties for UserEntity without the SerializeField attribute
 
         [JsonProperty("username")]
-        public string Username
-        {
-            get => _username;
-            set => _username = value;
-        }
-
-        [SerializeField]
-        private string _chainKey;
+        public string Username { get; set; }
 
         [JsonProperty("chainKey")]
-        public string ChainKey
-        {
-            get => _chainKey;
-            set => _chainKey = value;
-        }
-
-        [SerializeField]
-        private string _network;
+        public SupportedChainKey ChainKey { get; set; }
 
         [JsonProperty("network")]
-        public string Network
-        {
-            get => _network;
-            set => _network = value;
-        }
-
-        [SerializeField]
-        private string _accountAddress;
+        public Network Network { get; set; }
 
         [JsonProperty("accountAddress")]
-        public string AccountAddress
-        {
-            get => _accountAddress;
-            set => _accountAddress = value;
-        }
-
-        [SerializeField]
-        private int _golds;
+        public string AccountAddress { get; set; }
 
         [JsonProperty("golds")]
-        public int Golds
-        {
-            get => _golds;
-            set => _golds = value;
-        }
-
-        [SerializeField]
-        private float _tokens;
+        public int Golds { get; set; }
 
         [JsonProperty("tokens")]
-        public float Tokens
-        {
-            get => _tokens;
-            set => _tokens = value;
-        }
-
-        [SerializeField]
-        private int _experiences;
+        public float Tokens { get; set; }
 
         [JsonProperty("experiences")]
-        public int Experiences
-        {
-            get => _experiences;
-            set => _experiences = value;
-        }
-
-        [SerializeField]
-        private int _energy;
+        public int Experiences { get; set; }
 
         [JsonProperty("energy")]
-        public int Energy
-        {
-            get => _energy;
-            set => _energy = value;
-        }
-
-        [SerializeField]
-        private float _energyRegenTime;
+        public int Energy { get; set; }
 
         [JsonProperty("energyRegenTime")]
-        public float EnergyRegenTime
-        {
-            get => _energyRegenTime;
-            set => _energyRegenTime = value;
-        }
-
-        [SerializeField]
-        private int _level;
+        public float EnergyRegenTime { get; set; }
 
         [JsonProperty("level")]
-        public int Level
-        {
-            get => _level;
-            set => _level = value;
-        }
-
-        [SerializeField]
-        private int _tutorialIndex;
+        public int Level { get; set; }
 
         [JsonProperty("tutorialIndex")]
-        public int TutorialIndex
-        {
-            get => _tutorialIndex;
-            set => _tutorialIndex = value;
-        }
-
-        [SerializeField]
-        private int _stepIndex;
+        public int TutorialIndex { get; set; }
 
         [JsonProperty("stepIndex")]
-        public int StepIndex
-        {
-            get => _stepIndex;
-            set => _stepIndex = value;
-        }
-
-        [SerializeField]
-        private int _dailyRewardStreak;
+        public int StepIndex { get; set; }
 
         [JsonProperty("dailyRewardStreak")]
-        public int DailyRewardStreak
-        {
-            get => _dailyRewardStreak;
-            set => _dailyRewardStreak = value;
-        }
-
-        [SerializeField]
-        private DateTime? _dailyRewardLastClaimTime;
+        public int DailyRewardStreak { get; set; }
 
         [JsonProperty("dailyRewardLastClaimTime")]
-        public DateTime? DailyRewardLastClaimTime
-        {
-            get => _dailyRewardLastClaimTime;
-            set => _dailyRewardLastClaimTime = value;
-        }
-
-        [SerializeField]
-        private int _dailyRewardNumberOfClaim;
+        public DateTime? DailyRewardLastClaimTime { get; set; }
 
         [JsonProperty("dailyRewardNumberOfClaim")]
-        public int DailyRewardNumberOfClaim
-        {
-            get => _dailyRewardNumberOfClaim;
-            set => _dailyRewardNumberOfClaim = value;
-        }
-
-        [SerializeField]
-        private DateTime? _spinLastTime;
+        public int DailyRewardNumberOfClaim { get; set; }
 
         [JsonProperty("spinLastTime")]
-        public DateTime? SpinLastTime
-        {
-            get => _spinLastTime;
-            set => _spinLastTime = value;
-        }
-
-        [SerializeField]
-        private int _spinCount;
+        public DateTime? SpinLastTime { get; set; }
 
         [JsonProperty("spinCount")]
-        public int SpinCount
-        {
-            get => _spinCount;
-            set => _spinCount = value;
-        }
-
-        [SerializeField]
-        private string _visitingUserId;
-
-        [JsonProperty("visitingUserId")]
-        public string VisitingUserId
-        {
-            get => _visitingUserId;
-            set => _visitingUserId = value;
-        }
-
-        [SerializeField]
-        private bool? _isRandom;
-
-        [JsonProperty("isRandom")]
-        public bool? IsRandom
-        {
-            get => _isRandom;
-            set => _isRandom = value;
-        }
-
-        // Private backing fields for navigation properties
-        [SerializeField]
-        private UserEntity _visitingUser;
-
-        [JsonProperty("visitingUser")]
-        public UserEntity VisitingUser
-        {
-            get => _visitingUser;
-            set => _visitingUser = value;
-        }
-
-        [SerializeField]
-        private List<InventoryEntity> _inventories;
+        public int SpinCount { get; set; }
 
         [JsonProperty("inventories")]
-        public List<InventoryEntity> Inventories
-        {
-            get => _inventories;
-            set => _inventories = value;
-        }
-
-        [SerializeField]
-        private List<PlacedItemEntity> _placedItems;
+        public List<InventoryEntity> Inventories { get; set; }
 
         [JsonProperty("placedItems")]
-        public List<PlacedItemEntity> PlacedItems
-        {
-            get => _placedItems;
-            set => _placedItems = value;
-        }
-
-        [SerializeField]
-        private List<DeliveringProductEntity> _deliveringProducts;
+        public List<PlacedItemEntity> PlacedItems { get; set; }
 
         [JsonProperty("deliveringProducts")]
-        public List<DeliveringProductEntity> DeliveringProducts
-        {
-            get => _deliveringProducts;
-            set => _deliveringProducts = value;
-        }
-
-        [SerializeField]
-        private List<UsersFollowingUsersEntity> _followingUsers;
+        public List<DeliveringProductEntity> DeliveringProducts { get; set; }
 
         [JsonProperty("followingUsers")]
-        public List<UsersFollowingUsersEntity> FollowingUsers
-        {
-            get => _followingUsers;
-            set => _followingUsers = value;
-        }
-
-        [SerializeField]
-        private List<UsersFollowingUsersEntity> _followedByUsers;
+        public List<UsersFollowingUsersEntity> FollowingUsers { get; set; }
 
         [JsonProperty("followedByUsers")]
-        public List<UsersFollowingUsersEntity> FollowedByUsers
-        {
-            get => _followedByUsers;
-            set => _followedByUsers = value;
-        }
-
-        [SerializeField]
-        private List<SessionEntity> _sessions;
+        public List<UsersFollowingUsersEntity> FollowedByUsers { get; set; }
 
         [JsonProperty("sessions")]
-        public List<SessionEntity> Sessions
-        {
-            get => _sessions;
-            set => _sessions = value;
-        }
+        public List<SessionEntity> Sessions { get; set; }
     }
 }

@@ -1,130 +1,57 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable] // Makes the class serializable
     public class AnimalInfoEntity : UuidAbstractEntity
     {
-        // Private backing field for currentGrowthTime
-        [SerializeField] // Expose this field for Unity serialization
-        private float _currentGrowthTime = 0;
-
-        // Public property with getter and setter
+        // Public property for currentGrowthTime
         [JsonProperty("currentGrowthTime")] // Custom JSON property name
-        public float CurrentGrowthTime
-        {
-            get => _currentGrowthTime;
-            set => _currentGrowthTime = value;
-        }
+        public float CurrentGrowthTime { get; set; }
 
-        // Private backing field for currentHungryTime
-        [SerializeField] // Expose this field for Unity serialization
-        private float _currentHungryTime = 0;
-
-        // Public property with getter and setter
+        // Public property for currentHungryTime
         [JsonProperty("currentHungryTime")] // Custom JSON property name
-        public float CurrentHungryTime
-        {
-            get => _currentHungryTime;
-            set => _currentHungryTime = value;
-        }
+        public float CurrentHungryTime { get; set; }
 
-        // Private backing field for currentYieldTime
-        [SerializeField] // Expose this field for Unity serialization
-        private float _currentYieldTime = 0;
-
-        // Public property with getter and setter
+        // Public property for currentYieldTime
         [JsonProperty("currentYieldTime")] // Custom JSON property name
-        public float CurrentYieldTime
-        {
-            get => _currentYieldTime;
-            set => _currentYieldTime = value;
-        }
+        public float CurrentYieldTime { get; set; }
 
-        // Private backing field for isAdult
-        [SerializeField] // Expose this field for Unity serialization
-        private bool _isAdult = false;
-
-        // Public property with getter and setter
+        // Public property for isAdult
         [JsonProperty("isAdult")] // Custom JSON property name
-        public bool IsAdult
-        {
-            get => _isAdult;
-            set => _isAdult = value;
-        }
+        public bool IsAdult { get; set; }
 
-        // Private backing field for animalId
-        [SerializeField] // Expose this field for Unity serialization
-        private string _animalId;
-
-        // Public property with getter and setter
+        // Public property for animalId
         [JsonProperty("animalId")] // Custom JSON property name
-        public string AnimalId
-        {
-            get => _animalId;
-            set => _animalId = value;
-        }
+        public string AnimalId { get; set; }
 
-        // Animal reference (navigation property)
+        // Navigation property for AnimalEntity
         [JsonProperty("animal")] // Custom JSON property name
         public AnimalEntity Animal { get; set; }
 
-        // Private backing field for currentState
-        [SerializeField] // Expose this field for Unity serialization
-        private AnimalCurrentState _currentState = AnimalCurrentState.Normal;
-
-        // Public property with getter and setter
+        // Public property for currentState
         [JsonProperty("currentState")] // Custom JSON property name
-        public AnimalCurrentState CurrentState
-        {
-            get => _currentState;
-            set => _currentState = value;
-        }
+        public AnimalCurrentState CurrentState { get; set; }
 
-        // Private backing field for harvestQuantityRemaining (nullable)
-        [SerializeField] // Expose this field for Unity serialization
-        private int? _harvestQuantityRemaining;
-
-        // Public property with getter and setter
+        // Public property for harvestQuantityRemaining (nullable)
         [JsonProperty("harvestQuantityRemaining")] // Custom JSON property name
-        public int? HarvestQuantityRemaining
-        {
-            get => _harvestQuantityRemaining;
-            set => _harvestQuantityRemaining = value;
-        }
+        public int? HarvestQuantityRemaining { get; set; }
 
-        // Thiefed by users (many-to-many relationship)
+        // Public property for thiefedBy (many-to-many relationship)
         [JsonProperty("thiefedBy")] // Custom JSON property name
-        public List<UserEntity> ThiefedBy { get; set; } = new List<UserEntity>();
+        public List<UserEntity> ThiefedBy { get; set; }
 
-        // Private backing field for alreadySick
-        [SerializeField] // Expose this field for Unity serialization
-        private bool _alreadySick = false;
-
-        // Public property with getter and setter
+        // Public property for alreadySick
         [JsonProperty("alreadySick")] // Custom JSON property name
-        public bool AlreadySick
-        {
-            get => _alreadySick;
-            set => _alreadySick = value;
-        }
+        public bool AlreadySick { get; set; }
 
-        // Private backing field for placedItemId
-        [SerializeField] // Expose this field for Unity serialization
-        private string _placedItemId;
-
-        // Public property with getter and setter
+        // Public property for placedItemId
         [JsonProperty("placedItemId")] // Custom JSON property name
-        public string PlacedItemId
-        {
-            get => _placedItemId;
-            set => _placedItemId = value;
-        }
+        public string PlacedItemId { get; set; }
 
-        // Placed item reference (one-to-one relationship)
+        // Navigation property for PlacedItemEntity
         [JsonProperty("placedItem")] // Custom JSON property name
         public PlacedItemEntity PlacedItem { get; set; }
     }

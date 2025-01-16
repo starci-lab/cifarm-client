@@ -10,14 +10,8 @@ namespace CiFarm.RestApi
     [Serializable]
     public class RequestMessageResponse
     {
-        [SerializeField]
-        private string _message;
-
+        // Convert the private field to a public property with automatic getter and setter
         [JsonProperty("message")]
-        public string Message
-        {
-            get => _message;
-            set => _message = value;
-        }
+        public string Message { get; set; }
     }
 }

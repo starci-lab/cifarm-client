@@ -1,21 +1,14 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     [Serializable]
     public class HelpUseHerbicideRequest : NeighborAndUserIdRequest
     {
-        [SerializeField]
-        private string _placedItemTileId;
-
+        // Public auto-property for PlacedItemTileId with JSON serialization
         [JsonProperty("placedItemTileId")]
-        public string PlacedItemTileId
-        {
-            get => _placedItemTileId;
-            set => _placedItemTileId = value;
-        }
+        public string PlacedItemTileId { get; set; }
     }
 
     [Serializable]

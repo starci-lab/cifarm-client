@@ -1,21 +1,14 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     [Serializable]
     public class UnfollowRequest
     {
-        [SerializeField]
-        private string _unfollowedUserId;
-
+        // Public auto-property for UnfollowedUserId with JSON serialization
         [JsonProperty("unfollowedUserId")]
-        public string UnfollowedUserId
-        {
-            get => _unfollowedUserId;
-            set => _unfollowedUserId = value;
-        }
+        public string UnfollowedUserId { get; set; }
     }
 
     [Serializable]

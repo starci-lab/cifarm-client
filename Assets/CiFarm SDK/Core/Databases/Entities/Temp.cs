@@ -8,61 +8,35 @@ namespace CiFarm.Core.Databases
     [Serializable]
     public class TempEntity : StringAbstractEntity
     {
-        // Private backing field for value
-        [SerializeField]
-        private string _value;
-
-        // Public property for value
+        // Public property for value without SerializeField
         [JsonProperty("value")]
-        public string Value
-        {
-            get => _value;
-            set => _value = value;
-        }
+        public string Value { get; set; }
     }
 
     // Represents the last growth schedule for animal
     [Serializable]
     public class AnimalGrowthLastSchedule
     {
-        [SerializeField]
-        private DateTime _date;
-
+        // Public property for date without SerializeField
         [JsonProperty("date")]
-        public DateTime Date
-        {
-            get => _date;
-            set => _date = value;
-        }
+        public DateTime Date { get; set; }
     }
 
     // Represents the last growth schedule for crops
     [Serializable]
     public class CropGrowthLastSchedule
     {
-        [SerializeField]
-        private DateTime _date;
-
+        // Public property for date without SerializeField
         [JsonProperty("date")]
-        public DateTime Date
-        {
-            get => _date;
-            set => _date = value;
-        }
+        public DateTime Date { get; set; }
     }
 
     // Represents the last growth schedule for energy regeneration
     [Serializable]
     public class EnergyGrowthLastSchedule
     {
-        [SerializeField]
-        private DateTime _date;
-
+        // Public property for date without SerializeField
         [JsonProperty("date")]
-        public DateTime Date
-        {
-            get => _date;
-            set => _date = value;
-        }
+        public DateTime Date { get; set; }
     }
 }

@@ -1,31 +1,17 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.RestApi
 {
     [Serializable]
     public class PlantSeedRequest
     {
-        [SerializeField]
-        private string _inventorySeedId;
-
+        // Auto-properties with JSON serialization
         [JsonProperty("inventorySeedId")]
-        public string InventorySeedId
-        {
-            get => _inventorySeedId;
-            set => _inventorySeedId = value;
-        }
-
-        [SerializeField]
-        private string _placedItemTileId;
+        public string InventorySeedId { get; set; }
 
         [JsonProperty("placedItemTileId")]
-        public string PlacedItemTileId
-        {
-            get => _placedItemTileId;
-            set => _placedItemTileId = value;
-        }
+        public string PlacedItemTileId { get; set; }
     }
 
     [Serializable]

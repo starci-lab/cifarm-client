@@ -2,9 +2,14 @@ using System.Collections;
 using AYellowpaper.SerializedCollections;
 using CiFarm.Core.Credentials;
 using CiFarm.GraphQL;
+using CiFarm.IO;
 using CiFarm.RestApi;
 using CiFarm.Utils;
+using Cysharp.Threading.Tasks;
 using Firesplash.GameDevAssets.SocketIOPlus;
+using Imba.Utils;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace CiFarm
 {
@@ -14,7 +19,7 @@ namespace CiFarm
     /// as well as authentication and credentials management.
     /// </summary>
     [UnityEngine.AddComponentMenu("CiFarm/CiFarm SDK")]
-    public class CiFarmSDK : SingletonPersistent<CiFarmSDK>
+    public class CiFarmSDK : ManualSingletonMono<CiFarmSDK>
     {
         #region REST API Configuration
         /// <summary>
@@ -72,13 +77,6 @@ namespace CiFarm
             { Environment.Staging, "https://ws.cifarm.staging.starci.net" },
             { Environment.Production, "https://ws.cifarm.starci.net" },
         };
-
-        /// <summary>
-        /// Socket.IO client instance used for real-time communication with the server.
-        /// </summary>
-        [UnityEngine.Tooltip("Set the Socket.IO client instance, leave empty to create a new one")]
-        [UnityEngine.SerializeField]
-        private SocketIOClient _socketIOClient;
         #endregion
 
         #region Common Configuration
@@ -120,11 +118,23 @@ namespace CiFarm
         [UnityEngine.Header("Editor")]
         [UnityEngine.Tooltip("Credentials for the developer")]
         [UnityEngine.SerializeField]
-        private Credentials _credentials;
+        private Credentials _credentials = null;
 
         public void SetCredentials(Credentials credentials)
         {
             _credentials = credentials;
+        }
+
+        /// <summary>
+        /// Flag to indicate whether the SDK is authenticated and ready to use.
+        /// </summary>
+        [UnityEngine.SerializeField]
+        private bool _authenticated = false;
+
+        public bool Authenticated
+        {
+            get => _authenticated;
+            set => _authenticated = value;
         }
 
         /// <summary>
@@ -157,12 +167,42 @@ namespace CiFarm
         public GraphQLClient GraphQLClient { get; set; }
 
         /// <summary>
+        /// IO Client for managing real-time communication with the server.
+        /// </summary>
+        public IOClient IOClient { get; set; }
+
+        /// <summary>
         /// Socket.IO Client for managing real-time communication with the server.
         /// </summary>
+        [UnityEngine.Tooltip("Set the Socket.IO client instance, leave empty to create a new one")]
+        [UnityEngine.SerializeField]
+        private SocketIOClient _socketIOClient;
         public SocketIOClient SocketIOClient
         {
             get => _socketIOClient;
             set => _socketIOClient = value;
+        }
+
+        /// <summary>
+        /// Event to be invoked when the authentication process is successful.
+        /// </summary>
+        [SerializeField]
+        private UnityAction _onAuthenticatedSuccess;
+        public UnityAction OnAuthenticatedSuccess
+        {
+            get => _onAuthenticatedSuccess;
+            set => _onAuthenticatedSuccess = value;
+        }
+
+        /// <summary>
+        /// Event to be invoked when the authentication process fails.
+        /// </summary>
+        [SerializeField]
+        private UnityAction _onAuthenticatedFailed;
+        public UnityAction OnAuthenticatedFailed
+        {
+            get => _onAuthenticatedFailed;
+            set => _onAuthenticatedFailed = value;
         }
 
         /// <summary>
@@ -180,10 +220,17 @@ namespace CiFarm
         /// </summary>
         private IEnumerator AuthenticateCoroutine()
         {
+            var task = TryRefreshAuthTokenAsync();
+            yield return new WaitUntil(() => task.Status.IsCompletedSuccessfully());
+
+            if (task.GetAwaiter().GetResult())
+            {
+                yield return null;
+            }
 #if UNITY_EDITOR
             AuthenticateAsync();
 #else
-            yield return new WaitUntil(() => _credentials != null);
+            yield return new WaitUntil(() => !string.IsNullOrEmpty(_credentials.AccountAddress));
             AuthenticateAsync(false);
 #endif
             yield return null;
@@ -193,45 +240,89 @@ namespace CiFarm
         /// Handles the actual authentication process asynchronously.
         /// This involves generating a signature and verifying it to obtain access tokens.
         /// </summary>
+
+
+        private async UniTask<bool> TryRefreshAuthTokenAsync()
+        {
+            var refreshToken = AuthToken.GetRefreshToken();
+            if (!string.IsNullOrEmpty(refreshToken))
+            {
+                try
+                {
+                    var refreshTokenResponse = await RestApiClient.RefreshAsync(
+                        new() { RefreshToken = refreshToken }
+                    );
+                    AuthToken.Save(
+                        refreshTokenResponse.AccessToken,
+                        refreshTokenResponse.RefreshToken
+                    );
+                    _authenticated = true;
+                    return true;
+                }
+                catch (UnityWebRequestException error)
+                {
+                    ConsoleLogger.LogError(
+                        $"Error refreshing token: {error.Message}, try using signature..."
+                    );
+                    return false;
+                }
+            }
+            return false;
+        }
+
         private async void AuthenticateAsync(bool editor = true)
         {
-            if (editor)
+            try
             {
-                // Generate signature for the editor using account and network details
-                var generateSignatureResponse = await RestApiClient.GenerateSignatureAsync(
+                if (editor)
+                {
+                    // Generate signature for the editor using account and network details
+                    var generateSignatureResponse = await RestApiClient.GenerateSignatureAsync(
+                        new()
+                        {
+                            ChainKey = _chainKey,
+                            Network = _network,
+                            AccountNumber = _accountNumber,
+                        }
+                    );
+
+                    // Set the credentials with the generated signature and other details
+                    _credentials.ChainKey = generateSignatureResponse.ChainKey;
+                    _credentials.Message = generateSignatureResponse.Message;
+                    _credentials.PublicKey = generateSignatureResponse.PublicKey;
+                    _credentials.Signature = generateSignatureResponse.Signature;
+                    _credentials.Network = generateSignatureResponse.Network;
+                    _credentials.TelegramInitDataRaw =
+                        generateSignatureResponse.TelegramInitDataRaw;
+                    _credentials.AccountAddress = generateSignatureResponse.AccountAddress;
+                }
+
+                // Verify the generated signature and obtain the authentication token
+                var verifyMessageResponse = await RestApiClient.VerifyMessageAsync(
                     new()
                     {
-                        ChainKey = _chainKey,
-                        Network = _network,
-                        AccountNumber = _accountNumber,
+                        Message = _credentials.Message,
+                        PublicKey = _credentials.PublicKey,
+                        Signature = _credentials.Signature,
+                        ChainKey = _credentials.ChainKey,
+                        Network = _credentials.Network,
+                        AccountAddress = _credentials.AccountAddress,
                     }
                 );
-
-                // Set the credentials with the generated signature and other details
-                _credentials.ChainKey = generateSignatureResponse.ChainKey;
-                _credentials.Message = generateSignatureResponse.Message;
-                _credentials.PublicKey = generateSignatureResponse.PublicKey;
-                _credentials.Signature = generateSignatureResponse.Signature;
-                _credentials.Network = generateSignatureResponse.Network;
-                _credentials.TelegramInitDataRaw = generateSignatureResponse.TelegramInitDataRaw;
-                _credentials.AccountAddress = generateSignatureResponse.AccountAddress;
+                // Save the authentication tokens (access and refresh tokens)
+                AuthToken.Save(
+                    verifyMessageResponse.AccessToken,
+                    verifyMessageResponse.RefreshToken
+                );
+                _authenticated = true;
+                _onAuthenticatedSuccess?.Invoke();
             }
-
-            // Verify the generated signature and obtain the authentication token
-            var verifyMessageResponse = await RestApiClient.VerifyMessageAsync(
-                new()
-                {
-                    Message = _credentials.Message,
-                    PublicKey = _credentials.PublicKey,
-                    Signature = _credentials.Signature,
-                    ChainKey = _credentials.ChainKey,
-                    Network = _credentials.Network,
-                    AccountAddress = _credentials.AccountAddress,
-                }
-            );
-
-            // Save the authentication tokens (access and refresh tokens)
-            AuthToken.Save(verifyMessageResponse.AccessToken, verifyMessageResponse.RefreshToken);
+            catch (UnityWebRequestException error)
+            {
+                ConsoleLogger.LogError($"Error authenticating: {error.Message}");
+                _onAuthenticatedFailed?.Invoke();
+                _authenticated = false;
+            }
         }
 
         /// <summary>
@@ -275,8 +366,17 @@ namespace CiFarm
                 SocketIOClient.serverAddress = _socketIoUrl;
             }
 
+            if (IOClient == null)
+            {
+                IOClient = gameObject.AddComponent<IOClient>();
+            }
+
             ConsoleLogger.LogSuccess("CiFarm SDK initialized successfully");
         }
+
+        /// <summary>
+        /// On Authentication Success
+        /// </summary>
     }
 
     /// <summary>

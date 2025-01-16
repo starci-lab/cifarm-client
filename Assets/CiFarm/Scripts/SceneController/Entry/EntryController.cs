@@ -1,5 +1,4 @@
 using System.Collections;
-using CiFarm.Scripts.Services.NakamaServices.BaseServices;
 using DG.Tweening;
 using Imba.Audio;
 using Imba.UI;
@@ -12,21 +11,30 @@ namespace CiFarm.Scripts.SceneController.Entry
 {
     public class EntryController : MonoBehaviour
     {
-        [SerializeField] private GameObject      services;
-        [SerializeField] private Image           loaderBar;
-        [SerializeField] private TextMeshProUGUI details;
-        [SerializeField] private GameObject      loadingGroup;
-        [SerializeField] private GameObject      playButton;
+        [SerializeField]
+        private GameObject services;
 
-        private float  fillAmount    = 0;
+        [SerializeField]
+        private Image loaderBar;
+
+        [SerializeField]
+        private TextMeshProUGUI details;
+
+        [SerializeField]
+        private GameObject loadingGroup;
+
+        [SerializeField]
+        private GameObject playButton;
+
+        private float fillAmount = 0;
         private string loadingDetais = "Loading";
 
         private void Awake()
         {
             Application.targetFrameRate = 60;
 
-            NakamaInitializerService.Instance.OnLoginError   = OnLoginError;
-            NakamaInitializerService.Instance.OnLoginSuccess = OnLoginSuccess;
+            CiFarmSDK.Instance.OnAuthenticatedFailed = OnAuthenticationFailed;
+            CiFarmSDK.Instance.OnAuthenticatedSuccess = OnAuthenticationSuccess;
 
             DontDestroyOnLoad(services);
         }
@@ -37,7 +45,8 @@ namespace CiFarm.Scripts.SceneController.Entry
             UpdateFillAmount();
             StartCoroutine(PlayDetailAnimation());
 
-            yield return new WaitUntil(() => NakamaInitializerService.Instance.IsLogin);
+            yield return null;
+            //yield return new WaitUntil(() => NakamaInitializerService.Instance.IsLogin);
             fillAmount = 1f;
             UpdateFillAmount();
         }
@@ -46,7 +55,9 @@ namespace CiFarm.Scripts.SceneController.Entry
         {
             if (fillAmount > 0.99f)
             {
-                loaderBar.DOFillAmount(fillAmount, Random.Range(0.5f, 1f)).OnComplete(ShowPlayButton)
+                loaderBar
+                    .DOFillAmount(fillAmount, Random.Range(0.5f, 1f))
+                    .OnComplete(ShowPlayButton)
                     .SetEase(Ease.Linear);
             }
             else
@@ -62,7 +73,7 @@ namespace CiFarm.Scripts.SceneController.Entry
             {
                 string dots = new string('.', count);
                 details.text = loadingDetais + dots;
-                count        = (count % 3) + 1;
+                count = (count % 3) + 1;
                 yield return new WaitForSeconds(0.5f);
             }
         }
@@ -85,20 +96,25 @@ namespace CiFarm.Scripts.SceneController.Entry
             });
         }
 
-        public void OnLoginSuccess()
+        public void OnAuthenticationSuccess()
         {
             fillAmount = 1;
             UpdateFillAmount();
         }
 
-        public void OnLoginError()  
+        public void OnAuthenticationFailed()
         {
-            UIManager.Instance.PopupManager.ShowMessageDialog("Error", "Login error",
-                UIMessageBox.MessageBoxType.Retry, action =>
-                {
-                    NakamaInitializerService.Instance.AuthenticateAsync();
-                    return true;
-                });
+            UIManager.Instance.PopupManager.ShowMessageDialog(
+                "Error",
+                "Login error"
+            // no need to retry since the SDK handles it
+            // UIMessageBox.MessageBoxType.Retry,
+            // action =>
+            // {
+            //     //NakamaInitializerService.Instance.AuthenticateAsync();
+            //     return true;
+            // }
+            );
         }
     }
 }

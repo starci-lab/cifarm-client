@@ -1,74 +1,35 @@
 using System;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
-    [Serializable]
+    [Serializable] // Makes the class serializable for Unity
     public class BuildingInfoEntity : UuidAbstractEntity
     {
-        // Private fields for BuildingInfoEntity properties
-
-        [SerializeField]
-        private int? _currentUpgrade;
-
+        // Public property for currentUpgrade
         [JsonProperty("currentUpgrade")]
-        public int? CurrentUpgrade
-        {
-            get => _currentUpgrade;
-            set => _currentUpgrade = value;
-        }
+        public int? CurrentUpgrade { get; set; }
 
-        [SerializeField]
-        private int? _occupancy;
-
+        // Public property for occupancy
         [JsonProperty("occupancy")]
-        public int? Occupancy
-        {
-            get => _occupancy;
-            set => _occupancy = value;
-        }
+        public int? Occupancy { get; set; }
 
-        [SerializeField]
-        private string _buildingId;
-
+        // Public property for buildingId
         [JsonProperty("buildingId")]
-        public string BuildingId
-        {
-            get => _buildingId;
-            set => _buildingId = value;
-        }
+        public string BuildingId { get; set; }
 
-        // Navigation properties (One-to-Many and One-to-One relationships)
-
-        [SerializeField]
-        private BuildingEntity _building;
-
+        // Navigation property for BuildingEntity (one-to-many relationship)
         [JsonProperty("building")]
-        public BuildingEntity Building
-        {
-            get => _building;
-            set => _building = value;
-        }
+        public BuildingEntity Building { get; set; }
 
-        [SerializeField]
-        private string _placedItemId;
-
+        // Public property for placedItemId
         [JsonProperty("placedItemId")]
-        public string PlacedItemId
-        {
-            get => _placedItemId;
-            set => _placedItemId = value;
-        }
+        public string PlacedItemId { get; set; }
 
-        [SerializeField]
-        private PlacedItemEntity _placedItem;
-
+        // Navigation property for PlacedItemEntity (one-to-one relationship)
         [JsonProperty("placedItem")]
-        public PlacedItemEntity PlacedItem
-        {
-            get => _placedItem;
-            set => _placedItem = value;
-        }
+        public PlacedItemEntity PlacedItem { get; set; }
+
+        // Optionally, you could also consider adding a constructor if you need to initialize any fields at the time of instantiation.
     }
 }

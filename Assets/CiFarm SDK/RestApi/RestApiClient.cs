@@ -162,6 +162,8 @@ namespace CiFarm.RestApi
 
                 // Deserialize the response body to the specified response type
                 string responseBody = webRequest.downloadHandler.text;
+
+                ConsoleLogger.LogSuccess($"POST request to '{endpoint}' succeeded.");
                 return JsonConvert.DeserializeObject<TResponse>(
                     responseBody,
                     new EnumAsStringConverter<TResponse>() // Use custom converter for enums

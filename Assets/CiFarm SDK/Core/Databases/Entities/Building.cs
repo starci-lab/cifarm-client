@@ -1,78 +1,37 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable] // Makes the class serializable for Unity
     public class BuildingEntity : UuidAbstractEntity
     {
-        // Private backing field for availableInShop
-        [SerializeField] // Expose this field for Unity serialization
-        private bool _availableInShop;
-
-        // Public property with getter and setter
+        // Public property for availableInShop
         [JsonProperty("available_in_shop")] // Custom JSON property name
-        public bool AvailableInShop
-        {
-            get => _availableInShop;
-            set => _availableInShop = value;
-        }
+        public bool AvailableInShop { get; set; }
 
-        // Private backing field for type (enum)
-        [SerializeField] // Expose this field for Unity serialization
-        private AnimalType? _type;
-
-        // Public property with getter and setter
+        // Public property for type (enum)
         [JsonProperty("type")] // Custom JSON property name
-        public AnimalType? Type
-        {
-            get => _type;
-            set => _type = value;
-        }
+        public AnimalType? Type { get; set; }
 
-        // Private backing field for maxUpgrade
-        [SerializeField] // Expose this field for Unity serialization
-        private int _maxUpgrade;
-
-        // Public property with getter and setter
+        // Public property for maxUpgrade
         [JsonProperty("max_upgrade")] // Custom JSON property name
-        public int MaxUpgrade
-        {
-            get => _maxUpgrade;
-            set => _maxUpgrade = value;
-        }
+        public int MaxUpgrade { get; set; }
 
-        // Private backing field for price (nullable)
-        [SerializeField] // Expose this field for Unity serialization
-        private int? _price;
-
-        // Public property with getter and setter
+        // Public property for price (nullable)
         [JsonProperty("price")] // Custom JSON property name
-        public int? Price
-        {
-            get => _price;
-            set => _price = value;
-        }
+        public int? Price { get; set; }
 
-        // List of upgrades (One-to-many relationship) - No initialization here
+        // List of upgrades (One-to-many relationship)
         [JsonProperty("upgrades")] // Custom JSON property name
         public List<UpgradeEntity> Upgrades { get; set; }
 
-        // Private backing field for placedItemTypeId
-        [SerializeField] // Expose this field for Unity serialization
-        private string _placedItemTypeId;
-
-        // Public property with getter and setter
+        // Public property for placedItemTypeId
         [JsonProperty("placed_item_type_id")] // Custom JSON property name
-        public string PlacedItemTypeId
-        {
-            get => _placedItemTypeId;
-            set => _placedItemTypeId = value;
-        }
+        public string PlacedItemTypeId { get; set; }
 
-        // Placed item type (One-to-one relationship) - No initialization here
+        // Placed item type (One-to-one relationship)
         [JsonProperty("placed_item_type")] // Custom JSON property name
         public PlacedItemTypeEntity PlacedItemType { get; set; }
     }
