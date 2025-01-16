@@ -71,6 +71,18 @@ namespace CiFarm.DataManager
             set => _spinPrizes = value;
         }
 
+        /// <summary>
+        /// List of spin slots
+        /// </summary>
+        [SerializeField]
+        private List<SpinSlotEntity> _spinSlots;
+
+        public List<SpinSlotEntity> SpinSlots
+        {
+            get => _spinSlots;
+            set => _spinSlots = value;
+        }
+
         public IEnumerator Start()
         {
             yield return new WaitUntil(
@@ -82,6 +94,7 @@ namespace CiFarm.DataManager
             FetchCropsAsync();
             FetchPlacedItemTypesAsync();
             FetchSpinPrizesAsync();
+            FetchSpinSlotsAsync();
         }
 
         public async void FetchAnimalsAsync()
@@ -112,6 +125,12 @@ namespace CiFarm.DataManager
         {
             SpinPrizes = await CiFarmSDK.Instance.GraphQLClient.QuerySpinPrizesAsync();
             ConsoleLogger.LogVerbose($"Fetched {SpinPrizes.Count} spin prizes");
+        }
+
+        public async void FetchSpinSlotsAsync()
+        {
+            SpinSlots = await CiFarmSDK.Instance.GraphQLClient.QuerySpinSlotsAsync();
+            ConsoleLogger.LogVerbose($"Fetched {SpinSlots.Count} spin slots");
         }
     }
 }
