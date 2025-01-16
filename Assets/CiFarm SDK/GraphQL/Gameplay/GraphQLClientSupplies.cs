@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CiFarm.Core.Databases;
+using CiFarm.Utils;
 using Cysharp.Threading.Tasks;
 
 namespace CiFarm.GraphQL
@@ -29,13 +30,9 @@ query($args: ID!) {{
             return await QueryAsync<GraphQLVariables<Guid>, SupplyEntity>(name, query, variables);
         }
 
-        public async UniTask<List<SupplyEntity>> QuerySuppliesAsync(
-            GetSuppliesArgs args,
-            string query = null
-        )
+        public async UniTask<List<SupplyEntity>> QuerySuppliesAsync(string query = null)
         {
             var name = "supplies";
-            var variables = new GraphQLVariables<GetSuppliesArgs>() { Args = args };
             query ??=
                 $@"
 query($args: GetSuppliesArgs!) {{
@@ -51,11 +48,7 @@ query($args: GetSuppliesArgs!) {{
     }}
 }}";
 
-            return await QueryAsync<GraphQLVariables<GetSuppliesArgs>, List<SupplyEntity>>(
-                name,
-                query,
-                variables
-            );
+            return await QueryAsync<Empty, List<SupplyEntity>>(name, query);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CiFarm.Core.Databases;
+using CiFarm.Utils;
 using Cysharp.Threading.Tasks;
 
 namespace CiFarm.GraphQL
@@ -16,44 +17,52 @@ namespace CiFarm.GraphQL
 query($args: ID!) {{
     {name}(id: $args) {{
         availableInShop
-        createdAt
         id
         maxUpgrade
         price
         type
-        updatedAt
+        placedItemType {{
+            id
+            type
+        }}
+        upgrades {{
+            id
+            capacity
+            upgradePrice
+            upgradeLevel
+        }}
     }}
 }}";
 
             return await QueryAsync<GraphQLVariables<Guid>, BuildingEntity>(name, query, variables);
         }
 
-        public async UniTask<List<BuildingEntity>> QueryBuildingsAsync(
-            GetBuildingsArgs args,
-            string query = null
-        )
+        public async UniTask<List<BuildingEntity>> QueryBuildingsAsync(string query = null)
         {
             var name = "buildings";
-            var variables = new GraphQLVariables<GetBuildingsArgs>() { Args = args };
             query ??=
                 $@"
-query($args: GetBuildingsArgs!) {{
-    {name}(args: $args) {{
+query {{
+    {name} {{
         availableInShop
-        createdAt
         id
         maxUpgrade
         price
         type
-        updatedAt
+        placedItemType {{
+            id
+            type
+        }}
+        upgrades {{
+            id
+            capacity
+            upgradePrice
+            upgradeLevel
+        }}
     }}
 }}";
 
-            return await QueryAsync<GraphQLVariables<GetBuildingsArgs>, List<BuildingEntity>>(
-                name,
-                query,
-                variables
-            );
+            return await QueryAsync<Empty, List<BuildingEntity>>(name, query);
         }
     }
 }

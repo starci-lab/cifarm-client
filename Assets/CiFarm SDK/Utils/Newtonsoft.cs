@@ -83,7 +83,6 @@ namespace CiFarm.Utils
                 if (jObject[propertyName] != null)
                 {
                     var value = jObject[propertyName];
-
                     // Check if the property is an enum type
                     if (property.PropertyType.IsEnum)
                     {

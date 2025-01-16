@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CiFarm.Core.Databases;
+using CiFarm.Utils;
 using Cysharp.Threading.Tasks;
 
 namespace CiFarm.GraphQL
@@ -28,13 +29,9 @@ query($args: ID!) {{
             return await QueryAsync<GraphQLVariables<Guid>, TileEntity>(name, query, variables);
         }
 
-        public async UniTask<List<TileEntity>> QueryTilesAsync(
-            GetTilesArgs args,
-            string query = null
-        )
+        public async UniTask<List<TileEntity>> QueryTilesAsync(string query = null)
         {
             var name = "tiles";
-            var variables = new GraphQLVariables<GetTilesArgs>() { Args = args };
             query ??=
                 $@"
 query($args: GetTilesArgs!) {{
@@ -49,11 +46,7 @@ query($args: GetTilesArgs!) {{
     }}
 }}";
 
-            return await QueryAsync<GraphQLVariables<GetTilesArgs>, List<TileEntity>>(
-                name,
-                query,
-                variables
-            );
+            return await QueryAsync<Empty, List<TileEntity>>(name, query);
         }
     }
 }

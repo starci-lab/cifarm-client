@@ -12,7 +12,10 @@ namespace CiFarm.Core.Credentials
 
         [EnumStringValue("polkadot")]
         Polkadot,
+
         // Add other supported chains as necessary
+        [EnumStringValue("avalanche")]
+        Avalanche,
     }
 
     // Enum to represent Network (you would replace these values with actual ones from your context)
@@ -85,7 +88,7 @@ namespace CiFarm.Core.Credentials
             get => _telegramInitDataRaw;
             set => _telegramInitDataRaw = value;
         }
-    
+
         public string AccountAddress
         {
             get => _accountAddress;

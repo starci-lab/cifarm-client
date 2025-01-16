@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CiFarm.Core.Databases;
+using CiFarm.Utils;
 using Cysharp.Threading.Tasks;
 
 namespace CiFarm.GraphQL
@@ -17,7 +18,6 @@ query($args: ID!) {{
     {name}(id: $args) {{
         availableInShop
         basicHarvestExperiences
-        createdAt
         growthTime
         hungerTime
         id
@@ -28,28 +28,34 @@ query($args: ID!) {{
         premiumHarvestExperiences
         price
         type
-        updatedAt
         yieldTime  
+        placedItemType {{
+            id
+            type
+        }}
+        inventoryType {{
+            id
+            type
+        }}
+        product {{
+            id
+            type
+        }}
     }}
 }}";
 
             return await QueryAsync<GraphQLVariables<Guid>, AnimalEntity>(name, query, variables);
         }
 
-        public async UniTask<List<AnimalEntity>> QueryAnimalsAsync(
-            GetAnimalsArgs args,
-            string query = null
-        )
+        public async UniTask<List<AnimalEntity>> QueryAnimalsAsync(string query = null)
         {
             var name = "animals";
-            var variables = new GraphQLVariables<GetAnimalsArgs>() { Args = args };
             query ??=
                 $@"
-query($args: GetAnimalsArgs!) {{
-    {name}(args: $args) {{
+query {{
+    {name} {{
         availableInShop
         basicHarvestExperiences
-        createdAt
         growthTime
         hungerTime
         id
@@ -60,16 +66,23 @@ query($args: GetAnimalsArgs!) {{
         premiumHarvestExperiences
         price
         type
-        updatedAt
         yieldTime  
+        placedItemType {{
+            id
+            type
+        }}
+        inventoryType {{
+            id
+            type
+        }}
+        product {{
+            id
+            type
+        }}
     }}
 }}";
 
-            return await QueryAsync<GraphQLVariables<GetAnimalsArgs>, List<AnimalEntity>>(
-                name,
-                query,
-                variables
-            );
+            return await QueryAsync<Empty, List<AnimalEntity>>(name, query);
         }
     }
 }
