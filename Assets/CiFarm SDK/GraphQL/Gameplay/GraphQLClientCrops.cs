@@ -31,6 +31,9 @@ query($args: ID!) {{
         premiumHarvestExperiences
         price
         updatedAt
+        productId
+        inventoryTypeId
+        spinPrizeIds
     }}
 }}";
 
@@ -42,8 +45,8 @@ query($args: ID!) {{
             var name = "crops";
             query ??=
                 $@"
-query($args: GetCropsArgs!) {{
-    {name}(args: $args) {{
+query {{
+    {name} {{
         availableInShop
         basicHarvestExperiences
         createdAt
@@ -59,6 +62,9 @@ query($args: GetCropsArgs!) {{
         premiumHarvestExperiences
         price
         updatedAt
+        productId
+        inventoryTypeId
+        spinPrizeIds
     }}
 }}";
 

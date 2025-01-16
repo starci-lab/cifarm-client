@@ -1,50 +1,107 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable] // Makes the class serializable for Unity
     public class SpinPrizeEntity : UuidAbstractEntity
     {
-        // Public property for type
-        [JsonProperty("type")] // Custom JSON property name in camelCase
-        public SpinPrizeType Type { get; set; }
+        // Private field for Type
+        [SerializeField]
+        private SpinPrizeType _type;
 
-        // Public property for cropId
-        [JsonProperty("cropId")] // Custom JSON property name in camelCase
-        public string CropId { get; set; }
+        // Private field for CropId (nullable)
+        [SerializeField]
+        private string _cropId;
 
-        // Navigation property for CropEntity
-        [JsonProperty("crop")] // Custom JSON property name in camelCase
-        public CropEntity Crop { get; set; }
+        // Private field for SupplyId (nullable)
+        [SerializeField]
+        private string _supplyId;
 
-        // Public property for supplyId
-        [JsonProperty("supplyId")] // Custom JSON property name in camelCase
-        public string SupplyId { get; set; }
+        // Private field for Golds (nullable int)
+        [SerializeField]
+        private int? _golds;
 
-        // Navigation property for SupplyEntity
-        [JsonProperty("supply")] // Custom JSON property name in camelCase
-        public SupplyEntity Supply { get; set; }
+        // Private field for Tokens (nullable float)
+        [SerializeField]
+        private float? _tokens;
 
-        // Public property for golds (nullable int)
-        [JsonProperty("golds")] // Custom JSON property name in camelCase
-        public int? Golds { get; set; }
+        // Private field for Quantity (nullable int)
+        [SerializeField]
+        private int? _quantity;
 
-        // Public property for tokens (nullable float)
-        [JsonProperty("tokens")] // Custom JSON property name in camelCase
-        public float? Tokens { get; set; }
+        // Private field for AppearanceChance
+        [SerializeField]
+        private AppearanceChance _appearanceChance;
 
-        // Public property for quantity (nullable int)
-        [JsonProperty("quantity")] // Custom JSON property name in camelCase
-        public int? Quantity { get; set; }
+        // Private field for SpinSlots
+        [SerializeField]
+        private List<string> _spinSlotIds;
 
-        // Public property for appearanceChance
-        [JsonProperty("appearanceChance")] // Custom JSON property name in camelCase
-        public AppearanceChance AppearanceChance { get; set; }
+        // Public property for Type
+        [JsonProperty("type")]
+        public SpinPrizeType Type
+        {
+            get => _type;
+            set => _type = value;
+        }
 
-        // Navigation property for SpinSlotEntity
-        [JsonProperty("spinSlots")] // Custom JSON property name in camelCase
-        public List<SpinSlotEntity> SpinSlots { get; set; } = new List<SpinSlotEntity>();
+        // Public property for CropId
+        [JsonProperty("cropId")]
+        public string CropId
+        {
+            get => _cropId;
+            set => _cropId = value;
+        }
+
+        // Public property for SupplyId
+        [JsonProperty("supplyId")]
+        public string SupplyId
+        {
+            get => _supplyId;
+            set => _supplyId = value;
+        }
+
+        // Public property for Golds
+        [JsonProperty("golds")]
+        public int? Golds
+        {
+            get => _golds;
+            set => _golds = value;
+        }
+
+        // Public property for Tokens
+        [JsonProperty("tokens")]
+        public float? Tokens
+        {
+            get => _tokens;
+            set => _tokens = value;
+        }
+
+        // Public property for Quantity
+        [JsonProperty("quantity")]
+        public int? Quantity
+        {
+            get => _quantity;
+            set => _quantity = value;
+        }
+
+        // Public property for AppearanceChance
+        [JsonProperty("appearanceChance")]
+        public AppearanceChance AppearanceChance
+        {
+            get => _appearanceChance;
+            set => _appearanceChance = value;
+        }
+
+        // Public property for SpinSlots
+        [JsonProperty("spinSlots")]
+        public List<string> SpinSlotIds
+        {
+            get => _spinSlotIds;
+            set => _spinSlotIds = value;
+        }
     }
 }

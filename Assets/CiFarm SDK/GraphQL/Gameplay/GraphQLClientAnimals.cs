@@ -8,10 +8,10 @@ namespace CiFarm.GraphQL
 {
     public partial class GraphQLClient
     {
-        public async UniTask<AnimalEntity> QueryAnimalAsync(Guid id, string query = null)
+        public async UniTask<AnimalEntity> QueryAnimalAsync(string id, string query = null)
         {
             var name = "animal";
-            var variables = new GraphQLVariables<Guid>() { Args = id };
+            var variables = new GraphQLVariables<string>() { Args = id };
             query ??=
                 $@"
 query($args: ID!) {{
@@ -27,24 +27,16 @@ query($args: ID!) {{
         offspringPrice
         premiumHarvestExperiences
         price
-        type
         yieldTime  
-        placedItemType {{
-            id
-            type
-        }}
-        inventoryType {{
-            id
-            type
-        }}
-        product {{
-            id
-            type
-        }}
+        type
+        placedItemTypeId
+        inventoryTypeId
+        inventoryTypeId
+        productId
     }}
 }}";
 
-            return await QueryAsync<GraphQLVariables<Guid>, AnimalEntity>(name, query, variables);
+            return await QueryAsync<GraphQLVariables<string>, AnimalEntity>(name, query, variables);
         }
 
         public async UniTask<List<AnimalEntity>> QueryAnimalsAsync(string query = null)
@@ -65,20 +57,12 @@ query {{
         offspringPrice
         premiumHarvestExperiences
         price
-        type
         yieldTime  
-        placedItemType {{
-            id
-            type
-        }}
-        inventoryType {{
-            id
-            type
-        }}
-        product {{
-            id
-            type
-        }}
+        type
+        placedItemTypeId
+        inventoryTypeId
+        inventoryTypeId
+        productId
     }}
 }}";
 

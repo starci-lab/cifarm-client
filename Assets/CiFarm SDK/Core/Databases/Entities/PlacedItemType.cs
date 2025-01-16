@@ -1,42 +1,59 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable] // Makes the class serializable for Unity
     public class PlacedItemTypeEntity : StringAbstractEntity
     {
-        // Public property for type
-        [JsonProperty("type")] // Custom JSON property name in camelCase
-        public PlacedItemType Type { get; set; }
+        // Private field for Type
+        [SerializeField]
+        private PlacedItemType _type;
 
-        // Public property for tileId (nullable)
-        [JsonProperty("tileId")] // Custom JSON property name in camelCase
-        public string TileId { get; set; }
+        // Private field for TileId (nullable)
+        [SerializeField]
+        private string _tileId;
 
-        // Navigation property for TileEntity
-        [JsonProperty("tile")] // Custom JSON property name in camelCase
-        public TileEntity Tile { get; set; }
+        // Private field for BuildingId (nullable)
+        [SerializeField]
+        private string _buildingId;
 
-        // Public property for buildingId (nullable)
-        [JsonProperty("buildingId")] // Custom JSON property name in camelCase
-        public string BuildingId { get; set; }
+        // Private field for AnimalId (nullable)
+        [SerializeField]
+        private string _animalId;
 
-        // Navigation property for BuildingEntity
-        [JsonProperty("building")] // Custom JSON property name in camelCase
-        public BuildingEntity Building { get; set; }
+        // Public property for Type
+        [JsonProperty("type")]
+        public PlacedItemType Type
+        {
+            get => _type;
+            set => _type = value;
+        }
 
-        // Public property for animalId (nullable)
-        [JsonProperty("animalId")] // Custom JSON property name in camelCase
-        public string AnimalId { get; set; }
+        // Public property for TileId
+        [JsonProperty("tileId")]
+        public string TileId
+        {
+            get => _tileId;
+            set => _tileId = value;
+        }
 
-        // Navigation property for AnimalEntity
-        [JsonProperty("animal")] // Custom JSON property name in camelCase
-        public AnimalEntity Animal { get; set; }
+        // Public property for BuildingId
+        [JsonProperty("buildingId")]
+        public string BuildingId
+        {
+            get => _buildingId;
+            set => _buildingId = value;
+        }
 
-        // Public property for placedItems (one-to-many relationship)
-        [JsonProperty("placedItems")] // Custom JSON property name in camelCase
-        public List<PlacedItemEntity> PlacedItems { get; set; }
+        // Public property for AnimalId
+        [JsonProperty("animalId")]
+        public string AnimalId
+        {
+            get => _animalId;
+            set => _animalId = value;
+        }
     }
 }

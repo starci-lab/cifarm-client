@@ -1,67 +1,163 @@
 using System;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable]
     public class AnimalEntity : StringAbstractEntity
     {
-        // Public property for YieldTime
+        // Private backing fields
+        [SerializeField]
+        private int _yieldTime;
+
+        [SerializeField]
+        private int _offspringPrice;
+
+        [SerializeField]
+        private bool _isNFT;
+
+        [SerializeField]
+        private int? _price;
+
+        [SerializeField]
+        private int _growthTime;
+
+        [SerializeField]
+        private bool _availableInShop;
+
+        [SerializeField]
+        private int _hungerTime;
+
+        [SerializeField]
+        private int _minHarvestQuantity;
+
+        [SerializeField]
+        private int _maxHarvestQuantity;
+
+        [SerializeField]
+        private int _basicHarvestExperiences;
+
+        [SerializeField]
+        private int _premiumHarvestExperiences;
+
+        [SerializeField]
+        private AnimalType _type;
+
+        [SerializeField]
+        private string _productId;
+
+        [SerializeField]
+        private string _inventoryTypeId;
+
+        [SerializeField]
+        private string _placedItemTypeId;
+
+        // Public properties with getters and setters
+
         [JsonProperty("yieldTime")]
-        public int YieldTime { get; set; }
+        public int YieldTime
+        {
+            get => _yieldTime;
+            set => _yieldTime = value;
+        }
 
-        // Public property for OffspringPrice
         [JsonProperty("offspringPrice")]
-        public int OffspringPrice { get; set; }
+        public int OffspringPrice
+        {
+            get => _offspringPrice;
+            set => _offspringPrice = value;
+        }
 
-        // Public property for IsNFT
         [JsonProperty("isNFT")]
-        public bool IsNFT { get; set; }
+        public bool IsNFT
+        {
+            get => _isNFT;
+            set => _isNFT = value;
+        }
 
-        // Public property for Price (nullable)
         [JsonProperty("price")]
-        public int? Price { get; set; }
+        public int? Price
+        {
+            get => _price;
+            set => _price = value;
+        }
 
-        // Public property for GrowthTime
         [JsonProperty("growthTime")]
-        public int GrowthTime { get; set; }
+        public int GrowthTime
+        {
+            get => _growthTime;
+            set => _growthTime = value;
+        }
 
-        // Public property for AvailableInShop
         [JsonProperty("availableInShop")]
-        public bool AvailableInShop { get; set; }
+        public bool AvailableInShop
+        {
+            get => _availableInShop;
+            set => _availableInShop = value;
+        }
 
-        // Public property for HungerTime
         [JsonProperty("hungerTime")]
-        public int HungerTime { get; set; }
+        public int HungerTime
+        {
+            get => _hungerTime;
+            set => _hungerTime = value;
+        }
 
-        // Public property for MinHarvestQuantity
         [JsonProperty("minHarvestQuantity")]
-        public int MinHarvestQuantity { get; set; }
+        public int MinHarvestQuantity
+        {
+            get => _minHarvestQuantity;
+            set => _minHarvestQuantity = value;
+        }
 
-        // Public property for MaxHarvestQuantity
         [JsonProperty("maxHarvestQuantity")]
-        public int MaxHarvestQuantity { get; set; }
+        public int MaxHarvestQuantity
+        {
+            get => _maxHarvestQuantity;
+            set => _maxHarvestQuantity = value;
+        }
 
-        // Public property for BasicHarvestExperiences
         [JsonProperty("basicHarvestExperiences")]
-        public int BasicHarvestExperiences { get; set; }
+        public int BasicHarvestExperiences
+        {
+            get => _basicHarvestExperiences;
+            set => _basicHarvestExperiences = value;
+        }
 
-        // Public property for PremiumHarvestExperiences
         [JsonProperty("premiumHarvestExperiences")]
-        public int PremiumHarvestExperiences { get; set; }
+        public int PremiumHarvestExperiences
+        {
+            get => _premiumHarvestExperiences;
+            set => _premiumHarvestExperiences = value;
+        }
 
-        // Public property for Type
         [JsonProperty("type")]
-        public AnimalType Type { get; set; }
+        public AnimalType Type
+        {
+            get => _type;
+            set => _type = value;
+        }
 
-        // Navigation properties (One-to-One relationships)
-        [JsonProperty("product")]
-        public ProductEntity Product { get; set; }
+        [JsonProperty("productId")]
+        public string ProductId
+        {
+            get => _productId;
+            set => _productId = value;
+        }
 
-        [JsonProperty("inventoryType")]
-        public InventoryTypeEntity InventoryType { get; set; }
+        [JsonProperty("inventoryTypeId")]
+        public string InventoryTypeId
+        {
+            get => _inventoryTypeId;
+            set => _inventoryTypeId = value;
+        }
 
-        [JsonProperty("placedItemType")]
-        public PlacedItemTypeEntity PlacedItemType { get; set; }
+        [JsonProperty("placedItemTypeId")]
+        public string PlacedItemTypeId
+        {
+            get => _placedItemTypeId;
+            set => _placedItemTypeId = value;
+        }
     }
 }

@@ -1,5 +1,7 @@
 using System;
 using Newtonsoft.Json;
+using UnityEngine;
+using UnityEngine.XR.WSA;
 
 namespace CiFarm.Core.Databases
 {
@@ -16,21 +18,36 @@ namespace CiFarm.Core.Databases
         public DateTime UpdatedAt { get; set; }
     }
 
+    // Since guid cannot be serialized in Unity, we need to use string as ID
     // Abstract Entity with UUID (Guid) as ID
     [Serializable] // Makes this class serializable
     public abstract class UuidAbstractEntity : AbstractEntity
     {
-        // Public property for Id (Guid)
+        [SerializeField] // Serialize field for Unity
+        private string _id; // Private backing field for Id
+
+        // Public property for Id (string)
         [JsonProperty("id")] // Custom JSON property name
-        public Guid Id { get; set; }
+        public string Id
+        {
+            get => _id;
+            set => _id = value;
+        }
     }
 
     // Abstract Entity with String as ID (typically for GUIDs stored as strings)
     [Serializable] // Makes this class serializable
     public abstract class StringAbstractEntity : AbstractEntity
     {
+        [SerializeField] // Serialize field for Unity
+        private string _id; // Private backing field for Id
+
         // Public property for Id (string)
         [JsonProperty("id")] // Custom JSON property name
-        public string Id { get; set; }
+        public string Id
+        {
+            get => _id;
+            set => _id = value;
+        }
     }
 }

@@ -1,11 +1,12 @@
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace CiFarm.Utils
 {
-    public class EnumAsStringConverter<T> : JsonConverter<T>
+    public class DefaultJsonConverter<T> : JsonConverter<T>
         where T : class, new()
     {
         public override void WriteJson(JsonWriter writer, T value, JsonSerializer serializer)
@@ -31,12 +32,13 @@ namespace CiFarm.Utils
                 var propertyName = jsonProperty?.PropertyName ?? property.Name;
                 writer.WritePropertyName(propertyName);
 
+                if (propertyValue == null)
+                {
+                    writer.WriteNull();
+                    continue;
+                }
                 // Check if the property is an object (not primitive or enum)
-                if (
-                    propertyValue != null
-                    && propertyValue.GetType().IsClass
-                    && propertyValue.GetType() != typeof(string)
-                )
+                else if (propertyValue.GetType().IsClass && property.PropertyType != typeof(string))
                 {
                     // Recursively serialize the nested object
                     serializer.Serialize(writer, propertyValue);
@@ -45,6 +47,10 @@ namespace CiFarm.Utils
                 {
                     // If it's an enum, serialize its string representation (e.g., "Approved" instead of 1)
                     writer.WriteValue(propertyValue.GetStringValue());
+                }
+                else if (property.PropertyType == typeof(Guid))
+                {
+                    writer.WriteValue(Guid.Parse(propertyValue.ToString()));
                 }
                 else
                 {
@@ -102,10 +108,17 @@ namespace CiFarm.Utils
                         var nestedValue = value.ToObject(property.PropertyType, serializer);
                         property.SetValue(target, nestedValue);
                     }
+                    else if (property.PropertyType == typeof(Guid))
+                    {
+                        property.SetValue(target, Guid.Parse(value.ToString()));
+                    }
                     else
                     {
-                        // If it's a simple type, deserialize normally
-                        property.SetValue(target, value.ToObject(property.PropertyType));
+                        // Otherwise, deserialize the property normally
+                        property.SetValue(
+                            target,
+                            value.ToObject(property.PropertyType, serializer)
+                        );
                     }
                 }
             }

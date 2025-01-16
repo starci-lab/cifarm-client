@@ -129,7 +129,7 @@ namespace CiFarm.RestApi
             var jsonBody = JsonConvert.SerializeObject(
                 requestBody,
                 Formatting.Indented, // Pretty-print the JSON for easier reading (optional)
-                new EnumAsStringConverter<TRequest>() // Use custom converter to handle enums as strings
+                new DefaultJsonConverter<TRequest>() // Use custom converter to handle enums as strings
             );
 
             // Construct the request URL with base URL, API version, and endpoint
@@ -166,7 +166,7 @@ namespace CiFarm.RestApi
                 ConsoleLogger.LogSuccess($"POST request to '{endpoint}' succeeded.");
                 return JsonConvert.DeserializeObject<TResponse>(
                     responseBody,
-                    new EnumAsStringConverter<TResponse>() // Use custom converter for enums
+                    new DefaultJsonConverter<TResponse>() // Use custom converter for enums
                 );
             }
             catch (UnityWebRequestException ex)

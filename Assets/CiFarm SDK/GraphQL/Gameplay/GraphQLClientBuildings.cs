@@ -21,16 +21,8 @@ query($args: ID!) {{
         maxUpgrade
         price
         type
-        placedItemType {{
-            id
-            type
-        }}
-        upgrades {{
-            id
-            capacity
-            upgradePrice
-            upgradeLevel
-        }}
+        placedItemTypeId
+        upgradeIds
     }}
 }}";
 
@@ -49,16 +41,8 @@ query {{
         maxUpgrade
         price
         type
-        placedItemType {{
-            id
-            type
-        }}
-        upgrades {{
-            id
-            capacity
-            upgradePrice
-            upgradeLevel
-        }}
+        placedItemTypeId
+        upgradeIds
     }}
 }}";
 

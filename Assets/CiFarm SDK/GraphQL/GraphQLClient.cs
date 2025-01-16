@@ -81,14 +81,12 @@ namespace CiFarm.GraphQL
 
                 // Parse the response body as a GraphQL response
                 var responseBody = webRequest.downloadHandler.text;
+
                 // Deserialize the response body into a GraphQLResponse object.
                 var response = JsonConvert.DeserializeObject<GraphQLResponse<TResponse>>(
                     responseBody,
-                    new EnumAsStringConverter<TResponse>() // Use a custom JSON converter if necessary.
+                    new DefaultJsonConverter<TResponse>() // Use a custom JSON converter if necessary.
                 );
-
-                // Log the GraphQL response for debugging purposes
-                Debug.Log($"GraphQL Query response: {JsonConvert.SerializeObject(response)}");
 
                 // Return the data corresponding to the specified query name from the GraphQL response.
                 return response.GetData(name);
