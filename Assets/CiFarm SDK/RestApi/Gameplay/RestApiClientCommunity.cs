@@ -108,16 +108,5 @@ namespace CiFarm.RestApi
                 request // Request data (UnfollowRequest)
             );
         }
-
-        // Asynchronous method to visit another user by sending a POST request to the "visit" endpoint.
-        // This method will send the VisitRequest and return the VisitResponse.
-        public async UniTask<VisitResponse> Visit(VisitRequest request)
-        {
-            var endpoint = GetEndpoint("visit"); // Build the full URL for the "visit" endpoint.
-            return await PostAuthAsync<VisitRequest, VisitResponse>(
-                endpoint, // Full URL of the endpoint
-                request // Request data (VisitRequest)
-            );
-        }
     }
 }
