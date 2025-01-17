@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -38,7 +37,7 @@ namespace CiFarm.Utils
                     continue;
                 }
                 // Check if the property is an object (not primitive or enum)
-                else if (propertyValue.GetType().IsClass && property.PropertyType != typeof(string))
+                else if (property.PropertyType.IsClass && property.PropertyType != typeof(string))
                 {
                     // Recursively serialize the nested object
                     serializer.Serialize(writer, propertyValue);

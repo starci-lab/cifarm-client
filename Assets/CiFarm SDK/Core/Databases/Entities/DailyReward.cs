@@ -7,48 +7,22 @@ namespace CiFarm.Core.Databases
     [Serializable] // Makes the class serializable
     public class DailyRewardEntity : StringAbstractEntity
     {
-        // Private backing fields with SerializeField for Unity serialization
-
-        [SerializeField]
-        private int? _golds;
-
-        [SerializeField]
-        private float? _tokens;
-
-        [SerializeField]
-        private int? _day;
-
-        [SerializeField]
-        private bool _lastDay;
-
-        // Public properties with getters and setters
+        // Public properties with [SerializeField] for Unity serialization and [JsonProperty] for JSON serialization
 
         [JsonProperty("golds")]
-        public int? Golds
-        {
-            get => _golds;
-            set => _golds = value;
-        }
+        [field: SerializeField]
+        public int? Golds { get; set; }
 
         [JsonProperty("tokens")]
-        public float? Tokens
-        {
-            get => _tokens;
-            set => _tokens = value;
-        }
+        [field: SerializeField]
+        public float? Tokens { get; set; }
 
         [JsonProperty("day")]
-        public int? Day
-        {
-            get => _day;
-            set => _day = value;
-        }
+        [field: SerializeField]
+        public int? Day { get; set; }
 
         [JsonProperty("lastDay")]
-        public bool LastDay
-        {
-            get => _lastDay;
-            set => _lastDay = value;
-        }
+        [field: SerializeField]
+        public bool LastDay { get; set; }
     }
 }

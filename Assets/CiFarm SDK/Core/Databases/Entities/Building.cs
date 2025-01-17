@@ -7,65 +7,28 @@ using UnityEngine;
 [Serializable] // Makes the class serializable for Unity
 public class BuildingEntity : StringAbstractEntity
 {
-    // Private backing fields with SerializeField for Unity serialization
-    [SerializeField]
-    private bool _availableInShop;
+    // Public properties with SerializeField for Unity serialization and JsonProperty for custom JSON names
+    [JsonProperty("availableInShop")]
+    [field: SerializeField]
+    public bool AvailableInShop { get; set; }
 
-    [SerializeField]
-    private AnimalType? _type;
+    [JsonProperty("type")]
+    [field: SerializeField]
+    public AnimalType? Type { get; set; }
 
-    [SerializeField]
-    private int _maxUpgrade;
+    [JsonProperty("maxUpgrade")]
+    [field: SerializeField]
+    public int MaxUpgrade { get; set; }
 
-    [SerializeField]
-    private int? _price;
+    [JsonProperty("price")]
+    [field: SerializeField]
+    public int? Price { get; set; }
 
-    [SerializeField]
-    private string _placedItemTypeId;
+    [JsonProperty("placedItemTypeId")]
+    [field: SerializeField]
+    public string PlacedItemTypeId { get; set; }
 
-    [SerializeField]
-    private List<string> _upgradeIds;
-
-    // Public properties with getters and setters
-    [JsonProperty("availableInShop")] // Custom JSON property name
-    public bool AvailableInShop
-    {
-        get => _availableInShop;
-        set => _availableInShop = value;
-    }
-
-    [JsonProperty("type")] // Custom JSON property name
-    public AnimalType? Type
-    {
-        get => _type;
-        set => _type = value;
-    }
-
-    [JsonProperty("maxUpgrade")] // Custom JSON property name
-    public int MaxUpgrade
-    {
-        get => _maxUpgrade;
-        set => _maxUpgrade = value;
-    }
-
-    [JsonProperty("price")] // Custom JSON property name
-    public int? Price
-    {
-        get => _price;
-        set => _price = value;
-    }
-
-    [JsonProperty("placedItemTypeId")] // Custom JSON property name
-    public string PlacedItemTypeId
-    {
-        get => _placedItemTypeId;
-        set => _placedItemTypeId = value;
-    }
-
-    [JsonProperty("upgradeIds")] // Custom JSON property name
-    public List<string> UpgradeIds
-    {
-        get => _upgradeIds;
-        set => _upgradeIds = value;
-    }
+    [JsonProperty("upgradeIds")]
+    [field: SerializeField]
+    public List<string> UpgradeIds { get; set; }
 }

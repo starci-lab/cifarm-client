@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -8,78 +7,34 @@ namespace CiFarm.Core.Databases
     [Serializable] // Makes the class serializable for Unity
     public class ProductEntity : StringAbstractEntity
     {
-        // Private backing fields with SerializeField for Unity serialization
-
-        [SerializeField]
-        private bool _isPremium;
-
-        [SerializeField]
-        private int _goldAmount;
-
-        [SerializeField]
-        private float _tokenAmount;
-
-        [SerializeField]
-        private ProductType _type;
-
-        [SerializeField]
-        private string _cropId;
-
-        [SerializeField]
-        private string _animalId;
-
-        [SerializeField]
-        private string _inventoryTypeId;
-
-        // Public properties with getters and setters
+        // Public properties with [SerializeField] for Unity serialization and [JsonProperty] for JSON serialization
 
         [JsonProperty("isPremium")]
-        public bool IsPremium
-        {
-            get => _isPremium;
-            set => _isPremium = value;
-        }
+        [field: SerializeField]
+        public bool IsPremium { get; set; }
 
         [JsonProperty("goldAmount")]
-        public int GoldAmount
-        {
-            get => _goldAmount;
-            set => _goldAmount = value;
-        }
+        [field: SerializeField]
+        public int GoldAmount { get; set; }
 
         [JsonProperty("tokenAmount")]
-        public float TokenAmount
-        {
-            get => _tokenAmount;
-            set => _tokenAmount = value;
-        }
+        [field: SerializeField]
+        public float TokenAmount { get; set; }
 
         [JsonProperty("type")]
-        public ProductType Type
-        {
-            get => _type;
-            set => _type = value;
-        }
+        [field: SerializeField]
+        public ProductType Type { get; set; }
 
         [JsonProperty("cropId")]
-        public string CropId
-        {
-            get => _cropId;
-            set => _cropId = value;
-        }
+        [field: SerializeField]
+        public string CropId { get; set; }
 
         [JsonProperty("animalId")]
-        public string AnimalId
-        {
-            get => _animalId;
-            set => _animalId = value;
-        }
+        [field: SerializeField]
+        public string AnimalId { get; set; }
 
         [JsonProperty("inventoryTypeId")]
-        public string InventoryTypeId
-        {
-            get => _inventoryTypeId;
-            set => _inventoryTypeId = value;
-        }
+        [field: SerializeField]
+        public string InventoryTypeId { get; set; }
     }
 }

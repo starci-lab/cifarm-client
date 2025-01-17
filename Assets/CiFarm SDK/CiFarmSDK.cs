@@ -18,7 +18,7 @@ namespace CiFarm
     /// This component handles configuration for REST API, GraphQL, and Socket.IO connections,
     /// as well as authentication and credentials management.
     /// </summary>
-    [UnityEngine.AddComponentMenu("CiFarm/CiFarm SDK")]
+    [AddComponentMenu("CiFarm/CiFarm SDK")]
     public class CiFarmSDK : ManualSingletonMono<CiFarmSDK>
     {
         #region REST API Configuration
@@ -26,9 +26,9 @@ namespace CiFarm
         /// Dictionary to store REST API URLs for different environments (Local, Development, Staging, Production).
         /// Used to set the correct endpoint for API requests based on the selected environment.
         /// </summary>
-        [UnityEngine.Header("REST API")]
-        [UnityEngine.Tooltip("Set the REST API URLs for each environment")]
-        [UnityEngine.SerializeField]
+        [Header("REST API")]
+        [Tooltip("Set the REST API URLs for each environment")]
+        [SerializeField]
         private SerializedDictionary<Environment, string> _restApiUrls = new()
         {
             { Environment.Local, "http://localhost:3001" },
@@ -40,8 +40,8 @@ namespace CiFarm
         /// <summary>
         /// The version of the REST API to be used for requests.
         /// </summary>
-        [UnityEngine.Tooltip("Set the REST API version")]
-        [UnityEngine.SerializeField]
+        [Tooltip("Set the REST API version")]
+        [SerializeField]
         private RestApiVersion _restApiVersion = RestApiVersion.V1;
         #endregion
 
@@ -50,9 +50,9 @@ namespace CiFarm
         /// Dictionary to store GraphQL API URLs for different environments.
         /// Used to set the correct endpoint for GraphQL queries and mutations.
         /// </summary>
-        [UnityEngine.Header("GraphQL")]
-        [UnityEngine.Tooltip("Set the GraphQL API URLs for each environment")]
-        [UnityEngine.SerializeField]
+        [Header("GraphQL")]
+        [Tooltip("Set the GraphQL API URLs for each environment")]
+        [SerializeField]
         private SerializedDictionary<Environment, string> _graphQLUrls = new()
         {
             { Environment.Local, "http://localhost:3006/graphql" },
@@ -67,9 +67,9 @@ namespace CiFarm
         /// Dictionary to store Socket.IO server URLs for different environments.
         /// Used for establishing Socket.IO connections to the server for real-time communication.
         /// </summary>
-        [UnityEngine.Header("Socket.IO")]
-        [UnityEngine.Tooltip("Set the Socket.IO server address for each environment")]
-        [UnityEngine.SerializeField]
+        [Header("Socket.IO")]
+        [Tooltip("Set the Socket.IO server address for each environment")]
+        [SerializeField]
         private SerializedDictionary<Environment, string> _socketIoUrls = new()
         {
             { Environment.Local, "http://localhost:3003" },
@@ -84,30 +84,30 @@ namespace CiFarm
         /// The environment setting for the SDK (Local, Development, Staging, Production).
         /// Determines which API and Socket.IO URLs to use based on the selected environment.
         /// </summary>
-        [UnityEngine.Header("Common")]
-        [UnityEngine.Tooltip("Set the environment for using CiFarm SDK")]
-        [UnityEngine.SerializeField]
+        [Header("Common")]
+        [Tooltip("Set the environment for using CiFarm SDK")]
+        [SerializeField]
         private Environment _environment = Environment.Local;
 
         /// <summary>
         /// Log scope setting that helps in debugging by controlling the verbosity of logs.
         /// </summary>
-        [UnityEngine.Tooltip("Set the log scope, useful for debugging")]
-        [UnityEngine.SerializeField]
+        [Tooltip("Set the log scope, useful for debugging")]
+        [SerializeField]
         private LogScope _logScope = LogScope.All;
 
         /// <summary>
         /// The interval (in milliseconds) between retry attempts in case of a failed request.
         /// </summary>
-        [UnityEngine.Tooltip("Set the retry interval")]
-        [UnityEngine.SerializeField]
+        [Tooltip("Set the retry interval")]
+        [SerializeField]
         private int _retryInterval = 2000;
 
         /// <summary>
         /// The maximum number of retry attempts in case of a failed request.
         /// </summary>
-        [UnityEngine.Tooltip("Set the retry count")]
-        [UnityEngine.SerializeField]
+        [Tooltip("Set the retry count")]
+        [SerializeField]
         private int _retryCount = 2;
         #endregion
 
@@ -115,9 +115,9 @@ namespace CiFarm
         /// <summary>
         /// Credentials for the editor that are used for authentication and signature generation.
         /// </summary>
-        [UnityEngine.Header("Editor")]
-        [UnityEngine.Tooltip("Credentials for the developer")]
-        [UnityEngine.SerializeField]
+        [Header("Editor")]
+        [Tooltip("Credentials for the developer")]
+        [SerializeField]
         private Credentials _credentials = null;
 
         public void SetCredentials(Credentials credentials)
@@ -126,33 +126,33 @@ namespace CiFarm
         }
 
         /// <summary>
+        /// Page size for pagination in the editor.
+        /// </summary>
+        [field: SerializeField]
+        public int PageSize { get; set; } = 10;
+
+        /// <summary>
         /// Flag to indicate whether the SDK is authenticated and ready to use.
         /// </summary>
-        [UnityEngine.SerializeField]
-        private bool _authenticated = false;
-
-        public bool Authenticated
-        {
-            get => _authenticated;
-            set => _authenticated = value;
-        }
+        [field: SerializeField]
+        public bool Authenticated { get; set; } = false;
 
         /// <summary>
         /// Chain key used for the editor's authentication process.
         /// </summary>
-        [UnityEngine.SerializeField]
+        [SerializeField]
         private SupportedChainKey _chainKey;
 
         /// <summary>
         /// The network setting for the editor's authentication process.
         /// </summary>
-        [UnityEngine.SerializeField]
+        [SerializeField]
         private Network _network;
 
         /// <summary>
         /// Account number for the editor's authentication process.
         /// </summary>
-        [UnityEngine.SerializeField]
+        [SerializeField]
         private int _accountNumber;
         #endregion
 
@@ -174,36 +174,21 @@ namespace CiFarm
         /// <summary>
         /// Socket.IO Client for managing real-time communication with the server.
         /// </summary>
-        [UnityEngine.Tooltip("Set the Socket.IO client instance, leave empty to create a new one")]
-        [UnityEngine.SerializeField]
-        private SocketIOClient _socketIOClient;
-        public SocketIOClient SocketIOClient
-        {
-            get => _socketIOClient;
-            set => _socketIOClient = value;
-        }
+        [Tooltip("Set the Socket.IO client instance, leave empty to create a new one")]
+        [field: SerializeField]
+        public SocketIOClient SocketIOClient { get; set; }
 
         /// <summary>
         /// Event to be invoked when the authentication process is successful.
         /// </summary>
-        [SerializeField]
-        private UnityAction _onAuthenticatedSuccess;
-        public UnityAction OnAuthenticatedSuccess
-        {
-            get => _onAuthenticatedSuccess;
-            set => _onAuthenticatedSuccess = value;
-        }
+        [field: SerializeField]
+        public UnityAction OnAuthenticatedSuccess { get; set; }
 
         /// <summary>
         /// Event to be invoked when the authentication process fails.
         /// </summary>
-        [SerializeField]
-        private UnityAction _onAuthenticatedFailed;
-        public UnityAction OnAuthenticatedFailed
-        {
-            get => _onAuthenticatedFailed;
-            set => _onAuthenticatedFailed = value;
-        }
+        [field: SerializeField]
+        public UnityAction OnAuthenticatedFailed { get; set; }
 
         /// <summary>
         /// Starts the authentication process for the SDK.
@@ -256,7 +241,7 @@ namespace CiFarm
                         refreshTokenResponse.AccessToken,
                         refreshTokenResponse.RefreshToken
                     );
-                    _authenticated = true;
+                    Authenticated = true;
                     return true;
                 }
                 catch (UnityWebRequestException error)
@@ -314,14 +299,14 @@ namespace CiFarm
                     verifyMessageResponse.AccessToken,
                     verifyMessageResponse.RefreshToken
                 );
-                _authenticated = true;
-                _onAuthenticatedSuccess?.Invoke();
+                Authenticated = true;
+                OnAuthenticatedSuccess?.Invoke();
             }
             catch (UnityWebRequestException error)
             {
                 ConsoleLogger.LogError($"Error authenticating: {error.Message}");
-                _onAuthenticatedFailed?.Invoke();
-                _authenticated = false;
+                OnAuthenticatedFailed?.Invoke();
+                Authenticated = false;
             }
         }
 

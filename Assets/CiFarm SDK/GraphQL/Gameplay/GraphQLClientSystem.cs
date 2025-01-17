@@ -97,7 +97,7 @@ query {{
         isWeedyOrInfested
         needWater
         thief2 
-        thief38
+        thief3
     }}
 }}";
 

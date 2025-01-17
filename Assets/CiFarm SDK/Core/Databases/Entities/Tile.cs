@@ -8,68 +8,30 @@ namespace CiFarm.Core.Databases
     [Serializable]
     public class TileEntity : StringAbstractEntity
     {
-        // Private backing fields with SerializeField for Unity serialization
-
-        [SerializeField]
-        private float _price;
-
-        [SerializeField]
-        private int _maxOwnership;
-
-        [SerializeField]
-        private bool _isNFT;
-
-        [SerializeField]
-        private bool _availableInShop;
-
-        [SerializeField]
-        private string _inventoryTypeId;
-
-        [SerializeField]
-        private string _placedItemTypeId;
-
-        // Public properties with getters and setters
+        // Public properties with [SerializeField] for Unity serialization and [JsonProperty] for JSON serialization
 
         [JsonProperty("price")]
-        public float Price
-        {
-            get => _price;
-            set => _price = value;
-        }
+        [field: SerializeField]
+        public float Price { get; set; }
 
         [JsonProperty("maxOwnership")]
-        public int MaxOwnership
-        {
-            get => _maxOwnership;
-            set => _maxOwnership = value;
-        }
+        [field: SerializeField]
+        public int MaxOwnership { get; set; }
 
         [JsonProperty("isNFT")]
-        public bool IsNFT
-        {
-            get => _isNFT;
-            set => _isNFT = value;
-        }
+        [field: SerializeField]
+        public bool IsNFT { get; set; }
 
         [JsonProperty("availableInShop")]
-        public bool AvailableInShop
-        {
-            get => _availableInShop;
-            set => _availableInShop = value;
-        }
+        [field: SerializeField]
+        public bool AvailableInShop { get; set; }
 
         [JsonProperty("inventoryTypeId")]
-        public string InventoryTypeId
-        {
-            get => _inventoryTypeId;
-            set => _inventoryTypeId = value;
-        }
+        [field: SerializeField]
+        public string InventoryTypeId { get; set; }
 
         [JsonProperty("placedItemTypeId")]
-        public string PlacedItemTypeId
-        {
-            get => _placedItemTypeId;
-            set => _placedItemTypeId = value;
-        }
+        [field: SerializeField]
+        public string PlacedItemTypeId { get; set; }
     }
 }

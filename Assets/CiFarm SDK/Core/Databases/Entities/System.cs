@@ -9,394 +9,190 @@ namespace CiFarm.Core.Databases
     [Serializable]
     public class SystemEntity : StringAbstractEntity
     {
-        [SerializeField]
-        private string _value;
-
         [JsonProperty("value")]
-        public string Value
-        {
-            get => _value;
-            set => _value = value;
-        }
+        [field: SerializeField]
+        public string Value { get; set; }
     }
 
     // Represents different activities
     [Serializable]
     public class Activities
     {
-        [SerializeField]
-        private ActivityInfo _water;
-
-        [SerializeField]
-        private ActivityInfo _feedAnimal;
-
-        [SerializeField]
-        private ActivityInfo _usePesticide;
-
-        [SerializeField]
-        private ActivityInfo _useFertilizer;
-
-        [SerializeField]
-        private ActivityInfo _useHerbicide;
-
-        [SerializeField]
-        private ActivityInfo _helpUseHerbicide;
-
-        [SerializeField]
-        private ActivityInfo _helpUsePesticide;
-
-        [SerializeField]
-        private ActivityInfo _helpWater;
-
-        [SerializeField]
-        private ActivityInfo _thiefCrop;
-
-        [SerializeField]
-        private ActivityInfo _thiefAnimalProduct;
-
-        [SerializeField]
-        private ActivityInfo _cureAnimal;
-
-        [SerializeField]
-        private ActivityInfo _helpCureAnimal;
-
-        [SerializeField]
-        private ActivityInfo _harvestCrop;
-
         [JsonProperty("water")]
-        public ActivityInfo Water
-        {
-            get => _water;
-            set => _water = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo Water { get; set; }
 
         [JsonProperty("feedAnimal")]
-        public ActivityInfo FeedAnimal
-        {
-            get => _feedAnimal;
-            set => _feedAnimal = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo FeedAnimal { get; set; }
 
         [JsonProperty("usePesticide")]
-        public ActivityInfo UsePesticide
-        {
-            get => _usePesticide;
-            set => _usePesticide = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo UsePesticide { get; set; }
 
         [JsonProperty("useFertilizer")]
-        public ActivityInfo UseFertilizer
-        {
-            get => _useFertilizer;
-            set => _useFertilizer = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo UseFertilizer { get; set; }
 
         [JsonProperty("useHerbicide")]
-        public ActivityInfo UseHerbicide
-        {
-            get => _useHerbicide;
-            set => _useHerbicide = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo UseHerbicide { get; set; }
 
         [JsonProperty("helpUseHerbicide")]
-        public ActivityInfo HelpUseHerbicide
-        {
-            get => _helpUseHerbicide;
-            set => _helpUseHerbicide = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo HelpUseHerbicide { get; set; }
 
         [JsonProperty("helpUsePesticide")]
-        public ActivityInfo HelpUsePesticide
-        {
-            get => _helpUsePesticide;
-            set => _helpUsePesticide = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo HelpUsePesticide { get; set; }
 
         [JsonProperty("helpWater")]
-        public ActivityInfo HelpWater
-        {
-            get => _helpWater;
-            set => _helpWater = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo HelpWater { get; set; }
 
         [JsonProperty("thiefCrop")]
-        public ActivityInfo ThiefCrop
-        {
-            get => _thiefCrop;
-            set => _thiefCrop = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo ThiefCrop { get; set; }
 
         [JsonProperty("thiefAnimalProduct")]
-        public ActivityInfo ThiefAnimalProduct
-        {
-            get => _thiefAnimalProduct;
-            set => _thiefAnimalProduct = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo ThiefAnimalProduct { get; set; }
 
         [JsonProperty("cureAnimal")]
-        public ActivityInfo CureAnimal
-        {
-            get => _cureAnimal;
-            set => _cureAnimal = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo CureAnimal { get; set; }
 
         [JsonProperty("helpCureAnimal")]
-        public ActivityInfo HelpCureAnimal
-        {
-            get => _helpCureAnimal;
-            set => _helpCureAnimal = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo HelpCureAnimal { get; set; }
 
         [JsonProperty("harvestCrop")]
-        public ActivityInfo HarvestCrop
-        {
-            get => _harvestCrop;
-            set => _harvestCrop = value;
-        }
+        [field: SerializeField]
+        public ActivityInfo HarvestCrop { get; set; }
     }
 
     // Represents activity info containing experience gained and energy consumed
     [Serializable]
     public class ActivityInfo
     {
-        [SerializeField]
-        private int _experiencesGain;
-
-        [SerializeField]
-        private int _energyConsume;
-
         [JsonProperty("experiencesGain")]
-        public int ExperiencesGain
-        {
-            get => _experiencesGain;
-            set => _experiencesGain = value;
-        }
+        [field: SerializeField]
+        public int ExperiencesGain { get; set; }
 
         [JsonProperty("energyConsume")]
-        public int EnergyConsume
-        {
-            get => _energyConsume;
-            set => _energyConsume = value;
-        }
+        [field: SerializeField]
+        public int EnergyConsume { get; set; }
     }
 
     // Represents crop randomness values
     [Serializable]
     public class CropRandomness
     {
-        [SerializeField]
-        private int _thief3;
-
-        [SerializeField]
-        private int _thief2;
-
-        [SerializeField]
-        private int _needWater;
-
-        [SerializeField]
-        private int _isWeedyOrInfested;
-
         [JsonProperty("thief3")]
-        public int Thief3
-        {
-            get => _thief3;
-            set => _thief3 = value;
-        }
+        [field: SerializeField]
+        public int Thief3 { get; set; }
 
         [JsonProperty("thief2")]
-        public int Thief2
-        {
-            get => _thief2;
-            set => _thief2 = value;
-        }
+        [field: SerializeField]
+        public int Thief2 { get; set; }
 
         [JsonProperty("needWater")]
-        public int NeedWater
-        {
-            get => _needWater;
-            set => _needWater = value;
-        }
+        [field: SerializeField]
+        public int NeedWater { get; set; }
 
         [JsonProperty("isWeedyOrInfested")]
-        public int IsWeedyOrInfested
-        {
-            get => _isWeedyOrInfested;
-            set => _isWeedyOrInfested = value;
-        }
+        [field: SerializeField]
+        public int IsWeedyOrInfested { get; set; }
     }
 
     // Represents animal randomness values
     [Serializable]
     public class AnimalRandomness
     {
-        [SerializeField]
-        private int _sickChance;
-
-        [SerializeField]
-        private int _thief3;
-
-        [SerializeField]
-        private int _thief2;
-
         [JsonProperty("sickChance")]
-        public int SickChance
-        {
-            get => _sickChance;
-            set => _sickChance = value;
-        }
+        [field: SerializeField]
+        public int SickChance { get; set; }
 
         [JsonProperty("thief3")]
-        public int Thief3
-        {
-            get => _thief3;
-            set => _thief3 = value;
-        }
+        [field: SerializeField]
+        public int Thief3 { get; set; }
 
         [JsonProperty("thief2")]
-        public int Thief2
-        {
-            get => _thief2;
-            set => _thief2 = value;
-        }
+        [field: SerializeField]
+        public int Thief2 { get; set; }
     }
 
     // Represents positions such as starter tiles and home
     [Serializable]
     public class Positions
     {
-        [SerializeField]
-        private List<Position> _tiles;
-
-        [SerializeField]
-        private Position _home;
-
         [JsonProperty("tiles")]
-        public List<Position> Tiles
-        {
-            get => _tiles;
-            set => _tiles = value;
-        }
+        [field: SerializeField]
+        public List<Position> Tiles { get; set; }
 
         [JsonProperty("home")]
-        public Position Home
-        {
-            get => _home;
-            set => _home = value;
-        }
+        [field: SerializeField]
+        public Position Home { get; set; }
     }
 
     // Represents the starter info with golds and positions
     [Serializable]
     public class Starter
     {
-        [SerializeField]
-        private int _golds;
-
-        [SerializeField]
-        private Positions _positions;
-
         [JsonProperty("golds")]
-        public int Golds
-        {
-            get => _golds;
-            set => _golds = value;
-        }
+        [field: SerializeField]
+        public int Golds { get; set; }
 
         [JsonProperty("positions")]
-        public Positions Positions
-        {
-            get => _positions;
-            set => _positions = value;
-        }
+        [field: SerializeField]
+        public Positions Positions { get; set; }
     }
 
     // Represents spin info, including appearance chance slots
     [Serializable]
     public class SpinInfo
     {
-        [SerializeField]
-        private Dictionary<AppearanceChance, SlotInfo> _appearanceChanceSlots;
-
         [JsonProperty("appearanceChanceSlots")]
-        public Dictionary<AppearanceChance, SlotInfo> AppearanceChanceSlots
-        {
-            get => _appearanceChanceSlots;
-            set => _appearanceChanceSlots = value;
-        }
+        [field: SerializeField]
+        public Dictionary<AppearanceChance, SlotInfo> AppearanceChanceSlots { get; set; }
     }
 
     // Represents slot information in a spin
     [Serializable]
     public class SlotInfo
     {
-        [SerializeField]
-        private int _count;
-
-        [SerializeField]
-        private int _thresholdMin;
-
-        [SerializeField]
-        private int _thresholdMax;
-
         [JsonProperty("count")]
-        public int Count
-        {
-            get => _count;
-            set => _count = value;
-        }
+        [field: SerializeField]
+        public int Count { get; set; }
 
         [JsonProperty("thresholdMin")]
-        public int ThresholdMin
-        {
-            get => _thresholdMin;
-            set => _thresholdMin = value;
-        }
+        [field: SerializeField]
+        public int ThresholdMin { get; set; }
 
         [JsonProperty("thresholdMax")]
-        public int ThresholdMax
-        {
-            get => _thresholdMax;
-            set => _thresholdMax = value;
-        }
+        [field: SerializeField]
+        public int ThresholdMax { get; set; }
     }
 
     // Represents energy regeneration time in milliseconds
     [Serializable]
     public class EnergyRegen
     {
-        [SerializeField]
-        private int _time;
-
         [JsonProperty("time")]
-        public int Time
-        {
-            get => _time;
-            set => _time = value;
-        }
+        [field: SerializeField]
+        public int Time { get; set; }
     }
 
     // Represents Position data structure (placeholder class)
     [Serializable]
     public class Position
     {
-        [SerializeField]
-        private int _x;
-
-        [SerializeField]
-        private int _y;
-
         [JsonProperty("x")]
-        public int X
-        {
-            get => _x;
-            set => _x = value;
-        }
+        [field: SerializeField]
+        public int X { get; set; }
 
         [JsonProperty("y")]
-        public int Y
-        {
-            get => _y;
-            set => _y = value;
-        }
+        [field: SerializeField]
+        public int Y { get; set; }
     }
 }

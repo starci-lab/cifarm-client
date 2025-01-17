@@ -8,66 +8,30 @@ namespace CiFarm.Core.Databases
     [Serializable] // Makes the class serializable for Unity
     public class SupplyEntity : StringAbstractEntity
     {
-        // Private backing fields with SerializeField for Unity serialization
-        [SerializeField]
-        private SupplyType _type;
+        // Public properties with auto-properties and serialization attributes
 
-        [SerializeField]
-        private float _price;
+        [JsonProperty("type")]
+        [field: SerializeField]
+        public SupplyType Type { get; set; }
 
-        [SerializeField]
-        private bool _availableInShop;
+        [JsonProperty("price")]
+        [field: SerializeField]
+        public float Price { get; set; }
 
-        [SerializeField]
-        private int? _fertilizerEffectTimeReduce;
+        [JsonProperty("availableInShop")]
+        [field: SerializeField]
+        public bool AvailableInShop { get; set; }
 
-        [SerializeField]
-        private string _inventoryTypeId;
+        [JsonProperty("fertilizerEffectTimeReduce")]
+        [field: SerializeField]
+        public int? FertilizerEffectTimeReduce { get; set; }
 
-        [SerializeField]
-        private List<string> _spinPrizeIds;
+        [JsonProperty("inventoryTypeId")]
+        [field: SerializeField]
+        public string InventoryTypeId { get; set; }
 
-        // Public properties with getters and setters
-        [JsonProperty("type")] // Custom JSON property name
-        public SupplyType Type
-        {
-            get => _type;
-            set => _type = value;
-        }
-
-        [JsonProperty("price")] // Custom JSON property name
-        public float Price
-        {
-            get => _price;
-            set => _price = value;
-        }
-
-        [JsonProperty("availableInShop")] // Custom JSON property name
-        public bool AvailableInShop
-        {
-            get => _availableInShop;
-            set => _availableInShop = value;
-        }
-
-        [JsonProperty("fertilizerEffectTimeReduce")] // Custom JSON property name
-        public int? FertilizerEffectTimeReduce
-        {
-            get => _fertilizerEffectTimeReduce;
-            set => _fertilizerEffectTimeReduce = value;
-        }
-
-        [JsonProperty("inventoryTypeId")] // Custom JSON property name
-        public string InventoryTypeId
-        {
-            get => _inventoryTypeId;
-            set => _inventoryTypeId = value;
-        }
-
-        [JsonProperty("spinPrizeIds")] // Custom JSON property name
-        public List<string> SpinPrizes
-        {
-            get => _spinPrizeIds;
-            set => _spinPrizeIds = value;
-        }
+        [JsonProperty("spinPrizeIds")]
+        [field: SerializeField]
+        public List<string> SpinPrizes { get; set; }
     }
 }

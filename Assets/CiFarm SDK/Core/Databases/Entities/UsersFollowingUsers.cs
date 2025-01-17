@@ -8,18 +8,14 @@ namespace CiFarm.Core.Databases
     [Serializable]
     public class UsersFollowingUsersEntity : UuidAbstractEntity
     {
-        // Public properties for UsersFollowingUsersEntity without SerializeField attributes
+        // Public properties for UsersFollowingUsersEntity with SerializeField attributes
 
         [JsonProperty("followerId")]
-        public Guid FollowerId { get; set; }
+        [field: SerializeField]
+        public string FollowerId { get; set; }
 
         [JsonProperty("followeeId")]
-        public Guid FolloweeId { get; set; }
-
-        [JsonProperty("follower")]
-        public UserEntity Follower { get; set; }
-
-        [JsonProperty("followee")]
-        public UserEntity Followee { get; set; }
+        [field: SerializeField]
+        public string FolloweeId { get; set; }
     }
 }

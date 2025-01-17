@@ -8,157 +8,66 @@ namespace CiFarm.Core.Databases
     [Serializable] // Makes the class serializable for Unity
     public class CropEntity : StringAbstractEntity
     {
-        // Private backing fields with SerializeField for Unity serialization
-        [SerializeField]
-        private int _growthStageDuration;
-
-        [SerializeField]
-        private int _growthStages;
-
-        [SerializeField]
-        private int _price;
-
-        [SerializeField]
-        private bool _premium;
-
-        [SerializeField]
-        private int _perennialCount;
-
-        [SerializeField]
-        private int _nextGrowthStageAfterHarvest;
-
-        [SerializeField]
-        private int _minHarvestQuantity;
-
-        [SerializeField]
-        private int _maxHarvestQuantity;
-
-        [SerializeField]
-        private int _basicHarvestExperiences;
-
-        [SerializeField]
-        private int _premiumHarvestExperiences;
-
-        [SerializeField]
-        private bool _availableInShop;
-
-        [SerializeField]
-        private int _maxStack;
-
-        [SerializeField]
-        private string _productId;
-
-        [SerializeField]
-        private string _inventoryTypeId;
-
-        [SerializeField]
-        private List<string> _spinPrizeIds;
-
-        // Public properties with getters and setters
+        // Public properties with [SerializeField] for Unity serialization and [JsonProperty] for JSON serialization
         [JsonProperty("growthStageDuration")]
-        public int GrowthStageDuration
-        {
-            get => _growthStageDuration;
-            set => _growthStageDuration = value;
-        }
+        [field: SerializeField]
+        public int GrowthStageDuration { get; set; }
 
         [JsonProperty("growthStages")]
-        public int GrowthStages
-        {
-            get => _growthStages;
-            set => _growthStages = value;
-        }
+        [field: SerializeField]
+        public int GrowthStages { get; set; }
 
         [JsonProperty("price")]
-        public int Price
-        {
-            get => _price;
-            set => _price = value;
-        }
+        [field: SerializeField]
+        public int Price { get; set; }
 
         [JsonProperty("premium")]
-        public bool Premium
-        {
-            get => _premium;
-            set => _premium = value;
-        }
+        [field: SerializeField]
+        public bool Premium { get; set; }
 
         [JsonProperty("perennialCount")]
-        public int PerennialCount
-        {
-            get => _perennialCount;
-            set => _perennialCount = value;
-        }
+        [field: SerializeField]
+        public int PerennialCount { get; set; }
 
         [JsonProperty("nextGrowthStageAfterHarvest")]
-        public int NextGrowthStageAfterHarvest
-        {
-            get => _nextGrowthStageAfterHarvest;
-            set => _nextGrowthStageAfterHarvest = value;
-        }
+        [field: SerializeField]
+        public int NextGrowthStageAfterHarvest { get; set; }
 
         [JsonProperty("minHarvestQuantity")]
-        public int MinHarvestQuantity
-        {
-            get => _minHarvestQuantity;
-            set => _minHarvestQuantity = value;
-        }
+        [field: SerializeField]
+        public int MinHarvestQuantity { get; set; }
 
         [JsonProperty("maxHarvestQuantity")]
-        public int MaxHarvestQuantity
-        {
-            get => _maxHarvestQuantity;
-            set => _maxHarvestQuantity = value;
-        }
+        [field: SerializeField]
+        public int MaxHarvestQuantity { get; set; }
 
         [JsonProperty("basicHarvestExperiences")]
-        public int BasicHarvestExperiences
-        {
-            get => _basicHarvestExperiences;
-            set => _basicHarvestExperiences = value;
-        }
+        [field: SerializeField]
+        public int BasicHarvestExperiences { get; set; }
 
         [JsonProperty("premiumHarvestExperiences")]
-        public int PremiumHarvestExperiences
-        {
-            get => _premiumHarvestExperiences;
-            set => _premiumHarvestExperiences = value;
-        }
+        [field: SerializeField]
+        public int PremiumHarvestExperiences { get; set; }
 
         [JsonProperty("availableInShop")]
-        public bool AvailableInShop
-        {
-            get => _availableInShop;
-            set => _availableInShop = value;
-        }
+        [field: SerializeField]
+        public bool AvailableInShop { get; set; }
 
         [JsonProperty("maxStack")]
-        public int MaxStack
-        {
-            get => _maxStack;
-            set => _maxStack = value;
-        }
+        [field: SerializeField]
+        public int MaxStack { get; set; }
 
         // Navigation properties
         [JsonProperty("productId")]
-        public string ProductId
-        {
-            get => _productId;
-            set => _productId = value;
-        }
+        [field: SerializeField]
+        public string ProductId { get; set; }
 
         [JsonProperty("inventoryTypeId")]
-        public string InventoryType
-        {
-            get => _inventoryTypeId;
-            set => _inventoryTypeId = value;
-        }
+        [field: SerializeField]
+        public string InventoryType { get; set; }
 
         [JsonProperty("spinPrizeIds")]
-        public List<string> SpinPrizes
-        {
-            get => _spinPrizeIds;
-            set => _spinPrizeIds = value;
-        }
+        [field: SerializeField]
+        public List<string> SpinPrizes { get; set; }
     }
 }

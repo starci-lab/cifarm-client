@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using CiFarm.Core.Databases;
 using CiFarm.Utils;
-using Cysharp.Threading.Tasks;
 using Imba.Utils;
 using UnityEngine;
 
@@ -15,230 +12,116 @@ namespace CiFarm.DataManager
         /// <summary>
         /// List of animals
         /// </summary>
-        [SerializeField]
-        private List<AnimalEntity> _animals;
-
-        public List<AnimalEntity> Animals
-        {
-            get => _animals;
-            set => _animals = value;
-        }
+        [field: SerializeField]
+        public List<AnimalEntity> Animals { get; set; }
 
         /// <summary>
         /// List of buildings
         /// </summary>
-        [SerializeField]
-        private List<BuildingEntity> _buildings;
+        [field: SerializeField]
+        public List<BuildingEntity> Buildings { get; set; }
 
         /// <summary>
         /// List of crops
         /// </summary>
-        [SerializeField]
-        private List<CropEntity> _crops;
-
-        public List<CropEntity> Crops
-        {
-            get => _crops;
-            set => _crops = value;
-        }
-
-        public List<BuildingEntity> Buildings
-        {
-            get => _buildings;
-            set => _buildings = value;
-        }
+        [field: SerializeField]
+        public List<CropEntity> Crops { get; set; }
 
         /// <summary>
         /// List of placed item types
-        ///  </summary>
-        [SerializeField]
-        private List<PlacedItemTypeEntity> _placedItemTypes;
-
-        public List<PlacedItemTypeEntity> PlacedItemTypes
-        {
-            get => _placedItemTypes;
-            set => _placedItemTypes = value;
-        }
+        /// </summary>
+        [field: SerializeField]
+        public List<PlacedItemTypeEntity> PlacedItemTypes { get; set; }
 
         /// <summary>
         /// List of spin prizes
         /// </summary>
-        [SerializeField]
-        private List<SpinPrizeEntity> _spinPrizes;
-
-        public List<SpinPrizeEntity> SpinPrizes
-        {
-            get => _spinPrizes;
-            set => _spinPrizes = value;
-        }
+        [field: SerializeField]
+        public List<SpinPrizeEntity> SpinPrizes { get; set; }
 
         /// <summary>
         /// List of spin slots
         /// </summary>
-        [SerializeField]
-        private List<SpinSlotEntity> _spinSlots;
-
-        public List<SpinSlotEntity> SpinSlots
-        {
-            get => _spinSlots;
-            set => _spinSlots = value;
-        }
+        [field: SerializeField]
+        public List<SpinSlotEntity> SpinSlots { get; set; }
 
         /// <summary>
         /// List of supplies
         /// </summary>
-        [SerializeField]
-        private List<SupplyEntity> _supplies;
-
-        public List<SupplyEntity> Supplies
-        {
-            get => _supplies;
-            set => _supplies = value;
-        }
+        [field: SerializeField]
+        public List<SupplyEntity> Supplies { get; set; }
 
         /// <summary>
         /// List of tiles
         /// </summary>
-        [SerializeField]
-        private List<TileEntity> _tiles;
-
-        public List<TileEntity> Tiles
-        {
-            get => _tiles;
-            set => _tiles = value;
-        }
+        [field: SerializeField]
+        public List<TileEntity> Tiles { get; set; }
 
         /// <summary>
         /// List of tools
         /// </summary>
-        [SerializeField]
-        private List<ToolEntity> _tools;
-
-        public List<ToolEntity> Tools
-        {
-            get => _tools;
-            set => _tools = value;
-        }
+        [field: SerializeField]
+        public List<ToolEntity> Tools { get; set; }
 
         /// <summary>
         /// List of inventory types
         /// </summary>
-        [SerializeField]
-        private List<InventoryTypeEntity> _inventoryTypes;
-
-        public List<InventoryTypeEntity> InventoryTypes
-        {
-            get => _inventoryTypes;
-            set => _inventoryTypes = value;
-        }
+        [field: SerializeField]
+        public List<InventoryTypeEntity> InventoryTypes { get; set; }
 
         /// <summary>
         /// List of products
         /// </summary>
-        [SerializeField]
-        private List<ProductEntity> _products;
-
-        public List<ProductEntity> Products
-        {
-            get => _products;
-            set => _products = value;
-        }
+        [field: SerializeField]
+        public List<ProductEntity> Products { get; set; }
 
         /// <summary>
         /// List of daily rewards
         /// </summary>
-        [SerializeField]
-        private List<DailyRewardEntity> _dailyRewards;
-
-        public List<DailyRewardEntity> DailyRewards
-        {
-            get => _dailyRewards;
-            set => _dailyRewards = value;
-        }
+        [field: SerializeField]
+        public List<DailyRewardEntity> DailyRewards { get; set; }
 
         /// <summary>
         /// List of upgrades
         /// </summary>
-        [SerializeField]
-        private List<UpgradeEntity> _upgrades;
-
-        public List<UpgradeEntity> Upgrades
-        {
-            get => _upgrades;
-            set => _upgrades = value;
-        }
+        [field: SerializeField]
+        public List<UpgradeEntity> Upgrades { get; set; }
 
         /// <summary>
         /// Activities
         /// </summary>
-        [SerializeField]
-        private Activities _activities;
-
-        public Activities Activities
-        {
-            get => _activities;
-            set => _activities = value;
-        }
+        [field: SerializeField]
+        public Activities Activities { get; set; }
 
         /// <summary>
         /// Animal Randomness
         /// </summary>
-        [SerializeField]
-        private AnimalRandomness _animalRandomness;
-
-        public AnimalRandomness AnimalRandomness
-        {
-            get => _animalRandomness;
-            set => _animalRandomness = value;
-        }
+        [field: SerializeField]
+        public AnimalRandomness AnimalRandomness { get; set; }
 
         /// <summary>
         /// Crop Randomness
         /// </summary>
-        [SerializeField]
-        private CropRandomness _cropRandomness;
-
-        public CropRandomness CropRandomness
-        {
-            get => _cropRandomness;
-            set => _cropRandomness = value;
-        }
+        [field: SerializeField]
+        public CropRandomness CropRandomness { get; set; }
 
         /// <summary>
         /// Starter
         /// </summary>
-        [SerializeField]
-        private Starter _starter;
-
-        public Starter Starter
-        {
-            get => _starter;
-            set => _starter = value;
-        }
+        [field: SerializeField]
+        public Starter Starter { get; set; }
 
         /// <summary>
         /// Spin Info
         /// </summary>
-        [SerializeField]
-        private SpinInfo _spinInfo;
-
-        public SpinInfo SpinInfo
-        {
-            get => _spinInfo;
-            set => _spinInfo = value;
-        }
+        [field: SerializeField]
+        public SpinInfo SpinInfo { get; set; }
 
         /// <summary>
         /// Energy Regen
         /// </summary>
-        [SerializeField]
-        private EnergyRegen _energyRegen;
-
-        public EnergyRegen EnergyRegen
-        {
-            get => _energyRegen;
-            set => _energyRegen = value;
-        }
+        [field: SerializeField]
+        public EnergyRegen EnergyRegen { get; set; }
 
         public IEnumerator Start()
         {

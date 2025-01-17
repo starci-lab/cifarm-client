@@ -15,8 +15,6 @@ namespace CiFarm.GraphQL
                 $@"
 query {{
     {name} {{
-        createdAt
-        updatedAt
         id
         username
         chainKey
