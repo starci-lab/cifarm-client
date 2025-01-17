@@ -1,50 +1,85 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable] // Makes the class serializable for Unity
     public class ProductEntity : StringAbstractEntity
     {
-        // Public property for isPremium
-        [JsonProperty("isPremium")] // Custom JSON property name in camelCase
-        public bool IsPremium { get; set; }
+        // Private backing fields with SerializeField for Unity serialization
 
-        // Public property for goldAmount
-        [JsonProperty("goldAmount")] // Custom JSON property name in camelCase
-        public int GoldAmount { get; set; }
+        [SerializeField]
+        private bool _isPremium;
 
-        // Public property for tokenAmount
-        [JsonProperty("tokenAmount")] // Custom JSON property name in camelCase
-        public float TokenAmount { get; set; }
+        [SerializeField]
+        private int _goldAmount;
 
-        // Public property for type (enum)
-        [JsonProperty("type")] // Custom JSON property name in camelCase
-        public ProductType Type { get; set; }
+        [SerializeField]
+        private float _tokenAmount;
 
-        // Public property for cropId (nullable)
-        [JsonProperty("cropId")] // Custom JSON property name in camelCase
-        public string CropId { get; set; }
+        [SerializeField]
+        private ProductType _type;
 
-        // Navigation property for CropEntity
-        [JsonProperty("crop")] // Custom JSON property name in camelCase
-        public CropEntity Crop { get; set; }
+        [SerializeField]
+        private string _cropId;
 
-        // Public property for animalId (nullable)
-        [JsonProperty("animalId")] // Custom JSON property name in camelCase
-        public string AnimalId { get; set; }
+        [SerializeField]
+        private string _animalId;
 
-        // Navigation property for AnimalEntity
-        [JsonProperty("animal")] // Custom JSON property name in camelCase
-        public AnimalEntity Animal { get; set; }
+        [SerializeField]
+        private string _inventoryTypeId;
 
-        // Navigation property for InventoryTypeEntity
-        [JsonProperty("inventoryType")] // Custom JSON property name in camelCase
-        public InventoryTypeEntity InventoryType { get; set; }
+        // Public properties with getters and setters
 
-        // Public property for deliveringProducts (one-to-many relationship)
-        [JsonProperty("deliveringProducts")] // Custom JSON property name in camelCase
-        public List<DeliveringProductEntity> DeliveringProducts { get; set; }
+        [JsonProperty("isPremium")]
+        public bool IsPremium
+        {
+            get => _isPremium;
+            set => _isPremium = value;
+        }
+
+        [JsonProperty("goldAmount")]
+        public int GoldAmount
+        {
+            get => _goldAmount;
+            set => _goldAmount = value;
+        }
+
+        [JsonProperty("tokenAmount")]
+        public float TokenAmount
+        {
+            get => _tokenAmount;
+            set => _tokenAmount = value;
+        }
+
+        [JsonProperty("type")]
+        public ProductType Type
+        {
+            get => _type;
+            set => _type = value;
+        }
+
+        [JsonProperty("cropId")]
+        public string CropId
+        {
+            get => _cropId;
+            set => _cropId = value;
+        }
+
+        [JsonProperty("animalId")]
+        public string AnimalId
+        {
+            get => _animalId;
+            set => _animalId = value;
+        }
+
+        [JsonProperty("inventoryTypeId")]
+        public string InventoryTypeId
+        {
+            get => _inventoryTypeId;
+            set => _inventoryTypeId = value;
+        }
     }
 }

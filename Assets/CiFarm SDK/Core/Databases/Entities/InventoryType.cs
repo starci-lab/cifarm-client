@@ -1,61 +1,115 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable] // Makes the class serializable for Unity
     public class InventoryTypeEntity : UuidAbstractEntity
     {
-        // Public properties with auto-implemented getters and setters
+        // Private backing fields with SerializeField for Unity serialization
 
-        [JsonProperty("type")] // Custom JSON property name in camelCase
-        public InventoryType Type { get; set; }
+        [SerializeField]
+        private InventoryType _type;
 
-        [JsonProperty("placeable")] // Custom JSON property name in camelCase
-        public bool Placeable { get; set; } = false;
+        [SerializeField]
+        private bool _placeable = false;
 
-        [JsonProperty("deliverable")] // Custom JSON property name in camelCase
-        public bool Deliverable { get; set; } = false;
+        [SerializeField]
+        private bool _deliverable = false;
 
-        [JsonProperty("asTool")] // Custom JSON property name in camelCase
-        public bool AsTool { get; set; } = false;
+        [SerializeField]
+        private bool _asTool = false;
 
-        [JsonProperty("maxStack")] // Custom JSON property name in camelCase
-        public int MaxStack { get; set; } = 16;
+        [SerializeField]
+        private int _maxStack = 16;
 
-        [JsonProperty("cropId")] // Custom JSON property name in camelCase
-        public string CropId { get; set; }
+        [SerializeField]
+        private string _cropId;
 
-        [JsonProperty("crop")] // Custom JSON property name in camelCase
-        public CropEntity Crop { get; set; }
+        [SerializeField]
+        private string _animalId;
 
-        [JsonProperty("animalId")] // Custom JSON property name in camelCase
-        public string AnimalId { get; set; }
+        [SerializeField]
+        private string _supplyId;
 
-        [JsonProperty("animal")] // Custom JSON property name in camelCase
-        public AnimalEntity Animal { get; set; }
+        [SerializeField]
+        private string _productId;
 
-        [JsonProperty("supplyId")] // Custom JSON property name in camelCase
-        public string SupplyId { get; set; }
+        [SerializeField]
+        private string _tileId;
 
-        [JsonProperty("supply")] // Custom JSON property name in camelCase
-        public SupplyEntity Supply { get; set; }
+        // Public properties with getters and setters
 
-        [JsonProperty("productId")] // Custom JSON property name in camelCase
-        public string ProductId { get; set; }
+        [JsonProperty("type")]
+        public InventoryType Type
+        {
+            get => _type;
+            set => _type = value;
+        }
 
-        [JsonProperty("product")] // Custom JSON property name in camelCase
-        public ProductEntity Product { get; set; }
+        [JsonProperty("placeable")]
+        public bool Placeable
+        {
+            get => _placeable;
+            set => _placeable = value;
+        }
 
-        [JsonProperty("tileId")] // Custom JSON property name in camelCase
-        public string TileId { get; set; }
+        [JsonProperty("deliverable")]
+        public bool Deliverable
+        {
+            get => _deliverable;
+            set => _deliverable = value;
+        }
 
-        [JsonProperty("tile")] // Custom JSON property name in camelCase
-        public TileEntity Tile { get; set; }
+        [JsonProperty("asTool")]
+        public bool AsTool
+        {
+            get => _asTool;
+            set => _asTool = value;
+        }
 
-        // Navigation property for InventoryEntity (one-to-many relationship)
-        [JsonProperty("inventories")] // Custom JSON property name in camelCase
-        public List<InventoryEntity> Inventories { get; set; } = new List<InventoryEntity>();
+        [JsonProperty("maxStack")]
+        public int MaxStack
+        {
+            get => _maxStack;
+            set => _maxStack = value;
+        }
+
+        [JsonProperty("cropId")]
+        public string CropId
+        {
+            get => _cropId;
+            set => _cropId = value;
+        }
+
+        [JsonProperty("animalId")]
+        public string AnimalId
+        {
+            get => _animalId;
+            set => _animalId = value;
+        }
+
+        [JsonProperty("supplyId")]
+        public string SupplyId
+        {
+            get => _supplyId;
+            set => _supplyId = value;
+        }
+
+        [JsonProperty("productId")]
+        public string ProductId
+        {
+            get => _productId;
+            set => _productId = value;
+        }
+
+        [JsonProperty("tileId")]
+        public string TileId
+        {
+            get => _tileId;
+            set => _tileId = value;
+        }
     }
 }

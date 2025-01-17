@@ -104,9 +104,9 @@ query {{
             return QueryAsync<Empty, CropRandomness>(name, query);
         }
 
-        public UniTask<EnergyRegenTime> EnergyRegenAsync(string query = null)
+        public UniTask<EnergyRegen> QueryEnergyRegenAsync(string query = null)
         {
-            var name = "energyRegenTime";
+            var name = "energyRegen";
 
             query ??=
                 $@"
@@ -116,12 +116,12 @@ query {{
     }}
 }}";
 
-            return QueryAsync<Empty, EnergyRegenTime>(name, query);
+            return QueryAsync<Empty, EnergyRegen>(name, query);
         }
 
         public UniTask<SpinInfo> QuerySpinInfoAsync(string query = null)
         {
-            var name = "energyRegenTime";
+            var name = "spinInfo";
 
             query ??=
                 $@"

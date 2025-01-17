@@ -8,18 +8,48 @@ namespace CiFarm.Core.Databases
     [Serializable]
     public class UpgradeEntity : StringAbstractEntity
     {
-        // Public properties for UpgradeEntity without SerializeField attributes
+        // Private backing fields with SerializeField for Unity serialization
+
+        [SerializeField]
+        private int _upgradePrice;
+
+        [SerializeField]
+        private int _capacity;
+
+        [SerializeField]
+        private int _upgradeLevel;
+
+        [SerializeField]
+        private string _buildingId;
+
+        // Public properties with getters and setters
 
         [JsonProperty("upgradePrice")]
-        public int UpgradePrice { get; set; }
+        public int UpgradePrice
+        {
+            get => _upgradePrice;
+            set => _upgradePrice = value;
+        }
 
         [JsonProperty("capacity")]
-        public int Capacity { get; set; }
+        public int Capacity
+        {
+            get => _capacity;
+            set => _capacity = value;
+        }
 
         [JsonProperty("upgradeLevel")]
-        public int UpgradeLevel { get; set; }
+        public int UpgradeLevel
+        {
+            get => _upgradeLevel;
+            set => _upgradeLevel = value;
+        }
 
-        [JsonProperty("building")]
-        public BuildingEntity Building { get; set; }
+        [JsonProperty("buildingId")]
+        public string BuildingId
+        {
+            get => _buildingId;
+            set => _buildingId = value;
+        }
     }
 }

@@ -1,38 +1,73 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace CiFarm.Core.Databases
 {
     [Serializable] // Makes the class serializable for Unity
     public class SupplyEntity : StringAbstractEntity
     {
-        // Supply type property (Enum)
-        [JsonProperty("type")] // JSON property in camelCase
-        public SupplyType Type { get; set; }
+        // Private backing fields with SerializeField for Unity serialization
+        [SerializeField]
+        private SupplyType _type;
 
-        // Price property (float)
-        [JsonProperty("price")] // JSON property in camelCase
-        public float Price { get; set; }
+        [SerializeField]
+        private float _price;
 
-        // Available in shop property (bool)
-        [JsonProperty("availableInShop")] // JSON property in camelCase
-        public bool AvailableInShop { get; set; }
+        [SerializeField]
+        private bool _availableInShop;
 
-        // Max stack property (int)
-        [JsonProperty("maxStack")] // JSON property in camelCase
-        public int MaxStack { get; set; }
+        [SerializeField]
+        private int? _fertilizerEffectTimeReduce;
 
-        // Fertilizer effect time reduction (nullable int)
-        [JsonProperty("fertilizerEffectTimeReduce")] // JSON property in camelCase
-        public int? FertilizerEffectTimeReduce { get; set; }
+        [SerializeField]
+        private string _inventoryTypeId;
 
-        // Inventory type (Navigation property to InventoryTypeEntity)
-        [JsonProperty("inventoryType")] // JSON property in camelCase
-        public InventoryTypeEntity InventoryType { get; set; }
+        [SerializeField]
+        private List<string> _spinPrizeIds;
 
-        // Spin prizes (One-to-many relationship to SpinPrizeEntity)
-        [JsonProperty("spinPrizes")] // JSON property in camelCase
-        public List<SpinPrizeEntity> SpinPrizes { get; set; }
+        // Public properties with getters and setters
+        [JsonProperty("type")] // Custom JSON property name
+        public SupplyType Type
+        {
+            get => _type;
+            set => _type = value;
+        }
+
+        [JsonProperty("price")] // Custom JSON property name
+        public float Price
+        {
+            get => _price;
+            set => _price = value;
+        }
+
+        [JsonProperty("availableInShop")] // Custom JSON property name
+        public bool AvailableInShop
+        {
+            get => _availableInShop;
+            set => _availableInShop = value;
+        }
+
+        [JsonProperty("fertilizerEffectTimeReduce")] // Custom JSON property name
+        public int? FertilizerEffectTimeReduce
+        {
+            get => _fertilizerEffectTimeReduce;
+            set => _fertilizerEffectTimeReduce = value;
+        }
+
+        [JsonProperty("inventoryTypeId")] // Custom JSON property name
+        public string InventoryTypeId
+        {
+            get => _inventoryTypeId;
+            set => _inventoryTypeId = value;
+        }
+
+        [JsonProperty("spinPrizeIds")] // Custom JSON property name
+        public List<string> SpinPrizes
+        {
+            get => _spinPrizeIds;
+            set => _spinPrizeIds = value;
+        }
     }
 }

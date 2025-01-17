@@ -8,24 +8,68 @@ namespace CiFarm.Core.Databases
     [Serializable]
     public class TileEntity : StringAbstractEntity
     {
-        // Public properties for TileEntity without SerializeField attributes
+        // Private backing fields with SerializeField for Unity serialization
+
+        [SerializeField]
+        private float _price;
+
+        [SerializeField]
+        private int _maxOwnership;
+
+        [SerializeField]
+        private bool _isNFT;
+
+        [SerializeField]
+        private bool _availableInShop;
+
+        [SerializeField]
+        private string _inventoryTypeId;
+
+        [SerializeField]
+        private string _placedItemTypeId;
+
+        // Public properties with getters and setters
 
         [JsonProperty("price")]
-        public float Price { get; set; }
+        public float Price
+        {
+            get => _price;
+            set => _price = value;
+        }
 
         [JsonProperty("maxOwnership")]
-        public int MaxOwnership { get; set; }
+        public int MaxOwnership
+        {
+            get => _maxOwnership;
+            set => _maxOwnership = value;
+        }
 
         [JsonProperty("isNFT")]
-        public bool IsNFT { get; set; }
+        public bool IsNFT
+        {
+            get => _isNFT;
+            set => _isNFT = value;
+        }
 
         [JsonProperty("availableInShop")]
-        public bool AvailableInShop { get; set; }
+        public bool AvailableInShop
+        {
+            get => _availableInShop;
+            set => _availableInShop = value;
+        }
 
-        [JsonProperty("inventoryType")]
-        public InventoryTypeEntity InventoryType { get; set; }
+        [JsonProperty("inventoryTypeId")]
+        public string InventoryTypeId
+        {
+            get => _inventoryTypeId;
+            set => _inventoryTypeId = value;
+        }
 
-        [JsonProperty("placedItemType")]
-        public PlacedItemTypeEntity PlacedItemType { get; set; }
+        [JsonProperty("placedItemTypeId")]
+        public string PlacedItemTypeId
+        {
+            get => _placedItemTypeId;
+            set => _placedItemTypeId = value;
+        }
     }
 }

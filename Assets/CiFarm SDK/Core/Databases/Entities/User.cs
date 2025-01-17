@@ -34,8 +34,8 @@ namespace CiFarm.Core.Databases
         [JsonProperty("energy")]
         public int Energy { get; set; }
 
-        [JsonProperty("energyRegenTime")]
-        public float EnergyRegenTime { get; set; }
+        [JsonProperty("energyRegen")]
+        public float EnergyRegen { get; set; }
 
         [JsonProperty("level")]
         public int Level { get; set; }

@@ -2666,73 +2666,6 @@ Transform:
   - {fileID: 1788604778}
   m_Father: {fileID: 63961912}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1310806644
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1310806645}
-  - component: {fileID: 1310806646}
-  m_Layer: 0
-  m_Name: User
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1310806645
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310806644}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1817335457}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1310806646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310806644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f11d104bbdbfb143a410220e4201222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _user:
-    _username: 
-    _chainKey: 
-    _network: 
-    _accountAddress: 
-    _golds: 0
-    _tokens: 0
-    _experiences: 0
-    _energy: 0
-    _energyRegenTime: 0
-    _level: 0
-    _tutorialIndex: 0
-    _stepIndex: 0
-    _dailyRewardStreak: 0
-    _dailyRewardNumberOfClaim: 0
-    _spinCount: 0
-    _visitingUserId: 
-    _inventories: []
-    _placedItems: []
-    _deliveringProducts: []
-    _followingUsers: []
-    _followedByUsers: []
-    _sessions: []
 --- !u!1 &1381838363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2945,6 +2878,7 @@ GameObject:
   - component: {fileID: 1788604778}
   - component: {fileID: 1788604779}
   - component: {fileID: 1788604780}
+  - component: {fileID: 1788604781}
   m_Layer: 0
   m_Name: TrollVine
   m_TagString: Untagged
@@ -2964,8 +2898,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1817335457}
+  m_Children: []
   m_Father: {fileID: 1298724190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1788604779
@@ -3040,38 +2973,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d429ddddedabf4c8d499294de0974b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1817335456
-GameObject:
+--- !u!114 &1788604781
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1817335457}
-  m_Layer: 0
-  m_Name: RenderingManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1817335457
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817335456}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1310806645}
-  m_Father: {fileID: 1788604778}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1788604777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d90612e271b7f478232d501612e99a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animals: []
+  _buildings: []
+  _crops: []
+  _placedItemTypes: []
+  _spinPrizes: []
+  _spinSlots: []
 --- !u!1 &1833044184
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,14 +16,13 @@ namespace CiFarm.GraphQL
                 $@"
 query($args: ID!) {{
     {name}(id: $args) {{
-        availableInShop
-        createdAt  
-        fertilizerEffectTimeReduce
         id
-        maxStack
-        price
         type
-        updatedAt
+        price
+        availableInShop
+        fertilizerEffectTimeReduce
+        inventoryTypeId
+        spinPrizeIds
     }}
 }}";
 
@@ -35,16 +34,15 @@ query($args: ID!) {{
             var name = "supplies";
             query ??=
                 $@"
-query($args: GetSuppliesArgs!) {{
-    {name}(args: $args) {{
-        availableInShop
-        createdAt  
-        fertilizerEffectTimeReduce
+query {{
+    {name} {{
         id
-        maxStack
-        price
         type
-        updatedAt
+        price
+        availableInShop
+        fertilizerEffectTimeReduce
+        inventoryTypeId
+        spinPrizeIds
     }}
 }}";
 

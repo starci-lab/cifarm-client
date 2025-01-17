@@ -208,8 +208,8 @@ namespace CiFarm.Core.Databases
         [EnumStringValue("spinInfo")]
         SpinInfo,
 
-        [EnumStringValue("energyRegenTime")]
-        EnergyRegenTime,
+        [EnumStringValue("energyRegen")]
+        EnergyRegen,
     }
 
     // Temporary Enum

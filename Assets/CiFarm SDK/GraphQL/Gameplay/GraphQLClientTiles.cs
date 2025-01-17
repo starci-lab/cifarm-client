@@ -16,13 +16,13 @@ namespace CiFarm.GraphQL
                 $@"
 query($args: ID!) {{
     {name}(id: $args) {{
-        availableInShop
-        createdAt
         id
-        isNFT
-        maxOwnership
         price
-        updatedAt
+        maxOwnership
+        isNFT
+        availableInShop
+        inventoryTypeId
+        placedItemTypeId
     }}
 }}";
 
@@ -34,15 +34,15 @@ query($args: ID!) {{
             var name = "tiles";
             query ??=
                 $@"
-query($args: GetTilesArgs!) {{
-    {name}(args: $args) {{
-        availableInShop
-        createdAt
+query {{
+    {name} {{
         id
-        isNFT
-        maxOwnership
         price
-        updatedAt
+        maxOwnership
+        isNFT
+        availableInShop
+        inventoryTypeId
+        placedItemTypeId
     }}
 }}";
 
