@@ -6,7 +6,7 @@ namespace CiFarm.RestApi
     {
         // Asynchronous method to buy an animal by sending a POST request to the "buy-animal" endpoint.
         // This method will send the BuyAnimalRequest and return the BuyAnimalResponse.
-        public async UniTask<BuyAnimalResponse> BuyAnimal(BuyAnimalRequest request)
+        public async UniTask<BuyAnimalResponse> BuyAnimalAsync(BuyAnimalRequest request)
         {
             var endpoint = GetEndpoint("buy-animal"); // Build the full URL for the "buy-animal" endpoint.
             return await PostAuthAsync<BuyAnimalRequest, BuyAnimalResponse>(
@@ -17,7 +17,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to buy seeds by sending a POST request to the "buy-seeds" endpoint.
         // This method will send the BuySeedsRequest and return the BuySeedsResponse.
-        public async UniTask<BuySeedsResponse> BuySeeds(BuySeedsRequest request)
+        public async UniTask<BuySeedsResponse> BuySeedsAsync(BuySeedsRequest request)
         {
             var endpoint = GetEndpoint("buy-seeds"); // Build the full URL for the "buy-seeds" endpoint.
             return await PostAuthAsync<BuySeedsRequest, BuySeedsResponse>(
@@ -28,7 +28,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to buy supplies by sending a POST request to the "buy-supplies" endpoint.
         // This method will send the BuySuppliesRequest and return the BuySuppliesResponse.
-        public async UniTask<BuySuppliesResponse> BuySupplies(BuySuppliesRequest request)
+        public async UniTask<BuySuppliesResponse> BuySuppliesAsync(BuySuppliesRequest request)
         {
             var endpoint = GetEndpoint("buy-supplies"); // Build the full URL for the "buy-supplies" endpoint.
             return await PostAuthAsync<BuySuppliesRequest, BuySuppliesResponse>(

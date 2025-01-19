@@ -6,7 +6,7 @@ namespace CiFarm.RestApi
     {
         // Asynchronous method to claim the daily reward by sending a POST request to the "claim-daily-reward" endpoint.
         // This method will send the ClaimDailyRewardRequest and return the ClaimDailyRewardResponse.
-        public async UniTask<ClaimDailyRewardResponse> ClaimDailyReward(
+        public async UniTask<ClaimDailyRewardResponse> ClaimDailyRewardAsync(
             ClaimDailyRewardRequest request // The request data to claim the daily reward
         )
         {
@@ -21,7 +21,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to perform a spin action by sending a POST request to the "spin" endpoint.
         // This method will send the SpinRequest and return the SpinResponse.
-        public async UniTask<SpinResponse> Spin(SpinRequest request)
+        public async UniTask<SpinResponse> SpinAsync(SpinRequest request)
         {
             var endpoint = GetEndpoint("spin"); // Build the full URL for the "spin" endpoint.
 

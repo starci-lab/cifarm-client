@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using CiFarm.Utils;
 using Firesplash.GameDevAssets.SocketIOPlus;
 using Imba.Utils;
-using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,14 +10,8 @@ namespace CiFarm.IO
     {
         private const string NAMESPACE_GAMEPLAY = "/gameplay";
 
-        [SerializeField]
-        private UnityAction<PlacedItemsSyncedMessage> _placedItemsSyncedAction;
-
-        public UnityAction<PlacedItemsSyncedMessage> PlacedItemsSyncedAction
-        {
-            get => _placedItemsSyncedAction;
-            set => _placedItemsSyncedAction = value;
-        }
+        [field: SerializeField]
+        public UnityAction<PlacedItemsSyncedMessage> PlacedItemsSyncedAction { get; set; }
 
         private SocketIONamespace _gameplayNS;
 
@@ -46,7 +37,7 @@ namespace CiFarm.IO
                     ConsoleLogger.LogSuccess("Placed items synced");
                     ConsoleLogger.LogDebug(message);
 
-                    _placedItemsSyncedAction?.Invoke(message);
+                    PlacedItemsSyncedAction?.Invoke(message);
                 }
             );
         }
@@ -57,6 +48,14 @@ namespace CiFarm.IO
         public void SyncPlacedItems()
         {
             _gameplayNS.Emit("sync_placed_items");
+        }
+
+        /// <summary>
+        /// Visit
+        /// </summary>
+        public void Visit(VisitPayload payload)
+        {
+            _gameplayNS.Emit("visit", payload);
         }
     }
 }

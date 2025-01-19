@@ -4,16 +4,21 @@ using CiFarm.Core.Databases;
 using Newtonsoft.Json;
 using UnityEngine;
 
-[Serializable]
-public class PlacedItemsSyncedMessage
+namespace CiFarm.IO
 {
-    [SerializeField]
-    private List<PlacedItemEntity> _placedItems;
-
-    [JsonProperty("placedItems")]
-    public List<PlacedItemEntity> PlacedItems
+    [Serializable]
+    public class PlacedItemsSyncedMessage
     {
-        get => _placedItems;
-        set => _placedItems = value;
+        [field: SerializeField]
+        [JsonProperty("placedItems")]
+        public List<PlacedItemEntity> PlacedItems { get; set; }
+    }
+
+    [Serializable]
+    public class HandleVisitPayload
+    {
+        [field: SerializeField]
+        [JsonProperty("userId")]
+        public string UserId { get; set; }
     }
 }

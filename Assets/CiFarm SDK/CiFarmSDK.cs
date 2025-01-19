@@ -73,9 +73,9 @@ namespace CiFarm
         private SerializedDictionary<Environment, string> _socketIoUrls = new()
         {
             { Environment.Local, "http://localhost:3003" },
-            { Environment.Development, "https://ws.cifarm.dev.starci.net" },
-            { Environment.Staging, "https://ws.cifarm.staging.starci.net" },
-            { Environment.Production, "https://ws.cifarm.starci.net" },
+            { Environment.Development, "https://io.cifarm.dev.starci.net" },
+            { Environment.Staging, "https://io.cifarm.staging.starci.net" },
+            { Environment.Production, "https://io.cifarm.starci.net" },
         };
         #endregion
 

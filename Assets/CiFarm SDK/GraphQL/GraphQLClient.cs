@@ -81,7 +81,7 @@ namespace CiFarm.GraphQL
 
                 // Parse the response body as a GraphQL response
                 var responseBody = webRequest.downloadHandler.text;
-                ConsoleLogger.LogWarning($"GraphQL Response: {responseBody}");
+
                 // Deserialize the response body into a GraphQLResponse object.
                 var response = JsonConvert.DeserializeObject<GraphQLResponse<TResponse>>(
                     responseBody,

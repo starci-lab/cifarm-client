@@ -6,7 +6,7 @@ namespace CiFarm.RestApi
     {
         // Asynchronous method to move a placed item by sending a POST request to the "move" endpoint.
         // This method will send the MoveRequest and return the MoveResponse.
-        public async UniTask<MoveResponse> Move(MoveRequest request)
+        public async UniTask<MoveResponse> MoveAsync(MoveRequest request)
         {
             var endpoint = GetEndpoint("move"); // Build the full URL for the "move" endpoint.
             return await PostAuthAsync<MoveRequest, MoveResponse>(
@@ -17,7 +17,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to place a tile by sending a POST request to the "placement" endpoint.
         // This method will send the PlaceTileRequest and return the PlaceTileResponse.
-        public async UniTask<PlaceTileResponse> Placement(PlaceTileRequest request)
+        public async UniTask<PlaceTileResponse> PlacementAsync(PlaceTileRequest request)
         {
             var endpoint = GetEndpoint("placement"); // Build the full URL for the "placement" endpoint.
             return await PostAuthAsync<PlaceTileRequest, PlaceTileResponse>(
@@ -28,7 +28,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to recover a tile by sending a POST request to the "recover-tile" endpoint.
         // This method will send the RecoverTileRequest and return the RecoverTileResponse.
-        public async UniTask<RecoverTileResponse> RecoverTile(RecoverTileRequest request)
+        public async UniTask<RecoverTileResponse> RecoverTileAsync(RecoverTileRequest request)
         {
             var endpoint = GetEndpoint("recover-tile"); // Build the full URL for the "recover-tile" endpoint.
             return await PostAuthAsync<RecoverTileRequest, RecoverTileResponse>(

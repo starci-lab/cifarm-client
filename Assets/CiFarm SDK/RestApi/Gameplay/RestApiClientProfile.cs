@@ -6,7 +6,9 @@ namespace CiFarm.RestApi
     {
         // Asynchronous method to update the tutorial progress by sending a POST request to the "update-tutorial" endpoint.
         // This method will send the UpdateTutorialRequest and return the UpdateTutorialResponse.
-        public async UniTask<UpdateTutorialResponse> UpdateTutorial(UpdateTutorialRequest request)
+        public async UniTask<UpdateTutorialResponse> UpdateTutorialAsync(
+            UpdateTutorialRequest request
+        )
         {
             var endpoint = GetEndpoint("update-tutorial"); // Build the full URL for the "update-tutorial" endpoint.
             return await PostAuthAsync<UpdateTutorialRequest, UpdateTutorialResponse>(

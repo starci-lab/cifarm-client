@@ -2879,6 +2879,7 @@ GameObject:
   - component: {fileID: 1788604779}
   - component: {fileID: 1788604780}
   - component: {fileID: 1788604781}
+  - component: {fileID: 1788604782}
   m_Layer: 0
   m_Name: TrollVine
   m_TagString: Untagged
@@ -2956,11 +2957,12 @@ MonoBehaviour:
     _network: 0
     _telegramInitDataRaw: 
     _accountAddress: 
-  _authenticated: 0
+  <PageSize>k__BackingField: 10
+  <Authenticated>k__BackingField: 0
   _chainKey: 0
   _network: 0
   _accountNumber: 0
-  _socketIOClient: {fileID: 0}
+  <SocketIOClient>k__BackingField: {fileID: 0}
 --- !u!114 &1788604780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2985,12 +2987,118 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d90612e271b7f478232d501612e99a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animals: []
-  _buildings: []
-  _crops: []
-  _placedItemTypes: []
-  _spinPrizes: []
-  _spinSlots: []
+  <Animals>k__BackingField: []
+  <Buildings>k__BackingField: []
+  <Crops>k__BackingField: []
+  <PlacedItemTypes>k__BackingField: []
+  <SpinPrizes>k__BackingField: []
+  <SpinSlots>k__BackingField: []
+  <Supplies>k__BackingField: []
+  <Tiles>k__BackingField: []
+  <Tools>k__BackingField: []
+  <InventoryTypes>k__BackingField: []
+  <Products>k__BackingField: []
+  <DailyRewards>k__BackingField: []
+  <Upgrades>k__BackingField: []
+  <Activities>k__BackingField:
+    <Water>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <FeedAnimal>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <UsePesticide>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <UseFertilizer>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <UseHerbicide>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <HelpUseHerbicide>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <HelpUsePesticide>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <HelpWater>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <ThiefCrop>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <ThiefAnimalProduct>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <CureAnimal>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <HelpCureAnimal>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+    <HarvestCrop>k__BackingField:
+      <ExperiencesGain>k__BackingField: 0
+      <EnergyConsume>k__BackingField: 0
+  <AnimalRandomness>k__BackingField:
+    <SickChance>k__BackingField: 0
+    <Thief3>k__BackingField: 0
+    <Thief2>k__BackingField: 0
+  <CropRandomness>k__BackingField:
+    <Thief3>k__BackingField: 0
+    <Thief2>k__BackingField: 0
+    <NeedWater>k__BackingField: 0
+    <IsWeedyOrInfested>k__BackingField: 0
+  <Starter>k__BackingField:
+    <Golds>k__BackingField: 0
+    <Positions>k__BackingField:
+      <Tiles>k__BackingField: []
+      <Home>k__BackingField:
+        <X>k__BackingField: 0
+        <Y>k__BackingField: 0
+  <EnergyRegen>k__BackingField:
+    <Time>k__BackingField: 0
+--- !u!114 &1788604782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788604777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c8b7cc03d363f4fb431832f5c5f9a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <User>k__BackingField:
+    <Id>k__BackingField: 
+    <Username>k__BackingField: 
+    <ChainKey>k__BackingField: 0
+    <Network>k__BackingField: 0
+    <AccountAddress>k__BackingField: 
+    <Golds>k__BackingField: 0
+    <Tokens>k__BackingField: 0
+    <Experiences>k__BackingField: 0
+    <Energy>k__BackingField: 0
+    <EnergyRegen>k__BackingField: 0
+    <Level>k__BackingField: 0
+    <TutorialIndex>k__BackingField: 0
+    <StepIndex>k__BackingField: 0
+    <DailyRewardStreak>k__BackingField: 0
+    <DailyRewardNumberOfClaim>k__BackingField: 0
+    <SpinCount>k__BackingField: 0
+  <InventoryPagination>k__BackingField:
+    <CurrentPage>k__BackingField: 0
+    <TotalPages>k__BackingField: 0
+    <Items>k__BackingField: []
+  <PlacedItemPagination>k__BackingField:
+    <CurrentPage>k__BackingField: 0
+    <TotalPages>k__BackingField: 0
+    <Items>k__BackingField: []
+  <DeliveringProductPagination>k__BackingField:
+    <CurrentPage>k__BackingField: 0
+    <TotalPages>k__BackingField: 0
+    <Items>k__BackingField: []
 --- !u!1 &1833044184
 GameObject:
   m_ObjectHideFlags: 0

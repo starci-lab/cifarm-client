@@ -6,7 +6,7 @@ namespace CiFarm.RestApi
     {
         // Asynchronous method to upgrade a building by sending a POST request to the "upgrade-building" endpoint.
         // This method will send the UpgradeBuildingRequest and return the UpgradeBuildingResponse.
-        public async UniTask<UpgradeBuildingResponse> UpgradeBuilding(
+        public async UniTask<UpgradeBuildingResponse> UpgradeBuildingAsync(
             UpgradeBuildingRequest request
         )
         {

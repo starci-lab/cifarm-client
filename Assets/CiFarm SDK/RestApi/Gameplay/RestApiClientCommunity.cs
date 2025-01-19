@@ -6,7 +6,7 @@ namespace CiFarm.RestApi
     {
         // Asynchronous method to follow a user by sending a POST request to the "follow" endpoint.
         // This method will send the FollowRequest and return the FollowResponse.
-        public async UniTask<FollowResponse> Follow(FollowRequest request)
+        public async UniTask<FollowResponse> FollowAsync(FollowRequest request)
         {
             var endpoint = GetEndpoint("follow"); // Build the full URL for the "follow" endpoint.
             return await PostAuthAsync<FollowRequest, FollowResponse>(
@@ -17,7 +17,9 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to help cure an animal by sending a POST request to the "help-cure-animal" endpoint.
         // This method will send the HelpCureAnimalRequest and return the HelpCureAnimalResponse.
-        public async UniTask<HelpCureAnimalResponse> HelpCureAnimal(HelpCureAnimalRequest request)
+        public async UniTask<HelpCureAnimalResponse> HelpCureAnimalAsync(
+            HelpCureAnimalRequest request
+        )
         {
             var endpoint = GetEndpoint("help-cure-animal"); // Build the full URL for the "help-cure-animal" endpoint.
             return await PostAuthAsync<HelpCureAnimalRequest, HelpCureAnimalResponse>(
@@ -28,7 +30,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to help use herbicide by sending a POST request to the "help-use-herbicide" endpoint.
         // This method will send the HelpUseHerbicideRequest and return the HelpUseHerbicideResponse.
-        public async UniTask<HelpUseHerbicideResponse> HelpUseHerbicide(
+        public async UniTask<HelpUseHerbicideResponse> HelpUseHerbicideAsync(
             HelpUseHerbicideRequest request
         )
         {
@@ -41,7 +43,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to help use pesticide by sending a POST request to the "help-use-pesticide" endpoint.
         // This method will send the HelpUsePesticideRequest and return the HelpUsePesticideResponse.
-        public async UniTask<HelpUsePesticideResponse> HelpUsePesticide(
+        public async UniTask<HelpUsePesticideResponse> HelpUsePesticideAsync(
             HelpUsePesticideRequest request
         )
         {
@@ -54,7 +56,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to help water a crop by sending a POST request to the "help-water" endpoint.
         // This method will send the HelpWaterRequest and return the HelpWaterResponse.
-        public async UniTask<HelpWaterResponse> HelpWater(HelpWaterRequest request)
+        public async UniTask<HelpWaterResponse> HelpWaterAsync(HelpWaterRequest request)
         {
             var endpoint = GetEndpoint("help-water"); // Build the full URL for the "help-water" endpoint.
             return await PostAuthAsync<HelpWaterRequest, HelpWaterResponse>(
@@ -65,7 +67,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to return to a previous state by sending a POST request to the "return" endpoint.
         // This method will send the ReturnRequest and return the ReturnResponse.
-        public async UniTask<ReturnResponse> Return(ReturnRequest request)
+        public async UniTask<ReturnResponse> ReturnAsync(ReturnRequest request)
         {
             var endpoint = GetEndpoint("return"); // Build the full URL for the "return" endpoint.
             return await PostAuthAsync<ReturnRequest, ReturnResponse>(
@@ -76,7 +78,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to steal animal products by sending a POST request to the "thief-animal-product" endpoint.
         // This method will send the ThiefAnimalProductRequest and return the ThiefAnimalProductResponse.
-        public async UniTask<ThiefAnimalProductResponse> ThiefAnimalProduct(
+        public async UniTask<ThiefAnimalProductResponse> ThiefAnimalProductAsync(
             ThiefAnimalProductRequest request
         )
         {
@@ -89,7 +91,7 @@ namespace CiFarm.RestApi
 
         // Asynchronous method to steal crops by sending a POST request to the "thief-crop" endpoint.
         // This method will send the ThiefCropRequest and return the ThiefCropResponse.
-        public async UniTask<ThiefCropResponse> ThiefCrop(ThiefCropRequest request)
+        public async UniTask<ThiefCropResponse> ThiefCropAsync(ThiefCropRequest request)
         {
             var endpoint = GetEndpoint("thief-crop"); // Build the full URL for the "thief-crop" endpoint.
             return await PostAuthAsync<ThiefCropRequest, ThiefCropResponse>(
