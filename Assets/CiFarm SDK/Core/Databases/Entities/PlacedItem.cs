@@ -45,6 +45,10 @@ namespace CiFarm.Core.Databases
         [field: SerializeField]
         public AnimalInfoEntity AnimalInfo { get; set; }
 
+        [JsonProperty("tileInfo")] // Custom JSON property name in camelCase
+        [field: SerializeField]
+        public TileInfoEntity TileInfo { get; set; }
+
         [JsonProperty("buildingInfoId")] // Custom JSON property name in camelCase
         [field: SerializeField]
         public string BuildingInfoId { get; set; }

@@ -17,11 +17,6 @@ namespace CiFarm.Core.Databases
         [field: SerializeField]
         public int? Occupancy { get; set; }
 
-        // Public property for buildingId
-        [JsonProperty("buildingId")]
-        [field: SerializeField]
-        public string BuildingId { get; set; }
-
         // Public property for placedItemId
         [JsonProperty("placedItemId")]
         [field: SerializeField]

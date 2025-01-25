@@ -87,6 +87,7 @@ namespace CiFarm.GraphQL
                     responseBody,
                     new DefaultJsonConverter<TResponse>() // Use a custom JSON converter if necessary.
                 );
+                
                 ConsoleLogger.LogWarning(response);
 
                 // Return the data corresponding to the specified query name from the GraphQL response.

@@ -53,10 +53,6 @@ namespace CiFarm.Core.Databases
         [field: SerializeField]
         public bool AvailableInShop { get; set; }
 
-        [JsonProperty("maxStack")]
-        [field: SerializeField]
-        public int MaxStack { get; set; }
-
         // Navigation properties
         [JsonProperty("productId")]
         [field: SerializeField]

@@ -17,10 +17,6 @@ namespace CiFarm.Core.Databases
         [field: SerializeField]
         public int Index { get; set; }
 
-        [JsonProperty("premium")] // Custom JSON property name in camelCase
-        [field: SerializeField]
-        public bool Premium { get; set; }
-
         [JsonProperty("userId")] // Custom JSON property name in camelCase
         [field: SerializeField]
         public string UserId { get; set; }

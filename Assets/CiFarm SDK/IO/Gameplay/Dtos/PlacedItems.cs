@@ -15,7 +15,7 @@ namespace CiFarm.IO
     }
 
     [Serializable]
-    public class HandleVisitPayload
+    public class VisitPayload
     {
         [field: SerializeField]
         [JsonProperty("userId")]

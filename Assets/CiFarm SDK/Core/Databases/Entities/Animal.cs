@@ -67,5 +67,13 @@ namespace CiFarm.Core.Databases
         [JsonProperty("placedItemTypeId")]
         [field: SerializeField]
         public string PlacedItemTypeId { get; set; }
+
+        [JsonProperty("qualityProductChanceStack")]
+        [field: SerializeField]
+        public float QualityProductChanceStack { get; set; }
+
+        [JsonProperty("qualityProductChance")]
+        [field: SerializeField]
+        public float QualityProductChanceLimit { get; set; }
     }
 }

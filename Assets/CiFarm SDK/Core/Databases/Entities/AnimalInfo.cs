@@ -28,10 +28,9 @@ namespace CiFarm.Core.Databases
         [field: SerializeField]
         public bool IsAdult { get; set; }
 
-        // Public property for animalId
-        [JsonProperty("animalId")] // Custom JSON property name
+        [JsonProperty("isQuality")]
         [field: SerializeField]
-        public string AnimalId { get; set; }
+        public bool IsQuality { get; set; }
 
         // Public property for currentState
         [JsonProperty("currentState")] // Custom JSON property name

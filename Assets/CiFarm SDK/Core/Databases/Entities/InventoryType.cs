@@ -27,7 +27,7 @@ namespace CiFarm.Core.Databases
 
         [JsonProperty("maxStack")]
         [field: SerializeField]
-        public int MaxStack { get; set; } = 16; // Default value as per the previous code
+        public int MaxStack { get; set; }
 
         [JsonProperty("cropId")]
         [field: SerializeField]
